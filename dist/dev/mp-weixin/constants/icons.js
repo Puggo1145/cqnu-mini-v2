@@ -5,6 +5,7 @@ const icons = {
   mail: common_assets.mail,
   mailSecondary: common_assets.mailSecondary,
   back: common_assets.back,
+  down: common_assets.down,
   keySecondary: common_assets.keySecondary,
   lockSecondary: common_assets.lockSecondary,
   nameSecondary: common_assets.nameSecondary

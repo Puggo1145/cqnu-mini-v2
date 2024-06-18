@@ -223,6 +223,9 @@ view,text,::before,::after {
 .w-screen {
     width: 100vw;
 }
+.flex-1 {
+    flex: 1 1 0%;
+}
 .flex-col {
     flex-direction: column;
 }
@@ -285,6 +288,9 @@ view,text,::before,::after {
 .bg-white {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.bg-secondary-foreground {
+    background-color: hsl(var(--secondary-foreground));
 }
 .px-1 {
     padding-left: 0.25rem;

@@ -1,6 +1,9 @@
 {
   "component": true,
   "usingComponents": {
-    "signup-texts": "./signup-texts"
+    "signup-texts": "./signup-texts",
+    "cus-select": "../../../../components/cus-select",
+    "cus-input": "../../../../components/cus-input",
+    "cus-button": "../../../../components/cus-button"
   }
 }

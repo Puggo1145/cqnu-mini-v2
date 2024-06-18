@@ -1,0 +1,1 @@
+<view class="flex flex-col gap-6"><signup-texts wx:if="{{a}}" u-i="4462f7d7-0" bind:__l="__l" u-p="{{a}}"/></view>

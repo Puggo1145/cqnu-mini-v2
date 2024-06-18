@@ -1,0 +1,1 @@
+<view class="overflow-hidden w-screen h-screen bg-background" style="{{'padding-top:' + d + ';' + ('padding-left:' + e) + ';' + ('padding-right:' + f)}}"><view wx:if="{{a}}" class="w-full h-_60px_ flex px-4 items-center"><view class="overflow-hidden size-6" bindtap="{{c}}"><image src="{{b}}" class="size-full"/></view></view><slot/></view>

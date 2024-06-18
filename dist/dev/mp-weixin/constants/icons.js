@@ -1,0 +1,12 @@
+"use strict";
+const common_assets = require("../common/assets.js");
+const icons = {
+  wechatIcon: common_assets.wechatIcon,
+  mail: common_assets.mail,
+  mailSecondary: common_assets.mailSecondary,
+  back: common_assets.back,
+  keySecondary: common_assets.keySecondary,
+  lockSecondary: common_assets.lockSecondary,
+  nameSecondary: common_assets.nameSecondary
+};
+exports.icons = icons;

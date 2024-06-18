@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "signup-texts": "./signup-texts"
+  }
+}

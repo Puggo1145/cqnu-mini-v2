@@ -1,0 +1,14 @@
+{
+	"pages": [
+		{
+			"path": "pages/(Onboarding)/welcome/page"
+		},
+		{
+			"path": "pages/(Onboarding)/sign-up/page"
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black"
+	}
+}

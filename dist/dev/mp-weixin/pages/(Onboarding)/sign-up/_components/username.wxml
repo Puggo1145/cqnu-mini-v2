@@ -1,0 +1,1 @@
+<view class="flex flex-col gap-6"><signup-texts wx:if="{{a}}" u-i="78ae262a-0" bind:__l="__l" u-p="{{a}}"/><cus-input wx:if="{{b}}" u-i="78ae262a-1" bind:__l="__l" u-p="{{b}}"/><cus-button wx:if="{{c}}" u-s="{{['d']}}" u-i="78ae262a-2" bind:__l="__l" u-p="{{c}}"> 继续 </cus-button></view>

@@ -1,0 +1,1 @@
+<view class="flex flex-col"><text class="font-bold text-_32px_">{{a}}</text><text class="text-md">{{b}}</text></view>

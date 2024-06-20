@@ -31,5 +31,5 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/components/cus-button.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-d363d67f"], ["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/components/cus-button.vue"]]);
 wx.createComponent(Component);

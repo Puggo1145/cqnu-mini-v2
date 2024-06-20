@@ -25,10 +25,18 @@ const emit = defineEmits(['click']);
 
 <template>
     <button
-        :class="buttonStyle" class="h-[52px] rounded-2xl text-md font-bold leading-[52px]"
+        :class="buttonStyle" 
+        class="h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
+        hover-class="button-touch"
         @click="emit('click')"    
         :disabled="props.disabled"
     >
         <slot />
     </button>
 </template>
+
+<style scoped>
+.button-touch {
+    filter: brightness(0.8);
+}
+</style>

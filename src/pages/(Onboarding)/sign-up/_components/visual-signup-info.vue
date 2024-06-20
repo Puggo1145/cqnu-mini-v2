@@ -26,7 +26,7 @@ const identityMap: Record<number, string> = {
         :class="props.current === 3 && 'h-[360px]'"
     >
         <view 
-            class="w-[240px] h-[300px] bg-[#F2ECE8] rounded-2xl flex flex-col items-center py-5 px-4 gap-4 
+            class="w-[240px] h-[320px] bg-[#F2ECE8] rounded-2xl flex flex-col items-center py-5 px-4 gap-4 
             transition-all duration-500"
             :class="[
                 props.current === 0 && 'mt-0',

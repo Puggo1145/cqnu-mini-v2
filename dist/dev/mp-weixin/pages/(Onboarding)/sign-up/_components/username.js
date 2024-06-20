@@ -1,5 +1,7 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
+const constants_signup_signupTexts = require("../../../../constants/signup/signup-texts.js");
+const stores_signupInfo = require("../../../../stores/signup-info.js");
 if (!Math) {
   (signupTexts + cusInput + cusButton)();
 }
@@ -8,33 +10,32 @@ const signupTexts = () => "./signup-texts.js";
 const cusButton = () => "../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "username",
-  props: {
-    current: {}
-  },
   emits: ["update:current"],
   setup(__props, { emit: __emit }) {
-    const props = __props;
+    const { setUsername } = stores_signupInfo.useSignupInfo();
     const emit = __emit;
     const inputValue = common_vendor.ref("");
     const inputRef = common_vendor.ref();
     const handleInput = (event) => {
       inputValue.value = event.value;
       inputRef.value.showError("");
+      setUsername(inputValue.value);
     };
     const validateValue = () => {
       const valueLength = inputValue.value.length;
       if (valueLength < 2 || valueLength > 12) {
-        inputRef.value.showError("用户名长度必须在 2-12 个字符之间");
-      } else {
-        inputRef.value.showError("");
-        emit("update:current", props.current + 1);
+        return inputRef.value.showError("用户名长度必须在 2-12 个字符之间");
+      } else if (Number.isInteger(Number(inputValue.value[0]))) {
+        return inputRef.value.showError("用户名必须以字母开头");
       }
+      inputRef.value.showError("");
+      emit("update:current");
     };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
-          title: "让我们相互认识一下",
-          desc: "给自己取一个喜欢的昵称。你不必使用你的真实姓名"
+          title: common_vendor.unref(constants_signup_signupTexts.usernameTexts).title,
+          desc: common_vendor.unref(constants_signup_signupTexts.usernameTexts).desc
         }),
         b: common_vendor.sr(inputRef, "78ae262a-1", {
           "k": "inputRef"

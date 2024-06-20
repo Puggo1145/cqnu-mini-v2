@@ -7454,3 +7454,4 @@ exports.ref = ref;
 exports.sr = sr;
 exports.t = t;
 exports.unref = unref;
+exports.watch = watch;

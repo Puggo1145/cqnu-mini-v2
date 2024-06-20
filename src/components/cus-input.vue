@@ -3,6 +3,8 @@ import { ref, watch } from 'vue';
 
 interface Props {
     fieldName?: string;
+    value?: string | undefined | null;
+    disabled?: boolean;
 }
 const props = defineProps<Props>();
 
@@ -26,6 +28,16 @@ const showError = (message: string) => {
     errorMessage.value = message;
 };
 defineExpose({ showError });
+
+
+watch(() => props.value, (value) => {
+    if (value === undefined) return;
+
+    inputValue.value = value || '';
+    if (inputValue.value) {
+        isInputFocused.value = true;
+    }
+});
 </script>
 
 <template>
@@ -34,7 +46,8 @@ defineExpose({ showError });
         rounded-2xl bg-white flex flex-col px-4 relative" 
         :class="[
             isInputFocused ? 'py-3 border-secondary-foreground' : 'py-5 border-[#E0E0E0]',
-            errorMessage ? '!border-destructive' : ''
+            errorMessage && '!border-destructive',
+            props.disabled && 'border-[#E0E0E0] bg-[#F5F5F5]'
         ]"
     >
         <text :class="[
@@ -45,6 +58,8 @@ defineExpose({ showError });
         </text>
         <input 
             type="text" 
+            :value="props.value"
+            :disabled="props.disabled"
             @focus="isInputFocused = true" 
             @blur="onBlur"
             @input="onInput"

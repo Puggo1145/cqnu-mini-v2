@@ -3,7 +3,9 @@ const common_vendor = require("../common/vendor.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-input",
   props: {
-    fieldName: {}
+    fieldName: {},
+    value: {},
+    disabled: { type: Boolean }
   },
   emits: ["focus", "blur", "input"],
   setup(__props, { expose: __expose, emit: __emit }) {
@@ -21,18 +23,29 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       errorMessage.value = message;
     };
     __expose({ showError });
+    common_vendor.watch(() => props.value, (value) => {
+      if (value === void 0)
+        return;
+      inputValue.value = value || "";
+      if (inputValue.value) {
+        isInputFocused.value = true;
+      }
+    });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.t(props.fieldName),
         b: common_vendor.n(isInputFocused.value ? "text-xs leading-_12px_" : "leading-_16px_"),
-        c: common_vendor.o(($event) => isInputFocused.value = true),
-        d: common_vendor.o(onBlur),
-        e: common_vendor.o(onInput),
-        f: common_vendor.n(isInputFocused.value ? "py-3 border-secondary-foreground" : "py-5 border-_hE0E0E0_"),
-        g: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
-        h: errorMessage.value
+        c: props.value,
+        d: props.disabled,
+        e: common_vendor.o(($event) => isInputFocused.value = true),
+        f: common_vendor.o(onBlur),
+        g: common_vendor.o(onInput),
+        h: common_vendor.n(isInputFocused.value ? "py-3 border-secondary-foreground" : "py-5 border-_hE0E0E0_"),
+        i: common_vendor.n(errorMessage.value && "iborder-destructive"),
+        j: common_vendor.n(props.disabled && "border-_hE0E0E0_ bg-_hF5F5F5_"),
+        k: errorMessage.value
       }, errorMessage.value ? {
-        i: common_vendor.t(errorMessage.value)
+        l: common_vendor.t(errorMessage.value)
       } : {});
     };
   }

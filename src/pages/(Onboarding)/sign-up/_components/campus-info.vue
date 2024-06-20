@@ -7,11 +7,12 @@ import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
 // constans
 import { identity, facultiesAndMajors } from '@/constants/signup/campus-info';
+import { campusInfoTexts } from '@/constants/signup/signup-texts';
+// stores
+import { useSignupInfo } from '@/stores/signup-info';
 
-interface Props {
-    current: number;
-}
-const props = defineProps<Props>();
+const stores = useSignupInfo();
+
 const emit = defineEmits(['update:current']);
 
 const inputValue = ref('');
@@ -40,13 +41,19 @@ const majors = computed(() => {
 
 
 const handleInput = (event: any) => {
+    stores.studentId = event.value;
     inputValue.value = event.value;
     inputRef.value.showError('');
 }
 // vue 会在 html 内解构 ref，导致从 html 传入的 ref 失去响应性，只能分别处理
 const handleIdentityChange = (event: any) => {
     identityIndex.value = event.value;
-    majorsIndex.value = 0;
+    stores.identity = event.value;
+    
+    if (isMajorShow.value) {
+        majorsIndex.value = 0;
+        stores.major = majors.value[0];
+    }
 
     if (event.hasSelected) {
         identitySelectRef.value.showError('');
@@ -55,7 +62,12 @@ const handleIdentityChange = (event: any) => {
 }
 const handleFacultyChange = (event: any) => {
     facultyIndex.value = event.value;
-    majorsIndex.value = 0;
+    stores.faculty = faculties.value[event.value];
+    
+    if (isMajorShow.value) {
+        majorsIndex.value = 0;
+        stores.major = majors.value[0];
+    }
 
     if (event.hasSelected) {
         facultySelectRef.value.showError('');
@@ -64,6 +76,7 @@ const handleFacultyChange = (event: any) => {
 }
 const handleMajorChange = (event: any) => {
     majorsIndex.value = event.value;
+    stores.major = majors.value[event.value];
 
     if (event.hasSelected) {
         majorSelectRef.value.showError('');
@@ -96,15 +109,15 @@ const validateValue = () => {
     if (selectedFields.value.includes(null)) return;
 
     inputRef.value.showError('');  // 清除错误信息
-    emit('update:current', props.current + 1);
+    emit('update:current');
 }
 </script>
 
 <template>
     <view class="flex flex-col gap-6">
         <signup-texts 
-            title="完善你的校园信息" 
-            desc="输入你的学号、学院和专业，以便为你提供更好的服务" 
+            :title="campusInfoTexts.title" 
+            :desc="campusInfoTexts.desc" 
         />
         <cus-input 
             ref="inputRef"

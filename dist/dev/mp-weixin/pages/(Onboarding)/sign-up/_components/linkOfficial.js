@@ -1,5 +1,7 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
+const constants_signup_signupTexts = require("../../../../constants/signup/signup-texts.js");
+const stores_signupInfo = require("../../../../stores/signup-info.js");
 if (!Math) {
   (signupTexts + cusInput + cusButton)();
 }
@@ -8,15 +10,20 @@ const cusInput = () => "../../../../components/cus-input.js";
 const cusButton = () => "../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "linkOfficial",
-  setup(__props) {
+  emits: ["update:current"],
+  setup(__props, { emit: __emit }) {
+    const stores = stores_signupInfo.useSignupInfo();
+    const emit = __emit;
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
-          title: "绑定校园官网",
-          desc: "绑定学校官网户账号可以帮助你更好地管理学业信息课表同步、成绩查询及其他学业信息服务都有我来搞定我们尊重您的隐私，因此您可以选择性保存这一信息"
+          title: common_vendor.unref(constants_signup_signupTexts.linkOfficialTexts).title,
+          desc: common_vendor.unref(constants_signup_signupTexts.linkOfficialTexts).desc
         }),
         b: common_vendor.p({
-          ["field-name"]: "学号"
+          ["field-name"]: "学号",
+          value: common_vendor.unref(stores).studentId,
+          disabled: true
         }),
         c: common_vendor.p({
           ["field-name"]: "官网密码"
@@ -24,7 +31,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         d: common_vendor.p({
           variant: "muted"
         }),
-        e: common_vendor.p({
+        e: common_vendor.o(() => emit("update:current")),
+        f: common_vendor.p({
           variant: "outline"
         })
       };

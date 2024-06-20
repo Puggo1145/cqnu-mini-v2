@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 interface Props {
-    variant?: "primary" | "secondary" | "muted" | "outline" | "loading";
+    variant?: "primary" | "secondary" | "muted" | "outline" | "loading" | "ghost";
     class?: string;
     disabled?: boolean;
 }
@@ -14,9 +14,10 @@ const variants = {
     muted: "!bg-muted text-secondary-foreground",
     outline: "border border-primary border-solid text-primary bg-white",
     loading: "bg-primary text-white",
+    ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none'
 };
 const buttonStyle = computed(() => {
-    return props.class + " " + variants[props.variant || "primary"];
+    return props.class ?? "" + " " + variants[props.variant || "primary"];
 });
 
 const emit = defineEmits(['click']);

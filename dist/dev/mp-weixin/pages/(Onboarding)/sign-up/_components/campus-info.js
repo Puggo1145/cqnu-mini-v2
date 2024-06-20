@@ -1,6 +1,8 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
 const constants_signup_campusInfo = require("../../../../constants/signup/campus-info.js");
+const constants_signup_signupTexts = require("../../../../constants/signup/signup-texts.js");
+const stores_signupInfo = require("../../../../stores/signup-info.js");
 if (!Math) {
   (signupTexts + cusInput + cusSelect + cusButton)();
 }
@@ -10,12 +12,9 @@ const cusInput = () => "../../../../components/cus-input.js";
 const cusButton = () => "../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "campus-info",
-  props: {
-    current: {}
-  },
   emits: ["update:current"],
   setup(__props, { emit: __emit }) {
-    const props = __props;
+    const stores = stores_signupInfo.useSignupInfo();
     const emit = __emit;
     const inputValue = common_vendor.ref("");
     const inputRef = common_vendor.ref();
@@ -35,12 +34,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       return identityIndex.value === 0 ? majorsOfFaculty == null ? void 0 : majorsOfFaculty.majorsForUndergraduates : majorsOfFaculty == null ? void 0 : majorsOfFaculty.majorsForPostgraduates;
     });
     const handleInput = (event) => {
+      stores.studentId = event.value;
       inputValue.value = event.value;
       inputRef.value.showError("");
     };
     const handleIdentityChange = (event) => {
       identityIndex.value = event.value;
-      majorsIndex.value = 0;
+      stores.identity = event.value;
+      if (isMajorShow.value) {
+        majorsIndex.value = 0;
+        stores.major = majors.value[0];
+      }
       if (event.hasSelected) {
         identitySelectRef.value.showError("");
         selectedFields.value[0] = "identity";
@@ -48,7 +52,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     const handleFacultyChange = (event) => {
       facultyIndex.value = event.value;
-      majorsIndex.value = 0;
+      stores.faculty = faculties.value[event.value];
+      if (isMajorShow.value) {
+        majorsIndex.value = 0;
+        stores.major = majors.value[0];
+      }
       if (event.hasSelected) {
         facultySelectRef.value.showError("");
         selectedFields.value[1] = "faculty";
@@ -56,6 +64,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     const handleMajorChange = (event) => {
       majorsIndex.value = event.value;
+      stores.major = majors.value[event.value];
       if (event.hasSelected) {
         majorSelectRef.value.showError("");
         selectedFields.value[2] = "major";
@@ -77,13 +86,13 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       if (selectedFields.value.includes(null))
         return;
       inputRef.value.showError("");
-      emit("update:current", props.current + 1);
+      emit("update:current");
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.p({
-          title: "完善你的校园信息",
-          desc: "输入你的学号、学院和专业，以便为你提供更好的服务"
+          title: common_vendor.unref(constants_signup_signupTexts.campusInfoTexts).title,
+          desc: common_vendor.unref(constants_signup_signupTexts.campusInfoTexts).desc
         }),
         b: common_vendor.sr(inputRef, "4462f7d7-1", {
           "k": "inputRef"

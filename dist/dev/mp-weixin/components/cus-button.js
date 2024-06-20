@@ -15,10 +15,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       secondary: "bg-secondary text-white",
       muted: "ibg-muted text-secondary-foreground",
       outline: "border border-primary border-solid text-primary bg-white",
-      loading: "bg-primary text-white"
+      loading: "bg-primary text-white",
+      ghost: "ih-_32px_ ileading-_32px_ text-primary bg-transparent border-none"
     };
     const buttonStyle = common_vendor.computed(() => {
-      return props.class + " " + variants[props.variant || "primary"];
+      return props.class ?? " " + variants[props.variant || "primary"];
     });
     const emit = __emit;
     return (_ctx, _cache) => {

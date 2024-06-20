@@ -1,1 +1,0 @@
-<swiper-item><text>{{a}}</text><text>{{b}}</text><slot/></swiper-item>

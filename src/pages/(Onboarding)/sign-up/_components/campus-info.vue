@@ -8,10 +8,20 @@ import cusButton from '@/components/cus-button.vue';
 // constans
 import { identity, facultiesAndMajors } from '@/constants/signup/campus-info';
 
+interface Props {
+    current: number;
+}
+const props = defineProps<Props>();
+const emit = defineEmits(['update:current']);
+
+const inputValue = ref('');
+const inputRef = ref();
+const selectedFields = ref<string[]>([]);
+
+
 const identityIndex = ref<number>(0);
 const facultyIndex = ref<number>(0);
 const majorsIndex = ref<number>(0);
-const selectedFields = ref<string[]>([]);
 
 const faculties = computed(() => facultiesAndMajors.map(({ name }) => name));
 const majors = computed(() => {
@@ -39,12 +49,31 @@ const handleFacultyChange = (event: any) => {
         selectedFields.value.push(event.hasSelected);
     }
 }
+
+const validateValue = () => {
+    const isInputLengthCorrect = inputValue.value.length === 13
+    const isInputNumbers = Number.isInteger(Number(inputValue.value))
+    const isFieldsPassed = selectedFields.value.length === 3;
+
+    if (!isInputLengthCorrect) {
+        inputRef.value.showError('请输入 13 位学号');
+    } else if (!isInputNumbers) {
+        inputRef.value.showError('学号只能包含数字');
+    } else {
+        inputRef.value.showError('');  // 清除错误信息
+        emit('update:current', props.current + 1);
+    }
+}
 </script>
 
 <template>
     <view class="flex flex-col gap-6">
         <signup-texts title="完善你的校园信息" desc="输入你的学号、学院和专业，以便为你提供更好的服务" />
-        <cus-input field-name="学号（13 位）" />
+        <cus-input 
+            ref="inputRef"
+            field-name="学号（13 位）"
+            @input="inputValue = $event.value" 
+        />
         <cus-select
             field-name="identity"
             placeholder="请选择你的身份"
@@ -67,7 +96,9 @@ const handleFacultyChange = (event: any) => {
             :range="majors"
             @change="majorsIndex = $event.value"
         />
-        <cus-button variant="muted">
+        <cus-button
+            @click="validateValue"
+        >
             继续
         </cus-button>
     </view>

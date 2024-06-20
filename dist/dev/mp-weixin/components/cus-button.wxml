@@ -1,1 +1,1 @@
-<button class="{{[a, 'h-_52px_', 'rounded-2xl', 'text-md', 'font-bold', 'leading-_52px_']}}" bindtap="{{b}}"><slot/></button>
+<button class="{{[a, 'h-_52px_', 'rounded-2xl', 'text-md', 'font-bold', 'leading-_52px_']}}" bindtap="{{b}}" disabled="{{c}}"><slot/></button>

@@ -1,8 +1,8 @@
 {
   "usingComponents": {
     "cus-page": "../../../components/cus-page",
-    "signup-texts": "./_components/signup-texts",
     "username": "./_components/username",
-    "campus-info": "./_components/campus-info"
+    "campus-info": "./_components/campus-info",
+    "link-official": "./_components/linkOfficial"
   }
 }

@@ -20,6 +20,7 @@ useStatusBarHeight().set(statusBarHeight - 15);
         --secondary-foreground: 210 7% 57%;
         --primary: 225 76% 55%;
         --muted: 0 0% 85%;
+        --destructive: 356 61% 40%;
     }
 }
 </style>

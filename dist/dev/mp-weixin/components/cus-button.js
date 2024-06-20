@@ -4,7 +4,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-button",
   props: {
     variant: {},
-    class: {}
+    class: {},
+    disabled: { type: Boolean }
   },
   emits: ["click"],
   setup(__props, { emit: __emit }) {
@@ -12,7 +13,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const variants = {
       primary: "bg-primary text-white",
       secondary: "bg-secondary text-white",
-      muted: "bg-muted text-secondary-foreground",
+      muted: "ibg-muted text-secondary-foreground",
       outline: "border border-primary border-solid text-primary bg-white",
       loading: "bg-primary text-white"
     };
@@ -23,7 +24,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     return (_ctx, _cache) => {
       return {
         a: common_vendor.n(buttonStyle.value),
-        b: common_vendor.o(($event) => emit("click"))
+        b: common_vendor.o(($event) => emit("click")),
+        c: props.disabled
       };
     };
   }

@@ -10,11 +10,19 @@ const cusInput = () => "../../../../components/cus-input.js";
 const cusButton = () => "../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "campus-info",
-  setup(__props) {
+  props: {
+    current: {}
+  },
+  emits: ["update:current"],
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emit = __emit;
+    const inputValue = common_vendor.ref("");
+    const inputRef = common_vendor.ref();
+    const selectedFields = common_vendor.ref([]);
     const identityIndex = common_vendor.ref(0);
     const facultyIndex = common_vendor.ref(0);
     const majorsIndex = common_vendor.ref(0);
-    const selectedFields = common_vendor.ref([]);
     const faculties = common_vendor.computed(() => constants_signup_campusInfo.facultiesAndMajors.map(({ name }) => name));
     const majors = common_vendor.computed(() => {
       const majorsOfFaculty = constants_signup_campusInfo.facultiesAndMajors.find(({ name }) => name === faculties.value[facultyIndex.value]);
@@ -34,42 +42,57 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         selectedFields.value.push(event.hasSelected);
       }
     };
+    const validateValue = () => {
+      const isInputLengthCorrect = inputValue.value.length === 13;
+      const isInputNumbers = Number.isInteger(Number(inputValue.value));
+      selectedFields.value.length === 3;
+      if (!isInputLengthCorrect) {
+        inputRef.value.showError("请输入 13 位学号");
+      } else if (!isInputNumbers) {
+        inputRef.value.showError("学号只能包含数字");
+      } else {
+        inputRef.value.showError("");
+        emit("update:current", props.current + 1);
+      }
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.p({
           title: "完善你的校园信息",
           desc: "输入你的学号、学院和专业，以便为你提供更好的服务"
         }),
-        b: common_vendor.p({
+        b: common_vendor.sr(inputRef, "4462f7d7-1", {
+          "k": "inputRef"
+        }),
+        c: common_vendor.o(($event) => inputValue.value = $event.value),
+        d: common_vendor.p({
           ["field-name"]: "学号（13 位）"
         }),
-        c: common_vendor.o(handleIdentityChange),
-        d: common_vendor.p({
+        e: common_vendor.o(handleIdentityChange),
+        f: common_vendor.p({
           ["field-name"]: "identity",
           placeholder: "请选择你的身份",
           value: identityIndex.value,
           range: common_vendor.unref(constants_signup_campusInfo.identity)
         }),
-        e: common_vendor.o(handleFacultyChange),
-        f: common_vendor.p({
+        g: common_vendor.o(handleFacultyChange),
+        h: common_vendor.p({
           ["field-name"]: "faculty",
           placeholder: "请选择你的学院",
           value: facultyIndex.value,
           range: faculties.value
         }),
-        g: selectedFields.value.length > 1
+        i: selectedFields.value.length > 1
       }, selectedFields.value.length > 1 ? {
-        h: common_vendor.o(($event) => majorsIndex.value = $event.value),
-        i: common_vendor.p({
+        j: common_vendor.o(($event) => majorsIndex.value = $event.value),
+        k: common_vendor.p({
           ["field-name"]: "major",
           placeholder: "请选择你的专业",
           value: majorsIndex.value,
           range: majors.value
         })
       } : {}, {
-        j: common_vendor.p({
-          variant: "muted"
-        })
+        l: common_vendor.o(validateValue)
       });
     };
   }

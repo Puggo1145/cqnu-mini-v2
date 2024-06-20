@@ -4,13 +4,14 @@ import { computed } from 'vue';
 interface Props {
     variant?: "primary" | "secondary" | "muted" | "outline" | "loading";
     class?: string;
+    disabled?: boolean;
 }
 const props = defineProps<Props>();
 
 const variants = {
     primary: "bg-primary text-white",
     secondary: "bg-secondary text-white",
-    muted: "bg-muted text-secondary-foreground",
+    muted: "!bg-muted text-secondary-foreground",
     outline: "border border-primary border-solid text-primary bg-white",
     loading: "bg-primary text-white",
 };
@@ -25,6 +26,7 @@ const emit = defineEmits(['click']);
     <button
         :class="buttonStyle" class="h-[52px] rounded-2xl text-md font-bold leading-[52px]"
         @click="emit('click')"    
+        :disabled="props.disabled"
     >
         <slot />
     </button>

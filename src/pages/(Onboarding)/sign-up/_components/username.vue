@@ -16,6 +16,12 @@ const inputValue = ref('');
 const inputRef = ref();
 
 
+const handleInput = (event: any) => {
+    inputValue.value = event.value;
+    inputRef.value.showError('');
+}
+
+
 const validateValue = () => {
     const valueLength = inputValue.value.length;
 
@@ -34,7 +40,7 @@ const validateValue = () => {
         <cus-input 
             ref="inputRef"
             field-name="用户名（2-12 字符）"
-            @input="inputValue = $event.value" 
+            @input="handleInput" 
         />
         <cus-button 
             :variant="inputValue.length > 0 ? 'primary' : 'muted'"

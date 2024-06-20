@@ -10,8 +10,13 @@ interface Props {
     placeholder?: string;
 }
 const props = defineProps<Props>();
-const emit = defineEmits(['change']);
+
+
 const hasSelected = ref(false); // picker 是否被选择过，控制 placeholder 的显示
+const errorMessage = ref('');
+
+
+const emit = defineEmits(['change']);
 function emitChange(e: Event) {
     emit('change', hasSelected.value 
         // @ts-expect-error uniapp 没有标注 Event 类型
@@ -21,12 +26,20 @@ function emitChange(e: Event) {
     );
     hasSelected.value = true; // 如果 picker 被选择过，placeholder 就不再显示
 }
+
+
+// 显示错误信息
+const showError = (message: string) => {
+    errorMessage.value = message;
+};
+defineExpose({ showError, hasSelected });
 </script>
 
 <template>
     <view 
         class="w-full h-[60px] border border-solid border-[#E0E0E0]
         rounded-2xl bg-white flex items-center px-4 relative"
+        :class="errorMessage ? '!border-destructive' : ''"
     >
         <picker 
             class="flex-1" 
@@ -46,4 +59,7 @@ function emitChange(e: Event) {
             <image :src="icons.down" class="size-full" />
         </view>
     </view>
+    <text v-if="errorMessage" class="text-destructive text-xs mt-2">
+        {{ errorMessage }}
+    </text>
 </template>

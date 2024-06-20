@@ -11,10 +11,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     placeholder: {}
   },
   emits: ["change"],
-  setup(__props, { emit: __emit }) {
+  setup(__props, { expose: __expose, emit: __emit }) {
     const props = __props;
-    const emit = __emit;
     const hasSelected = common_vendor.ref(false);
+    const errorMessage = common_vendor.ref("");
+    const emit = __emit;
     function emitChange(e) {
       emit(
         "change",
@@ -22,6 +23,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       );
       hasSelected.value = true;
     }
+    const showError = (message) => {
+      errorMessage.value = message;
+    };
+    __expose({ showError, hasSelected });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: _ctx.placeholder && !hasSelected.value
@@ -33,8 +38,12 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         d: props.value,
         e: props.range,
         f: common_vendor.o(emitChange),
-        g: common_vendor.unref(constants_icons.icons).down
-      });
+        g: common_vendor.unref(constants_icons.icons).down,
+        h: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
+        i: errorMessage.value
+      }, errorMessage.value ? {
+        j: common_vendor.t(errorMessage.value)
+      } : {});
     };
   }
 });

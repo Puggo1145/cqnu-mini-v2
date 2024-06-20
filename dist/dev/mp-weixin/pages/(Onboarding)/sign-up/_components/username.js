@@ -17,6 +17,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const emit = __emit;
     const inputValue = common_vendor.ref("");
     const inputRef = common_vendor.ref();
+    const handleInput = (event) => {
+      inputValue.value = event.value;
+      inputRef.value.showError("");
+    };
     const validateValue = () => {
       const valueLength = inputValue.value.length;
       if (valueLength < 2 || valueLength > 12) {
@@ -35,7 +39,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         b: common_vendor.sr(inputRef, "78ae262a-1", {
           "k": "inputRef"
         }),
-        c: common_vendor.o(($event) => inputValue.value = $event.value),
+        c: common_vendor.o(handleInput),
         d: common_vendor.p({
           ["field-name"]: "用户名（2-12 字符）"
         }),

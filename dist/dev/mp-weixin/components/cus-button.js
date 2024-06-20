@@ -4,7 +4,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-button",
   props: {
     variant: {},
-    class: {},
+    className: {},
     disabled: { type: Boolean }
   },
   emits: ["click"],
@@ -19,7 +19,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       ghost: "ih-_32px_ ileading-_32px_ text-primary bg-transparent border-none"
     };
     const buttonStyle = common_vendor.computed(() => {
-      return props.class ?? " " + variants[props.variant || "primary"];
+      return props.className + " " + variants[props.variant || "primary"];
     });
     const emit = __emit;
     return (_ctx, _cache) => {

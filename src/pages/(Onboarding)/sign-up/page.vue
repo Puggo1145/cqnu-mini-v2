@@ -16,10 +16,10 @@ const getCurrent = (e: any) => current.value = e.detail.current;
 </script>
 
 <template>
-    <cus-page header-type="nav">
+    <cus-page header-type="nav" class="flex flex-col ">
         <visual-signup-info :current="current" />
         <swiper
-            class="w-screen box-border h-full mt-8"
+            class="w-screen flex-1 box-border mt-8"
             :current="current"
             @change="getCurrent"
         >
@@ -32,18 +32,26 @@ const getCurrent = (e: any) => current.value = e.detail.current;
                 />
             </swiper-item>
             <swiper-item 
-                class="box-border flex flex-col gap-6 px-4"
+                class="box-border px-4"
                 @touchmove.stop
             >
-                <campus-info 
-                    @update:current="nextPage"
-                />
-                <cus-button 
-                    variant="ghost"
-                    @click="prevPage"
+                <scroll-view
+                    class="h-full"
+                    scroll-y
                 >
-                    返回
-                </cus-button>
+                    <campus-info 
+                        @update:current="nextPage"
+                    />
+                    <cus-button 
+                        class-name="mt-6"
+                        variant="ghost"
+                        @click="prevPage"
+                    >
+                        返回
+                    </cus-button>
+                    <!-- 占位 -->
+                    <view class="h-8"></view>
+                </scroll-view>
             </swiper-item>
             <swiper-item 
                 class="box-border flex flex-col gap-6 px-4"

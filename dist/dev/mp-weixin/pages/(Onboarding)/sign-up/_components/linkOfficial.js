@@ -26,7 +26,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           disabled: true
         }),
         c: common_vendor.p({
-          ["field-name"]: "官网密码"
+          ["field-name"]: "官网密码",
+          type: "password"
         }),
         d: common_vendor.p({
           variant: "muted"

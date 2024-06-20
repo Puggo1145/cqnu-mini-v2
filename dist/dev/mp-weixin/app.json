@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/(Onboarding)/welcome/page",
+    "pages/(Onboarding)/index/index",
     "pages/(Onboarding)/sign-up/page"
   ],
   "window": {
     "navigationStyle": "custom",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "bounce": "none"
   },
   "usingComponents": {}
 }

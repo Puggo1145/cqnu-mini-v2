@@ -28,6 +28,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         d: common_vendor.o(nextPage),
         e: common_vendor.o(prevPage),
         f: common_vendor.p({
+          ["class-name"]: "mt-6",
           variant: "ghost"
         }),
         g: common_vendor.o(() => {

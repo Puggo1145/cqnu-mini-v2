@@ -9,7 +9,7 @@ const cusPage = () => "../../../components/cus-page.js";
 const cusButton = () => "../../../components/cus-button.js";
 const flowTexts = () => "./_components/flow-texts.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
-  __name: "page",
+  __name: "index",
   setup(__props) {
     const isSigningIn = common_vendor.ref(false);
     const handleSignIn = () => {
@@ -38,5 +38,5 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/pages/(Onboarding)/welcome/page.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/pages/(Onboarding)/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

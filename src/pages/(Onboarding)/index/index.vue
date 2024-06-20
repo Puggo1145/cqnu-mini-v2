@@ -24,10 +24,8 @@ const handleSignIn = () => {
 
 <template>
     <cus-page header-type="none">
-        <view class="w-full h-[380px] overflow-hidden">
-            <image :src="images.landing" class="w-full h-[430px]" />
-        </view>
-        <view class="mb-11">
+        <image :src="images.landing" class="w-full h-[310px] object-cover" />
+        <view class="overflow-hidden w-screen my-4">
             <flowTexts />
         </view>
         <!-- 首页欢迎文字 -->
@@ -49,7 +47,10 @@ const handleSignIn = () => {
                     </view>
                 </view>
             </view>
-            <cus-button @click="handleSignIn" :variant="isSigningIn ? 'muted' : 'primary'">
+            <cus-button 
+                @click="handleSignIn" 
+                :variant="isSigningIn ? 'muted' : 'primary'"
+            >
                 {{ isSigningIn ? "登录中" : "登录"}}
             </cus-button>
         </view>

@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 interface Props {
     variant?: "primary" | "secondary" | "muted" | "outline" | "loading" | "ghost";
-    class?: string;
+    className?: string;
     disabled?: boolean;
 }
 const props = defineProps<Props>();
@@ -17,7 +17,7 @@ const variants = {
     ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none'
 };
 const buttonStyle = computed(() => {
-    return props.class ?? "" + " " + variants[props.variant || "primary"];
+    return props.className + " " + variants[props.variant || "primary"];
 });
 
 const emit = defineEmits(['click']);

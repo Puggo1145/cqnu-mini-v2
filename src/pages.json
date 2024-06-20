@@ -1,7 +1,7 @@
 {
 	"pages": [
 		{
-			"path": "pages/(Onboarding)/welcome/page"
+			"path": "pages/(Onboarding)/index/index"
 		},
 		{
 			"path": "pages/(Onboarding)/sign-up/page"
@@ -9,6 +9,7 @@
 	],
 	"globalStyle": {
 		"navigationStyle": "custom",
-		"navigationBarTextStyle": "black"
+		"navigationBarTextStyle": "black",
+		"bounce": "none"
 	}
 }

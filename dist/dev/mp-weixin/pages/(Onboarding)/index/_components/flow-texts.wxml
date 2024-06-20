@@ -1,0 +1,1 @@
+<view class="z-10 relative w-_150p_ overflow-hidden gap-4"><view wx:for="{{a}}" wx:for-item="text" wx:key="c" class="{{['w-fit', 'bg-secondary', 'text-secondary-foreground', 'rounded-2xl', 'px-4', 'py-2', 'whitespace-nowrap', 'text-center', 'text-sm', 'mr-4', 'mb-4', text.b]}}">{{text.a}}</view></view>

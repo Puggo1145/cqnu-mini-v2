@@ -29,7 +29,7 @@ const goBack = () => uni.navigateBack();
 
 <template>
     <view 
-        class="overflow-hidden w-screen h-screen bg-background" 
+        class="w-screen h-screen bg-background flex flex-col fixed" 
         :style="{
             paddingTop: paddingTop,
             paddingLeft: (paddingX || 0) + 'px',

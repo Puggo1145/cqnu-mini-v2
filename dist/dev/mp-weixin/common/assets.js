@@ -1,5 +1,5 @@
 "use strict";
-const landing = "/assets/landing-page-img.3c1fd249.svg";
+const landing = "/assets/landing-page-img.6a9a4d3b.svg";
 const welcome = "/assets/welcome.5d276a7d.svg";
 const wechatIcon = "/assets/wechat-icon.c3382be8.svg";
 const mail = "/assets/mail.7e898867.svg";

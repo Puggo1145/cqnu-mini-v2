@@ -24,7 +24,10 @@ const emit = defineEmits(['update:current']);
             :value="stores.studentId"
             disabled  
         />
-        <cusInput field-name="官网密码" />
+        <cusInput 
+            field-name="官网密码" 
+            type="password"
+        />
         <cusButton 
             variant="muted" 
             class="w-full"

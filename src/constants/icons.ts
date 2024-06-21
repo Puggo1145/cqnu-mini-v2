@@ -1,15 +1,24 @@
-import wechatIcon from "@/assets/icons/wechat-icon.svg";
-import mail from "@/assets/icons/mail.svg"
-import mailSecondary from "@/assets/icons/mail-secondary.svg"
-import back from "@/assets/icons/back.svg"
-import down from "@/assets/icons/down.svg"
-import keySecondary from "@/assets/icons/key-secondary.svg"
-import lockSecondary from "@/assets/icons/lock-secondary.svg"
-import nameSecondary from "@/assets/icons/name-secondary.svg"
-import loadingBlack from "@/assets/icons/loading-black.svg"
-import loadingWhite from "@/assets/icons/loading-white.svg"
-import notification from "@/assets/icons/notification.svg"
-import me from "@/assets/icons/me.svg"
+import wechatIcon from "@/static/icons/wechat-icon.svg";
+import mail from "@/static/icons/mail.svg"
+import mailSecondary from "@/static/icons/mail-secondary.svg"
+import back from "@/static/icons/back.svg"
+import down from "@/static/icons/down.svg"
+import keySecondary from "@/static/icons/key-secondary.svg"
+import lockSecondary from "@/static/icons/lock-secondary.svg"
+import nameSecondary from "@/static/icons/name-secondary.svg"
+import loadingBlack from "@/static/icons/loading-black.svg"
+import loadingWhite from "@/static/icons/loading-white.svg"
+import notification from "@/static/icons/notification.svg"
+import me from "@/static/icons/me.svg"
+// tabbar icons
+import today from "@/static/icons/today.png"
+import todayActived from "@/static/icons/today-activated.png"
+import gpt from "@/static/icons/gpt.png"
+import gptActived from "@/static/icons/gpt-activated.png"
+import study from "@/static/icons/study.png"
+import studyActived from "@/static/icons/study-activated.png"
+import service from "@/static/icons/service.png"
+import serviceActived from "@/static/icons/service-activated.png"
 
 const icons = {
     wechatIcon,
@@ -23,7 +32,15 @@ const icons = {
     loadingBlack,
     loadingWhite,
     notification,
-    me
+    me,
+    today,
+    todayActived,
+    gpt,
+    gptActived,
+    study,
+    studyActived,
+    service,
+    serviceActived
 };
 
 export default icons;

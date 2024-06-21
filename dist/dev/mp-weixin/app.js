@@ -4,6 +4,9 @@ const common_vendor = require("./common/vendor.js");
 const stores_statusBarHeight = require("./stores/statusBarHeight.js");
 if (!Math) {
   "./pages/(Main)/today/page.js";
+  "./pages/(Main)/gpt/page.js";
+  "./pages/(Main)/study/page.js";
+  "./pages/(Main)/service/page.js";
   "./pages/(Onboarding)/index/index.js";
   "./pages/(Onboarding)/sign-up/page.js";
   "./pages/(Onboarding)/process-sign-up/page.js";
@@ -23,6 +26,7 @@ function createApp() {
   const app = common_vendor.createSSRApp(App);
   const pinia = common_vendor.createPinia();
   app.use(pinia);
+  app.use(common_vendor.uviewPlus);
   return {
     app,
     pinia

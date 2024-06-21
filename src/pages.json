@@ -4,6 +4,15 @@
 			"path": "pages/(Main)/today/page"
 		},
 		{
+			"path": "pages/(Main)/gpt/page"
+		},
+		{
+			"path": "pages/(Main)/study/page"
+		},
+		{
+			"path": "pages/(Main)/service/page"
+		},
+		{
 			"path": "pages/(Onboarding)/index/index"
 		},
 		{
@@ -19,5 +28,45 @@
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"color": "#434041",
+		"selectedColor": "#3662E3",
+		"borderStyle": "white",
+		"backgroundColor": "#faf8f7",
+		"list": [
+			{
+				"pagePath": "pages/(Main)/today/page",
+				"iconPath": "static/icons/today.png",
+				"selectedIconPath": "static/icons/today-activated.png",
+				"text": "今日"
+			},
+			{
+				"pagePath": "pages/(Main)/gpt/page",
+				"iconPath": "static/icons/gpt.png",
+				"selectedIconPath": "static/icons/gpt-activated.png",
+				"text": "问问"
+			},
+			{
+				"pagePath": "pages/(Main)/study/page",
+				"iconPath": "static/icons/study.png",
+				"selectedIconPath": "static/icons/study-activated.png",
+				"text": "学习"
+			},
+			{
+				"pagePath": "pages/(Main)/service/page",
+				"iconPath": "static/icons/service.png",
+				"selectedIconPath": "static/icons/service-activated.png",
+				"text": "服务"
+			}
+		]
+	},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+	        "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue"
+		}
 	}
 }

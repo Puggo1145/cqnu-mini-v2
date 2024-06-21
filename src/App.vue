@@ -6,6 +6,10 @@ const statusBarHeight = uni.getMenuButtonBoundingClientRect().top;
 useStatusBarHeight().set(statusBarHeight - 15);
 </script>
 
+<style lang="scss">
+@import "uview-plus/index.scss";
+</style>
+
 <style>
 @import "@/normalize.css";
 @tailwind base;

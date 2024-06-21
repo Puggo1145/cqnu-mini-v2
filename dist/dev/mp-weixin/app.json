@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/(Main)/today/page",
+    "pages/(Main)/gpt/page",
+    "pages/(Main)/study/page",
+    "pages/(Main)/service/page",
     "pages/(Onboarding)/index/index",
     "pages/(Onboarding)/sign-up/page",
     "pages/(Onboarding)/process-sign-up/page",
@@ -9,6 +12,38 @@
   "window": {
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#434041",
+    "selectedColor": "#3662E3",
+    "borderStyle": "white",
+    "backgroundColor": "#faf8f7",
+    "list": [
+      {
+        "pagePath": "pages/(Main)/today/page",
+        "iconPath": "static/icons/today.png",
+        "selectedIconPath": "static/icons/today-activated.png",
+        "text": "今日"
+      },
+      {
+        "pagePath": "pages/(Main)/gpt/page",
+        "iconPath": "static/icons/gpt.png",
+        "selectedIconPath": "static/icons/gpt-activated.png",
+        "text": "问问"
+      },
+      {
+        "pagePath": "pages/(Main)/study/page",
+        "iconPath": "static/icons/study.png",
+        "selectedIconPath": "static/icons/study-activated.png",
+        "text": "学习"
+      },
+      {
+        "pagePath": "pages/(Main)/service/page",
+        "iconPath": "static/icons/service.png",
+        "selectedIconPath": "static/icons/service-activated.png",
+        "text": "服务"
+      }
+    ]
   },
   "usingComponents": {}
 }

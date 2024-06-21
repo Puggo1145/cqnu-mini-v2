@@ -1,5 +1,5 @@
-import landing from "@/assets/images/landing-page-img.svg";
-import welcome from "@/assets/images/welcome.svg";
+import landing from "@/static/images/landing-page-img.svg";
+import welcome from "@/static/images/welcome.svg";
 
 const images = {
     landing,

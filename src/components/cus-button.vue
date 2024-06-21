@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+// components
+import spinner from './spinner.vue';
 
 interface Props {
-    variant?: "primary" | "secondary" | "muted" | "outline" | "loading" | "ghost";
+    variant?: "primary" | "secondary" | "muted" | "outline" | "ghost";
     className?: string;
     disabled?: boolean;
 }
@@ -13,7 +15,6 @@ const variants = {
     secondary: "bg-secondary text-white",
     muted: "!bg-muted text-secondary-foreground",
     outline: "border border-primary border-solid text-primary bg-white",
-    loading: "bg-primary text-white",
     ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none'
 };
 const buttonStyle = computed(() => {
@@ -26,7 +27,7 @@ const emit = defineEmits(['click']);
 <template>
     <button
         :class="buttonStyle" 
-        class="h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
+        class="flex justify-center items-center h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
         hover-class="button-touch"
         @click="emit('click')"    
         :disabled="props.disabled"

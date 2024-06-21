@@ -5,11 +5,16 @@
 		},
 		{
 			"path": "pages/(Onboarding)/sign-up/page"
+		},
+		{
+			"path": "pages/(Onboarding)/process-sign-up/page"
+		},
+		{
+			"path": "pages/dev/page"
 		}
 	],
 	"globalStyle": {
 		"navigationStyle": "custom",
-		"navigationBarTextStyle": "black",
-		"bounce": "none"
+		"navigationBarTextStyle": "black"
 	}
 }

@@ -20,6 +20,8 @@ const handleSignIn = () => {
         });
     }, 500);
 };
+
+const gotoDevPage = () => uni.navigateTo({ url: "/pages/dev/page" });
 </script>
 
 <template>
@@ -52,6 +54,9 @@ const handleSignIn = () => {
                 :variant="isSigningIn ? 'muted' : 'primary'"
             >
                 {{ isSigningIn ? "登录中" : "登录"}}
+            </cus-button>
+            <cus-button variant="outline" @click="gotoDevPage">
+                dev page
             </cus-button>
         </view>
         <!-- 背景圆 -->

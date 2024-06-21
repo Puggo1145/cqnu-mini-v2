@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cus-page": "../../../components/cus-page",
+    "spinner": "../../../components/spinner"
+  }
+}

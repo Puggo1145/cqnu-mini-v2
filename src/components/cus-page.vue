@@ -10,7 +10,7 @@ const { statusBarheight } = useStatusBarHeight();
 // props
 interface Props {
     headerType?: "none" | "default" | "nav"; 
-    paddingX?: number; // 两侧边距
+    paddingX?: number | string; // 两侧边距
 }
 
 const { 
@@ -30,11 +30,7 @@ const goBack = () => uni.navigateBack();
 <template>
     <view 
         class="w-screen h-screen bg-background flex flex-col fixed" 
-        :style="{
-            paddingTop: paddingTop,
-            paddingLeft: (paddingX || 0) + 'px',
-            paddingRight: (paddingX || 0) + 'px',
-        }"
+        :style="{ paddingTop: paddingTop }"
     >
         <view
             v-if="headerType === 'nav'"
@@ -44,6 +40,14 @@ const goBack = () => uni.navigateBack();
                 <image :src="icons.back" class="size-full" />
             </view>
         </view>
-        <slot />
+        <view 
+            class="w-screen flex-1 flex flex-col"
+            :style="{
+                paddingLeft: (paddingX || 0) + 'px',
+                paddingRight: (paddingX || 0) + 'px',
+            }"
+        >
+            <slot />
+        </view>
     </view>
 </template>

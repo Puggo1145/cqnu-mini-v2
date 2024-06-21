@@ -26,9 +26,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         b: common_vendor.unref(constants_icons.icons).back,
         c: common_vendor.o(goBack)
       } : {}, {
-        d: paddingTop.value,
+        d: (_ctx.paddingX || 0) + "px",
         e: (_ctx.paddingX || 0) + "px",
-        f: (_ctx.paddingX || 0) + "px"
+        f: paddingTop.value
       });
     };
   }

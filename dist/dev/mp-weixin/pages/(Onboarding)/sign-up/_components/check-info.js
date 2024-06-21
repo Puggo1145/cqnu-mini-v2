@@ -9,7 +9,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "check-info",
   setup(__props) {
     const goToSignUpProcess = () => {
-      common_vendor.index.navigateTo({
+      common_vendor.index.redirectTo({
         url: "/pages/(Onboarding)/process-sign-up/page"
       });
     };

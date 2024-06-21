@@ -6,6 +6,8 @@ import down from "@/assets/icons/down.svg"
 import keySecondary from "@/assets/icons/key-secondary.svg"
 import lockSecondary from "@/assets/icons/lock-secondary.svg"
 import nameSecondary from "@/assets/icons/name-secondary.svg"
+import loadingBlack from "@/assets/icons/loading-black.svg"
+import loadingWhite from "@/assets/icons/loading-white.svg"
 
 const icons = {
     wechatIcon,
@@ -15,7 +17,9 @@ const icons = {
     down,
     keySecondary,
     lockSecondary,
-    nameSecondary
+    nameSecondary,
+    loadingBlack,
+    loadingWhite
 };
 
 export default icons;

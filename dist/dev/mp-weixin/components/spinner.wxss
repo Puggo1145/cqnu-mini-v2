@@ -1,0 +1,12 @@
+
+.spin.data-v-40d3408f {
+    animation: rotate-40d3408f 1s linear infinite;
+}
+@keyframes rotate-40d3408f {
+0% {
+        transform: rotate(0deg);
+}
+100% {
+        transform: rotate(360deg);
+}
+}

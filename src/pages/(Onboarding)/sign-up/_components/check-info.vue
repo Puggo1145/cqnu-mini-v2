@@ -4,7 +4,7 @@ import signupTexts from './signup-texts.vue';
 import cusButton from '@/components/cus-button.vue';
 
 const goToSignUpProcess = () => {
-    uni.navigateTo({
+    uni.redirectTo({
         url: '/pages/(Onboarding)/process-sign-up/page'
     });
 }

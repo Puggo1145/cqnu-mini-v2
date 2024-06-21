@@ -1,1 +1,1 @@
-<button class="{{[a, 'h-_52px_', 'rounded-2xl', 'text-md', 'font-bold', 'leading-_52px_', 'transition-all', 'data-v-d363d67f']}}" hover-class="button-touch" bindtap="{{b}}" disabled="{{c}}"><slot/></button>
+<button class="{{[a, 'flex', 'justify-center', 'items-center', 'h-_52px_', 'rounded-2xl', 'text-md', 'font-bold', 'leading-_52px_', 'transition-all', 'data-v-d363d67f']}}" hover-class="button-touch" bindtap="{{b}}" disabled="{{c}}"><slot/></button>

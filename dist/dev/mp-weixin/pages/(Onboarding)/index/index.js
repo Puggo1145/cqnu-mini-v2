@@ -21,6 +21,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         });
       }, 500);
     };
+    const gotoDevPage = () => common_vendor.index.navigateTo({ url: "/pages/dev/page" });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(constants_images.images).landing,
@@ -31,7 +32,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         e: common_vendor.p({
           variant: isSigningIn.value ? "muted" : "primary"
         }),
-        f: common_vendor.p({
+        f: common_vendor.o(gotoDevPage),
+        g: common_vendor.p({
+          variant: "outline"
+        }),
+        h: common_vendor.p({
           ["header-type"]: "none"
         })
       });

@@ -5,6 +5,8 @@ const stores_statusBarHeight = require("./stores/statusBarHeight.js");
 if (!Math) {
   "./pages/(Onboarding)/index/index.js";
   "./pages/(Onboarding)/sign-up/page.js";
+  "./pages/(Onboarding)/process-sign-up/page.js";
+  "./pages/dev/page.js";
 }
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "App",

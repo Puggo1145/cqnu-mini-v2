@@ -16,7 +16,7 @@ const getCurrent = (e: any) => current.value = e.detail.current;
 </script>
 
 <template>
-    <cus-page header-type="nav" class="flex flex-col ">
+    <cus-page header-type="nav">
         <visual-signup-info :current="current" />
         <swiper
             class="w-screen flex-1 box-border mt-8"

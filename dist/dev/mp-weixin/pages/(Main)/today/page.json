@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "cus-page": "../../../components/cus-page",
+    "dynamic-header": "./_components/dynamic-header",
+    "smart-class": "./_components/smart-class"
+  }
+}

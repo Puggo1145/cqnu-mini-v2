@@ -1,0 +1,1 @@
+<view class="w-full h-_80px_ flex items-center justify-between mt-12"><view class="font-bold text-3xl"> 早上好 Puggo </view><view class="flex items-center gap-5"><view wx:for="{{a}}" wx:for-item="btn" wx:key="b" class="size-8 overflow-hidden" bindtap="{{btn.c}}"><image src="{{btn.a}}" class="size-full"/></view></view></view>

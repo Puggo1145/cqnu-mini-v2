@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/(Main)/today/page"
+		},
+		{
 			"path": "pages/(Onboarding)/index/index"
 		},
 		{

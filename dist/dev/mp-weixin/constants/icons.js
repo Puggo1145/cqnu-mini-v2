@@ -10,6 +10,8 @@ const icons = {
   lockSecondary: common_assets.lockSecondary,
   nameSecondary: common_assets.nameSecondary,
   loadingBlack: common_assets.loadingBlack,
-  loadingWhite: common_assets.loadingWhite
+  loadingWhite: common_assets.loadingWhite,
+  notification: common_assets.notification,
+  me: common_assets.me
 };
 exports.icons = icons;

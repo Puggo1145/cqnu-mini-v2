@@ -20,6 +20,7 @@ const icons = {
   study: common_assets.study,
   studyActived: common_assets.studyActived,
   service: common_assets.service,
-  serviceActived: common_assets.serviceActived
+  serviceActived: common_assets.serviceActived,
+  plus: common_assets.plus
 };
 exports.icons = icons;

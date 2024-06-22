@@ -2,6 +2,7 @@
   "usingComponents": {
     "cus-page": "../../../components/cus-page",
     "dynamic-header": "./_components/dynamic-header",
+    "tabs": "./_components/tabs",
     "smart-class": "./_components/smart-class"
   }
 }

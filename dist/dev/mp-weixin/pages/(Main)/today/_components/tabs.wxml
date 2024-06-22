@@ -1,0 +1,1 @@
+<up-sticky u-s="{{['d']}}" u-i="1164ea1b-0" bind:__l="__l"><view class="flex items-center justify-between"><up-tabs wx:if="{{a}}" u-i="1164ea1b-1,1164ea1b-0" bind:__l="__l" u-p="{{a}}"></up-tabs><view class="size-6 overflow-hidden flex items-center justify-center mr-3"><image src="{{b}}" class="size-full"/></view></view></up-sticky>

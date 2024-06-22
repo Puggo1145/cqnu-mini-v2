@@ -74,8 +74,8 @@ const capitalize = cacheStringFunction((str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 });
 const toHandlerKey = cacheStringFunction((str) => {
-  const s = str ? `on${capitalize(str)}` : ``;
-  return s;
+  const s2 = str ? `on${capitalize(str)}` : ``;
+  return s2;
 });
 const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
 const invokeArrayFns$1 = (fns, arg) => {
@@ -94,6 +94,36 @@ const looseToNumber = (val) => {
   const n2 = parseFloat(val);
   return isNaN(n2) ? val : n2;
 };
+function normalizeStyle(value) {
+  if (isArray$1(value)) {
+    const res = {};
+    for (let i = 0; i < value.length; i++) {
+      const item = value[i];
+      const normalized = isString(item) ? parseStringStyle(item) : normalizeStyle(item);
+      if (normalized) {
+        for (const key in normalized) {
+          res[key] = normalized[key];
+        }
+      }
+    }
+    return res;
+  } else if (isString(value) || isObject$1(value)) {
+    return value;
+  }
+}
+const listDelimiterRE = /;(?![^(]*\))/g;
+const propertyDelimiterRE = /:([^]+)/;
+const styleCommentRE = /\/\*[^]*?\*\//g;
+function parseStringStyle(cssText) {
+  const ret = {};
+  cssText.replace(styleCommentRE, "").split(listDelimiterRE).forEach((item) => {
+    if (item) {
+      const tmp = item.split(propertyDelimiterRE);
+      tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
+    }
+  });
+  return ret;
+}
 function normalizeClass(value) {
   let res = "";
   if (isString(value)) {
@@ -728,8 +758,8 @@ function promisify$1(name, fn) {
     if (hasCallback(args)) {
       return wrapperReturnValue(name, invokeApi(name, fn, args, rest));
     }
-    return wrapperReturnValue(name, handlePromise(new Promise((resolve, reject) => {
-      invokeApi(name, fn, extend(args, { success: resolve, fail: reject }), rest);
+    return wrapperReturnValue(name, handlePromise(new Promise((resolve2, reject) => {
+      invokeApi(name, fn, extend(args, { success: resolve2, fail: reject }), rest);
     })));
   };
 }
@@ -1026,7 +1056,7 @@ function invokeGetPushCidCallbacks(cid2, errMsg) {
   getPushCidCallbacks.length = 0;
 }
 const API_GET_PUSH_CLIENT_ID = "getPushClientId";
-const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve, reject }) => {
+const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve: resolve2, reject }) => {
   Promise.resolve().then(() => {
     if (typeof enabled === "undefined") {
       enabled = false;
@@ -1035,7 +1065,7 @@ const getPushClientId = defineAsyncApi(API_GET_PUSH_CLIENT_ID, (_, { resolve, re
     }
     getPushCidCallbacks.push((cid2, errMsg) => {
       if (cid2) {
-        resolve({ cid: cid2 });
+        resolve2({ cid: cid2 });
       } else {
         reject(errMsg);
       }
@@ -1100,9 +1130,9 @@ function promisify(name, api) {
     if (isFunction(options.success) || isFunction(options.fail) || isFunction(options.complete)) {
       return wrapperReturnValue(name, invokeApi(name, api, options, rest));
     }
-    return wrapperReturnValue(name, handlePromise(new Promise((resolve, reject) => {
+    return wrapperReturnValue(name, handlePromise(new Promise((resolve2, reject) => {
       invokeApi(name, api, extend({}, options, {
-        success: resolve,
+        success: resolve2,
         fail: reject
       }), rest);
     })));
@@ -3330,8 +3360,8 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       warn(`watch() "deep" option is only respected when using the watch(source, callback, options?) signature.`);
     }
   }
-  const warnInvalidSource = (s) => {
-    warn(`Invalid watch source: `, s, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
+  const warnInvalidSource = (s2) => {
+    warn(`Invalid watch source: `, s2, `A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.`);
   };
   const instance = getCurrentScope() === (currentInstance === null || currentInstance === void 0 ? void 0 : currentInstance.scope) ? currentInstance : null;
   let getter;
@@ -3345,21 +3375,21 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
     deep = true;
   } else if (isArray$1(source)) {
     isMultiSource = true;
-    forceTrigger = source.some((s) => isReactive(s) || isShallow(s));
-    getter = () => source.map((s) => {
-      if (isRef(s)) {
-        return s.value;
-      } else if (isReactive(s)) {
-        return traverse(s);
-      } else if (isFunction(s)) {
+    forceTrigger = source.some((s2) => isReactive(s2) || isShallow(s2));
+    getter = () => source.map((s2) => {
+      if (isRef(s2)) {
+        return s2.value;
+      } else if (isReactive(s2)) {
+        return traverse(s2);
+      } else if (isFunction(s2)) {
         return callWithErrorHandling(
-          s,
+          s2,
           instance,
           2
           /* ErrorCodes.WATCH_GETTER */
         );
       } else {
-        warnInvalidSource(s);
+        warnInvalidSource(s2);
       }
     });
   } else if (isFunction(source)) {
@@ -3637,6 +3667,46 @@ function validateDirectiveName(name) {
   if (isBuiltInDirective(name)) {
     warn("Do not use built-in directive ids as custom directive id: " + name);
   }
+}
+const COMPONENTS = "components";
+function resolveComponent(name, maybeSelfReference) {
+  return resolveAsset(COMPONENTS, name, true, maybeSelfReference) || name;
+}
+function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false) {
+  const instance = currentRenderingInstance || currentInstance;
+  if (instance) {
+    const Component2 = instance.type;
+    if (type === COMPONENTS) {
+      const selfName = getComponentName(
+        Component2,
+        false
+        /* do not include inferred name to avoid breaking existing code */
+      );
+      if (selfName && (selfName === name || selfName === camelize(name) || selfName === capitalize(camelize(name)))) {
+        return Component2;
+      }
+    }
+    const res = (
+      // local registration
+      // check instance[type] first which is resolved for options API
+      resolve(instance[type] || Component2[type], name) || // global registration
+      resolve(instance.appContext[type], name)
+    );
+    if (!res && maybeSelfReference) {
+      return Component2;
+    }
+    if (warnMissing && !res) {
+      const extra = type === COMPONENTS ? `
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.` : ``;
+      warn(`Failed to resolve ${type.slice(0, -1)}: ${name}${extra}`);
+    }
+    return res;
+  } else {
+    warn(`resolve${capitalize(type.slice(0, -1))} can only be used in render() or setup().`);
+  }
+}
+function resolve(registry, name) {
+  return registry && (registry[name] || registry[camelize(name)] || registry[capitalize(camelize(name))]);
 }
 const getPublicInstance = (i) => {
   if (!i)
@@ -5227,8 +5297,8 @@ function nextTick(instance, fn) {
       _resolve(instance.proxy);
     }
   });
-  return new Promise((resolve) => {
-    _resolve = resolve;
+  return new Promise((resolve2) => {
+    _resolve = resolve2;
   });
 }
 function clone$1(src, seen) {
@@ -5996,12 +6066,29 @@ function vFor(source, renderItem) {
   }
   return ret;
 }
+function stringifyStyle(value) {
+  if (isString(value)) {
+    return value;
+  }
+  return stringify(normalizeStyle(value));
+}
+function stringify(styles) {
+  let ret = "";
+  if (!styles || isString(styles)) {
+    return ret;
+  }
+  for (const key in styles) {
+    ret += `${key.startsWith(`--`) ? key : hyphenate(key)}:${styles[key]};`;
+  }
+  return ret;
+}
 function setRef(ref2, id, opts = {}) {
   const { $templateRefs } = getCurrentInstance();
   $templateRefs.push({ i: id, r: ref2, k: opts.k, f: opts.f });
 }
 const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
+const s = (value) => stringifyStyle(value);
 const e = (target, ...sources) => extend(target, ...sources);
 const n = (value) => normalizeClass(value);
 const t = (val) => toDisplayString(val);
@@ -7717,9 +7804,9 @@ function getPx(value, unit = false) {
   return unit ? `${parseInt(value)}px` : parseInt(value);
 }
 function sleep(value = 30) {
-  return new Promise((resolve) => {
+  return new Promise((resolve2) => {
     setTimeout(() => {
-      resolve();
+      resolve2();
     }, value);
   });
 }
@@ -8068,17 +8155,17 @@ function priceFormat(number2, decimals = 0, decimalPoint = ".", thousandsSeparat
   const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
   const sep = typeof thousandsSeparator === "undefined" ? "," : thousandsSeparator;
   const dec = typeof decimalPoint === "undefined" ? "." : decimalPoint;
-  let s = "";
-  s = (prec ? round(n2, prec) + "" : `${Math.round(n2)}`).split(".");
+  let s2 = "";
+  s2 = (prec ? round(n2, prec) + "" : `${Math.round(n2)}`).split(".");
   const re = /(-?\d+)(\d{3})/;
-  while (re.test(s[0])) {
-    s[0] = s[0].replace(re, `$1${sep}$2`);
+  while (re.test(s2[0])) {
+    s2[0] = s2[0].replace(re, `$1${sep}$2`);
   }
-  if ((s[1] || "").length < prec) {
-    s[1] = s[1] || "";
-    s[1] += new Array(prec - s[1].length + 1).join("0");
+  if ((s2[1] || "").length < prec) {
+    s2[1] = s2[1] || "";
+    s2[1] += new Array(prec - s2[1].length + 1).join("0");
   }
-  return s.join(dec);
+  return s2.join(dec);
 }
 function getDuration(value, unit = true) {
   const valueNum = parseInt(value);
@@ -8241,8 +8328,8 @@ class Router {
     mergeConfig2.params = params;
     mergeConfig2 = deepMerge$1(this.config, mergeConfig2);
     if (typeof index$1.$u.routeIntercept === "function") {
-      const isNext = await new Promise((resolve, reject) => {
-        index$1.$u.routeIntercept(mergeConfig2, resolve);
+      const isNext = await new Promise((resolve2, reject) => {
+        index$1.$u.routeIntercept(mergeConfig2, resolve2);
       });
       isNext && this.openPage(mergeConfig2);
     } else {
@@ -8370,13 +8457,13 @@ const mixin = {
     // 目前此方法在支付宝小程序中无法获取组件跟接点的尺寸，为支付宝的bug(2020-07-21)
     // 解决办法为在组件根部再套一个没有任何作用的view元素
     $uGetRect(selector, all) {
-      return new Promise((resolve) => {
+      return new Promise((resolve2) => {
         index$1.createSelectorQuery().in(this)[all ? "selectAll" : "select"](selector).boundingClientRect((rect) => {
           if (all && Array.isArray(rect) && rect.length) {
-            resolve(rect);
+            resolve2(rect);
           }
           if (!all && rect) {
-            resolve(rect);
+            resolve2(rect);
           }
         }).exec();
       });
@@ -8530,11 +8617,11 @@ function buildFullPath(baseURL, requestedURL) {
   }
   return requestedURL;
 }
-function settle(resolve, reject, response) {
+function settle(resolve2, reject, response) {
   const { validateStatus: validateStatus2 } = response.config;
   const status = response.statusCode;
   if (status && (!validateStatus2 || validateStatus2(status))) {
-    resolve(response);
+    resolve2(response);
   } else {
     reject(response);
   }
@@ -8548,7 +8635,7 @@ const mergeKeys$1 = (keys, config2) => {
   });
   return config3;
 };
-const adapter = (config2) => new Promise((resolve, reject) => {
+const adapter = (config2) => new Promise((resolve2, reject) => {
   const fullPath = buildURL(buildFullPath(config2.baseURL, config2.url), config2.params);
   const _config = {
     url: fullPath,
@@ -8562,7 +8649,7 @@ const adapter = (config2) => new Promise((resolve, reject) => {
         }
       } catch (e2) {
       }
-      settle(resolve, reject, response);
+      settle(resolve2, reject, response);
     }
   };
   let requestTask;
@@ -8731,9 +8818,9 @@ var clone = function() {
       } else if (_instanceof(parent2, nativeSet)) {
         child = new nativeSet();
       } else if (_instanceof(parent2, nativePromise)) {
-        child = new nativePromise(function(resolve, reject) {
+        child = new nativePromise(function(resolve2, reject) {
           parent2.then(function(value) {
-            resolve(_clone(value, depth2 - 1));
+            resolve2(_clone(value, depth2 - 1));
           }, function(err) {
             reject(_clone(err, depth2 - 1));
           });
@@ -10571,7 +10658,7 @@ const Upload = {
     previewImage: true
   }
 };
-const props = {
+const defProps = {
   ...ActionSheet,
   ...Album,
   ...Alert,
@@ -10681,7 +10768,7 @@ const http = new Request();
 let themeType = ["primary", "success", "error", "warning", "info"];
 function setConfig(configs) {
   index.shallowMerge(config, configs.config || {});
-  index.shallowMerge(props, configs.props || {});
+  index.shallowMerge(defProps, configs.props || {});
   index.shallowMerge(color, configs.color || {});
   index.shallowMerge(zIndex, configs.zIndex || {});
 }
@@ -10704,7 +10791,7 @@ const $u = {
   throttle,
   mixin,
   mpMixin,
-  props,
+  props: defProps,
   ...index,
   color,
   platform: platform$1
@@ -10717,21 +10804,213 @@ const install = (Vue) => {
 const uviewPlus = {
   install
 };
+const props$2 = {
+  props: {
+    // 滑块的移动过渡时间，单位ms
+    duration: {
+      type: Number,
+      default: () => defProps.tabs.duration
+    },
+    // tabs标签数组
+    list: {
+      type: Array,
+      default: () => defProps.tabs.list
+    },
+    // 滑块颜色
+    lineColor: {
+      type: String,
+      default: () => defProps.tabs.lineColor
+    },
+    // 菜单选择中时的样式
+    activeStyle: {
+      type: [String, Object],
+      default: () => defProps.tabs.activeStyle
+    },
+    // 菜单非选中时的样式
+    inactiveStyle: {
+      type: [String, Object],
+      default: () => defProps.tabs.inactiveStyle
+    },
+    // 滑块长度
+    lineWidth: {
+      type: [String, Number],
+      default: () => defProps.tabs.lineWidth
+    },
+    // 滑块高度
+    lineHeight: {
+      type: [String, Number],
+      default: () => defProps.tabs.lineHeight
+    },
+    // 滑块背景显示大小，当滑块背景设置为图片时使用
+    lineBgSize: {
+      type: String,
+      default: () => defProps.tabs.lineBgSize
+    },
+    // 菜单item的样式
+    itemStyle: {
+      type: [String, Object],
+      default: () => defProps.tabs.itemStyle
+    },
+    // 菜单是否可滚动
+    scrollable: {
+      type: Boolean,
+      default: () => defProps.tabs.scrollable
+    },
+    // 当前选中标签的索引
+    current: {
+      type: [Number, String],
+      default: () => defProps.tabs.current
+    },
+    // 默认读取的键名
+    keyName: {
+      type: String,
+      default: () => defProps.tabs.keyName
+    }
+  }
+};
+const props$1 = {
+  props: {
+    // 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px
+    offsetTop: {
+      type: [String, Number],
+      default: () => defProps.sticky.offsetTop
+    },
+    // 自定义导航栏的高度
+    customNavHeight: {
+      type: [String, Number],
+      default: () => defProps.sticky.customNavHeight
+    },
+    // 是否开启吸顶功能
+    disabled: {
+      type: Boolean,
+      default: () => defProps.sticky.disabled
+    },
+    // 吸顶区域的背景颜色
+    bgColor: {
+      type: String,
+      default: () => defProps.sticky.bgColor
+    },
+    // z-index值
+    zIndex: {
+      type: [String, Number],
+      default: () => defProps.sticky.zIndex
+    },
+    // 列表中的索引值
+    index: {
+      type: [String, Number],
+      default: () => defProps.sticky.index
+    }
+  }
+};
+const props = {
+  props: {
+    // 是否显示圆点
+    isDot: {
+      type: Boolean,
+      default: () => defProps.badge.isDot
+    },
+    // 显示的内容
+    value: {
+      type: [Number, String],
+      default: () => defProps.badge.value
+    },
+    // 显示的内容
+    modelValue: {
+      type: [Number, String],
+      default: () => defProps.badge.modelValue
+    },
+    // 是否显示
+    show: {
+      type: Boolean,
+      default: () => defProps.badge.show
+    },
+    // 最大值，超过最大值会显示 '{max}+'
+    max: {
+      type: [Number, String],
+      default: () => defProps.badge.max
+    },
+    // 主题类型，error|warning|success|primary
+    type: {
+      type: String,
+      default: () => defProps.badge.type
+    },
+    // 当数值为 0 时，是否展示 Badge
+    showZero: {
+      type: Boolean,
+      default: () => defProps.badge.showZero
+    },
+    // 背景颜色，优先级比type高，如设置，type参数会失效
+    bgColor: {
+      type: [String, null],
+      default: () => defProps.badge.bgColor
+    },
+    // 字体颜色
+    color: {
+      type: [String, null],
+      default: () => defProps.badge.color
+    },
+    // 徽标形状，circle-四角均为圆角，horn-左下角为直角
+    shape: {
+      type: String,
+      default: () => defProps.badge.shape
+    },
+    // 设置数字的显示方式，overflow|ellipsis|limit
+    // overflow会根据max字段判断，超出显示`${max}+`
+    // ellipsis会根据max判断，超出显示`${max}...`
+    // limit会依据1000作为判断条件，超出1000，显示`${value/1000}K`，比如2.2k、3.34w，最多保留2位小数
+    numberType: {
+      type: String,
+      default: () => defProps.badge.numberType
+    },
+    // 设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，absolute为true时有效
+    offset: {
+      type: Array,
+      default: () => defProps.badge.offset
+    },
+    // 是否反转背景和字体颜色
+    inverted: {
+      type: Boolean,
+      default: () => defProps.badge.inverted
+    },
+    // 是否绝对定位
+    absolute: {
+      type: Boolean,
+      default: () => defProps.badge.absolute
+    }
+  }
+};
 exports._export_sfc = _export_sfc;
+exports.addStyle = addStyle;
+exports.addUnit = addUnit;
 exports.computed = computed;
 exports.createPinia = createPinia;
 exports.createSSRApp = createSSRApp;
+exports.deepMerge = deepMerge$1;
+exports.defProps = defProps;
 exports.defineComponent = defineComponent;
 exports.defineStore = defineStore;
 exports.e = e;
 exports.f = f;
+exports.getPx = getPx;
+exports.guid = guid;
 exports.index = index$1;
+exports.mixin = mixin;
+exports.mpMixin = mpMixin;
 exports.n = n;
 exports.o = o;
+exports.os = os;
 exports.p = p;
+exports.props = props$2;
+exports.props$1 = props$1;
+exports.props$2 = props;
 exports.ref = ref;
+exports.resolveComponent = resolveComponent;
+exports.s = s;
+exports.sleep = sleep;
 exports.sr = sr;
+exports.sys = sys;
 exports.t = t;
 exports.unref = unref;
 exports.uviewPlus = uviewPlus;
 exports.watch = watch;
+exports.zIndex = zIndex;

@@ -10,6 +10,7 @@ import loadingBlack from "@/static/icons/loading-black.svg"
 import loadingWhite from "@/static/icons/loading-white.svg"
 import notification from "@/static/icons/notification.svg"
 import me from "@/static/icons/me.svg"
+import plus from "@/static/icons/plus.svg"
 // tabbar icons
 import today from "@/static/icons/today.png"
 import todayActived from "@/static/icons/today-activated.png"
@@ -40,7 +41,8 @@ const icons = {
     study,
     studyActived,
     service,
-    serviceActived
+    serviceActived,
+    plus
 };
 
 export default icons;

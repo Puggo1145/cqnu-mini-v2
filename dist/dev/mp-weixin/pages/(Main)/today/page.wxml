@@ -1,1 +1,1 @@
-<cus-page wx:if="{{a}}" u-s="{{['d']}}" u-i="2cfc6d12-0" bind:__l="__l" u-p="{{a}}"><dynamic-header u-i="2cfc6d12-1,2cfc6d12-0" bind:__l="__l"/><smart-class u-i="2cfc6d12-2,2cfc6d12-0" bind:__l="__l"/></cus-page>
+<cus-page wx:if="{{a}}" u-s="{{['d']}}" u-i="2cfc6d12-0" bind:__l="__l" u-p="{{a}}"><dynamic-header u-i="2cfc6d12-1,2cfc6d12-0" bind:__l="__l"/><tabs u-i="2cfc6d12-2,2cfc6d12-0" bind:__l="__l"/><view class="mt-4"><smart-class u-i="2cfc6d12-3,2cfc6d12-0" bind:__l="__l"/></view></cus-page>

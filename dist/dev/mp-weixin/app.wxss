@@ -3253,6 +3253,9 @@ view,text,::before,::after {
 .mt-_152px_ {
     margin-top: 152px;
 }
+.mt-4 {
+    margin-top: 1rem;
+}
 .box-border {
     box-sizing: border-box;
 }
@@ -3340,6 +3343,12 @@ view,text,::before,::after {
 }
 .h-screen {
     height: 100vh;
+}
+.h-_30px_ {
+    height: 30px;
+}
+.ih-_30px_ {
+    height: 30px !important;
 }
 .w-_150p_ {
     width: 150%;
@@ -3477,6 +3486,10 @@ view,text,::before,::after {
 .bg-white {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.bg-black {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 .object-cover {
     -o-object-fit: cover;

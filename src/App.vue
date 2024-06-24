@@ -20,8 +20,8 @@ useStatusBarHeight().set(statusBarHeight - 15);
     :root {
         --background: 20 30% 98%;
         --foreground: 330 33% 99%;
-        --secondary: 227 47% 94%;
-        --secondary-foreground: 210 7% 57%;
+        --secondary: 231 10% 94%;
+        --secondary-foreground: 0 0% 50%;
         --primary: 225 76% 55%;
         --muted: 0 0% 85%;
         --destructive: 356 61% 40%;

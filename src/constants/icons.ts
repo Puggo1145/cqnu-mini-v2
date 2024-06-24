@@ -20,6 +20,7 @@ import study from "@/static/icons/study.png"
 import studyActived from "@/static/icons/study-activated.png"
 import service from "@/static/icons/service.png"
 import serviceActived from "@/static/icons/service-activated.png"
+import rightSecondary from "@/static/icons/right-secondary.svg"
 
 const icons = {
     wechatIcon,
@@ -42,7 +43,8 @@ const icons = {
     studyActived,
     service,
     serviceActived,
-    plus
+    plus,
+    rightSecondary
 };
 
 export default icons;

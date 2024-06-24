@@ -1,0 +1,1 @@
+<view class="mt-8"><view class="flex items-center justify-between"><text class="text-2xl font-bold"> 课堂小记 </text><cus-button wx:if="{{b}}" u-s="{{['d']}}" u-i="5af6c310-0" bind:__l="__l" u-p="{{b}}"> 更多小记 <image src="{{a}}" class="w-5 h-5"/></cus-button></view><view><no-note wx:if="{{c}}" u-i="5af6c310-1" bind:__l="__l"/></view></view>

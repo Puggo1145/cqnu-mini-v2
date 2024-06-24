@@ -12,7 +12,7 @@ const props = defineProps<Props>();
 
 const variants = {
     primary: "bg-primary text-white",
-    secondary: "bg-secondary text-white",
+    secondary: "bg-secondary text-secondary-foreground",
     muted: "!bg-muted text-secondary-foreground",
     outline: "border border-primary border-solid text-primary bg-white",
     ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none'
@@ -26,8 +26,8 @@ const emit = defineEmits(['click']);
 
 <template>
     <button
-        :class="buttonStyle" 
         class="flex justify-center items-center h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
+        :class="buttonStyle" 
         hover-class="button-touch"
         @click="emit('click')"    
         :disabled="props.disabled"

@@ -12,7 +12,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const props = __props;
     const variants = {
       primary: "bg-primary text-white",
-      secondary: "bg-secondary text-white",
+      secondary: "bg-secondary text-secondary-foreground",
       muted: "ibg-muted text-secondary-foreground",
       outline: "border border-primary border-solid text-primary bg-white",
       ghost: "ih-_32px_ ileading-_32px_ text-primary bg-transparent border-none"

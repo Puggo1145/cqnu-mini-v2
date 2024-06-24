@@ -3,6 +3,7 @@
     "cus-page": "../../../components/cus-page",
     "dynamic-header": "./_components/dynamic-header",
     "tabs": "./_components/tabs",
-    "smart-class": "./_components/smart-class"
+    "smart-class": "./_components/smart-class",
+    "easy-note": "./_components/easy-note"
   }
 }

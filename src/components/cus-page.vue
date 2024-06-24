@@ -41,7 +41,7 @@ const goBack = () => uni.navigateBack();
             </view>
         </view>
         <view 
-            class="w-screen flex-1 flex flex-col"
+            class="w-screen overflow-y-hidden flex-1 flex flex-col mb-4"
             :style="{
                 paddingLeft: (paddingX || 0) + 'px',
                 paddingRight: (paddingX || 0) + 'px',

@@ -1,12 +1,13 @@
 "use strict";
 const common_vendor = require("../../../common/vendor.js");
 if (!Math) {
-  (dynamicHeader + tabs + smartClass + cusPage)();
+  (dynamicHeader + tabs + smartClass + easyNote + cusPage)();
 }
 const cusPage = () => "../../../components/cus-page.js";
 const dynamicHeader = () => "./_components/dynamic-header.js";
 const tabs = () => "./_components/tabs.js";
 const smartClass = () => "./_components/smart-class.js";
+const easyNote = () => "./_components/easy-note.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "page",
   setup(__props) {

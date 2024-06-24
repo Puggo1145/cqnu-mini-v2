@@ -3,10 +3,11 @@ import { ref } from 'vue';
 // components
 import cusButton from '@/components/cus-button.vue';
 import noNote from './no-note.vue';
+import easyNoteCard from '@/components/easy-note/easy-note-card.vue';
 // static
 import icons from '@/constants/icons';
 
-const notes = ref([]);
+const notes = ref([1]);
 </script>
 
 <template>
@@ -20,8 +21,17 @@ const notes = ref([]);
                 <image :src="icons.rightSecondary" class="w-5 h-5" />
             </cusButton>
         </view>
-        <view>
+        <view class="pt-3">
             <no-note v-if="notes.length === 0" />
+            <view v-else class="flex flex-col gap-3">
+                <easyNoteCard />
+                <cus-button 
+                    variant="ghost"
+                    class="w-full h-[96px] bg-secondary rounded-2xl flex justify-center items-center"
+                >
+                    <image :src="icons.plus" class="size-9"/>
+                </cus-button>
+            </view>
         </view>
     </view>
 </template>

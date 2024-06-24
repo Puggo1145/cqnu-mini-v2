@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "cus-button": "../../../../components/cus-button",
-    "no-note": "./no-note"
+    "no-note": "./no-note",
+    "easy-note-card": "../../../../components/easy-note/easy-note-card"
   }
 }

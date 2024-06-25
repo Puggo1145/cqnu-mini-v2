@@ -1,11 +1,12 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 if (!Math) {
-  (spinner + cusButton + cusPage)();
+  (spinner + cusButton + tabs + cusPage)();
 }
 const cusPage = () => "../../components/cus-page.js";
 const spinner = () => "../../components/spinner.js";
 const cusButton = () => "../../components/cus-button.js";
+const tabs = () => "../(Main)/today/_components/tabs.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "page",
   setup(__props) {

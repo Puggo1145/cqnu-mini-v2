@@ -2,6 +2,7 @@
 import cusPage from '@/components/cus-page.vue';
 import spinner from '@/components/spinner.vue';
 import cusButton from '@/components/cus-button.vue';
+import tabs from '../(Main)/today/_components/tabs.vue';
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import cusButton from '@/components/cus-button.vue';
             <spinner size="small" color="white" />
             测试
         </cus-button>
+        <tabs />
     </cus-page>
 </template>
 

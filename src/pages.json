@@ -1,13 +1,10 @@
 {
 	"pages": [
 		{
-			"path": "pages/(Main)/study/easy-note/_components/create-easy-note"
-		},
-		{
-			"path": "pages/(Main)/study/easy-note/page"
-		},
-		{
 			"path": "pages/(Main)/today/page"
+		},
+		{
+			"path": "pages/(Onboarding)/index/index"
 		},
 		{
 			"path": "pages/(Main)/gpt/page"
@@ -16,10 +13,13 @@
 			"path": "pages/(Main)/study/page"
 		},
 		{
-			"path": "pages/(Main)/service/page"
+			"path": "pages/(Main)/study/easy-note/page"
 		},
 		{
-			"path": "pages/(Onboarding)/index/index"
+			"path": "pages/(Main)/study/easy-note/_components/create-easy-note"
+		},
+		{
+			"path": "pages/(Main)/service/page"
 		},
 		{
 			"path": "pages/(Onboarding)/sign-up/page"

@@ -27,24 +27,36 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const selectedTimeRange = common_vendor.ref(0);
     const selectedRelatedCourse = common_vendor.ref(0);
     const selectedTag = common_vendor.ref(0);
+    function onTimeRangeChange(e) {
+      selectedTimeRange.value = e.value;
+    }
+    function onRelatedCourseChange(e) {
+      selectedRelatedCourse.value = e.value;
+    }
+    function onTagChange(e) {
+      selectedTag.value = e.value;
+    }
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.p({
+        a: common_vendor.o(onTimeRangeChange),
+        b: common_vendor.p({
           value: selectedTimeRange.value,
           range: timeRangeOptions,
           variant: "mini"
         }),
-        b: common_vendor.p({
+        c: common_vendor.o(onRelatedCourseChange),
+        d: common_vendor.p({
           value: selectedRelatedCourse.value,
           range: allRelatedCoursesOptions.value,
           variant: "mini"
         }),
-        c: common_vendor.p({
+        e: common_vendor.o(onTagChange),
+        f: common_vendor.p({
           value: selectedTag.value,
           range: tagsOptions.value,
           variant: "mini"
         }),
-        d: common_vendor.f(common_vendor.unref(mock_easyNote.mockNotes), (note, k0, i0) => {
+        g: common_vendor.f(common_vendor.unref(mock_easyNote.mockNotes), (note, k0, i0) => {
           return {
             a: note.id,
             b: "609b43a2-3-" + i0,
@@ -53,7 +65,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             })
           };
         }),
-        e: common_vendor.f(common_vendor.unref(mock_easyNote.mockNotes), (note, k0, i0) => {
+        h: common_vendor.f(common_vendor.unref(mock_easyNote.mockNotes), (note, k0, i0) => {
           return {
             a: note.id,
             b: "609b43a2-4-" + i0,

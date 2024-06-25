@@ -3,13 +3,13 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 const stores_statusBarHeight = require("./stores/statusBarHeight.js");
 if (!Math) {
-  "./pages/(Main)/study/easy-note/_components/create-easy-note.js";
-  "./pages/(Main)/study/easy-note/page.js";
   "./pages/(Main)/today/page.js";
+  "./pages/(Onboarding)/index/index.js";
   "./pages/(Main)/gpt/page.js";
   "./pages/(Main)/study/page.js";
+  "./pages/(Main)/study/easy-note/page.js";
+  "./pages/(Main)/study/easy-note/_components/create-easy-note.js";
   "./pages/(Main)/service/page.js";
-  "./pages/(Onboarding)/index/index.js";
   "./pages/(Onboarding)/sign-up/page.js";
   "./pages/(Onboarding)/process-sign-up/page.js";
   "./pages/dev/page.js";

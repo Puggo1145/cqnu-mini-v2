@@ -27,6 +27,16 @@ const tagsOptions = ref([
 const selectedTimeRange = ref(0);   
 const selectedRelatedCourse = ref(0);
 const selectedTag = ref(0);
+
+function onTimeRangeChange(e: any) {
+    selectedTimeRange.value = e.value;
+}
+function onRelatedCourseChange(e: any) {
+    selectedRelatedCourse.value = e.value;
+}
+function onTagChange(e: any) {
+    selectedTag.value = e.value;
+}
 </script>
 
 <template>
@@ -36,16 +46,19 @@ const selectedTag = ref(0);
             <cus-select
                 :value="selectedTimeRange"
                 :range="timeRangeOptions"
+                @change="onTimeRangeChange"
                 variant="mini"
             />
             <cus-select
                 :value="selectedRelatedCourse"
                 :range="allRelatedCoursesOptions"
+                @change="onRelatedCourseChange"
                 variant="mini"
             />
             <cus-select
                 :value="selectedTag"
                 :range="tagsOptions"
+                @change="onTagChange"
                 variant="mini"
             />
         </view>

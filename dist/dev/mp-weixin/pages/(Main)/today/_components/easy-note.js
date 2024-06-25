@@ -2,6 +2,7 @@
 const common_vendor = require("../../../../common/vendor.js");
 const constants_icons = require("../../../../constants/icons.js");
 const mock_easyNote = require("../../../../mock/easy-note.js");
+require("../../../../common/assets.js");
 if (!Math) {
   (cusButton + noNote + easyNoteCard + cusButton)();
 }

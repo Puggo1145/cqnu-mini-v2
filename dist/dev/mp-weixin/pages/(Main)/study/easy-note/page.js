@@ -1,6 +1,7 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
 const constants_icons = require("../../../../constants/icons.js");
+require("../../../../common/assets.js");
 if (!Math) {
   (cusInput + easyNoteHeader + easyNoteStatistic + easyNoteFilter + cusPage)();
 }

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive } from 'vue';
 // icons
 import icons from '@/constants/icons';
 
-const tabs = ref([
+const tabs = reactive([
     { name: "课程" },
     { name: "打卡" },
+    { name: "小记" },
 ])
 </script>
 
@@ -13,6 +14,7 @@ const tabs = ref([
     <up-sticky>
         <view class="flex items-center justify-between">
             <up-tabs 
+                class="flex-1"
                 :list="tabs"
                 :scrollable="false"
                 line-width="28"
@@ -30,8 +32,7 @@ const tabs = ref([
                     lineHeight: '20px',
                 }"
                 item-style="height: 30px"
-            >
-            </up-tabs>
+            />
             <view class="size-6 overflow-hidden flex items-center justify-center mr-3">
                 <image :src="icons.plus" class="size-full" />
             </view>

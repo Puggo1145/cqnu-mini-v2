@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/(Main)/study/easy-note/_components/create-easy-note",
-    "pages/(Main)/study/easy-note/page",
     "pages/(Main)/today/page",
+    "pages/(Onboarding)/index/index",
     "pages/(Main)/gpt/page",
     "pages/(Main)/study/page",
+    "pages/(Main)/study/easy-note/page",
+    "pages/(Main)/study/easy-note/_components/create-easy-note",
     "pages/(Main)/service/page",
-    "pages/(Onboarding)/index/index",
     "pages/(Onboarding)/sign-up/page",
     "pages/(Onboarding)/process-sign-up/page",
     "pages/dev/page"

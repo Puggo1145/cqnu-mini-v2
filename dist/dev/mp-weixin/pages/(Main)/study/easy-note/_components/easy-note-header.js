@@ -9,7 +9,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     function gotoCreateEasyNote() {
       common_vendor.index.navigateTo({
-        url: "/pages/(Main)/study/easy-note/create-easy-note"
+        url: "/pages/(Main)/study/easy-note/_components/create-easy-note"
       });
     }
     return (_ctx, _cache) => {

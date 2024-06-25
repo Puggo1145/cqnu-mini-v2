@@ -1,22 +1,29 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
 const constants_icons = require("../../../../constants/icons.js");
+require("../../../../common/assets.js");
 if (!Array) {
-  const _component_up_tabs = common_vendor.resolveComponent("up-tabs");
-  const _component_up_sticky = common_vendor.resolveComponent("up-sticky");
-  (_component_up_tabs + _component_up_sticky)();
+  const _easycom_up_tabs2 = common_vendor.resolveComponent("up-tabs");
+  const _easycom_up_sticky2 = common_vendor.resolveComponent("up-sticky");
+  (_easycom_up_tabs2 + _easycom_up_sticky2)();
+}
+const _easycom_up_tabs = () => "../../../../node-modules/uview-plus/components/u-tabs/u-tabs.js";
+const _easycom_up_sticky = () => "../../../../node-modules/uview-plus/components/u-sticky/u-sticky.js";
+if (!Math) {
+  (_easycom_up_tabs + _easycom_up_sticky)();
 }
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "tabs",
   setup(__props) {
-    const tabs = common_vendor.ref([
+    const tabs = common_vendor.reactive([
       { name: "课程" },
-      { name: "打卡" }
+      { name: "打卡" },
+      { name: "小记" }
     ]);
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
-          list: tabs.value,
+          list: tabs,
           scrollable: false,
           ["line-width"]: "28",
           ["line-color"]: "#000",

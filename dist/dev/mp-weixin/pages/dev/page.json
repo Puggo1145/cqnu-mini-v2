@@ -2,6 +2,7 @@
   "usingComponents": {
     "cus-page": "../../components/cus-page",
     "spinner": "../../components/spinner",
-    "cus-button": "../../components/cus-button"
+    "cus-button": "../../components/cus-button",
+    "tabs": "../(Main)/today/_components/tabs"
   }
 }

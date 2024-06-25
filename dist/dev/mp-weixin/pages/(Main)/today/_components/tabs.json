@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "up-tabs": "../../../../node-modules/uview-plus/components/u-tabs/u-tabs",
+    "up-sticky": "../../../../node-modules/uview-plus/components/u-sticky/u-sticky"
+  }
 }

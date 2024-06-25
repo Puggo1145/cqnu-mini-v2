@@ -16,6 +16,11 @@ function goToEasyNote() {
         url: '/pages/(Main)/study/easy-note/page'
     });
 }
+function goToCreateEasyNote() {
+    uni.navigateTo({
+        url: '/pages/(Main)/study/easy-note/_components/create-easy-note'
+    });
+}
 </script>
 
 <template>
@@ -41,12 +46,12 @@ function goToEasyNote() {
                     :key="note.id"
                     v-bind="note"
                 />
-                <cus-button 
-                    variant="ghost"
+                <view 
                     class="w-full h-[96px] bg-secondary rounded-2xl flex justify-center items-center"
+                    @click="goToCreateEasyNote"
                 >
                     <image :src="icons.plus" class="size-9"/>
-                </cus-button>
+                </view>
             </view>
         </view>
     </view>

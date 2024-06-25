@@ -3177,6 +3177,9 @@ view,text,::before,::after {
     --tw-contain-paint:  ;
     --tw-contain-style:  ;
 }
+.pointer-events-none {
+    pointer-events: none;
+}
 .static {
     position: static;
 }
@@ -3209,6 +3212,12 @@ view,text,::before,::after {
 }
 .top-_12px_ {
     top: 12px;
+}
+.right-3 {
+    right: 0.75rem;
+}
+.top-1s2 {
+    top: 50%;
 }
 .z-0 {
     z-index: 0;
@@ -3270,6 +3279,18 @@ view,text,::before,::after {
 }
 .mt-_152px_ {
     margin-top: 152px;
+}
+.mr-6 {
+    margin-right: 1.5rem;
+}
+.mr-8 {
+    margin-right: 2rem;
+}
+.mt-1 {
+    margin-top: 0.25rem;
+}
+.ml-4 {
+    margin-left: 1rem;
 }
 .box-border {
     box-sizing: border-box;
@@ -3412,11 +3433,18 @@ view,text,::before,::after {
 .w-screen {
     width: 100vw;
 }
+.w-_100px_ {
+    width: 100px;
+}
 .max-w-_110px_ {
     max-width: 110px;
 }
 .flex-1 {
     flex: 1 1 0%;
+}
+.-translate-y-1s2 {
+    --tw-translate-y: -50%;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .transform {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3593,6 +3621,10 @@ view,text,::before,::after {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
 }
+.py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
 .pl-2 {
     padding-left: 0.5rem;
 }
@@ -3666,6 +3698,15 @@ view,text,::before,::after {
 }
 .leading-none {
     line-height: 1;
+}
+.leading-_58px_ {
+    line-height: 58px;
+}
+.leading-_36px_ {
+    line-height: 36px;
+}
+.leading-_60px_ {
+    line-height: 60px;
 }
 .itext-primary {
     color: hsl(var(--primary)) !important;

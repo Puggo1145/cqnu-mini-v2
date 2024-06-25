@@ -49,20 +49,22 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }, _ctx.placeholder && !hasSelected.value ? {
         d: common_vendor.t(_ctx.placeholder)
       } : {
-        e: common_vendor.t(props.range ? props.range[props.value] : props.value)
+        e: common_vendor.t(props.range ? props.range[props.value] : props.value),
+        f: common_vendor.n(props.variant === "primary" || !props.variant && "leading-_58px_"),
+        g: common_vendor.n(props.variant === "mini" && "leading-_36px_ mr-8")
       }, {
-        f: props.mode ?? "selector",
-        g: props.value,
-        h: props.range,
-        i: common_vendor.o(emitChange),
-        j: common_vendor.unref(constants_icons.icons).down,
-        k: common_vendor.n(props.variant === "primary" || !props.variant && "size-6"),
-        l: common_vendor.n(props.variant === "mini" && "size-4"),
-        m: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
-        n: common_vendor.n(variants[props.variant || "primary"]),
-        o: errorMessage.value
+        h: props.mode ?? "selector",
+        i: props.value,
+        j: props.range,
+        k: common_vendor.o(emitChange),
+        l: common_vendor.unref(constants_icons.icons).down,
+        m: common_vendor.n(props.variant === "primary" || !props.variant && "size-6"),
+        n: common_vendor.n(props.variant === "mini" && "size-4"),
+        o: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
+        p: common_vendor.n(variants[props.variant || "primary"]),
+        q: errorMessage.value
       }, errorMessage.value ? {
-        p: common_vendor.t(errorMessage.value)
+        r: common_vendor.t(errorMessage.value)
       } : {});
     };
   }

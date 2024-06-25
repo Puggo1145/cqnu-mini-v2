@@ -4,7 +4,7 @@ const constants_icons = require("../../../../constants/icons.js");
 const mock_easyNote = require("../../../../mock/easy-note.js");
 require("../../../../common/assets.js");
 if (!Math) {
-  (cusButton + noNote + easyNoteCard + cusButton)();
+  (cusButton + noNote + easyNoteCard)();
 }
 const cusButton = () => "../../../../components/cus-button.js";
 const noNote = () => "./no-note.js";
@@ -16,6 +16,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     function goToEasyNote() {
       common_vendor.index.navigateTo({
         url: "/pages/(Main)/study/easy-note/page"
+      });
+    }
+    function goToCreateEasyNote() {
+      common_vendor.index.navigateTo({
+        url: "/pages/(Main)/study/easy-note/_components/create-easy-note"
       });
     }
     return (_ctx, _cache) => {
@@ -38,9 +43,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           };
         }),
         f: common_vendor.unref(constants_icons.icons).plus,
-        g: common_vendor.p({
-          variant: "ghost"
-        })
+        g: common_vendor.o(goToCreateEasyNote)
       });
     };
   }

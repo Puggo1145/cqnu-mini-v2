@@ -74,8 +74,8 @@ watch(() => props.value, (value) => {
                 {{ props.fieldName }}
             </text>
             <input 
-                class="box-border w-full h-full absolute px-4 pt-4"
-                :class="!props.fieldName && 'py-4'"
+                class="box-border w-full h-full absolute ml-4 leading-[60px]"
+                :class="props.fieldName && 'mt-2'"
                 :type="props.type ?? 'text'" 
                 :value="props.value"
                 :disabled="props.disabled"

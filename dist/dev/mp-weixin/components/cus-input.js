@@ -48,7 +48,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         d: common_vendor.t(props.fieldName),
         e: common_vendor.n(isInputFocused.value ? "top-_12px_ text-xs leading-_12px_" : "leading-_16px_")
       } : {}, {
-        f: common_vendor.n(!props.fieldName && "py-4"),
+        f: common_vendor.n(props.fieldName && "mt-2"),
         g: props.type ?? "text",
         h: props.value,
         i: props.disabled,

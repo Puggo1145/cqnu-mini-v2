@@ -54,15 +54,16 @@ defineExpose({ showError, hasSelected });
 
 <template>
     <view
-        class="flex items-center justify-between px-4 relative"
+        class="flex items-center justify-between pl-4 relative"
         :class="[
             errorMessage ? '!border-destructive' : '',
             variants[props.variant || 'primary']
         ]"
     >
-        <view class="flex items-center gap-3">
+        <view class="flex-1 h-full flex items-center gap-3">
             <image v-if="props.icon" :src="props.icon" class="size-6" />
-            <picker 
+            <picker
+                class="flex-1 h-full"
                 :mode="props.mode ?? 'selector'"
                 :value="props.value"
                 :range="props.range"
@@ -71,18 +72,23 @@ defineExpose({ showError, hasSelected });
                 <view v-if="placeholder && !hasSelected" class="text-secondary-foreground">
                     {{ placeholder }}
                 </view>
-                <view v-else class="w-full" >
-                    {{ 
-                        props.range 
-                        ? props.range[props.value as number] 
-                        : props.value
-                    }}
+                <view v-else class="size-full">
+                    <text :class="[
+                        props.variant === 'primary' || !props.variant && 'leading-[58px]',
+                        props.variant === 'mini' && 'leading-[36px] mr-8'
+                    ]">
+                        {{ 
+                            props.range 
+                            ? props.range[props.value as number] 
+                            : props.value
+                        }}
+                    </text>
                 </view>
             </picker>
         </view>
 
         <view 
-            class="overflow-hidden ml-3"
+            class="pointer-events-none absolute overflow-hidden top-1/2 -translate-y-1/2 right-3"
             :class="[
                 props.variant === 'primary' || !props.variant && 'size-6',
                 props.variant === 'mini' && 'size-4'

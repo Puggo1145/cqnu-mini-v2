@@ -7,11 +7,16 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     value: {},
     range: {},
     fieldName: {},
-    placeholder: {}
+    placeholder: {},
+    variant: {}
   },
   emits: ["change"],
   setup(__props, { expose: __expose, emit: __emit }) {
     const props = __props;
+    const variants = {
+      primary: "w-full h-_60px_ border border-solid border-_hE0E0E0_ rounded-2xl bg-white",
+      mini: "h-_36px_ bg-secondary rounded-full text-secondary-foreground text-sm"
+    };
     const hasSelected = common_vendor.ref(false);
     const errorMessage = common_vendor.ref("");
     const emit = __emit;
@@ -38,10 +43,13 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         e: props.range,
         f: common_vendor.o(emitChange),
         g: common_vendor.unref(constants_icons.icons).down,
-        h: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
-        i: errorMessage.value
+        h: common_vendor.n(props.variant === "primary" && "size-6"),
+        i: common_vendor.n(props.variant === "mini" && "size-4"),
+        j: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
+        k: common_vendor.n(variants[props.variant || "primary"]),
+        l: errorMessage.value
       }, errorMessage.value ? {
-        j: common_vendor.t(errorMessage.value)
+        m: common_vendor.t(errorMessage.value)
       } : {});
     };
   }

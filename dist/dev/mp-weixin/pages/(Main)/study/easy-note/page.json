@@ -2,6 +2,8 @@
   "usingComponents": {
     "cus-page": "../../../../components/cus-page",
     "cus-input": "../../../../components/cus-input",
-    "cus-button": "../../../../components/cus-button"
+    "easy-note-header": "./_components/easy-note-header",
+    "easy-note-statistic": "./_components/easy-note-statistic",
+    "easy-note-filter": "./_components/easy-note-filter"
   }
 }

@@ -17,9 +17,6 @@ const variants = {
     outline: "border border-primary border-solid text-primary bg-white",
     ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none'
 };
-const buttonStyle = computed(() => {
-    return  variants[props.variant || "primary"] + " " + props.className;
-});
 
 const emit = defineEmits(['click']);
 </script>
@@ -27,7 +24,10 @@ const emit = defineEmits(['click']);
 <template>
     <button
         class="flex justify-center items-center h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
-        :class="buttonStyle" 
+        :class="[
+            variants[props.variant || 'primary'],
+            props.className,
+        ]" 
         hover-class="button-touch"
         @click="emit('click')"    
         :disabled="props.disabled"

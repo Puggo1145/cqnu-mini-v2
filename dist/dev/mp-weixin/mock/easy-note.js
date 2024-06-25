@@ -30,5 +30,13 @@ const mockNoteStatistics = {
   important: 6,
   total: 24
 };
+const allRelatedCourses = [
+  "计算机网络",
+  "计算机组成原理",
+  "操作系统",
+  "数据结构",
+  "算法设计与分析"
+];
+exports.allRelatedCourses = allRelatedCourses;
 exports.mockNoteStatistics = mockNoteStatistics;
 exports.mockNotes = mockNotes;

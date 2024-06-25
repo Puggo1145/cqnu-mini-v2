@@ -17,15 +17,13 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       outline: "border border-primary border-solid text-primary bg-white",
       ghost: "ih-_32px_ ileading-_32px_ text-primary bg-transparent border-none"
     };
-    const buttonStyle = common_vendor.computed(() => {
-      return variants[props.variant || "primary"] + " " + props.className;
-    });
     const emit = __emit;
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.n(buttonStyle.value),
-        b: common_vendor.o(($event) => emit("click")),
-        c: props.disabled
+        a: common_vendor.n(variants[props.variant || "primary"]),
+        b: common_vendor.n(props.className),
+        c: common_vendor.o(($event) => emit("click")),
+        d: props.disabled
       };
     };
   }

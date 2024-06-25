@@ -1,0 +1,1 @@
+<view class="flex items-center justify-between mt-8"><view class="flex flex-col"><text class="text-3xl font-bold leading-none">班级小记</text><text class="text-sm text-secondary-foreground">有 2 条新小记</text></view><cus-button wx:if="{{a}}" u-s="{{['d']}}" u-i="bbba3a78-0" bind:__l="__l" u-p="{{a}}"> + 创建小记 </cus-button></view>

@@ -32,3 +32,11 @@ export const mockNoteStatistics = {
     important: 6,
     total: 24
 };
+
+export const allRelatedCourses = [
+    "计算机网络",
+    "计算机组成原理",
+    "操作系统",
+    "数据结构",
+    "算法设计与分析",
+];

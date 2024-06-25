@@ -6,7 +6,6 @@ import icons from '@/constants/icons';
 const tabs = reactive([
     { name: "课程" },
     { name: "打卡" },
-    { name: "小记" },
 ])
 </script>
 

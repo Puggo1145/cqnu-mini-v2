@@ -17,8 +17,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const tabs = common_vendor.reactive([
       { name: "课程" },
-      { name: "打卡" },
-      { name: "小记" }
+      { name: "打卡" }
     ]);
     return (_ctx, _cache) => {
       return {

@@ -9,16 +9,24 @@ import cusButton from '@/components/cus-button.vue';
 import { getDate } from '@/utils/getDate';
 // static
 import icons from '@/constants/icons';
+// mock
+import { mockRelatedCourses } from '@/mock/easy-note';
 
 const currentDate = ref(getDate());
 const currentTime = ref("12:00");
+const currentCourseIndex = ref(0);
+
 const tags = ref(["重要", "作业", "考试"]);
+const relatedCourses = ref(mockRelatedCourses);
 
 function onDateChange(e: any) {
     currentDate.value = e.value;
 }
 function onTimeChange(e: any) {
     currentTime.value = e.value;
+}
+function onCourseChange(e: any) {
+    currentCourseIndex.value = e.value;
 }
 </script>
 
@@ -67,6 +75,18 @@ function onTimeChange(e: any) {
                     :icon="icons.clock"
                     :value="currentTime"
                     @change="onTimeChange"
+                />
+            </view>
+            <view class="mt-3 flex flex-col gap-1">
+                <text class="text-sm font-semibold text-secondary-foreground pl-2">
+                    关联课程
+                </text>
+                <cus-select
+                    mode="selector"
+                    :icon="icons.academy"
+                    :value="currentCourseIndex"
+                    :range="relatedCourses"
+                    @change="onCourseChange"
                 />
             </view>
             <view class="mt-3 flex flex-col gap-2">

@@ -2,6 +2,7 @@
 const common_vendor = require("../../../../../common/vendor.js");
 const utils_getDate = require("../../../../../utils/getDate.js");
 const constants_icons = require("../../../../../constants/icons.js");
+const mock_easyNote = require("../../../../../mock/easy-note.js");
 require("../../../../../common/assets.js");
 if (!Math) {
   (cusInput + cusSelect + cusButton + cusPage)();
@@ -15,12 +16,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const currentDate = common_vendor.ref(utils_getDate.getDate());
     const currentTime = common_vendor.ref("12:00");
+    const currentCourseIndex = common_vendor.ref(0);
     const tags = common_vendor.ref(["重要", "作业", "考试"]);
+    const relatedCourses = common_vendor.ref(mock_easyNote.mockRelatedCourses);
     function onDateChange(e) {
       currentDate.value = e.value;
     }
     function onTimeChange(e) {
       currentTime.value = e.value;
+    }
+    function onCourseChange(e) {
+      currentCourseIndex.value = e.value;
     }
     return (_ctx, _cache) => {
       return {
@@ -40,13 +46,20 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           icon: common_vendor.unref(constants_icons.icons).clock,
           value: currentTime.value
         }),
-        g: common_vendor.f(tags.value, (tag, index, i0) => {
+        g: common_vendor.o(onCourseChange),
+        h: common_vendor.p({
+          mode: "selector",
+          icon: common_vendor.unref(constants_icons.icons).academy,
+          value: currentCourseIndex.value,
+          range: relatedCourses.value
+        }),
+        i: common_vendor.f(tags.value, (tag, index, i0) => {
           return {
             a: common_vendor.t(tag),
             b: index
           };
         }),
-        h: common_vendor.p({
+        j: common_vendor.p({
           ["header-type"]: "nav",
           ["padding-x"]: "16"
         })

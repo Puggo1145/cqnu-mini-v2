@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import easyNoteCard from './easy-note-card.vue';
 import cusSelect from '@/components/cus-select.vue';
 // mock
-import { allRelatedCourses } from '@/mock/easy-note';
+import { mockRelatedCourses } from '@/mock/easy-note';
 import { mockNotes } from '@/mock/easy-note';
 
 // select ranges
@@ -17,7 +17,7 @@ const timeRangeOptions = [
     "半年内",
     "今年内",
 ];
-const allRelatedCoursesOptions = ref(allRelatedCourses);
+const allRelatedCoursesOptions = ref(mockRelatedCourses);
 const tagsOptions = ref([
     "重要",
     "作业",

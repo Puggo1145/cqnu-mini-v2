@@ -18,7 +18,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       "半年内",
       "今年内"
     ];
-    const allRelatedCoursesOptions = common_vendor.ref(mock_easyNote.allRelatedCourses);
+    const allRelatedCoursesOptions = common_vendor.ref(mock_easyNote.mockRelatedCourses);
     const tagsOptions = common_vendor.ref([
       "重要",
       "作业",

@@ -33,7 +33,7 @@ export const mockNoteStatistics = {
     total: 24
 };
 
-export const allRelatedCourses = [
+export const mockRelatedCourses = [
     "计算机网络",
     "计算机组成原理",
     "操作系统",

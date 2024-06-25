@@ -15,21 +15,21 @@ interface NoteStatisticsBlock {
 
 const noteStatistics = ref<NoteStatisticsBlock[]>([
     { 
-        icon: icons.calendar,
+        icon: icons.calendarWhite,
         iconBackgroundColor: "#90ad5f",
         title: "周内小记", 
         count: mockNoteStatistics.thisWeek ?? 0,
         backgroundColor: "#e1ecc8"
     },
     { 
-        icon: icons.attention, 
+        icon: icons.attentionWhite, 
         iconBackgroundColor: "#a6765a",
         title: "重要小记", 
         count: mockNoteStatistics.important ?? 0,
         backgroundColor: "#f4ded1"
     },
     { 
-        icon: icons.box, 
+        icon: icons.boxWhite, 
         iconBackgroundColor: "#638fac",
         title: "所有小记", 
         count: mockNoteStatistics.total ?? 0,

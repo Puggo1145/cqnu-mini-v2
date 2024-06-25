@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/(Main)/study/easy-note/_components/create-easy-note",
     "pages/(Main)/study/easy-note/page",
     "pages/(Main)/today/page",
     "pages/(Main)/gpt/page",

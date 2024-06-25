@@ -12,9 +12,13 @@ import notification from "@/static/icons/notification.svg"
 import me from "@/static/icons/me.svg"
 import plus from "@/static/icons/plus.svg"
 import search from "@/static/icons/search.svg"
+import calendarWhite from "@/static/icons/calendar-white.svg"
+import attentionWhite from "@/static/icons/attention-white.svg"
+import boxWhite from "@/static/icons/box-white.svg"
+import image from "@/static/icons/image.svg"
+import clock from "@/static/icons/clock.svg"
+import academy from "@/static/icons/academy.svg"
 import calendar from "@/static/icons/calendar.svg"
-import attention from "@/static/icons/attention.svg"
-import box from "@/static/icons/box.svg"
 // tabbar icons
 import today from "@/static/icons/today.png"
 import todayActived from "@/static/icons/today-activated.png"
@@ -43,8 +47,12 @@ const icons = {
     plus,
     rightSecondary,
     calendar,
-    attention,
-    box,
+    calendarWhite,
+    attentionWhite,
+    boxWhite,
+    image,
+    clock,
+    academy,
 
     today,
     todayActived,

@@ -4,10 +4,14 @@ const constants_icons = require("../constants/icons.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-select",
   props: {
+    mode: {},
     value: {},
     range: {},
+    start: {},
+    end: {},
     fieldName: {},
     placeholder: {},
+    icon: {},
     variant: {}
   },
   emits: ["change"],
@@ -21,6 +25,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const errorMessage = common_vendor.ref("");
     const emit = __emit;
     function emitChange(e) {
+      if (props.mode !== "selector") {
+        return emit("change", { value: e.detail.value });
+      }
       emit(
         "change",
         hasSelected.value ? { value: Number(e.detail.value) } : { value: Number(e.detail.value), hasSelected: props.fieldName }
@@ -33,23 +40,28 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     __expose({ showError, hasSelected });
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: _ctx.placeholder && !hasSelected.value
+        a: props.icon
+      }, props.icon ? {
+        b: props.icon
+      } : {}, {
+        c: _ctx.placeholder && !hasSelected.value
       }, _ctx.placeholder && !hasSelected.value ? {
-        b: common_vendor.t(_ctx.placeholder)
+        d: common_vendor.t(_ctx.placeholder)
       } : {
-        c: common_vendor.t(props.range[props.value])
+        e: common_vendor.t(props.range ? props.range[props.value] : props.value)
       }, {
-        d: props.value,
-        e: props.range,
-        f: common_vendor.o(emitChange),
-        g: common_vendor.unref(constants_icons.icons).down,
-        h: common_vendor.n(props.variant === "primary" && "size-6"),
-        i: common_vendor.n(props.variant === "mini" && "size-4"),
-        j: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
-        k: common_vendor.n(variants[props.variant || "primary"]),
-        l: errorMessage.value
+        f: props.mode ?? "selector",
+        g: props.value,
+        h: props.range,
+        i: common_vendor.o(emitChange),
+        j: common_vendor.unref(constants_icons.icons).down,
+        k: common_vendor.n(props.variant === "primary" || !props.variant && "size-6"),
+        l: common_vendor.n(props.variant === "mini" && "size-4"),
+        m: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
+        n: common_vendor.n(variants[props.variant || "primary"]),
+        o: errorMessage.value
       }, errorMessage.value ? {
-        m: common_vendor.t(errorMessage.value)
+        p: common_vendor.t(errorMessage.value)
       } : {});
     };
   }

@@ -7,9 +7,15 @@ const cusButton = () => "../../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "easy-note-header",
   setup(__props) {
+    function gotoCreateEasyNote() {
+      common_vendor.index.navigateTo({
+        url: "/pages/(Main)/study/easy-note/create-easy-note"
+      });
+    }
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.p({
+        a: common_vendor.o(gotoCreateEasyNote),
+        b: common_vendor.p({
           variant: "secondary",
           ["class-name"]: "w-_122px_ itext-primary"
         })

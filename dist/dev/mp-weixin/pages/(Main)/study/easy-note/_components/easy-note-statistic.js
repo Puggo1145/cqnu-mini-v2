@@ -7,21 +7,21 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const noteStatistics = common_vendor.ref([
       {
-        icon: constants_icons.icons.calendar,
+        icon: constants_icons.icons.calendarWhite,
         iconBackgroundColor: "#90ad5f",
         title: "周内小记",
         count: mock_easyNote.mockNoteStatistics.thisWeek,
         backgroundColor: "#e1ecc8"
       },
       {
-        icon: constants_icons.icons.attention,
+        icon: constants_icons.icons.attentionWhite,
         iconBackgroundColor: "#a6765a",
         title: "重要小记",
         count: mock_easyNote.mockNoteStatistics.important,
         backgroundColor: "#f4ded1"
       },
       {
-        icon: constants_icons.icons.box,
+        icon: constants_icons.icons.boxWhite,
         iconBackgroundColor: "#638fac",
         title: "所有小记",
         count: mock_easyNote.mockNoteStatistics.total,

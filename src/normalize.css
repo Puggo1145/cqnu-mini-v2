@@ -10,3 +10,8 @@ button {
 button::after {
     border: none;
 }
+
+input,
+textarea {
+    box-sizing: border-box;
+}

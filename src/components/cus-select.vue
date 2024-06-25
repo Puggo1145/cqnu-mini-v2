@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 // icons
 import icons from '@/constants/icons';
 
 interface Props {
-    value: number;
-    range: any[];
+    mode?: "selector" | "time" | "date" | "multiSelector" | "region"
+    value: number | string | Date;
+    range?: any[];
+    start?: any;
+    end?: any;
     fieldName?: string;
     placeholder?: string;
+    icon?: string;
     variant?: "primary" | "mini";
 }
 const props = defineProps<Props>();
@@ -25,6 +29,12 @@ const errorMessage = ref('');
 
 const emit = defineEmits(['change']);
 function emitChange(e: Event) {
+    // 非普通 selector 模式下，直接返回 value
+    if (props.mode !== 'selector') {
+        // @ts-expect-error uniapp 没有标注 Event 类型
+        return emit('change', {value: e.detail.value});
+    }
+
     emit('change', hasSelected.value 
         // @ts-expect-error uniapp 没有标注 Event 类型
         ? {value: Number(e.detail.value)} 
@@ -50,23 +60,31 @@ defineExpose({ showError, hasSelected });
             variants[props.variant || 'primary']
         ]"
     >
-        <picker 
-            mode="selector"
-            :value="props.value"
-            :range="props.range"
-            @change="emitChange"
-        >
-            <view v-if="placeholder && !hasSelected" class="text-secondary-foreground">
-                {{ placeholder }}
-            </view>
-            <view v-else class="w-full" >
-                {{ props.range[props.value] }}
-            </view>
-        </picker>
+        <view class="flex items-center gap-3">
+            <image v-if="props.icon" :src="props.icon" class="size-6" />
+            <picker 
+                :mode="props.mode ?? 'selector'"
+                :value="props.value"
+                :range="props.range"
+                @change="emitChange"
+            >
+                <view v-if="placeholder && !hasSelected" class="text-secondary-foreground">
+                    {{ placeholder }}
+                </view>
+                <view v-else class="w-full" >
+                    {{ 
+                        props.range 
+                        ? props.range[props.value as number] 
+                        : props.value
+                    }}
+                </view>
+            </picker>
+        </view>
+
         <view 
             class="overflow-hidden ml-3"
             :class="[
-                props.variant === 'primary' && 'size-6',
+                props.variant === 'primary' || !props.variant && 'size-6',
                 props.variant === 'mini' && 'size-4'
             ]"
         >

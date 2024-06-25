@@ -3,6 +3,7 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 const stores_statusBarHeight = require("./stores/statusBarHeight.js");
 if (!Math) {
+  "./pages/(Main)/study/easy-note/_components/create-easy-note.js";
   "./pages/(Main)/study/easy-note/page.js";
   "./pages/(Main)/today/page.js";
   "./pages/(Main)/gpt/page.js";

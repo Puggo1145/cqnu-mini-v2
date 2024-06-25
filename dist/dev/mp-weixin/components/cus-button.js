@@ -18,7 +18,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       ghost: "ih-_32px_ ileading-_32px_ text-primary bg-transparent border-none"
     };
     const buttonStyle = common_vendor.computed(() => {
-      return props.className + " " + variants[props.variant || "primary"];
+      return variants[props.variant || "primary"] + " " + props.className;
     });
     const emit = __emit;
     return (_ctx, _cache) => {

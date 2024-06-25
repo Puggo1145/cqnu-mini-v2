@@ -11,6 +11,10 @@ import loadingWhite from "@/static/icons/loading-white.svg"
 import notification from "@/static/icons/notification.svg"
 import me from "@/static/icons/me.svg"
 import plus from "@/static/icons/plus.svg"
+import search from "@/static/icons/search.svg"
+import calendar from "@/static/icons/calendar.svg"
+import attention from "@/static/icons/attention.svg"
+import box from "@/static/icons/box.svg"
 // tabbar icons
 import today from "@/static/icons/today.png"
 import todayActived from "@/static/icons/today-activated.png"
@@ -35,6 +39,13 @@ const icons = {
     loadingWhite,
     notification,
     me,
+    search,
+    plus,
+    rightSecondary,
+    calendar,
+    attention,
+    box,
+
     today,
     todayActived,
     gpt,
@@ -43,8 +54,6 @@ const icons = {
     studyActived,
     service,
     serviceActived,
-    plus,
-    rightSecondary
 };
 
 export default icons;

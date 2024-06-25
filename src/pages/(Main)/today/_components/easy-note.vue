@@ -10,6 +10,12 @@ import icons from '@/constants/icons';
 import { mockNotes } from '@/mock/easy-note';
 
 const notes = ref(mockNotes);
+
+function goToEasyNote() {
+    uni.navigateTo({
+        url: '/pages/(Main)/study/easy-note/page'
+    });
+}
 </script>
 
 <template>
@@ -18,7 +24,11 @@ const notes = ref(mockNotes);
             <text class="text-2xl font-bold">
                 课堂小记
             </text>
-            <cusButton variant="ghost" class-name="text-secondary-foreground font-normal">
+            <cusButton 
+                variant="ghost" 
+                class-name="text-secondary-foreground font-normal"
+                @click="goToEasyNote"
+            >
                 更多小记
                 <image :src="icons.rightSecondary" class="w-5 h-5" />
             </cusButton>

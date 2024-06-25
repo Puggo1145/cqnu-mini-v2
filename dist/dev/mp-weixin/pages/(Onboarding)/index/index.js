@@ -20,7 +20,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         });
       }, 500);
     };
-    const gotoDevPage = () => common_vendor.index.navigateTo({ url: "/pages/dev/page" });
+    function gotoDevPage() {
+      common_vendor.index.navigateTo({ url: "/pages/dev/page" });
+    }
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(constants_images.images).landing,

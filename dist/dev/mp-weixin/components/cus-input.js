@@ -6,7 +6,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     fieldName: {},
     value: {},
     disabled: { type: Boolean },
-    type: {}
+    type: {},
+    placeholder: {},
+    icon: {}
   },
   emits: ["focus", "blur", "input"],
   setup(__props, { expose: __expose, emit: __emit }) {
@@ -37,20 +39,29 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.t(props.fieldName),
-        b: common_vendor.n(isInputFocused.value ? "top-_12px_ text-xs leading-_12px_" : "leading-_16px_"),
-        c: props.type ?? "text",
-        d: props.value,
-        e: props.disabled,
-        f: common_vendor.o(onBlur),
-        g: common_vendor.o(onInput),
-        h: common_vendor.n(isInputFocused.value ? "border-secondary-foreground" : "border-_hE0E0E0_"),
-        i: common_vendor.n(errorMessage.value && "iborder-destructive"),
-        j: common_vendor.n(props.disabled && "border-_hE0E0E0_ bg-_hF5F5F5_"),
-        k: common_vendor.o(onFocus),
-        l: errorMessage.value
+        a: props.icon
+      }, props.icon ? {
+        b: props.icon
+      } : {}, {
+        c: props.fieldName
+      }, props.fieldName ? {
+        d: common_vendor.t(props.fieldName),
+        e: common_vendor.n(isInputFocused.value ? "top-_12px_ text-xs leading-_12px_" : "leading-_16px_")
+      } : {}, {
+        f: common_vendor.n(!props.fieldName && "py-4"),
+        g: props.type ?? "text",
+        h: props.value,
+        i: props.disabled,
+        j: props.placeholder,
+        k: common_vendor.o(onBlur),
+        l: common_vendor.o(onInput),
+        m: common_vendor.n(isInputFocused.value ? "border-secondary-foreground" : "border-_hE0E0E0_"),
+        n: common_vendor.n(errorMessage.value && "iborder-destructive"),
+        o: common_vendor.n(props.disabled && "border-_hE0E0E0_ bg-_hF5F5F5_"),
+        p: common_vendor.o(onFocus),
+        q: errorMessage.value
       }, errorMessage.value ? {
-        m: common_vendor.t(errorMessage.value)
+        r: common_vendor.t(errorMessage.value)
       } : {});
     };
   }

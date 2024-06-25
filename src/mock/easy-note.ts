@@ -1,4 +1,4 @@
-import type { EasyNoteCard } from "@/components/easy-note/easy-note-card.vue"
+import type { EasyNoteCard } from "@/pages/(Main)/study/easy-note/_components/easy-note-card.vue"
 
 export const mockNotes: EasyNoteCard[] = [
     {
@@ -26,3 +26,9 @@ export const mockNotes: EasyNoteCard[] = [
         supportedNumber: 14
     },
 ];
+
+export const mockNoteStatistics = {
+    thisWeek: 12,
+    important: 6,
+    total: 24
+};

@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/(Main)/study/easy-note/page"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{

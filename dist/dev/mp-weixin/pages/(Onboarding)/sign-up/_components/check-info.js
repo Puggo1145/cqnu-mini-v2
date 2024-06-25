@@ -8,11 +8,11 @@ const cusButton = () => "../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "check-info",
   setup(__props) {
-    const goToSignUpProcess = () => {
+    function goToSignUpProcess() {
       common_vendor.index.redirectTo({
         url: "/pages/(Onboarding)/process-sign-up/page"
       });
-    };
+    }
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({

@@ -18,7 +18,7 @@ const variants = {
     ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none'
 };
 const buttonStyle = computed(() => {
-    return props.className + " " + variants[props.variant || "primary"];
+    return  variants[props.variant || "primary"] + " " + props.className;
 });
 
 const emit = defineEmits(['click']);

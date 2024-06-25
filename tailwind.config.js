@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        md: "16px"
+        md: "16px",
+        "3xl": "32px"
       },
       colors: {
         background: "hsl(var(--background))",
@@ -23,7 +24,12 @@ module.exports = {
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
-        }
+        },
+        "fit-background": {
+          DEFAULT: "rgba(0, 0, 0, 0.5)",
+          lighter: "rgba(0, 0, 0, 0.35)",
+          darker: "rgba(0, 0, 0, 0.65)",
+        },
       },
     },
   },

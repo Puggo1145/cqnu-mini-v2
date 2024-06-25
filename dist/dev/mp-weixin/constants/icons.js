@@ -13,6 +13,12 @@ const icons = {
   loadingWhite: common_assets.loadingWhite,
   notification: common_assets.notification,
   me: common_assets.me,
+  search: common_assets.search,
+  plus: common_assets.plus,
+  rightSecondary: common_assets.rightSecondary,
+  calendar: common_assets.calendar,
+  attention: common_assets.attention,
+  box: common_assets.box,
   today: common_assets.today,
   todayActived: common_assets.todayActived,
   gpt: common_assets.gpt,
@@ -20,8 +26,6 @@ const icons = {
   study: common_assets.study,
   studyActived: common_assets.studyActived,
   service: common_assets.service,
-  serviceActived: common_assets.serviceActived,
-  plus: common_assets.plus,
-  rightSecondary: common_assets.rightSecondary
+  serviceActived: common_assets.serviceActived
 };
 exports.icons = icons;

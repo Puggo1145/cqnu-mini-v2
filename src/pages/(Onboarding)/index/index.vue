@@ -21,7 +21,9 @@ const handleSignIn = () => {
     }, 500);
 };
 
-const gotoDevPage = () => uni.navigateTo({ url: "/pages/dev/page" });
+function gotoDevPage () {
+    uni.navigateTo({ url: "/pages/dev/page" });
+};
 </script>
 
 <template>

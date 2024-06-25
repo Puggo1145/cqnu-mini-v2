@@ -3207,18 +3207,6 @@ view,text,::before,::after {
 .top-_12px_ {
     top: 12px;
 }
-.right-0 {
-    right: 0px;
-}
-.top-0 {
-    top: 0px;
-}
-.-right-4 {
-    right: -1rem;
-}
-.-top-3 {
-    top: -0.75rem;
-}
 .z-0 {
     z-index: 0;
 }
@@ -3228,9 +3216,6 @@ view,text,::before,::after {
 .my-4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
-}
-.-ml-2 {
-    margin-left: -0.5rem;
 }
 .-mt-24 {
     margin-top: -6rem;
@@ -3342,6 +3327,9 @@ view,text,::before,::after {
 .h-_100px_ {
     height: 100px;
 }
+.h-_128px_ {
+    height: 128px;
+}
 .h-_16px_ {
     height: 16px;
 }
@@ -3380,6 +3368,9 @@ view,text,::before,::after {
 }
 .w-5 {
     width: 1.25rem;
+}
+.w-_122px_ {
+    width: 122px;
 }
 .w-_150p_ {
     width: 150%;
@@ -3513,10 +3504,6 @@ view,text,::before,::after {
     --tw-bg-opacity: 1;
     background-color: rgb(245 245 245 / var(--tw-bg-opacity));
 }
-.bg-_he9ecf7_ {
-    --tw-bg-opacity: 1;
-    background-color: rgb(233 236 247 / var(--tw-bg-opacity));
-}
 .bg-_hf7f4f1_ {
     --tw-bg-opacity: 1;
     background-color: rgb(247 244 241 / var(--tw-bg-opacity));
@@ -3541,6 +3528,9 @@ view,text,::before,::after {
     -o-object-fit: cover;
        object-fit: cover;
 }
+.p-3 {
+    padding: 0.75rem;
+}
 .p-4 {
     padding: 1rem;
 }
@@ -3554,25 +3544,32 @@ view,text,::before,::after {
     padding-left: 0.25rem;
     padding-right: 0.25rem;
 }
+.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
 .px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
+}
+.py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
 .py-2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 .py-5 {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
 }
-.px-3 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-}
-.py-1 {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+.pl-4 {
+    padding-left: 1rem;
 }
 .pr-8 {
     padding-right: 2rem;
@@ -3591,8 +3588,7 @@ view,text,::before,::after {
     line-height: 2rem;
 }
 .text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+    font-size: 32px;
 }
 .text-4xl {
     font-size: 2.25rem;
@@ -3640,6 +3636,9 @@ view,text,::before,::after {
 .leading-none {
     line-height: 1;
 }
+.itext-primary {
+    color: hsl(var(--primary)) !important;
+}
 .text-_h333333_ {
     --tw-text-opacity: 1;
     color: rgb(51 51 51 / var(--tw-text-opacity));
@@ -3655,6 +3654,9 @@ view,text,::before,::after {
 .text-destructive {
     color: hsl(var(--destructive));
 }
+.text-fit-background {
+    color: rgba(0, 0, 0, 0.5);
+}
 .text-gray-500 {
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -3668,6 +3670,9 @@ view,text,::before,::after {
 .text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-fit-background-darker {
+    color: rgba(0, 0, 0, 0.65);
 }
 .text-opacity-35 {
     --tw-text-opacity: 0.35;

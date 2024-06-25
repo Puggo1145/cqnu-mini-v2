@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, watch, type ButtonHTMLAttributes, type InputTypeHTMLAttribute } from 'vue';
+import { ref, watch, type InputTypeHTMLAttribute } from 'vue';
 
 interface Props {
     fieldName?: string;
     value?: string | undefined | null;
     disabled?: boolean;
     type?: InputTypeHTMLAttribute;
+    placeholder?: string;
+    icon?: string;
 }
 const props = defineProps<Props>();
 
@@ -46,30 +48,44 @@ watch(() => props.value, (value) => {
 
 <template>
     <view 
-        class="w-full h-[60px] border border-solid
-        rounded-2xl bg-white flex flex-col relative" 
+        class="flex items-center w-full h-[60px] border border-solid rounded-2xl bg-white"
         :class="[
             isInputFocused ? 'border-secondary-foreground' : 'border-[#E0E0E0]',
             errorMessage && '!border-destructive',
             props.disabled && 'border-[#E0E0E0] bg-[#F5F5F5]'
         ]"
-        @click="onFocus"
+        @click="onFocus"    
     >
-        <text :class="[
-            'absolute left-4 top-5 text-md text-secondary-foreground transition-all', 
-            isInputFocused ? 'top-[12px] text-xs leading-[12px]' : 'leading-[16px]' 
-        ]">
-            {{ props.fieldName }}
-        </text>
-        <input 
-            class="box-border w-full h-full absolute px-4 pt-4"
-            :type="props.type ?? 'text'" 
-            :value="props.value"
-            :disabled="props.disabled"
-            @blur="onBlur"
-            @input="onInput"
+        <image 
+            v-if="props.icon" 
+            :src="props.icon" 
+            class="size-6 pl-4"
         />
+        <view 
+            class="flex-1 h-full flex flex-col relative" 
+        >
+            <text
+                v-if="props.fieldName"
+                :class="[
+                    'absolute left-4 top-5 text-md text-secondary-foreground transition-all', 
+                    isInputFocused ? 'top-[12px] text-xs leading-[12px]' : 'leading-[16px]' 
+                ]"
+            >
+                {{ props.fieldName }}
+            </text>
+            <input 
+                class="box-border w-full h-full absolute px-4 pt-4"
+                :class="!props.fieldName && 'py-4'"
+                :type="props.type ?? 'text'" 
+                :value="props.value"
+                :disabled="props.disabled"
+                :placeholder="props.placeholder"
+                @blur="onBlur"
+                @input="onInput"
+            />
+        </view>
     </view>
+
     <text v-if="errorMessage" class="text-destructive text-xs mt-2">
         {{ errorMessage }}
     </text>

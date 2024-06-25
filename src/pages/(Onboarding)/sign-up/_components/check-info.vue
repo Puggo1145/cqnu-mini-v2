@@ -3,7 +3,7 @@
 import signupTexts from './signup-texts.vue';
 import cusButton from '@/components/cus-button.vue';
 
-const goToSignUpProcess = () => {
+function goToSignUpProcess() {
     uni.redirectTo({
         url: '/pages/(Onboarding)/process-sign-up/page'
     });

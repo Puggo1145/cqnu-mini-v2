@@ -25,4 +25,10 @@ const mockNotes = [
     supportedNumber: 14
   }
 ];
+const mockNoteStatistics = {
+  thisWeek: 12,
+  important: 6,
+  total: 24
+};
+exports.mockNoteStatistics = mockNoteStatistics;
 exports.mockNotes = mockNotes;

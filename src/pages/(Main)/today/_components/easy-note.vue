@@ -3,7 +3,7 @@ import { ref } from 'vue';
 // components
 import cusButton from '@/components/cus-button.vue';
 import noNote from './no-note.vue';
-import easyNoteCard from '@/components/easy-note/easy-note-card.vue';
+import easyNoteCard from '@/pages/(Main)/study/easy-note/_components/easy-note-card.vue';
 // static
 import icons from '@/constants/icons';
 // mock

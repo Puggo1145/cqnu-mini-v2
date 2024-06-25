@@ -7,7 +7,7 @@ if (!Math) {
 }
 const cusButton = () => "../../../../components/cus-button.js";
 const noNote = () => "./no-note.js";
-const easyNoteCard = () => "../../../../components/easy-note/easy-note-card.js";
+const easyNoteCard = () => "../../study/easy-note/_components/easy-note-card.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "easy-note",
   setup(__props) {

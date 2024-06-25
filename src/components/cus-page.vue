@@ -9,15 +9,17 @@ const { statusBarheight } = useStatusBarHeight();
 
 // props
 interface Props {
+    // 内置 nav bar 样式
     headerType?: "none" | "default" | "nav"; 
-    paddingX?: number | string; // 两侧边距
+    // 页面两侧边距 => 为了保证页面高度一致使用了 overflow-hidden，因此会裁切掉部分内容，需要酌情使用
+    paddingX?: number | string; 
 }
-
 const { 
     headerType, 
     paddingX
 } = defineProps<Props>();
-// process props
+
+// 处理 status bar height
 const paddingTop = computed(() => {
     return headerType === "none"
         ? '0px' 
@@ -32,6 +34,7 @@ const goBack = () => uni.navigateBack();
         class="w-screen h-screen bg-background flex flex-col fixed" 
         :style="{ paddingTop: paddingTop }"
     >
+        <!-- nav bar -->
         <view
             v-if="headerType === 'nav'"
             class="w-full h-[60px] flex px-4 items-center"
@@ -40,6 +43,7 @@ const goBack = () => uni.navigateBack();
                 <image :src="icons.back" class="size-full" />
             </view>
         </view>
+        <!-- 页面 -->
         <view 
             class="w-screen overflow-y-hidden flex-1 flex flex-col mb-4"
             :style="{

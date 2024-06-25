@@ -1,7 +1,6 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
 const constants_images = require("../../../../constants/images.js");
-require("../../../../common/assets.js");
 if (!Math) {
   cusButton();
 }

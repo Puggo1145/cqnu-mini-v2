@@ -6,8 +6,10 @@ import noNote from './no-note.vue';
 import easyNoteCard from '@/components/easy-note/easy-note-card.vue';
 // static
 import icons from '@/constants/icons';
+// mock
+import { mockNotes } from '@/mock/easy-note';
 
-const notes = ref([1]);
+const notes = ref(mockNotes);
 </script>
 
 <template>
@@ -24,7 +26,11 @@ const notes = ref([1]);
         <view class="pt-3">
             <no-note v-if="notes.length === 0" />
             <view v-else class="flex flex-col gap-3">
-                <easyNoteCard />
+                <easyNoteCard 
+                    v-for="note in notes"
+                    :key="note.id"
+                    v-bind="note"
+                />
                 <cus-button 
                     variant="ghost"
                     class="w-full h-[96px] bg-secondary rounded-2xl flex justify-center items-center"

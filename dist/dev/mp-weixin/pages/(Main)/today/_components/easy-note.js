@@ -1,7 +1,7 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
 const constants_icons = require("../../../../constants/icons.js");
-require("../../../../common/assets.js");
+const mock_easyNote = require("../../../../mock/easy-note.js");
 if (!Math) {
   (cusButton + noNote + easyNoteCard + cusButton)();
 }
@@ -11,7 +11,7 @@ const easyNoteCard = () => "../../../../components/easy-note/easy-note-card.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "easy-note",
   setup(__props) {
-    const notes = common_vendor.ref([1]);
+    const notes = common_vendor.ref(mock_easyNote.mockNotes);
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(constants_icons.icons).rightSecondary,
@@ -21,8 +21,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         c: notes.value.length === 0
       }, notes.value.length === 0 ? {} : {
-        d: common_vendor.unref(constants_icons.icons).plus,
-        e: common_vendor.p({
+        d: common_vendor.f(notes.value, (note, k0, i0) => {
+          return {
+            a: note.id,
+            b: "5af6c310-2-" + i0,
+            c: common_vendor.p({
+              ...note
+            })
+          };
+        }),
+        e: common_vendor.unref(constants_icons.icons).plus,
+        f: common_vendor.p({
           variant: "ghost"
         })
       });

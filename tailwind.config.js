@@ -30,6 +30,10 @@ module.exports = {
           lighter: "rgba(0, 0, 0, 0.35)",
           darker: "rgba(0, 0, 0, 0.65)",
         },
+        modern: {
+          DEFAULT: "#455A64",
+          secondary: "#B9BBBB"
+        },
       },
     },
   },

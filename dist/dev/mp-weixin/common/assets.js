@@ -2,6 +2,7 @@
 const landing = "/static/images/landing-page-img.svg";
 const welcome = "/static/images/welcome.svg";
 const addNote = "/static/images/add-note.svg";
+const serviceBg = "/static/images/service-bg.svg";
 const wechatIcon = "/static/icons/wechat-icon.svg";
 const mail = "/static/icons/mail.svg";
 const mailSecondary = "/static/icons/mail-secondary.svg";
@@ -59,6 +60,7 @@ exports.rightSecondary = rightSecondary;
 exports.search = search;
 exports.service = service;
 exports.serviceActived = serviceActived;
+exports.serviceBg = serviceBg;
 exports.study = study;
 exports.studyActived = studyActived;
 exports.today = today;

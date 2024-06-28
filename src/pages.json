@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/(Main)/service/page"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{
@@ -17,9 +20,6 @@
 		},
 		{
 			"path": "pages/(Main)/study/easy-note/_components/create-easy-note"
-		},
-		{
-			"path": "pages/(Main)/service/page"
 		},
 		{
 			"path": "pages/(Onboarding)/sign-up/page"

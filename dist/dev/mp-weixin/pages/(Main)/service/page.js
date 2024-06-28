@@ -3,16 +3,17 @@ const common_vendor = require("../../../common/vendor.js");
 const constants_images = require("../../../constants/images.js");
 require("../../../common/assets.js");
 if (!Math) {
-  (utilityConsumeCards + cusPage)();
+  (utilityConsumeCards + cards + cusPage)();
 }
 const cusPage = () => "../../../components/cus-page.js";
 const utilityConsumeCards = () => "./_components/utility-consume-cards.js";
+const cards = () => "./_components/cards.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "page",
   setup(__props) {
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.unref(constants_images.images).serviceBg,
+        a: common_vendor.unref(constants_images.images).service.bg,
         b: common_vendor.p({
           ["background-style"]: "modern"
         })

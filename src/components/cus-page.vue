@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { computed, withDefaults } from 'vue';
 import { useStatusBarHeight } from '@/stores/statusBarHeight';
-import { computed } from 'vue';
 // icons
 import icons from '@/constants/icons';
 
@@ -16,7 +16,11 @@ interface Props {
     // 页面两侧边距 => 为了保证页面高度一致使用了 overflow-hidden，因此会裁切掉部分内容，需要酌情使用
     paddingX?: number | string; 
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    headerType: "default",
+    backgroundStyle: "default",
+    paddingX: 0
+});
 
 // 处理 status bar height
 const paddingTop = computed(() => {
@@ -39,7 +43,7 @@ const goBack = () => uni.navigateBack();
 <template>
     <view 
         class="w-screen h-screen flex flex-col fixed"
-        :class="backgroundStyle[props.backgroundStyle ?? 'default']"
+        :class="backgroundStyle[props.backgroundStyle]"
         :style="{ paddingTop: paddingTop }"
     >
         <!-- nav bar -->
@@ -55,8 +59,8 @@ const goBack = () => uni.navigateBack();
         <view 
             class="w-screen overflow-y-hidden flex-1 flex flex-col"
             :style="{
-                paddingLeft: (props.paddingX || 0) + 'px',
-                paddingRight: (props.paddingX || 0) + 'px',
+                paddingLeft: props.paddingX + 'px',
+                paddingRight: props.paddingX + 'px',
             }"
         >
             <slot />

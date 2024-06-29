@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { withDefaults } from 'vue';
 import icons from '@/constants/icons';
 
 interface Props {
     size?: "default" | "small" | "medium" | "large";
     color?: "black" | "white";
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    size: "default",
+    color: "black"
+});
 
 const size = {
     default: "size-8",
@@ -23,10 +27,10 @@ const color = {
 <template>
     <view 
         class="overflow-hidden flex items-center justify-center" 
-        :class="props.size ? size[props.size] : size['default']"
+        :class="props.size"
     >
         <image 
-            :src="props.color ? color[props.color] : color.black" 
+            :src="props.color"
             class="spin size-full" 
         />
     </view>

@@ -6,7 +6,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     fieldName: {},
     value: {},
     disabled: { type: Boolean },
-    type: {},
+    type: { default: "text" },
     placeholder: {},
     icon: {}
   },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue';
+import { ref, withDefaults } from 'vue';
 // icons
 import icons from '@/constants/icons';
 
@@ -14,7 +14,10 @@ interface Props {
     icon?: string;
     variant?: "primary" | "mini";
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    mode: "selector",
+    variant: "primary"
+});
 
 
 const variants = {
@@ -29,10 +32,8 @@ const errorMessage = ref('');
 
 const emit = defineEmits(['change']);
 function emitChange(e: Event) {
-    const mode = props.mode === undefined ? "selector" : props.mode;
-
     // 非普通 selector 模式下，直接返回 value
-    if (mode !== 'selector' ) {
+    if (props.mode !== 'selector' ) {
         // @ts-expect-error uniapp 没有标注 Event 类型
         return emit('change', {value: e.detail.value});
     }
@@ -59,14 +60,14 @@ defineExpose({ showError, hasSelected });
         class="flex items-center justify-between pl-4 relative"
         :class="[
             errorMessage ? '!border-destructive' : '',
-            variants[props.variant || 'primary']
+            variants[props.variant]
         ]"
     >
         <view class="flex-1 h-full flex items-center gap-3">
             <image v-if="props.icon" :src="props.icon" class="size-6" />
             <picker
                 class="flex-1 h-full"
-                :mode="props.mode ?? 'selector'"
+                :mode="props.mode"
                 :value="props.value"
                 :range="props.range"
                 @change="emitChange"
@@ -79,7 +80,7 @@ defineExpose({ showError, hasSelected });
                     <text
                         class="text-secondary-foreground"
                         :class="[
-                            props.variant === 'primary' || !props.variant && 'leading-[58px]',
+                            props.variant === 'primary' && 'leading-[58px]',
                             props.variant === 'mini' && 'leading-[36px] mr-8'
                         ]"
                     >
@@ -89,7 +90,7 @@ defineExpose({ showError, hasSelected });
                 <!-- 直接显示 -->
                 <view v-else class="size-full">
                     <text :class="[
-                        props.variant === 'primary' || !props.variant && 'leading-[58px]',
+                        props.variant === 'primary' && 'leading-[58px]',
                         props.variant === 'mini' && 'leading-[36px] mr-8'
                     ]">
                         {{ 
@@ -105,7 +106,7 @@ defineExpose({ showError, hasSelected });
         <view 
             class="pointer-events-none absolute overflow-hidden top-1/2 -translate-y-1/2 right-3"
             :class="[
-                props.variant === 'primary' || !props.variant && 'size-6',
+                props.variant === 'primary' && 'size-6',
                 props.variant === 'mini' && 'size-4'
             ]"
         >

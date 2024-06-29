@@ -3,9 +3,9 @@ const common_vendor = require("../common/vendor.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-button",
   props: {
-    variant: {},
+    variant: { default: "primary" },
     className: {},
-    disabled: { type: Boolean }
+    disabled: { type: Boolean, default: false }
   },
   emits: ["click"],
   setup(__props, { emit: __emit }) {
@@ -20,7 +20,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const emit = __emit;
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.n(variants[props.variant || "primary"]),
+        a: common_vendor.n(variants[props.variant]),
         b: common_vendor.n(props.className),
         c: common_vendor.o(($event) => emit("click")),
         d: props.disabled

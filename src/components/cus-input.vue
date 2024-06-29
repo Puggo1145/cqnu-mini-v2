@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, type InputTypeHTMLAttribute } from 'vue';
+import { ref, watch, withDefaults, type InputTypeHTMLAttribute } from 'vue';
 
 interface Props {
     fieldName?: string;
@@ -9,7 +9,9 @@ interface Props {
     placeholder?: string;
     icon?: string;
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    type: "text"
+});
 
 
 const isInputFocused = ref(false);

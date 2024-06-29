@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { withDefaults } from 'vue';
 // components
-import spinner from './spinner.vue';
+// import spinner from './spinner.vue'; // TODO 完成 spinner variant
 
 interface Props {
     variant?: "primary" | "secondary" | "muted" | "outline" | "ghost";
     className?: string;
     disabled?: boolean;
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    variant: "primary",
+    disabled: false
+});
 
 const variants = {
     primary: "bg-primary text-white",
@@ -25,13 +28,14 @@ const emit = defineEmits(['click']);
     <button
         class="flex justify-center items-center min-w-[100px] h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
         :class="[
-            variants[props.variant || 'primary'],
+            variants[props.variant],
             props.className,
         ]" 
         hover-class="button-touch"
         @click="emit('click')"    
         :disabled="props.disabled"
     >
+
         <slot />
     </button>
 </template>

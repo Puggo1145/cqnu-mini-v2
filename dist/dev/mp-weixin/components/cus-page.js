@@ -6,9 +6,9 @@ require("../common/assets.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-page",
   props: {
-    headerType: {},
-    backgroundStyle: {},
-    paddingX: {}
+    headerType: { default: "default" },
+    backgroundStyle: { default: "default" },
+    paddingX: { default: 0 }
   },
   setup(__props) {
     const { statusBarheight } = stores_statusBarHeight.useStatusBarHeight();
@@ -29,9 +29,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         b: common_vendor.unref(constants_icons.icons).back,
         c: common_vendor.o(goBack)
       } : {}, {
-        d: (props.paddingX || 0) + "px",
-        e: (props.paddingX || 0) + "px",
-        f: common_vendor.n(backgroundStyle[props.backgroundStyle ?? "default"]),
+        d: props.paddingX + "px",
+        e: props.paddingX + "px",
+        f: common_vendor.n(backgroundStyle[props.backgroundStyle]),
         g: paddingTop.value
       });
     };

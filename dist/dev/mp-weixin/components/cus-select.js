@@ -5,7 +5,7 @@ require("../common/assets.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-select",
   props: {
-    mode: {},
+    mode: { default: "selector" },
     value: {},
     range: {},
     start: {},
@@ -13,7 +13,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     fieldName: {},
     placeholder: {},
     icon: {},
-    variant: {}
+    variant: { default: "primary" }
   },
   emits: ["change"],
   setup(__props, { expose: __expose, emit: __emit }) {
@@ -26,8 +26,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const errorMessage = common_vendor.ref("");
     const emit = __emit;
     function emitChange(e) {
-      const mode = props.mode === void 0 ? "selector" : props.mode;
-      if (mode !== "selector") {
+      if (props.mode !== "selector") {
         return emit("change", { value: e.detail.value });
       }
       emit(
@@ -49,22 +48,22 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         c: _ctx.placeholder && !hasSelected.value
       }, _ctx.placeholder && !hasSelected.value ? {
         d: common_vendor.t(_ctx.placeholder),
-        e: common_vendor.n(props.variant === "primary" || !props.variant && "leading-_58px_"),
+        e: common_vendor.n(props.variant === "primary" && "leading-_58px_"),
         f: common_vendor.n(props.variant === "mini" && "leading-_36px_ mr-8")
       } : {
         g: common_vendor.t(props.range ? props.range[props.value] : props.value),
-        h: common_vendor.n(props.variant === "primary" || !props.variant && "leading-_58px_"),
+        h: common_vendor.n(props.variant === "primary" && "leading-_58px_"),
         i: common_vendor.n(props.variant === "mini" && "leading-_36px_ mr-8")
       }, {
-        j: props.mode ?? "selector",
+        j: props.mode,
         k: props.value,
         l: props.range,
         m: common_vendor.o(emitChange),
         n: common_vendor.unref(constants_icons.icons).down,
-        o: common_vendor.n(props.variant === "primary" || !props.variant && "size-6"),
+        o: common_vendor.n(props.variant === "primary" && "size-6"),
         p: common_vendor.n(props.variant === "mini" && "size-4"),
         q: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
-        r: common_vendor.n(variants[props.variant || "primary"]),
+        r: common_vendor.n(variants[props.variant]),
         s: errorMessage.value
       }, errorMessage.value ? {
         t: common_vendor.t(errorMessage.value)

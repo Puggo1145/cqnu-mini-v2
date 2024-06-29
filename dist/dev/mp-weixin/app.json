@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/(Onboarding)/index/index",
+    "pages/index/index",
     "pages/(Main)/study/page",
     "pages/(Main)/service/page",
     "pages/(Main)/today/page",

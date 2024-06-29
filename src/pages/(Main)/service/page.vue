@@ -10,7 +10,7 @@ import images from '@/constants/images';
 <template>
     <cus-page background-style="modern">
         <scroll-view 
-            class="w-full px-4"
+            class="w-full flex-1 px-4"
             scroll-y    
         >
             <image :src="images.service.bg" class="z-0 fixed w-[255px] -right-4 top-2" />

@@ -1,7 +1,7 @@
 {
 	"pages": [
 		{
-			"path": "pages/(Onboarding)/index/index"
+			"path": "pages/index/index"
 		},
 		{
 			"path": "pages/(Main)/study/page"

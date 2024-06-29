@@ -3,7 +3,7 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 const stores_statusBarHeight = require("./stores/statusBarHeight.js");
 if (!Math) {
-  "./pages/(Onboarding)/index/index.js";
+  "./pages/index/index.js";
   "./pages/(Main)/study/page.js";
   "./pages/(Main)/service/page.js";
   "./pages/(Main)/today/page.js";

@@ -4,7 +4,7 @@ import images from '@/constants/images';
 </script>
 
 <template>
-    <view class="flex items-center justify-between gap-[14px]">
+    <view class="flex justify-between gap-[14px]">
         <!-- 水电费余额 -->
         <view class="relative w-full h-[172px] bg-primary rounded-2xl 
         shadow-md shadow-primary px-4 py-5">

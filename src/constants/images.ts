@@ -2,6 +2,10 @@ import landing from "@/static/images/landing-page-img.svg";
 import welcome from "@/static/images/welcome.svg";
 import addNote from "@/static/images/add-note.svg";
 import board from "@/static/images/board.svg";
+// study
+import studyBg from "@/static/images/study-bg.svg";
+import studyTodo from "@/static/images/study-todo.svg";
+import studyEasyNote from "@/static/images/study-easy-note.svg";
 // service
 import serviceBg from "@/static/images/service-bg.svg";
 import serviceUtility from "@/static/images/service-utility.svg";
@@ -10,11 +14,17 @@ import serviceFood from "@/static/images/service-food.png";
 import serviceLocation from "@/static/images/service-location.svg";
 import serviceWater from "@/static/images/service-water.svg";
 
+
 const images = {
     landing,
     welcome,
     addNote,
     board,
+    study: {
+        bg: studyBg,
+        todo: studyTodo,
+        easyNote: studyEasyNote,
+    },
     service: {
         bg: serviceBg,
         utility: serviceUtility,

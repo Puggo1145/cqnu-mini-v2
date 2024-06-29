@@ -23,13 +23,10 @@ const icons = {
   image: common_assets.image,
   clock: common_assets.clock,
   academy: common_assets.academy,
-  today: common_assets.today,
-  todayActived: common_assets.todayActived,
-  gpt: common_assets.gpt,
-  gptActived: common_assets.gptActived,
-  study: common_assets.study,
-  studyActived: common_assets.studyActived,
-  service: common_assets.service,
-  serviceActived: common_assets.serviceActived
+  study: {
+    transcript: common_assets.studyTranscript,
+    schedule: common_assets.studySchedule,
+    review: common_assets.studyReview
+  }
 };
 exports.icons = icons;

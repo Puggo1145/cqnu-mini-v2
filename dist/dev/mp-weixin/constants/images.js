@@ -5,6 +5,11 @@ const images = {
   welcome: common_assets.welcome,
   addNote: common_assets.addNote,
   board: common_assets.board,
+  study: {
+    bg: common_assets.studyBg,
+    todo: common_assets.studyTodo,
+    easyNote: common_assets.studyEasyNote
+  },
   service: {
     bg: common_assets.serviceBg,
     utility: common_assets.serviceUtility,

@@ -19,16 +19,11 @@ import image from "@/static/icons/image.svg"
 import clock from "@/static/icons/clock.svg"
 import academy from "@/static/icons/academy.svg"
 import calendar from "@/static/icons/calendar.svg"
-// tabbar icons
-import today from "@/static/icons/today.png"
-import todayActived from "@/static/icons/today-activated.png"
-import gpt from "@/static/icons/gpt.png"
-import gptActived from "@/static/icons/gpt-activated.png"
-import study from "@/static/icons/study.png"
-import studyActived from "@/static/icons/study-activated.png"
-import service from "@/static/icons/service.png"
-import serviceActived from "@/static/icons/service-activated.png"
 import rightSecondary from "@/static/icons/right-secondary.svg"
+// study
+import studyTranscript from "@/static/icons/study-transcript.svg"
+import studySchedule from "@/static/icons/study-schedule.svg"
+import studyReview from "@/static/icons/study-review.svg"
 
 const icons = {
     wechatIcon,
@@ -53,15 +48,11 @@ const icons = {
     image,
     clock,
     academy,
-
-    today,
-    todayActived,
-    gpt,
-    gptActived,
-    study,
-    studyActived,
-    service,
-    serviceActived,
+    study: {
+        transcript: studyTranscript,
+        schedule: studySchedule,
+        review: studyReview,
+    },
 };
 
 export default icons;

@@ -10998,7 +10998,6 @@ exports.mixin = mixin;
 exports.mpMixin = mpMixin;
 exports.n = n;
 exports.o = o;
-exports.onMounted = onMounted;
 exports.os = os;
 exports.p = p;
 exports.props = props$2;

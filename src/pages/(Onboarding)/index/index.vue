@@ -24,6 +24,9 @@ const handleSignIn = () => {
 function gotoDevPage () {
     uni.navigateTo({ url: "/pages/dev/page" });
 };
+function gotoHome() {
+    uni.switchTab({ url: "/pages/(Main)/today/page" });
+}
 </script>
 
 <template>
@@ -33,7 +36,7 @@ function gotoDevPage () {
             <flowTexts />
         </view>
         <!-- 首页欢迎文字 -->
-        <view class="relative z-10 px-4 flex flex-col gap-9">
+        <view class="relative z-10 px-4 flex flex-col">
             <view class="font-bold text-[32px] flex flex-col">
                 <text class="text-6xl mb-4">👌</text>
                 <view v-if="!isSigningIn">
@@ -54,12 +57,27 @@ function gotoDevPage () {
             <cus-button 
                 @click="handleSignIn" 
                 :variant="isSigningIn ? 'muted' : 'primary'"
+                class-name="mt-4 "
             >
                 {{ isSigningIn ? "登录中" : "登录"}}
             </cus-button>
-            <cus-button variant="outline" @click="gotoDevPage">
-                dev page
-            </cus-button>
+            <!-- dev buttons -->
+            <view class="w-full flex gap-x-2 mt-2">
+                <cus-button 
+                    variant="outline" 
+                    @click="gotoHome"
+                    class-name="w-full"
+                >
+                    去主页
+                </cus-button>
+                <cus-button 
+                    variant="outline" 
+                    @click="gotoDevPage"
+                    class-name="w-full"
+                >
+                    dev page
+                </cus-button>
+            </view>
         </view>
         <!-- 背景圆 -->
         <view class="z-0 overflow-hidden w-full h-[330px] absolute bottom-0 left-0">

@@ -1,9 +1,7 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
 const stores_statusBarHeight = require("../stores/statusBarHeight.js");
-const utils_setTab = require("../utils/setTab.js");
 const constants_icons = require("../constants/icons.js");
-require("../constants/tabbar-style.js");
 require("../common/assets.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-page",
@@ -23,7 +21,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       default: "bg-background",
       modern: "bg-gradient-to-b from-_hE6EBF8_ to-_hF5F9FC_"
     };
-    common_vendor.onMounted(() => utils_setTab.setTabBackgroundColor(props.backgroundStyle ?? "default"));
     const goBack = () => common_vendor.index.navigateBack();
     return (_ctx, _cache) => {
       return common_vendor.e({

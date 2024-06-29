@@ -24,6 +24,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     function gotoDevPage() {
       common_vendor.index.navigateTo({ url: "/pages/dev/page" });
     }
+    function gotoHome() {
+      common_vendor.index.switchTab({ url: "/pages/(Main)/today/page" });
+    }
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(constants_images.images).landing,
@@ -32,13 +35,20 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         c: common_vendor.t(isSigningIn.value ? "登录中" : "登录"),
         d: common_vendor.o(handleSignIn),
         e: common_vendor.p({
-          variant: isSigningIn.value ? "muted" : "primary"
+          variant: isSigningIn.value ? "muted" : "primary",
+          ["class-name"]: "mt-4 "
         }),
-        f: common_vendor.o(gotoDevPage),
+        f: common_vendor.o(gotoHome),
         g: common_vendor.p({
-          variant: "outline"
+          variant: "outline",
+          ["class-name"]: "w-full"
         }),
-        h: common_vendor.p({
+        h: common_vendor.o(gotoDevPage),
+        i: common_vendor.p({
+          variant: "outline",
+          ["class-name"]: "w-full"
+        }),
+        j: common_vendor.p({
           ["header-type"]: "none"
         })
       });

@@ -1,10 +1,9 @@
 {
   "pages": [
+    "pages/(Onboarding)/index/index",
     "pages/(Main)/study/page",
     "pages/(Main)/service/page",
     "pages/(Main)/today/page",
-    "pages/(Onboarding)/index/index",
-    "pages/(Main)/gpt/page",
     "pages/(Main)/study/easy-note/page",
     "pages/(Main)/study/easy-note/_components/create-easy-note",
     "pages/(Onboarding)/sign-up/page",
@@ -19,7 +18,7 @@
     "color": "#434041",
     "selectedColor": "#3662E3",
     "borderStyle": "white",
-    "backgroundColor": "#faf8f7",
+    "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/(Main)/today/page",
@@ -28,16 +27,10 @@
         "text": "今日"
       },
       {
-        "pagePath": "pages/(Main)/gpt/page",
-        "iconPath": "static/icons/gpt.png",
-        "selectedIconPath": "static/icons/gpt-activated.png",
-        "text": "问问"
-      },
-      {
         "pagePath": "pages/(Main)/study/page",
         "iconPath": "static/icons/study.png",
         "selectedIconPath": "static/icons/study-activated.png",
-        "text": "学习"
+        "text": "学业"
       },
       {
         "pagePath": "pages/(Main)/service/page",

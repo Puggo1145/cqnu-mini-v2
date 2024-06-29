@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 // icons
 import icons from '@/constants/icons';
 
@@ -29,13 +29,15 @@ const errorMessage = ref('');
 
 const emit = defineEmits(['change']);
 function emitChange(e: Event) {
+    const mode = props.mode === undefined ? "selector" : props.mode;
+
     // 非普通 selector 模式下，直接返回 value
-    if (props.mode !== 'selector') {
+    if (mode !== 'selector' ) {
         // @ts-expect-error uniapp 没有标注 Event 类型
         return emit('change', {value: e.detail.value});
     }
-
-    emit('change', hasSelected.value 
+    
+    emit('change', hasSelected.value
         // @ts-expect-error uniapp 没有标注 Event 类型
         ? {value: Number(e.detail.value)} 
         // @ts-expect-error uniapp 没有标注 Event 类型
@@ -69,9 +71,22 @@ defineExpose({ showError, hasSelected });
                 :range="props.range"
                 @change="emitChange"
             >
-                <view v-if="placeholder && !hasSelected" class="text-secondary-foreground">
-                    {{ placeholder }}
+                <!-- 有模拟 placeholder -->
+                <view 
+                    v-if="placeholder && !hasSelected" 
+                    class="size-full"
+                >
+                    <text
+                        class="text-secondary-foreground"
+                        :class="[
+                            props.variant === 'primary' || !props.variant && 'leading-[58px]',
+                            props.variant === 'mini' && 'leading-[36px] mr-8'
+                        ]"
+                    >
+                        {{ placeholder }}
+                    </text>
                 </view>
+                <!-- 直接显示 -->
                 <view v-else class="size-full">
                     <text :class="[
                         props.variant === 'primary' || !props.variant && 'leading-[58px]',

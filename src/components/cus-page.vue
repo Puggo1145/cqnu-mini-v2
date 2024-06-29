@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useStatusBarHeight } from '@/stores/statusBarHeight';
-import { computed, onMounted, watch } from 'vue';
-// utils
-import { setTabBackgroundColor } from '@/utils/setTab';
+import { computed } from 'vue';
 // icons
 import icons from '@/constants/icons';
 
@@ -28,14 +26,12 @@ const paddingTop = computed(() => {
 });
 
 
-// 设置 background 和 tabbar 颜色
+// 设置 background 颜色
 const backgroundStyle: Record<string, string> = {
     none: 'bg-transparent',
     default: 'bg-background',
     modern: 'bg-gradient-to-b from-[#E6EBF8] to-[#F5F9FC]'
 }
-onMounted(() => setTabBackgroundColor(props.backgroundStyle ?? 'default'));
-
 
 const goBack = () => uni.navigateBack();
 </script>

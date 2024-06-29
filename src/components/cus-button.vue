@@ -23,7 +23,7 @@ const emit = defineEmits(['click']);
 
 <template>
     <button
-        class="flex justify-center items-center h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
+        class="flex justify-center items-center min-w-[100px] h-[52px] rounded-2xl text-md font-bold leading-[52px] transition-all"
         :class="[
             variants[props.variant || 'primary'],
             props.className,

@@ -1,6 +1,15 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import cusPage from '@/components/cus-page.vue';
 import spinner from '@/components/spinner.vue';
+
+onMounted(() => {
+    setTimeout(() => {
+        uni.switchTab({
+            url: '/pages/(Main)/today/page'
+        });
+    }, 2000);
+});
 </script>
 
 <template>

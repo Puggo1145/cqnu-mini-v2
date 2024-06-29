@@ -10,14 +10,20 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   },
   setup(__props) {
     const props = __props;
-    ({
+    const size = {
+      default: "size-8",
+      small: "size-4",
+      medium: "size-6",
+      large: "size-12"
+    };
+    const color = {
       black: constants_icons.icons.loadingBlack,
       white: constants_icons.icons.loadingWhite
-    });
+    };
     return (_ctx, _cache) => {
       return {
-        a: props.color,
-        b: common_vendor.n(props.size)
+        a: color[props.color],
+        b: common_vendor.n(size[props.size])
       };
     };
   }

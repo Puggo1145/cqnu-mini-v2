@@ -27,10 +27,10 @@ const color = {
 <template>
     <view 
         class="overflow-hidden flex items-center justify-center" 
-        :class="props.size"
+        :class="size[props.size]"
     >
         <image 
-            :src="props.color"
+            :src="color[props.color]"
             class="spin size-full" 
         />
     </view>

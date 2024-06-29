@@ -8,6 +8,13 @@ const spinner = () => "../../../components/spinner.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "page",
   setup(__props) {
+    common_vendor.onMounted(() => {
+      setTimeout(() => {
+        common_vendor.index.switchTab({
+          url: "/pages/(Main)/today/page"
+        });
+      }, 2e3);
+    });
     return (_ctx, _cache) => {
       return {};
     };

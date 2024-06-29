@@ -4,6 +4,7 @@ const images = {
   landing: common_assets.landing,
   welcome: common_assets.welcome,
   addNote: common_assets.addNote,
+  board: common_assets.board,
   service: {
     bg: common_assets.serviceBg,
     utility: common_assets.serviceUtility,

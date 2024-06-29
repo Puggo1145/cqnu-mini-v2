@@ -1,6 +1,7 @@
 import landing from "@/static/images/landing-page-img.svg";
 import welcome from "@/static/images/welcome.svg";
 import addNote from "@/static/images/add-note.svg";
+import board from "@/static/images/board.svg";
 // service
 import serviceBg from "@/static/images/service-bg.svg";
 import serviceUtility from "@/static/images/service-utility.svg";
@@ -13,6 +14,7 @@ const images = {
     landing,
     welcome,
     addNote,
+    board,
     service: {
         bg: serviceBg,
         utility: serviceUtility,

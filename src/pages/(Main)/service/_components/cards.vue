@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // components
 import cardGlass from '@/components/card-glass.vue';
+import cardNeedNewFunction from '@/components/card-need-new-function.vue';
 // images
 import images from '@/constants/images';
 </script>
@@ -28,6 +29,9 @@ import images from '@/constants/images';
                 :img="images.service.water"
                 clip-content
             />
+        </view>
+        <view class="col-span-2">
+            <card-need-new-function />
         </view>
     </view>
 </template>

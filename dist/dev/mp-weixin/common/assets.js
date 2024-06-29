@@ -2,6 +2,7 @@
 const landing = "/static/images/landing-page-img.svg";
 const welcome = "/static/images/welcome.svg";
 const addNote = "/static/images/add-note.svg";
+const board = "/static/images/board.svg";
 const serviceBg = "/static/images/service-bg.svg";
 const serviceUtility = "/static/images/service-utility.svg";
 const serviceCard = "/static/images/service-card.svg";
@@ -42,6 +43,7 @@ exports.academy = academy;
 exports.addNote = addNote;
 exports.attentionWhite = attentionWhite;
 exports.back = back;
+exports.board = board;
 exports.boxWhite = boxWhite;
 exports.calendar = calendar;
 exports.calendarWhite = calendarWhite;

@@ -31,8 +31,8 @@ function gotoHome() {
 
 <template>
     <cus-page header-type="none">
-        <image :src="images.landing" class="w-full h-[310px] object-cover" />
-        <view class="overflow-hidden w-screen my-4">
+        <image :src="images.landing" mode="aspectFill" class="w-full h-[300px]" />
+        <view class="overflow-hidden w-screen mt-8 mb-4">
             <flowTexts />
         </view>
         <!-- 首页欢迎文字 -->

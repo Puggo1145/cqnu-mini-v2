@@ -3052,7 +3052,7 @@ button {
 button::after {
     border: none;
 }
-input,textarea {
+input,textarea,scroll-view {
     box-sizing: border-box;
 }
 page {
@@ -3201,6 +3201,9 @@ view,text,::before,::after {
 .-bottom-_400px_ {
     bottom: -400px;
 }
+.-bottom-_60px_ {
+    bottom: -60px;
+}
 .-left-_280px_ {
     left: -280px;
 }
@@ -3239,27 +3242,6 @@ view,text,::before,::after {
 }
 .top-_12px_ {
     top: 12px;
-}
-.-bottom-8 {
-    bottom: -2rem;
-}
-.-right-5 {
-    right: -1.25rem;
-}
-.-right-10 {
-    right: -2.5rem;
-}
-.-bottom-12 {
-    bottom: -3rem;
-}
-.-bottom-_60px_ {
-    bottom: -60px;
-}
-.-right-8 {
-    right: -2rem;
-}
-.right-8 {
-    right: 2rem;
 }
 .z-0 {
     z-index: 0;
@@ -3330,6 +3312,24 @@ view,text,::before,::after {
 }
 .mt-_152px_ {
     margin-top: 152px;
+}
+.-ml-1 {
+    margin-left: -0.25rem;
+}
+.mr-2 {
+    margin-right: 0.5rem;
+}
+.-ml-2 {
+    margin-left: -0.5rem;
+}
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+.-mt-2 {
+    margin-top: -0.5rem;
 }
 .box-border {
     box-sizing: border-box;
@@ -3492,6 +3492,9 @@ view,text,::before,::after {
 .w-_180px_ {
     width: 180px;
 }
+.w-_196px_ {
+    width: 196px;
+}
 .w-_240px_ {
     width: 240px;
 }
@@ -3508,9 +3511,6 @@ view,text,::before,::after {
 .w-screen {
     width: 100vw;
 }
-.w-_196px_ {
-    width: 196px;
-}
 .max-w-_110px_ {
     max-width: 110px;
 }
@@ -3526,9 +3526,6 @@ view,text,::before,::after {
 }
 .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.grid-rows-2 {
-    grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 .flex-col {
     flex-direction: column;
@@ -3719,6 +3716,10 @@ view,text,::before,::after {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
 }
+.px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
 .pl-2 {
     padding-left: 0.5rem;
 }
@@ -3801,6 +3802,9 @@ view,text,::before,::after {
 }
 .leading-none {
     line-height: 1;
+}
+.ileading-none {
+    line-height: 1 !important;
 }
 .itext-primary {
     color: hsl(var(--primary)) !important;

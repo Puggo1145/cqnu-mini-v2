@@ -12,6 +12,7 @@ button::after {
 }
 
 input,
-textarea {
+textarea,
+scroll-view {
     box-sizing: border-box;
 }

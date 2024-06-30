@@ -7,21 +7,23 @@ import cusButton from "@/components/cus-button.vue";
 import flowTexts from "./_components/flow-texts.vue";
 // images
 import images from "@/constants/images";
+// api
+import { signin, signup } from "@/api/auth";
 
 
 const isSigningIn = ref(false);
 
-const handleSignIn = () => {
+const handleSignIn = async () => {
     isSigningIn.value = true;
-    setTimeout(() => {
-        isSigningIn.value = false;
-        uni.navigateTo({
-            url: "/pages/(Onboarding)/sign-up/page",
-        });
-    }, 500);
+    
+    // const res = await signin();
+    // if (res?.toSignUp) {
+    //     console.log("to sign up");
+    // }
+    await signup();
 };
 
-function gotoDevPage () {
+function gotoDevPage() {
     uni.navigateTo({ url: "/pages/dev/page" });
 };
 function gotoHome() {
@@ -54,27 +56,15 @@ function gotoHome() {
                     </view>
                 </view>
             </view>
-            <cus-button 
-                @click="handleSignIn" 
-                :variant="isSigningIn ? 'muted' : 'primary'"
-                class-name="mt-4 "
-            >
-                {{ isSigningIn ? "登录中" : "登录"}}
+            <cus-button @click="handleSignIn" :variant="isSigningIn ? 'muted' : 'primary'" class-name="mt-4 ">
+                {{ isSigningIn ? "登录中" : "登录" }}
             </cus-button>
             <!-- dev buttons -->
             <view class="w-full flex gap-x-2 mt-2">
-                <cus-button 
-                    variant="outline" 
-                    @click="gotoHome"
-                    class-name="w-full"
-                >
+                <cus-button variant="outline" @click="gotoHome" class-name="w-full">
                     去主页
                 </cus-button>
-                <cus-button 
-                    variant="outline" 
-                    @click="gotoDevPage"
-                    class-name="w-full"
-                >
+                <cus-button variant="outline" @click="gotoDevPage" class-name="w-full">
                     dev page
                 </cus-button>
             </view>

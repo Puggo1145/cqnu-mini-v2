@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "cus-page": "../../../components/cus-page",
-    "cus-button": "../../../components/cus-button",
-    "flow-texts": "./_components/flow-texts"
-  }
-}

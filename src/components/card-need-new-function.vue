@@ -1,4 +1,5 @@
 <script setup>
+// static
 import images from '@/constants/images';
 </script>
 

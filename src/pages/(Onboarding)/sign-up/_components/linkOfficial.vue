@@ -8,7 +8,9 @@ import { linkOfficialTexts } from '@/constants/signup/signup-texts';
 // stores
 import { useSignupInfo } from '@/stores/signup-info';
 
+
 const stores = useSignupInfo();
+
 
 const emit = defineEmits(['update:current']);
 </script>

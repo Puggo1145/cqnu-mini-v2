@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useStatusBarHeight } from './stores/statusBarHeight';
 
+
 // 自适应状态栏高度
 const statusBarHeight = uni.getMenuButtonBoundingClientRect().top;
 useStatusBarHeight().set(statusBarHeight - 15);

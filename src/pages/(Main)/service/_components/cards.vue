@@ -2,7 +2,7 @@
 // components
 import cardGlass from '@/components/card-glass.vue';
 import cardNeedNewFunction from '@/components/card-need-new-function.vue';
-// images
+// static
 import images from '@/constants/images';
 </script>
 

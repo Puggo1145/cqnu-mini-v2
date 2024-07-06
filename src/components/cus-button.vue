@@ -10,7 +10,8 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {
     variant: "primary",
-    disabled: false
+    disabled: false,
+    className: "",
 });
 
 const variants = {

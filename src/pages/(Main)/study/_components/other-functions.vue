@@ -1,6 +1,7 @@
 <script setup lang="ts">
-// assets
+// static
 import icons from '@/constants/icons';
+
 
 const otherFunctions = [
     {

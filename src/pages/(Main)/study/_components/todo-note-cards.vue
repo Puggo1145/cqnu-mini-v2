@@ -1,6 +1,7 @@
 <script setup lang="ts">
-// assets
+// static
 import images from '@/constants/images';
+
 
 const cards = [
     {

@@ -9,7 +9,9 @@ import icons from '@/constants/icons';
 // mock
 import { mockNotes } from '@/mock/easy-note';
 
+
 const notes = ref(mockNotes);
+
 
 function goToEasyNote() {
     uni.navigateTo({

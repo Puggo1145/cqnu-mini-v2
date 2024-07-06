@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue';
+// stores
 import { useStatusBarHeight } from '@/stores/statusBarHeight';
-// icons
+// static
 import icons from '@/constants/icons';
-
-
-const { statusBarheight } = useStatusBarHeight();
 
 
 // props
@@ -22,7 +20,9 @@ const props = withDefaults(defineProps<Props>(), {
     paddingX: 0
 });
 
+
 // 处理 status bar height
+const { statusBarheight } = useStatusBarHeight();
 const paddingTop = computed(() => {
     return props.headerType === "none"
         ? '0px' 
@@ -36,6 +36,7 @@ const backgroundStyle: Record<string, string> = {
     default: 'bg-background',
     modern: 'bg-gradient-to-b from-[#E6EBF8] to-[#F5F9FC]'
 }
+
 
 const goBack = () => uni.navigateBack();
 </script>

@@ -9,7 +9,10 @@ import linkOfficial from './_components/linkOfficial.vue';
 import checkInfo from './_components/check-info.vue';
 import visualSignupInfo from './_components/visual-signup-info.vue';
 
+
 const current = ref(0);
+
+
 const nextPage = () => current.value += 1
 const prevPage = () => current.value -= 1
 const getCurrent = (e: any) => current.value = e.detail.current;

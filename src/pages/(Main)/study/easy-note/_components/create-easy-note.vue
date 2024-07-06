@@ -7,17 +7,19 @@ import cusSelect from '@/components/cus-select.vue';
 import cusButton from '@/components/cus-button.vue';
 // utils
 import { getDate } from '@/utils/getDate';
-// static
-import icons from '@/constants/icons';
 // mock
 import { mockRelatedCourses } from '@/mock/easy-note';
+// static
+import icons from '@/constants/icons';
+
+
+const tags = ref(["重要", "作业", "考试"]);
+const relatedCourses = ref(mockRelatedCourses);
+
 
 const currentDate = ref(getDate());
 const currentTime = ref("12:00");
 const currentCourseIndex = ref(0);
-
-const tags = ref(["重要", "作业", "考试"]);
-const relatedCourses = ref(mockRelatedCourses);
 
 function onDateChange(e: any) {
     currentDate.value = e.value;

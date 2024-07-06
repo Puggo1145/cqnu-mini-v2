@@ -9,19 +9,18 @@ import { usernameTexts } from '@/constants/signup/signup-texts';
 // store
 import { useSignupInfo } from '@/stores/signup-info';
 
-const { setUsername } = useSignupInfo();
-
-const emit = defineEmits(['update:current']);
 
 const inputValue = ref('');
 const inputRef = ref();
-
+const { setUsername } = useSignupInfo();
 const handleInput = (event: any) => {
     inputValue.value = event.value;
     inputRef.value.showError('');
     setUsername(inputValue.value);
 }
 
+
+const emit = defineEmits(['update:current']);
 const validateValue = () => {
     const valueLength = inputValue.value.length;
 

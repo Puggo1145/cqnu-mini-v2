@@ -6,8 +6,8 @@ interface CardGlassProps {
     img?: string;
     clipContent?: boolean; // 是否裁剪超出卡片的部分
 }
-
 const props = defineProps<CardGlassProps>();
+
 
 const cardSize: Record<string, string> = {
     small: "h-[89px] px-4 pt-6",

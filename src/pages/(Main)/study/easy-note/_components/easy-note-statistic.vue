@@ -4,7 +4,8 @@ import { ref } from 'vue';
 import icons from '@/constants/icons';
 // mock
 import { mockNoteStatistics } from '@/mock/easy-note';
-// types
+
+
 interface NoteStatisticsBlock {
     icon: string;
     iconBackgroundColor: string;
@@ -12,7 +13,6 @@ interface NoteStatisticsBlock {
     count: number;
     backgroundColor: string;
 }
-
 const noteStatistics = ref<NoteStatisticsBlock[]>([
     { 
         icon: icons.calendarWhite,

@@ -11,9 +11,6 @@ import { campusInfoTexts } from '@/constants/signup/signup-texts';
 // stores
 import { useSignupInfo } from '@/stores/signup-info';
 
-const stores = useSignupInfo();
-
-const emit = defineEmits(['update:current']);
 
 const inputValue = ref('');
 const inputRef = ref();
@@ -25,11 +22,13 @@ const isMajorShow = computed(() => {
     return selectedFields.value[0] === 'identity' && selectedFields.value[1] === 'faculty'
 });
 
+
 const identityIndex = ref<number>(0);
 const facultyIndex = ref<number>(0);
 const majorsIndex = ref<number>(0);
 
 
+// 处理学院和专业的数据，根据选择的学院来显示对应的专业
 const faculties = computed(() => facultiesAndMajors.map(({ name }) => name));
 const majors = computed(() => {
     const majorsOfFaculty = facultiesAndMajors.find(({ name }) => name === faculties.value[facultyIndex.value])!;
@@ -40,12 +39,13 @@ const majors = computed(() => {
 });
 
 
+const stores = useSignupInfo();
 const handleInput = (event: any) => {
     stores.studentId = event.value;
     inputValue.value = event.value;
     inputRef.value.showError('');
 }
-// vue 会在 html 内解构 ref，导致从 html 传入的 ref 失去响应性，只能分别处理
+// vue 会在 html 内解构 ref，导致从 html 传入的 ref 失去响应性，只能分别处理每一种表单
 const handleIdentityChange = (event: any) => {
     identityIndex.value = event.value;
     stores.identity = event.value;
@@ -84,6 +84,8 @@ const handleMajorChange = (event: any) => {
     }
 }
 
+
+const emit = defineEmits(['update:current']);
 const validateValue = () => {
     // 检查 input
     const isInputLengthCorrect = inputValue.value.length === 13;

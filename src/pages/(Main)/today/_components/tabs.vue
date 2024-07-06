@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-// icons
+// static
 import icons from '@/constants/icons';
+
 
 const tabs = reactive([
     { name: "课程" },

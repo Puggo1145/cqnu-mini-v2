@@ -6,7 +6,8 @@ import {
     easyNoteTagColorMapper,
     easyNoteColorMapper
 } from '@/constants/easy-note/easy-note-card';
-// types
+
+
 enum EasyNoteTags {
     "重要",
     "作业",
@@ -25,6 +26,7 @@ export interface EasyNoteCard {
     supportedNumber: number; // 有多少人击掌
 }
 const easyNoteCardProps = defineProps<EasyNoteCard>();
+
 
 // 根据 tag 处理 note 的样式表现
 const isNoteImportant = computed(() => easyNoteCardProps.tags.includes(0));

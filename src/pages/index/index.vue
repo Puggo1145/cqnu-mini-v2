@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
-
-import cusPage from "@/components/cus-page.vue"
 // components
+import cusPage from "@/components/cus-page.vue"
 import cusButton from "@/components/cus-button.vue";
 import flowTexts from "./_components/flow-texts.vue";
-// images
+// static
 import images from "@/constants/images";
 // api
-import { signin, signup } from "@/api/auth";
+import { signup } from "@/api/auth";
 
 
 const isSigningIn = ref(false);
-
 const handleSignIn = async () => {
     isSigningIn.value = true;
     
@@ -22,6 +20,7 @@ const handleSignIn = async () => {
     // }
     await signup();
 };
+
 
 function gotoDevPage() {
     uni.navigateTo({ url: "/pages/dev/page" });

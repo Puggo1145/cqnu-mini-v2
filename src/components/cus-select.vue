@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, withDefaults } from 'vue';
-// icons
+// static
 import icons from '@/constants/icons';
+
 
 interface Props {
     mode?: "selector" | "time" | "date" | "multiSelector" | "region"
@@ -26,10 +27,8 @@ const variants = {
 }
 
 
+// 自定义的 picker onChange 事件
 const hasSelected = ref(false); // picker 是否被选择过，控制 placeholder 的显示
-const errorMessage = ref('');
-
-
 const emit = defineEmits(['change']);
 function emitChange(e: Event) {
     // 非普通 selector 模式下，直接返回 value
@@ -49,9 +48,12 @@ function emitChange(e: Event) {
 
 
 // 显示错误信息
+const errorMessage = ref('');
 const showError = (message: string) => {
     errorMessage.value = message;
 };
+
+
 defineExpose({ showError, hasSelected });
 </script>
 

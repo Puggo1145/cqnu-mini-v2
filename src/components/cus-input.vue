@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref, watch, withDefaults, type InputTypeHTMLAttribute } from 'vue';
+import { ref, watch, withDefaults } from 'vue';
+// types
+import type { InputTypeHTMLAttribute } from 'vue';
 
 interface Props {
     fieldName?: string;

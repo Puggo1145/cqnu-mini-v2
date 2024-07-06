@@ -1,6 +1,7 @@
 <script setup lang="ts">
-// icons
+// static
 import icons from '@/constants/icons';
+
 
 const functionBtns = {
     notification: {

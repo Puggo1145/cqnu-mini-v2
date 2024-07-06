@@ -4,7 +4,7 @@ import cusPage from '@/components/cus-page.vue';
 import todoNoteCards from './_components/todo-note-cards.vue';  
 import otherFunctions from './_components/other-functions.vue';
 import cardNeedNewFunction from '@/components/card-need-new-function.vue';
-// assets
+// static
 import images from '@/constants/images';
 </script>
 

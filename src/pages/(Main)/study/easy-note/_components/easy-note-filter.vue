@@ -7,7 +7,7 @@ import cusSelect from '@/components/cus-select.vue';
 import { mockRelatedCourses } from '@/mock/easy-note';
 import { mockNotes } from '@/mock/easy-note';
 
-// select ranges
+
 const timeRangeOptions = [
     "今日内",
     "本周内",
@@ -23,10 +23,11 @@ const tagsOptions = ref([
     "作业",
     "考试"
 ])
-// select values
+// 选中 option 的对应 index
 const selectedTimeRange = ref(0);   
 const selectedRelatedCourse = ref(0);
 const selectedTag = ref(0);
+
 
 function onTimeRangeChange(e: any) {
     selectedTimeRange.value = e.value;
@@ -71,12 +72,17 @@ function onTagChange(e: any) {
                 <easy-note-card 
                     v-for="note in mockNotes"
                     :key="note.id"
-                    v-bind="note"
-                />
-                <easy-note-card 
-                    v-for="note in mockNotes"
-                    :key="note.id"
-                    v-bind="note"
+                    
+                    :id="note.id"
+                    :title="note.title"
+                    :content="note.content"
+                    :images="note.images"
+                    :deadline="note.deadline"
+                    :relatedCourse="note.relatedCourse"
+                    :tags="note.tags"
+                    :from="note.from"
+                    :seenNumber="note.seenNumber"
+                    :supportedNumber="note.supportedNumber"
                 />
             </view>
             <!-- 占位 -->

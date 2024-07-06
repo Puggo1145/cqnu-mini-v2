@@ -4,7 +4,6 @@ interface Props {
     title: string;
     desc: string;
 }
-
 const { title, desc } = defineProps<Props>();
 </script>
 

@@ -6,9 +6,8 @@ import { useStatusBarHeight } from '@/stores/statusBarHeight';
 import icons from '@/constants/icons';
 
 
-// props
 interface Props {
-    // 内置 nav bar 样式
+    // 内置 nav bar 样式: default 只令页面在状态栏之下，nav 会显示一个包含返回按钮的 header
     headerType?: "none" | "default" | "nav";
     backgroundStyle?: "none" | "default" | "modern"
     // 页面两侧边距 => 为了保证页面高度一致使用了 overflow-hidden，因此会裁切掉部分内容，需要酌情使用

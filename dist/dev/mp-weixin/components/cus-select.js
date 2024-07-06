@@ -23,7 +23,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       mini: "h-_36px_ bg-secondary rounded-full text-secondary-foreground text-sm"
     };
     const hasSelected = common_vendor.ref(false);
-    const errorMessage = common_vendor.ref("");
     const emit = __emit;
     function emitChange(e) {
       if (props.mode !== "selector") {
@@ -35,6 +34,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       );
       hasSelected.value = true;
     }
+    const errorMessage = common_vendor.ref("");
     const showError = (message) => {
       errorMessage.value = message;
     };

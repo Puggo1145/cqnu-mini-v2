@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/(Main)/today/page",
     "pages/index/index",
     "pages/(Main)/study/page",
     "pages/(Main)/service/page",
-    "pages/(Main)/today/page",
     "pages/(Main)/study/easy-note/page",
     "pages/(Main)/study/easy-note/_components/create-easy-note",
     "pages/(Onboarding)/sign-up/page",

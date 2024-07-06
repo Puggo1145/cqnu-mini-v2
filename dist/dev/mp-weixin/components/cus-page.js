@@ -11,8 +11,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     paddingX: { default: 0 }
   },
   setup(__props) {
-    const { statusBarheight } = stores_statusBarHeight.useStatusBarHeight();
     const props = __props;
+    const { statusBarheight } = stores_statusBarHeight.useStatusBarHeight();
     const paddingTop = common_vendor.computed(() => {
       return props.headerType === "none" ? "0px" : statusBarheight.toString() + "px";
     });

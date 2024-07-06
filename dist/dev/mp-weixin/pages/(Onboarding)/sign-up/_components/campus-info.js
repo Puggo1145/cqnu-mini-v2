@@ -14,8 +14,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "campus-info",
   emits: ["update:current"],
   setup(__props, { emit: __emit }) {
-    const stores = stores_signupInfo.useSignupInfo();
-    const emit = __emit;
     const inputValue = common_vendor.ref("");
     const inputRef = common_vendor.ref();
     const identitySelectRef = common_vendor.ref();
@@ -33,6 +31,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       const majorsOfFaculty = constants_signup_campusInfo.facultiesAndMajors.find(({ name }) => name === faculties.value[facultyIndex.value]);
       return identityIndex.value === 0 ? majorsOfFaculty == null ? void 0 : majorsOfFaculty.majorsForUndergraduates : majorsOfFaculty == null ? void 0 : majorsOfFaculty.majorsForPostgraduates;
     });
+    const stores = stores_signupInfo.useSignupInfo();
     const handleInput = (event) => {
       stores.studentId = event.value;
       inputValue.value = event.value;
@@ -70,6 +69,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         selectedFields.value[2] = "major";
       }
     };
+    const emit = __emit;
     const validateValue = () => {
       const isInputLengthCorrect = inputValue.value.length === 13;
       const isInputNumbers = Number.isInteger(Number(inputValue.value));

@@ -4,7 +4,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "cus-button",
   props: {
     variant: { default: "primary" },
-    className: {},
+    className: { default: "" },
     disabled: { type: Boolean, default: false }
   },
   emits: ["click"],

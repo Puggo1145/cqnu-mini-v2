@@ -7,17 +7,21 @@ import easyNote from './_components/easy-note.vue';
 </script>
 
 <template>
-    <cus-page padding-x="16">
-        <dynamic-header />
-        <tabs />
+    <cus-page>
+        <view class="px-4">
+            <dynamic-header />
+            <tabs />
+        </view>
         <scroll-view 
             class="mt-4 flex-1 overflow-hidden"
             scroll-y
             enable-back-to-top
             :show-scrollbar="false"
         >
-            <smart-class />
-            <easy-note />
+            <view class="px-4 pb-4">
+                <smart-class />
+                <easy-note />
+            </view>
         </scroll-view>
     </cus-page>
 </template>

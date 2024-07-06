@@ -1,8 +1,8 @@
 "use strict";
 const common_vendor = require("../../../../../common/vendor.js");
 const utils_getDate = require("../../../../../utils/getDate.js");
-const constants_icons = require("../../../../../constants/icons.js");
 const mock_easyNote = require("../../../../../mock/easy-note.js");
+const constants_icons = require("../../../../../constants/icons.js");
 require("../../../../../common/assets.js");
 if (!Math) {
   (cusInput + cusSelect + cusButton + cusPage)();
@@ -14,11 +14,11 @@ const cusButton = () => "../../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "create-easy-note",
   setup(__props) {
+    const tags = common_vendor.ref(["重要", "作业", "考试"]);
+    const relatedCourses = common_vendor.ref(mock_easyNote.mockRelatedCourses);
     const currentDate = common_vendor.ref(utils_getDate.getDate());
     const currentTime = common_vendor.ref("12:00");
     const currentCourseIndex = common_vendor.ref(0);
-    const tags = common_vendor.ref(["重要", "作业", "考试"]);
-    const relatedCourses = common_vendor.ref(mock_easyNote.mockRelatedCourses);
     function onDateChange(e) {
       currentDate.value = e.value;
     }

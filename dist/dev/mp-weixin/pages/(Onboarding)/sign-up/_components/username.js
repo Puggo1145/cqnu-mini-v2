@@ -12,15 +12,15 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "username",
   emits: ["update:current"],
   setup(__props, { emit: __emit }) {
-    const { setUsername } = stores_signupInfo.useSignupInfo();
-    const emit = __emit;
     const inputValue = common_vendor.ref("");
     const inputRef = common_vendor.ref();
+    const { setUsername } = stores_signupInfo.useSignupInfo();
     const handleInput = (event) => {
       inputValue.value = event.value;
       inputRef.value.showError("");
       setUsername(inputValue.value);
     };
+    const emit = __emit;
     const validateValue = () => {
       const valueLength = inputValue.value.length;
       if (valueLength < 2 || valueLength > 12) {

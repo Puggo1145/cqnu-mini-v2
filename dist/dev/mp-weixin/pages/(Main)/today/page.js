@@ -12,11 +12,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "page",
   setup(__props) {
     return (_ctx, _cache) => {
-      return {
-        a: common_vendor.p({
-          ["padding-x"]: "16"
-        })
-      };
+      return {};
     };
   }
 });

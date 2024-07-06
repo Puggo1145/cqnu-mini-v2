@@ -13,6 +13,8 @@ const functionBtns = {
         url: "/me"
     }
 }
+
+
 const goto = (url: string) => uni.navigateTo({ url });
 </script>
 

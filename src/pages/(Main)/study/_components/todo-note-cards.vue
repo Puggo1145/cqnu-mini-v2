@@ -9,14 +9,21 @@ const cards = [
         description: "发现学搭 共同进步",
         image: images.study.todo,
         backgroundColor: "#598af6",
+        url: "/study/todo",
     },
     {
         name: "班级小记",
         description: "整理学业重要事项",
         image: images.study.easyNote,
         backgroundColor: "#649ef3",
+        url: '/pages/(Main)/study/easy-note/page',
     },
 ]
+
+
+function goTo(url: string) {
+    uni.navigateTo({ url });
+}
 </script>
 
 <template>
@@ -26,6 +33,7 @@ const cards = [
             :key="card.name"
             class="overflow-hidden relative w-full h-[108px] px-4 py-5 rounded-2xl"
             :style="{ backgroundColor: card.backgroundColor }"
+            @click="goTo(card.url)"
         >
             <view class="flex flex-col relative z-10">
                 <text class="text-2xl font-bold text-white">{{ card.name }}</text>

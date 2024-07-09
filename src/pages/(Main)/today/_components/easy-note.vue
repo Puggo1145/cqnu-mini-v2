@@ -43,10 +43,20 @@ function goToCreateEasyNote() {
         <view class="pt-3">
             <no-note v-if="notes.length === 0" />
             <view v-else class="flex flex-col gap-3">
-                <easyNoteCard 
+                <easy-note-card 
                     v-for="note in notes"
                     :key="note.id"
-                    v-bind="note"
+
+                    :id="note.id"
+                    :title="note.title"
+                    :content="note.content"
+                    :images="note.images"
+                    :deadline="note.deadline"
+                    :relatedCourse="note.relatedCourse"
+                    :tags="note.tags"
+                    :from="note.from"
+                    :seenNumber="note.seenNumber"
+                    :supportedNumber="note.supportedNumber"
                 />
                 <view 
                     class="w-full h-[96px] bg-secondary rounded-2xl flex justify-center items-center"

@@ -36,9 +36,19 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         e: common_vendor.f(notes.value, (note, k0, i0) => {
           return {
             a: note.id,
-            b: "5af6c310-2-" + i0,
-            c: common_vendor.p({
-              ...note
+            b: note.id,
+            c: "5af6c310-2-" + i0,
+            d: common_vendor.p({
+              id: note.id,
+              title: note.title,
+              content: note.content,
+              images: note.images,
+              deadline: note.deadline,
+              relatedCourse: note.relatedCourse,
+              tags: note.tags,
+              from: note.from,
+              seenNumber: note.seenNumber,
+              supportedNumber: note.supportedNumber
             })
           };
         }),

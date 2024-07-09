@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 // constants
 import {
     easyNoteTagMapper,
     easyNoteTagColorMapper,
     easyNoteColorMapper
 } from '@/constants/easy-note/easy-note-card';
-
 
 enum EasyNoteTags {
     "重要",
@@ -37,39 +36,61 @@ const noteColor = computed(() => {
         return easyNoteColorMapper.normal
     }
 });
+
+
+// 处理卡片打开和关闭
+const isCardOpen = ref(false);
+function onCardClick() {
+    isCardOpen.value = !isCardOpen.value;
+}
 </script>
 
 <template>
-    <view 
-        class="relative w-full rounded-2xl p-4 flex items-center justify-between"
+    <view
+        class="w-full rounded-2xl flex flex-col justify-between p-4"
         :style="{ backgroundColor: noteColor }"
+        @click="onCardClick"
     >
-        <view class="flex flex-col">
-            <text class="text-md font-bold">
-                {{ easyNoteCardProps.title }}
-            </text>
-            <view class="text-sm flex items-center gap-2 text-black text-opacity-35">
-                <text>{{ easyNoteCardProps.relatedCourse }}</text>
-                <text>{{ easyNoteCardProps.deadline }}</text>
+        <view class="flex items-center justify-between">
+            <view class="flex flex-col">
+                <text class="text-md font-bold">
+                    {{ easyNoteCardProps.title }}
+                </text>
+                <view class="text-sm flex items-center gap-2 text-black text-opacity-35">
+                    <text>{{ easyNoteCardProps.relatedCourse }}</text>
+                    <text>{{ easyNoteCardProps.deadline }}</text>
+                </view>
+                <text class="text-sm text-black text-opacity-35">
+                    来自 {{ easyNoteCardProps.from }}
+                </text>
             </view>
-            <text class="text-sm text-black text-opacity-35">
-                来自 {{ easyNoteCardProps.from }}
-            </text>
-        </view>
-        <!-- 查看人数 -->
-        <view class="flex flex-col justify-between items-end gap-y-2">
-            <text class="text-sm text-black text-opacity-35">
-                有 {{ easyNoteCardProps.seenNumber }} 人查看
-            </text>
-            <!-- 外显 tag -->
-            <view class="flex-1">
-                <view
-                    class="px-3 py-1 rounded-full text-white font-bold text-sm"
-                    :style="{ backgroundColor: easyNoteTagColorMapper[tags[0]] }"
-                >
-                    {{ easyNoteTagMapper[tags[0]] }}
+            <view class="flex flex-col justify-between items-end gap-y-2">
+                <!-- 查看人数 -->
+                <text class="text-sm text-black text-opacity-35">
+                    有 {{ easyNoteCardProps.seenNumber }} 人查看
+                </text>
+                <!-- 外显 tag -->
+                <view class="flex-1">
+                    <view
+                        class="px-3 py-1 rounded-full text-white font-bold text-sm"
+                        :style="{ backgroundColor: easyNoteTagColorMapper[tags[0]] }"
+                    >
+                        {{ easyNoteTagMapper[tags[0]] }}
+                    </view>
                 </view>
             </view>
         </view>
+        <!-- 分割线 -->
+        <view class="w-full bg-black/10 transition-all duration-300" :class="isCardOpen ? 'my-4 h-[1px]' : 'my-0 h-0'" />
+        <!-- content -->
+        <scroll-view 
+            scroll-y
+            class="overflow-hidden transition-all duration-300" 
+            :class="isCardOpen ? 'h-[100px]' : 'h-0'
+        ">
+            <view class="pb-4">
+                {{ easyNoteCardProps.content }}
+            </view>
+        </scroll-view>
     </view>
 </template>

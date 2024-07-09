@@ -19,7 +19,8 @@ export default [
       "vue/multi-word-component-names": ["error", {
         "ignores": ["page"]
       }]
-    }
+    },
+    parser: "@typescript-eslint/parser",
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,

@@ -20,6 +20,7 @@ import clock from "@/static/icons/clock.svg"
 import academy from "@/static/icons/academy.svg"
 import calendar from "@/static/icons/calendar.svg"
 import rightSecondary from "@/static/icons/right-secondary.svg"
+import downSecondary from "@/static/icons/down-secondary.svg"
 // study
 import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
@@ -48,6 +49,7 @@ const icons = {
     image,
     clock,
     academy,
+    downSecondary,
     study: {
         transcript: studyTranscript,
         schedule: studySchedule,

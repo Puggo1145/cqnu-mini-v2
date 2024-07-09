@@ -23,6 +23,7 @@ const icons = {
   image: common_assets.image,
   clock: common_assets.clock,
   academy: common_assets.academy,
+  downSecondary: common_assets.downSecondary,
   study: {
     transcript: common_assets.studyTranscript,
     schedule: common_assets.studySchedule,

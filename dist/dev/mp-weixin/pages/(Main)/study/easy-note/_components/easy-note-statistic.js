@@ -35,10 +35,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return {
             a: item.icon,
             b: item.iconBackgroundColor,
-            c: common_vendor.t(item.title),
-            d: common_vendor.t(item.count),
-            e: index,
-            f: item.backgroundColor
+            c: "0 0 16px 2px " + item.iconBackgroundColor,
+            d: common_vendor.t(item.title),
+            e: common_vendor.t(item.count),
+            f: index,
+            g: item.backgroundColor
           };
         })
       };

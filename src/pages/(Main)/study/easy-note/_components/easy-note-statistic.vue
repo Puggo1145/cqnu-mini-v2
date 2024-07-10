@@ -49,7 +49,10 @@ const noteStatistics = ref<NoteStatisticsBlock[]>([
         >
             <view 
                 class="size-8 rounded-full flex items-center justify-center"
-                :style="{ backgroundColor: item.iconBackgroundColor }"
+                :style="{ 
+                    backgroundColor: item.iconBackgroundColor,
+                    boxShadow: '0 0 16px 2px ' + item.iconBackgroundColor
+                }"
             >
                 <image :src="item.icon" class="size-4" />
             </view>

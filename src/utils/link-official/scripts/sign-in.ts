@@ -10,7 +10,7 @@ export const getSignInSessionAndAuthCode = async () => {
     try {
         const dataObj = await getDynamicData();
         const authCodeImg = await getCaptcha();
-        
+
         return {
             authCodeImg,
             dataObj,
@@ -43,7 +43,6 @@ export const signInToOfficial = async (
     })
         .send();
 
-    console.log(res);
-
-    return res;
+    // 保存登录后的主 cookie        
+    uni.setStorageSync('Cookie', res.data);
 }

@@ -21,7 +21,7 @@ onMounted(async () => {
 })
 
 const signInToOfficial = async () => {
-    const data = await LinkOfficial.signInToOfficial(
+    await LinkOfficial.signInToOfficial(
         "2021050919079",
         "281733",
         authCode.value,
@@ -29,19 +29,31 @@ const signInToOfficial = async () => {
     )
 }
 
+const getSchedules = async () => {
+    const schedule = await LinkOfficial.getSchedules();
+    console.log(schedule);
+}
 </script>
 
 <template>
     <cus-page header-type="nav" padding-x="16">
-        <cus-button class-name="flex items-center gap-2"> 
+        <cus-button class-name="flex items-center gap-2">
             <spinner size="small" color="white" />
             测试
         </cus-button>
         <view class="mt-4">
-            <image :src="captchaBase64" class="w-[100px] h-[30px] object-cover" />
-            <cus-input @input="event => authCode = event.value" />
-            <cus-button @click="signInToOfficial">提交登录</cus-button>
+            <text class="mb-2 text-xl font-bold">登录到校园门户</text>
+            <view class="flex flex-col">
+                <image :src="captchaBase64" class="w-[100px] h-[30px] object-cover" />
+                <cus-input @input="event => authCode = event.value" />
+                <cus-button @click="signInToOfficial">提交登录</cus-button>
+            </view>
+        </view>
+        <view class="mt-4">
+            <text class="mb-2 text-xl font-bold">教务系统</text>
+            <view class="flex flex-col">
+                <cus-button @click="getSchedules">同步课表</cus-button>
+            </view>
         </view>
     </cus-page>
 </template>
-

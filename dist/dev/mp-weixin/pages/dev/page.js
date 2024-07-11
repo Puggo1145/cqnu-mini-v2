@@ -9,6 +9,9 @@ require("../../utils/link-official/libs/sign-in/getDynamicData.js");
 require("../../utils/link-official/constants/headers.js");
 require("../../utils/link-official/constants/urls.js");
 require("../../utils/link-official/libs/sign-in/getCaptcha.js");
+require("../../utils/link-official/scripts/jwxt.js");
+require("../../utils/link-official/libs/jwxt/getJwxtCookie.js");
+require("../../utils/link-official/libs/jwxt/scheduleHandlers.js");
 if (!Math) {
   (spinner + cusButton + cusInput + cusPage)();
 }
@@ -37,6 +40,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         dataObj.value
       );
     };
+    const getSchedules = async () => {
+      const schedule = await utils_linkOfficial_index.LinkOfficial.getSchedules();
+      console.log(schedule);
+    };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -49,7 +56,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         c: captchaBase64.value,
         d: common_vendor.o((event) => authCode.value = event.value),
         e: common_vendor.o(signInToOfficial),
-        f: common_vendor.p({
+        f: common_vendor.o(getSchedules),
+        g: common_vendor.p({
           ["header-type"]: "nav",
           ["padding-x"]: "16"
         })

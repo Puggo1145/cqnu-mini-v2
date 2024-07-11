@@ -3,10 +3,12 @@ import {
     getSignInSessionAndAuthCode,
     signInToOfficial
 } from "./scripts/sign-in"
+import { getSchedules } from "./scripts/jwxt"
 
 const LinkOfficial = {
     getSignInSessionAndAuthCode,
-    signInToOfficial
+    signInToOfficial,
+    getSchedules
 }
 
 export default LinkOfficial

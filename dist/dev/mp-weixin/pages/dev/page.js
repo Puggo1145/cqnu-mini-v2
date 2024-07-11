@@ -1,5 +1,14 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_linkOfficial_index = require("../../utils/link-official/index.js");
+require("../../utils/link-official/scripts/sign-in.js");
+require("../../utils/request.js");
+require("../../utils/requestManager.js");
+require("../../constants/acceptableErrorCode.js");
+require("../../utils/link-official/libs/sign-in/getDynamicData.js");
+require("../../utils/link-official/constants/headers.js");
+require("../../utils/link-official/constants/urls.js");
+require("../../utils/link-official/libs/sign-in/getCaptcha.js");
 if (!Math) {
   (spinner + cusButton + cusInput + cusPage)();
 }
@@ -12,8 +21,22 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const captchaBase64 = common_vendor.ref("");
     const authCode = common_vendor.ref("");
-    common_vendor.onMounted(() => {
+    const dataObj = common_vendor.ref();
+    common_vendor.onMounted(async () => {
+      const data = await utils_linkOfficial_index.LinkOfficial.getSignInSessionAndAuthCode();
+      if (data) {
+        captchaBase64.value = "data:image/png;base64," + data.authCodeImg;
+        dataObj.value = data.dataObj;
+      }
     });
+    const signInToOfficial = async () => {
+      await utils_linkOfficial_index.LinkOfficial.signInToOfficial(
+        "2021050919079",
+        "281733",
+        authCode.value,
+        dataObj.value
+      );
+    };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -25,7 +48,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         c: captchaBase64.value,
         d: common_vendor.o((event) => authCode.value = event.value),
-        e: common_vendor.p({
+        e: common_vendor.o(signInToOfficial),
+        f: common_vendor.p({
           ["header-type"]: "nav",
           ["padding-x"]: "16"
         })

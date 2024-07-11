@@ -6,12 +6,28 @@ import spinner from '@/components/spinner.vue';
 import cusButton from '@/components/cus-button.vue';
 import cusInput from '@/components/cus-input.vue';
 // 爬虫测试
+import LinkOfficial from '@/utils/link-official';
+
 const captchaBase64 = ref<string>('');
 const authCode = ref<string>('');
+const dataObj = ref();
 
-onMounted(() => {
-    
+onMounted(async () => {
+    const data = await LinkOfficial.getSignInSessionAndAuthCode();
+    if (data) {
+        captchaBase64.value = "data:image/png;base64," + data.authCodeImg;
+        dataObj.value = data.dataObj;
+    }
 })
+
+const signInToOfficial = async () => {
+    const data = await LinkOfficial.signInToOfficial(
+        "2021050919079",
+        "281733",
+        authCode.value,
+        dataObj.value,
+    )
+}
 
 </script>
 
@@ -24,7 +40,7 @@ onMounted(() => {
         <view class="mt-4">
             <image :src="captchaBase64" class="w-[100px] h-[30px] object-cover" />
             <cus-input @input="event => authCode = event.value" />
-            <!-- <cus-button @click="loginOfficial">提交登录</cus-button> -->
+            <cus-button @click="signInToOfficial">提交登录</cus-button>
         </view>
     </cus-page>
 </template>

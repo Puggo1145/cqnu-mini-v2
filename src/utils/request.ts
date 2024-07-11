@@ -1,15 +1,17 @@
 import RequestManager from "./requestManager";
 import { acceptableErrorCode } from "@/constants/acceptableErrorCode";
-
 // types
 import type { MyResponse } from "@/types/response";
 export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
+export type Where = 'base' | 'linkOfficial';
 
-const baseURL = import.meta.env.VITE_BASE_URL;
+// const baseURL = import.meta.env.VITE_BASE_URL;
 const requestManager = Object.freeze(new RequestManager());
 
+
 // 对 uniapp 请求对基本封装，返回一个 Promise
-const baseRequest = async <T>(
+const Request = async <T>(
+    targetURL: string,
     route: string,
     method: Methods,
     data: any,
@@ -21,18 +23,18 @@ const baseRequest = async <T>(
         if (!requestId) {
             return Promise.reject('当前请求还未完成，请勿重复请求');
         }
+        
+        // 构造 headers
+        const authorization = uni.getStorageSync('accessToken') || '';
+        const header = {
+            'Authorization': `Bearer ${authorization}`,
+        }
 
         return new Promise((resolve, reject) => {
-            // 构造 headers
-            const authorization = uni.getStorageSync('accessToken') || '';
-            const header = {
-                'Authorization': `Bearer ${authorization}`,
-            }
-
             showLoading && uni.showLoading({ title: '加载中' });
 
             uni.request({
-                url: baseURL + route,
+                url: targetURL + route,
                 method: method || 'GET',
                 header: header,
                 timeout: 8000,
@@ -92,6 +94,7 @@ const baseRequest = async <T>(
 //     descStr?: string;
 // }
 class RequestBuilder<T> {
+    private where?: Where;
     private route: string;
     private method: Methods;
     private data: any;
@@ -99,11 +102,13 @@ class RequestBuilder<T> {
     private queryParams: Record<string, any>;
 
     constructor(
+        where: Where,
         route: string,
         method: Methods,
         data: any,
         showLoading: boolean = false
     ) {
+        this.where = where;
         this.method = method;
         this.route = route;
         this.data = data;
@@ -137,25 +142,60 @@ class RequestBuilder<T> {
 
     // 发送请求
     async send(): Promise<MyResponse<T>> {
-        const queryString = this.buildQueryString();  // 构建最终的查询字符串
-        return baseRequest<T>(this.route + queryString, this.method, this.data, this.showLoading);
+        // 构建最终的查询字符串
+        const queryString = this.buildQueryString();  
+        
+        // 选择请求地址
+        const targetURL = this.where === 'base' ? 
+            import.meta.env.VITE_BASE_URL : 
+            import.meta.env.VITE_LINKOFFICIAL_URL
+
+        return Request<T>(targetURL, this.route + queryString, this.method, this.data, this.showLoading);
     }
 }
 
 
 // 这么做是为了获得更好的全局类型提示，其次是为了处理不同请求方式在未来可能携带的不同参数
 interface RequestOptions {
+    where?: Where;
     route: string;
     showLoading?: boolean;
     data?: any;
 }
 const request:
-    Record<Methods, <T>({ route, showLoading, data }: RequestOptions) => RequestBuilder<T>>
+    Record<Methods, <T>({ where, route, showLoading, data }: RequestOptions) => RequestBuilder<T>>
     = {
-    GET: ({ route, showLoading }) => new RequestBuilder(route, 'GET', {}, showLoading),
-    POST: ({ route, data, showLoading }) => new RequestBuilder(route, 'POST', data, showLoading),
-    PUT: ({ route, data, showLoading }) => new RequestBuilder(route, 'PUT', data, showLoading),
-    DELETE: ({ route, data, showLoading }) => new RequestBuilder(route, 'DELETE', data, showLoading),
+    GET: ({ 
+        where = "base", 
+        route, 
+        showLoading 
+    }) => {
+        return new RequestBuilder(where, route, 'GET', {}, showLoading)
+    },
+    POST: ({
+        where = "base", 
+        route, 
+        data, 
+        showLoading 
+    }) => {
+        return new RequestBuilder(where, route, 'POST', data, showLoading)
+    },
+    PUT: ({ 
+        where = "base", 
+        route, 
+        data, 
+        showLoading 
+    }) => {
+        return new RequestBuilder(where, route, 'PUT', data, showLoading)
+    },
+    DELETE: ({ 
+        where = "base", 
+        route, 
+        data, 
+        showLoading 
+    }) => {
+        return new RequestBuilder(where, route, 'DELETE', data, showLoading)
+    },
 };
 
 export default request;

@@ -7525,6 +7525,9 @@ This will fail in production.`);
   useStore.$id = id;
   return useStore;
 }
+const defineMixin = (options) => {
+  return options;
+};
 function email(value) {
   return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(value);
 }
@@ -8375,7 +8378,7 @@ class Router {
   }
 }
 const route = new Router().route;
-const mixin = {
+const mixin = defineMixin({
   // 定义每个组件都可能需要用到的外部样式以及类名
   props: {
     // 每个组件都有的父组件传递的样式，可以为字符串或者对象形式
@@ -8503,13 +8506,13 @@ const mixin = {
       });
     }
   }
-};
-const mpMixin = {
+});
+const mpMixin = defineMixin({
   // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，能更好的使用flex属性
   options: {
     virtualHost: true
   }
-};
+});
 const { toString } = Object.prototype;
 function isArray(val) {
   return toString.call(val) === "[object Array]";
@@ -10635,6 +10638,7 @@ const Upload = {
   // upload组件
   upload: {
     accept: "image",
+    extension: [],
     capture: ["album", "camera"],
     compressed: true,
     camera: "back",
@@ -10804,7 +10808,7 @@ const install = (Vue) => {
 const uviewPlus = {
   install
 };
-const props$2 = {
+const props$2 = defineMixin({
   props: {
     // 滑块的移动过渡时间，单位ms
     duration: {
@@ -10867,8 +10871,8 @@ const props$2 = {
       default: () => defProps.tabs.keyName
     }
   }
-};
-const props$1 = {
+});
+const props$1 = defineMixin({
   props: {
     // 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px
     offsetTop: {
@@ -10901,8 +10905,8 @@ const props$1 = {
       default: () => defProps.sticky.index
     }
   }
-};
-const props = {
+});
+const props = defineMixin({
   props: {
     // 是否显示圆点
     isDot: {
@@ -10978,7 +10982,7 @@ const props = {
       default: () => defProps.badge.absolute
     }
   }
-};
+});
 exports._export_sfc = _export_sfc;
 exports.addStyle = addStyle;
 exports.addUnit = addUnit;

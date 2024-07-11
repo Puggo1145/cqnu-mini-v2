@@ -1,14 +1,14 @@
 {
   "pages": [
-    "pages/(Main)/today/page",
     "pages/index/index",
+    "pages/dev/page",
+    "pages/(Main)/today/page",
     "pages/(Main)/study/page",
     "pages/(Main)/service/page",
     "pages/(Main)/study/easy-note/page",
     "pages/(Main)/study/easy-note/_components/create-easy-note",
     "pages/(Onboarding)/sign-up/page",
-    "pages/(Onboarding)/process-sign-up/page",
-    "pages/dev/page"
+    "pages/(Onboarding)/process-sign-up/page"
   ],
   "window": {
     "navigationStyle": "custom",

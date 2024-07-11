@@ -3350,6 +3350,9 @@ view,text,::before,::after {
 .grid {
     display: grid;
 }
+.hidden {
+    display: none;
+}
 .size-12 {
     width: 3rem;
     height: 3rem;
@@ -3449,6 +3452,9 @@ view,text,::before,::after {
 .h-_300px_ {
     height: 300px;
 }
+.h-_30px_ {
+    height: 30px;
+}
 .h-_320px_ {
     height: 320px;
 }
@@ -3484,6 +3490,9 @@ view,text,::before,::after {
 }
 .w-5 {
     width: 1.25rem;
+}
+.w-_100px_ {
+    width: 100px;
 }
 .w-_120px_ {
     width: 120px;
@@ -3700,6 +3709,10 @@ view,text,::before,::after {
 }
 .to-_hF5F9FC_ {
     --tw-gradient-to: #F5F9FC var(--tw-gradient-to-position);
+}
+.object-cover {
+    -o-object-fit: cover;
+       object-fit: cover;
 }
 .p-3 {
     padding: 0.75rem;

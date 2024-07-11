@@ -3,6 +3,6 @@
     "cus-page": "../../components/cus-page",
     "spinner": "../../components/spinner",
     "cus-button": "../../components/cus-button",
-    "tabs": "../(Main)/today/_components/tabs"
+    "cus-input": "../../components/cus-input"
   }
 }

@@ -196,7 +196,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       backgroundSize: _ctx.lineBgSize
     }),
     e: _ctx.scrollable,
-    f: $data.scrollLeft
+    f: $data.scrollLeft,
+    g: common_vendor.n(_ctx.customClass)
   };
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-0546c3e4"], ["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/node_modules/uview-plus/components/u-tabs/u-tabs.vue"]]);

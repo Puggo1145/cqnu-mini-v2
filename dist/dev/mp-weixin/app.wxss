@@ -3278,6 +3278,9 @@ view,text,::before,::after {
 .mb-12 {
     margin-bottom: 3rem;
 }
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
 .mb-4 {
     margin-bottom: 1rem;
 }
@@ -3325,9 +3328,6 @@ view,text,::before,::after {
 }
 .mt-_152px_ {
     margin-top: 152px;
-}
-.mb-2 {
-    margin-bottom: 0.5rem;
 }
 .box-border {
     box-sizing: border-box;
@@ -3616,11 +3616,6 @@ view,text,::before,::after {
 .gap-y-_14px_ {
     row-gap: 14px;
 }
-.space-y-4>view+view {
-    --tw-space-y-reverse: 0;
-    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
 .overflow-hidden {
     overflow: hidden;
 }
@@ -3810,13 +3805,13 @@ view,text,::before,::after {
     font-size: 0.875rem;
     line-height: 1.25rem;
 }
-.text-xs {
-    font-size: 0.75rem;
-    line-height: 1rem;
-}
 .text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+}
+.text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
 }
 .font-bold {
     font-weight: 700;

@@ -12,6 +12,7 @@ require("../../utils/link-official/libs/sign-in/getCaptcha.js");
 require("../../utils/link-official/scripts/jwxt.js");
 require("../../utils/link-official/libs/jwxt/getJwxtCookie.js");
 require("../../utils/link-official/libs/jwxt/scheduleHandlers.js");
+require("../../utils/link-official/libs/jwxt/studentInfoHandler.js");
 if (!Math) {
   (spinner + cusButton + cusInput + cusPage)();
 }
@@ -44,6 +45,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       const schedule = await utils_linkOfficial_index.LinkOfficial.getSchedules();
       console.log(schedule);
     };
+    const getStudentInfo = async () => {
+      const studentInfo = await utils_linkOfficial_index.LinkOfficial.getStudentInfo();
+      console.log(studentInfo);
+    };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -57,7 +62,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         d: common_vendor.o((event) => authCode.value = event.value),
         e: common_vendor.o(signInToOfficial),
         f: common_vendor.o(getSchedules),
-        g: common_vendor.p({
+        g: common_vendor.o(getStudentInfo),
+        h: common_vendor.p({
           ["header-type"]: "nav",
           ["padding-x"]: "16"
         })

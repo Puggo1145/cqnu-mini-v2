@@ -8,6 +8,9 @@ import type { DataObj } from "../libs/sign-in/getDynamicData";
 
 export const getSignInSessionAndAuthCode = async () => {
     try {
+        const cookie = uni.getStorageSync('Cookie') as string;
+        if (cookie.startsWith("CASTGC")) return;
+
         const dataObj = await getDynamicData();
         const authCodeImg = await getCaptcha();
 
@@ -29,7 +32,7 @@ export const signInToOfficial = async (
     authCode: string,
     dataObj: DataObj,
 ) => {
-    const cookie = uni.getStorageSync('Cookie');
+    const cookie = uni.getStorageSync('Cookie') as string;
     const res = await request.POST({
         where: 'linkOfficial',
         route: '/',

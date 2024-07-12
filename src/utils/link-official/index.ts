@@ -3,12 +3,16 @@ import {
     getSignInSessionAndAuthCode,
     signInToOfficial
 } from "./scripts/sign-in"
-import { getSchedules } from "./scripts/jwxt"
+import { 
+    getSchedules,
+    getStudentInfo
+} from "./scripts/jwxt"
 
 const LinkOfficial = {
     getSignInSessionAndAuthCode,
     signInToOfficial,
-    getSchedules
+    getSchedules,
+    getStudentInfo
 }
 
 export default LinkOfficial

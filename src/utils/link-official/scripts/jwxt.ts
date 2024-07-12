@@ -4,6 +4,7 @@ import {
     getYearAndTerm,
     resolveSchedule
 } from "../libs/jwxt/scheduleHandlers";
+import { resolveStudentInfo } from "../libs/jwxt/studentInfoHandler";
 // constants
 import urls from "../constants/urls";
 
@@ -22,9 +23,41 @@ export const getSchedules = async () => {
                 "Content-Type": 'application/x-www-form-urlencoded',
                 "Cookie": jwxtCookie
             }
-        }) as any;
+        })
 
-        return resolveSchedule(res.data.kbList);
+        return resolveSchedule((res.data as any).kbList);
+    } catch {
+        uni.showToast({
+            title: "网络错误",
+            icon: "error",
+        })
+
+        return null;
+    }
+}
+
+export interface OriginalStudentInfo {
+    xh: string // 学号
+    xslbdm: string // 学生身份（普通本科生 ｜ 研究生）
+    jg_id: string // 学院
+    bh_id: string // 专业班级
+    zyh_id: string // 专业
+}
+export const getStudentInfo = async () => {
+    try {
+        const jwxtCookie = await getJwxtCookie();
+
+        const res = await uni.request({
+            method: "GET",
+            url: urls.studentInfo,
+            header: {
+                "Cookie": jwxtCookie
+            }
+        })
+
+        const resolvedStudentInfo = resolveStudentInfo((res.data as OriginalStudentInfo));
+
+        return resolvedStudentInfo;
     } catch {
         uni.showToast({
             title: "网络错误",

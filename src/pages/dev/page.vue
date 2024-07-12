@@ -33,6 +33,11 @@ const getSchedules = async () => {
     const schedule = await LinkOfficial.getSchedules();
     console.log(schedule);
 }
+
+const getStudentInfo = async () => {
+    const studentInfo = await LinkOfficial.getStudentInfo();
+    console.log(studentInfo);
+}
 </script>
 
 <template>
@@ -53,6 +58,7 @@ const getSchedules = async () => {
             <text class="mb-2 text-xl font-bold">教务系统</text>
             <view class="flex flex-col">
                 <cus-button @click="getSchedules">同步课表</cus-button>
+                <cus-button @click="getStudentInfo">获取学生信息</cus-button>
             </view>
         </view>
     </cus-page>

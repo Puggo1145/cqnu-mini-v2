@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { withDefaults } from 'vue';
+import { computed, withDefaults } from 'vue';
 // components
-// import spinner from './spinner.vue'; // TODO 完成 spinner variant
+import spinner from './spinner.vue'; // TODO 完成 spinner variant
 
 interface Props {
-    variant?: "primary" | "secondary" | "muted" | "outline" | "ghost";
+    variant?: "primary" | "secondary" | "muted" | "outline" | "ghost" | 'loading';
     className?: string;
     disabled?: boolean;
 }
@@ -13,14 +13,20 @@ const props = withDefaults(defineProps<Props>(), {
     disabled: false,
     className: "",
 });
+const isButtonDisabled = computed(() => 
+    props.disabled || props.variant === 'loading'
+);
+
 
 const variants = {
     primary: "bg-primary text-white",
     secondary: "bg-secondary text-secondary-foreground",
     muted: "!bg-muted text-secondary-foreground",
     outline: "border border-primary border-solid text-primary bg-white",
-    ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none'
+    ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none',
+    loading: '!bg-muted text-secondary-foreground'
 };
+
 
 const emit = defineEmits(['click']);
 </script>
@@ -34,9 +40,12 @@ const emit = defineEmits(['click']);
         ]" 
         hover-class="button-touch"
         @click="emit('click')"    
-        :disabled="props.disabled"
+        :disabled="isButtonDisabled"
     >
-
+        <spinner 
+            v-if="props.variant === 'loading'" 
+            size="small"
+        />
         <slot />
     </button>
 </template>

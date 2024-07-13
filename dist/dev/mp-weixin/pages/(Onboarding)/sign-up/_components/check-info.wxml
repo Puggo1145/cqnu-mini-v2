@@ -1,1 +1,1 @@
-<view class="flex flex-col gap-6"><signup-texts wx:if="{{a}}" u-i="435eb8a8-0" bind:__l="__l" u-p="{{a}}"/><cus-button wx:if="{{c}}" u-s="{{['d']}}" bindclick="{{b}}" u-i="435eb8a8-1" bind:__l="__l" u-p="{{c}}"> 确认 </cus-button></view>
+<view class="flex flex-col gap-6"><signup-texts wx:if="{{a}}" u-i="435eb8a8-0" bind:__l="__l" u-p="{{a}}"/><cus-button wx:if="{{d}}" u-s="{{['d']}}" bindclick="{{c}}" u-i="435eb8a8-1" bind:__l="__l" u-p="{{d}}">{{b}}</cus-button></view>

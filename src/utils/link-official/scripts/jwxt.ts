@@ -38,7 +38,7 @@ export const getSchedules = async () => {
 
 export interface OriginalStudentInfo {
     xh: string // 学号
-    xslbdm: string // 学生身份（普通本科生 ｜ 研究生）
+    pyccdm: string // 学生身份（本科 ｜ 研究生）
     jg_id: string // 学院
     bh_id: string // 专业班级
     zyh_id: string // 专业

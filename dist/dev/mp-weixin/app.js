@@ -4,13 +4,13 @@ const common_vendor = require("./common/vendor.js");
 const stores_statusBarHeight = require("./stores/statusBarHeight.js");
 if (!Math) {
   "./pages/index/index.js";
+  "./pages/(Onboarding)/sign-up/page.js";
   "./pages/dev/page.js";
   "./pages/(Main)/today/page.js";
   "./pages/(Main)/study/page.js";
   "./pages/(Main)/service/page.js";
   "./pages/(Main)/study/easy-note/page.js";
   "./pages/(Main)/study/easy-note/_components/create-easy-note.js";
-  "./pages/(Onboarding)/sign-up/page.js";
   "./pages/(Onboarding)/process-sign-up/page.js";
 }
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({

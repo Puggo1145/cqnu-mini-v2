@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import cusPage from '@/components/cus-page.vue';
 import cusButton from '@/components/cus-button.vue';
 import username from './_components/username.vue';
-import campusInfo from './_components/campus-info.vue';
+// import campusInfo from './_components/campus-info.vue';
 import linkOfficial from './_components/linkOfficial.vue';
 import checkInfo from './_components/check-info.vue';
 import visualSignupInfo from './_components/visual-signup-info.vue';
@@ -21,20 +21,14 @@ const getCurrent = (e: any) => current.value = e.detail.current;
 <template>
     <cus-page header-type="nav">
         <visual-signup-info :current="current" />
-        <swiper
-            class="w-screen flex-1 box-border mt-8"
-            :current="current"
-            @change="getCurrent"
-        >
-            <swiper-item 
-                class="box-border flex flex-col gap-6 px-4"
-                @touchmove.stop
-            >
-                <username 
-                    @update:current="nextPage"
-                />
+        <swiper class="w-screen flex-1 box-border mt-8" :current="current" @change="getCurrent">
+            <swiper-item class="box-border flex flex-col gap-6 px-4" @touchmove.stop>
+                <link-official @update:current="nextPage" />
             </swiper-item>
-            <swiper-item 
+            <swiper-item class="box-border flex flex-col gap-6 px-4" @touchmove.stop>
+                <username @update:current="nextPage" />
+            </swiper-item>
+            <!-- <swiper-item 
                 class="box-border px-4"
                 @touchmove.stop
             >
@@ -52,30 +46,12 @@ const getCurrent = (e: any) => current.value = e.detail.current;
                     >
                         返回
                     </cus-button>
-                    <!-- 占位 -->
                     <view class="h-8"></view>
                 </scroll-view>
-            </swiper-item>
-            <swiper-item 
-                class="box-border flex flex-col gap-6 px-4"
-                @touchmove.stop
-            >
-                <link-official 
-                    @update:current="nextPage"
-                />
-                <cus-button 
-                    variant="ghost"
-                    @click="prevPage"
-                >
-                    返回
-                </cus-button>
-            </swiper-item>
+            </swiper-item> -->
             <swiper-item class="box-border flex flex-col gap-6 px-4">
                 <check-info />
-                <cus-button 
-                    variant="ghost"
-                    @click="prevPage"
-                >
+                <cus-button variant="ghost" @click="prevPage">
                     返回
                 </cus-button>
             </swiper-item>

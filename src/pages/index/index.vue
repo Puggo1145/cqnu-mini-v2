@@ -7,18 +7,23 @@ import flowTexts from "./_components/flow-texts.vue";
 // static
 import images from "@/constants/images";
 // api
-import { signup } from "@/api/auth";
-
+import { signin } from "@/api/auth";
 
 const isSigningIn = ref(false);
 const handleSignIn = async () => {
     isSigningIn.value = true;
     
-    // const res = await signin();
-    // if (res?.toSignUp) {
-    //     console.log("to sign up");
-    // }
-    await signup();
+    const res = await signin();
+    // 用户不存在，跳转到注册页
+    if (res?.toSignUp) {
+        uni.navigateTo({ url: "/pages/(Onboarding)/sign-up/page" });
+        isSigningIn.value = false;
+
+        return;
+    }
+    
+    // 登录成功后跳转主页
+    uni.switchTab({ url: "/pages/(Main)/today/page" });
 };
 
 
@@ -55,8 +60,8 @@ function gotoHome() {
                     </view>
                 </view>
             </view>
-            <cus-button @click="handleSignIn" :variant="isSigningIn ? 'muted' : 'primary'" class-name="mt-4 ">
-                {{ isSigningIn ? "登录中" : "登录" }}
+            <cus-button @click="handleSignIn" :variant="isSigningIn ? 'loading' : 'primary'" class-name="mt-4 ">
+                {{ isSigningIn ? "" : "登录" }}
             </cus-button>
             <!-- dev buttons -->
             <view class="w-full flex gap-x-2 mt-2">

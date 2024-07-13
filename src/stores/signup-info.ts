@@ -2,12 +2,13 @@ import { defineStore } from "pinia";
 
 export const useSignupInfo = defineStore('signupInfo', {
     state: () => ({
-        username: null as string | null,
-        studentId: null as string | null,
+        username: '',
+        studentId: '',
+        password: '',
         identity: null as number | null,
         faculty: null as string | null,
         major: null as string | null,
-        password: null as string | null,
+        stuClass: null as string | null,
     }),
     actions: {
         setUsername(newUsername: string) {
@@ -27,6 +28,9 @@ export const useSignupInfo = defineStore('signupInfo', {
         },
         setPassword(newPassword: string) {
             this.password = newPassword;
+        },
+        setStuClass(newStuClass: string) {
+            this.stuClass = newStuClass;
         }
     }
 })

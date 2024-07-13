@@ -2,12 +2,13 @@
 const common_vendor = require("../common/vendor.js");
 const useSignupInfo = common_vendor.defineStore("signupInfo", {
   state: () => ({
-    username: null,
-    studentId: null,
+    username: "",
+    studentId: "",
+    password: "",
     identity: null,
     faculty: null,
     major: null,
-    password: null
+    stuClass: null
   }),
   actions: {
     setUsername(newUsername) {
@@ -27,6 +28,9 @@ const useSignupInfo = common_vendor.defineStore("signupInfo", {
     },
     setPassword(newPassword) {
       this.password = newPassword;
+    },
+    setStuClass(newStuClass) {
+      this.stuClass = newStuClass;
     }
   }
 });

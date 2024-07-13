@@ -23,7 +23,7 @@ const identityMap: Record<number, string> = {
 <template>
     <view 
         class="overflow-hidden w-full h-[180px] flex justify-center pt-4 transition-all duration-500"
-        :class="props.current === 3 && 'h-[360px]'"
+        :class="props.current === 2 && 'h-[360px]'"
     >
         <view 
             class="w-[240px] h-[320px] bg-[#F2ECE8] rounded-2xl flex flex-col items-center py-5 px-4 gap-4 
@@ -31,13 +31,13 @@ const identityMap: Record<number, string> = {
             :class="[
                 props.current === 0 && 'mt-0',
                 props.current === 1 && '-mt-24',
-                props.current === 2 && '-mt-40',
-                props.current === 3 && 'mt-0',
+                // props.current === 2 && '-mt-40',
+                props.current === 2 && 'mt-0',
             ]"
         >
             <view class="flex flex-col gap-3 items-center">
                 <view class="size-[64px] rounded-full bg-[#E5D7CD]"></view>
-                <text class="max-w-[110px] font-bold h-[16px] leading-[16px] line-clamp-1">
+                <text class="max-w-[110px] font-bold h-[24px] leading-[16px] line-clamp-1">
                     {{ stores.username }}
                 </text>
             </view>
@@ -54,9 +54,6 @@ const identityMap: Record<number, string> = {
                         {{ item.label === '身份' ? identityMap[item.value as number] : item.value }}
                     </text>
                 </view>
-            </view>
-            <view class="px-4 py-2 bg-[#E5D7CD] rounded-full text-[#AB9D93] text-sm font-bold">
-                {{ stores.password ? '已绑定到官网' : '未绑定到官网' }}
             </view>
         </view>
     </view>

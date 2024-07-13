@@ -4,6 +4,9 @@
 			"path": "pages/index/index"
 		},
 		{
+			"path": "pages/(Onboarding)/sign-up/page"
+		},
+		{
 			"path": "pages/dev/page"
 		},
 		{
@@ -20,9 +23,6 @@
 		},
 		{
 			"path": "pages/(Main)/study/easy-note/_components/create-easy-note"
-		},
-		{
-			"path": "pages/(Onboarding)/sign-up/page"
 		},
 		{
 			"path": "pages/(Onboarding)/process-sign-up/page"

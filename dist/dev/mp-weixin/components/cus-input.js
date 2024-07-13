@@ -23,6 +23,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const onInput = (e) => {
       inputValue.value = e.detail.value;
       emit("input", { value: inputValue.value });
+      errorMessage.value = "";
     };
     const onBlur = () => inputValue.value.length === 0 && (isInputFocused.value = false);
     const showError = (message) => {

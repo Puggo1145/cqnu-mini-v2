@@ -1,8 +1,12 @@
 // 身份
 const identity = [
-    "本科生", // 0
-    "研究生", // 1
+    '本科',
+    '研究生'
 ];
+const identityMapper: Record<string, number> = {
+    '本科': 0, 
+    '研究生': 1
+};
 
 // 学院和专业
 const facultiesAndMajors = [
@@ -93,4 +97,4 @@ const facultiesAndMajors = [
     }
 ];
 
-export { identity, facultiesAndMajors };
+export { identity, identityMapper, facultiesAndMajors };

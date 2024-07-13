@@ -1,12 +1,11 @@
 "use strict";
 const common_vendor = require("../../../common/vendor.js");
 if (!Math) {
-  (visualSignupInfo + username + campusInfo + cusButton + linkOfficial + checkInfo + cusPage)();
+  (visualSignupInfo + linkOfficial + username + checkInfo + cusButton + cusPage)();
 }
 const cusPage = () => "../../../components/cus-page.js";
 const cusButton = () => "../../../components/cus-button.js";
 const username = () => "./_components/username.js";
-const campusInfo = () => "./_components/campus-info.js";
 const linkOfficial = () => "./_components/linkOfficial.js";
 const checkInfo = () => "./_components/check-info.js";
 const visualSignupInfo = () => "./_components/visual-signup-info.js";
@@ -26,27 +25,15 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         c: common_vendor.o(() => {
         }),
         d: common_vendor.o(nextPage),
-        e: common_vendor.o(prevPage),
-        f: common_vendor.p({
-          ["class-name"]: "mt-6",
+        e: common_vendor.o(() => {
+        }),
+        f: common_vendor.o(prevPage),
+        g: common_vendor.p({
           variant: "ghost"
         }),
-        g: common_vendor.o(() => {
-        }),
-        h: common_vendor.o(nextPage),
-        i: common_vendor.o(prevPage),
+        h: current.value,
+        i: common_vendor.o(getCurrent),
         j: common_vendor.p({
-          variant: "ghost"
-        }),
-        k: common_vendor.o(() => {
-        }),
-        l: common_vendor.o(prevPage),
-        m: common_vendor.p({
-          variant: "ghost"
-        }),
-        n: current.value,
-        o: common_vendor.o(getCurrent),
-        p: common_vendor.p({
           ["header-type"]: "nav"
         })
       };

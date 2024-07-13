@@ -27,8 +27,10 @@ const onFocus = () => {
 };
 const onInput = (e: Event) => {
     // @ts-expect-error uniapp 没有标注 Event 类型
-    inputValue.value = e.detail.value
-    emit('input', { value: inputValue.value })
+    inputValue.value = e.detail.value;
+    emit('input', { value: inputValue.value });
+    // 用户输入时清空错误信息
+    errorMessage.value = '';
 };
 const onBlur = () => inputValue.value.length === 0 && (isInputFocused.value = false)
 

@@ -29,12 +29,13 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             c: item.label
           };
         }),
-        c: common_vendor.t(common_vendor.unref(stores).password ? "已绑定到官网" : "未绑定到官网"),
-        d: common_vendor.n(props.current === 0 && "mt-0"),
-        e: common_vendor.n(props.current === 1 && "-mt-24"),
-        f: common_vendor.n(props.current === 2 && "-mt-40"),
-        g: common_vendor.n(props.current === 3 && "mt-0"),
-        h: common_vendor.n(props.current === 3 && "h-_360px_")
+        c: common_vendor.n(props.current === 0 && "mt-0"),
+        d: common_vendor.n(props.current === 1 && "-mt-24"),
+        e: common_vendor.n(
+          // props.current === 2 && '-mt-40',
+          props.current === 2 && "mt-0"
+        ),
+        f: common_vendor.n(props.current === 2 && "h-_360px_")
       };
     };
   }

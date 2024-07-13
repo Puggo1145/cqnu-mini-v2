@@ -8,17 +8,22 @@ import type { DataObj } from "../libs/sign-in/getDynamicData";
 
 export const getSignInSessionAndAuthCode = async () => {
     try {
-        const cookie = uni.getStorageSync('Cookie') as string;
-        if (cookie.startsWith("CASTGC")) return;
+        // const cookie = uni.getStorageSync('Cookie') as string;
+        // if (cookie.startsWith("CASTGC")) return;
+
+        uni.showLoading({ title: "正在加载验证码" });
 
         const dataObj = await getDynamicData();
         const authCodeImg = await getCaptcha();
+
+        uni.hideLoading();
 
         return {
             authCodeImg,
             dataObj,
         };
     } catch {
+        uni.hideLoading();
         uni.showToast({
             title: "网络错误，请重试",
             icon: "error",
@@ -48,4 +53,6 @@ export const signInToOfficial = async (
 
     // 保存登录后的主 cookie        
     uni.setStorageSync('Cookie', res.data);
+
+    return res;
 }

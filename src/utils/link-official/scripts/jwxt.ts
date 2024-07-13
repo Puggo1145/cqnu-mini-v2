@@ -54,6 +54,8 @@ export const getStudentInfo = async () => {
                 "Cookie": jwxtCookie
             }
         })
+        console.log(res);
+        
 
         const resolvedStudentInfo = resolveStudentInfo((res.data as OriginalStudentInfo));
 

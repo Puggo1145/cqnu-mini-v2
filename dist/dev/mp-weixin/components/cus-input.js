@@ -30,11 +30,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       errorMessage.value = message;
     };
     __expose({ showError });
+    common_vendor.onMounted(() => {
+      if (props.value) {
+        inputValue.value = props.value;
+        isInputFocused.value = true;
+      }
+    });
     common_vendor.watch(() => props.value, (value) => {
       if (value === void 0)
         return;
-      inputValue.value = value || "";
       if (inputValue.value) {
+        inputValue.value = value || "";
         isInputFocused.value = true;
       }
     });

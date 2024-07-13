@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, withDefaults } from 'vue';
+import { ref, watch, withDefaults, onMounted } from 'vue';
 // types
 import type { InputTypeHTMLAttribute } from 'vue';
 
@@ -42,11 +42,18 @@ const showError = (message: string) => {
 defineExpose({ showError });
 
 
+onMounted(() => {
+    if (props.value) {
+        inputValue.value = props.value;
+        isInputFocused.value = true;
+    }
+})
+
 watch(() => props.value, (value) => {
     if (value === undefined) return;
 
-    inputValue.value = value || '';
     if (inputValue.value) {
+        inputValue.value = value || '';
         isInputFocused.value = true;
     }
 });

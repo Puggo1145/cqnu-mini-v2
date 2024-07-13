@@ -38,6 +38,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }
     }
     common_vendor.onMounted(async () => {
+      common_vendor.index.setStorageSync("JwxtCookie", null);
       await refreshAuthCode();
     });
     const stores = stores_signupInfo.useSignupInfo();
@@ -59,6 +60,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           password: stores.password,
           authCode: authCode.value
         });
+        console.log(form);
         const signInRes = await utils_linkOfficial_index.LinkOfficial.signInToOfficial(
           form.studentId,
           form.password,

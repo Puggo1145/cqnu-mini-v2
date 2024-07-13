@@ -28,6 +28,8 @@ async function refreshAuthCode() {
     }
 }
 onMounted(async () => {
+    // 清除教务系统 cookie 缓存
+    uni.setStorageSync('JwxtCookie', null);
     await refreshAuthCode();
 })
 
@@ -61,6 +63,8 @@ async function handleLinkOfficial() {
             password: stores.password,
             authCode: authCode.value,
         });
+        console.log(form);
+        
         
         // 2. 登录官网
         const signInRes = await LinkOfficial.signInToOfficial(

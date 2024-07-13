@@ -33,7 +33,6 @@ export const signin = async () => {
         } else {
             return { toSignUp: false };
         }
-
     } catch (err) {
         uni.showToast({
             title: "微信登录失败",

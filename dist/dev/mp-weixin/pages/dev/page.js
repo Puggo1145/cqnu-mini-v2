@@ -1,10 +1,11 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const api_easyNote = require("../../api/easy-note.js");
 const utils_linkOfficial_index = require("../../utils/link-official/index.js");
-require("../../utils/link-official/scripts/sign-in.js");
 require("../../utils/request.js");
 require("../../utils/requestManager.js");
 require("../../constants/acceptableErrorCode.js");
+require("../../utils/link-official/scripts/sign-in.js");
 require("../../utils/link-official/libs/sign-in/getDynamicData.js");
 require("../../utils/link-official/constants/headers.js");
 require("../../utils/link-official/constants/urls.js");
@@ -49,6 +50,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       const studentInfo = await utils_linkOfficial_index.LinkOfficial.getStudentInfo();
       console.log(studentInfo);
     };
+    const createEasyNote = async () => {
+      const res = await api_easyNote.createNote({
+        title: "测试",
+        content: "测试",
+        imagesUrl: [],
+        deadline: "2021-10-10 00:04:46",
+        courseName: "测试",
+        tagsIds: [0]
+      });
+      console.log(res);
+    };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -64,6 +76,14 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         f: common_vendor.o(getSchedules),
         g: common_vendor.o(getStudentInfo),
         h: common_vendor.p({
+          ["class-name"]: "mt-4"
+        }),
+        i: common_vendor.o(() => common_vendor.unref(api_easyNote.getNoteList)(1, 10)),
+        j: common_vendor.o(createEasyNote),
+        k: common_vendor.p({
+          ["class-name"]: "mt-4"
+        }),
+        l: common_vendor.p({
           ["header-type"]: "nav",
           ["padding-x"]: "16"
         })

@@ -7,17 +7,19 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     id: {},
     title: {},
     content: {},
-    images: {},
+    imagesUrl: {},
     deadline: {},
-    relatedCourse: {},
+    courseName: {},
     tags: {},
-    from: {},
-    seenNumber: {},
-    supportedNumber: {}
+    openid: {},
+    seeNumber: {},
+    supportNumber: {}
   },
   setup(__props) {
     const easyNoteCardProps = __props;
-    const isNoteImportant = common_vendor.computed(() => easyNoteCardProps.tags.includes(0));
+    const isNoteImportant = common_vendor.computed(
+      () => easyNoteCardProps.tags.some((tag) => tag.tagName === "重要")
+    );
     const noteColor = common_vendor.computed(() => {
       if (isNoteImportant.value) {
         return constants_easyNote_easyNoteCard.easyNoteColorMapper.important;
@@ -32,12 +34,12 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     return (_ctx, _cache) => {
       return {
         a: common_vendor.t(easyNoteCardProps.title),
-        b: common_vendor.t(easyNoteCardProps.relatedCourse),
+        b: common_vendor.t(easyNoteCardProps.courseName),
         c: common_vendor.t(easyNoteCardProps.deadline),
-        d: common_vendor.t(easyNoteCardProps.from),
-        e: common_vendor.t(easyNoteCardProps.seenNumber),
-        f: common_vendor.t(common_vendor.unref(constants_easyNote_easyNoteCard.easyNoteTagMapper)[_ctx.tags[0]]),
-        g: common_vendor.unref(constants_easyNote_easyNoteCard.easyNoteTagColorMapper)[_ctx.tags[0]],
+        d: common_vendor.t(easyNoteCardProps.openid),
+        e: common_vendor.t(easyNoteCardProps.seeNumber),
+        f: common_vendor.t(_ctx.tags[0].tagName),
+        g: common_vendor.unref(constants_easyNote_easyNoteCard.easyNoteTagColorMapper)[_ctx.tags[0].tagName],
         h: common_vendor.n(isCardOpen.value ? "my-4 h-_1px_" : "my-0 h-0"),
         i: common_vendor.t(easyNoteCardProps.content),
         j: common_vendor.n(isCardOpen.value ? "h-_100px_" : "h-0"),

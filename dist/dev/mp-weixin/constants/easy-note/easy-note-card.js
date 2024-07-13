@@ -1,13 +1,8 @@
 "use strict";
-const easyNoteTagMapper = {
-  0: "重要",
-  1: "作业",
-  2: "考试"
-};
 const easyNoteTagColorMapper = {
-  0: "#df625e",
-  1: "#4061db",
-  2: "#4061db"
+  "重要": "#df625e",
+  "作业": "#4061db",
+  "考试": "#4061db"
 };
 const easyNoteColorMapper = {
   important: "#f5e8e8",
@@ -15,4 +10,3 @@ const easyNoteColorMapper = {
 };
 exports.easyNoteColorMapper = easyNoteColorMapper;
 exports.easyNoteTagColorMapper = easyNoteTagColorMapper;
-exports.easyNoteTagMapper = easyNoteTagMapper;

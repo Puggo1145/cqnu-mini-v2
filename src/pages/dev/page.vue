@@ -5,6 +5,8 @@ import cusPage from '@/components/cus-page.vue';
 import spinner from '@/components/spinner.vue';
 import cusButton from '@/components/cus-button.vue';
 import cusInput from '@/components/cus-input.vue';
+// apis
+import { getNoteList, createNote } from '@/api/easy-note';
 // 爬虫测试
 import LinkOfficial from '@/utils/link-official';
 
@@ -38,6 +40,21 @@ const getStudentInfo = async () => {
     const studentInfo = await LinkOfficial.getStudentInfo();
     console.log(studentInfo);
 }
+
+
+const createEasyNote = async () => {
+    const res = await createNote({
+        title: "测试",
+        content: "测试",
+        imagesUrl: [],
+        deadline: "2021-10-10 00:04:46",
+        courseName: "测试",
+        tagsIds: [0],
+    });
+
+    console.log(res);
+};
+
 </script>
 
 <template>
@@ -57,8 +74,23 @@ const getStudentInfo = async () => {
         <view class="mt-4">
             <text class="mb-2 text-xl font-bold">教务系统</text>
             <view class="flex flex-col">
-                <cus-button @click="getSchedules">同步课表</cus-button>
-                <cus-button @click="getStudentInfo">获取学生信息</cus-button>
+                <cus-button @click="getSchedules">
+                    同步课表
+                </cus-button>
+                <cus-button class-name="mt-4" @click="getStudentInfo">
+                    获取学生信息
+                </cus-button>
+            </view>
+        </view>
+        <view class="mt-4">
+            <text class="mb-2 text-xl font-bold">小记</text>
+            <view class="flex flex-col">
+                <cus-button @click="() => getNoteList(1, 10)">
+                    获取小记
+                </cus-button>
+                <cus-button class-name="mt-4" @click="createEasyNote">
+                    创建小记
+                </cus-button>
             </view>
         </view>
     </cus-page>

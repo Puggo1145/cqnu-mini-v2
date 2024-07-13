@@ -25,9 +25,9 @@ const Request = async <T>(
         }
         
         // 构造 headers
-        const authorization = uni.getStorageSync('accessToken') || '';
+        const authorization = uni.getStorageSync('token') || '';
         const header = {
-            'Authorization': `Bearer ${authorization}`,
+            "Authentication": authorization,
         }
 
         return new Promise((resolve, reject) => {
@@ -41,22 +41,22 @@ const Request = async <T>(
                 data: data,
 
                 success: (res) => {
-                    const data = res.data as MyResponse<T>;
+                    const responseBody = res.data as MyResponse<T>;
 
-                    let isFetchSuccess = data.code === '0' && data.success;
+                    let isFetchSuccess = responseBody.code === '0' && responseBody.success;
                     // 放行部分错误码
-                    if (acceptableErrorCode.includes(data.code)) {
+                    if (acceptableErrorCode.includes(responseBody.code)) {
                         isFetchSuccess = true;
                     }
 
                     if (!isFetchSuccess) {
                         uni.showToast({
-                            title: data.message,
+                            title: responseBody.message,
                             icon: "error"
                         });
                     }
                     
-                    resolve(data);
+                    resolve(responseBody);
                     
                     showLoading && uni.hideLoading();
                     requestManager.deleteById(requestId);
@@ -84,15 +84,15 @@ const Request = async <T>(
 }
 
 // 实现 请求 + 分页 + 参数等功能的链式调用
-// export interface PageRequest {
-//     page: number;
-//     pageSize: number;
-// }
-// export interface SortRequest {
-//     field?: string;
-//     order: 'ascending' | 'descending';
-//     descStr?: string;
-// }
+export interface PageRequest {
+    current: number;
+    pageSize: number;
+}
+export interface SortRequest {
+    field?: string;
+    order: 'ascending' | 'descending';
+    descStr?: string;
+}
 class RequestBuilder<T> {
     private where?: Where;
     private route: string;
@@ -122,11 +122,11 @@ class RequestBuilder<T> {
         return this;
     }
 
-    // // 分页请求
-    // usePagination({ page, pageSize }: PageRequest) {
-    //     Object.assign(this.queryParams, { page, pageSize });
-    //     return this;
-    // }
+    // 分页请求
+    usePagination({ current, pageSize }: PageRequest) {
+        Object.assign(this.queryParams, { current, pageSize });
+        return this;
+    }
 
     // // 排序
     // useSort({ field, order, descStr }: SortRequest) {

@@ -23,10 +23,10 @@ export const signin = async () => {
             .send();
 
         // 登录成功，保存 token
-        if (res.success) {
+        if (res.data.token) {
             uni.setStorageSync("token", res.data.token);
         }
-        
+
         // 放行用户不存在 => 跳转注册
         if (res.code === acceptableErrorCode[0]) {
             return { toSignUp: true };
@@ -64,9 +64,7 @@ export const signup = async (signupData: SignUpData) => {
             .send();
 
         // 注册成功，保存 token
-        if (res.success) {
-            uni.setStorageSync("token", res.data.token);
-        }
+        uni.setStorageSync("token", res.data.token);
 
         return { success: true };
     } catch (err) {

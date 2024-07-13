@@ -12,7 +12,6 @@ import visualSignupInfo from './_components/visual-signup-info.vue';
 
 const current = ref(0);
 
-
 const nextPage = () => current.value += 1
 const prevPage = () => current.value -= 1
 const getCurrent = (e: any) => current.value = e.detail.current;

@@ -5,6 +5,8 @@ import {
     easyNoteTagColorMapper,
     easyNoteColorMapper
 } from '@/constants/easy-note/easy-note-card';
+// static
+import icons from '@/constants/icons';
 
 
 type EasyNoteTagsName = "重要" | "作业" | "考试"
@@ -23,7 +25,7 @@ export interface EasyNoteCard {
     imagesUrl: (string | null)[];
     deadline: string | Date;
     courseName: string;
-    tags: EasyNoteTags[];
+    tagList: EasyNoteTags[];
     openid: string; // 来自（创建者）id
     username: string; // 来自（创建者）昵称
     seeNumber: number; // 被多少人查看 
@@ -34,14 +36,25 @@ const easyNoteCardProps = defineProps<EasyNoteCard>();
 
 // 根据 tag 处理 note 的样式表现
 const isNoteImportant = computed(() => {
-    if (!easyNoteCardProps.tags) return false;
-    easyNoteCardProps.tags.some(tag => tag.tagName === "重要") && true;
+    if (easyNoteCardProps.tagList.length === 0) {
+        return false
+    } else if (easyNoteCardProps.tagList.some(tag => tag.tagName === "重要")) {
+        return true;
+    };
 });
 const noteColor = computed(() => {
     if (isNoteImportant.value) {
-        return easyNoteColorMapper.important
+        return {
+            bg: easyNoteColorMapper.important,
+            tag: easyNoteTagColorMapper["重要"]
+        }
     } else {
-        return easyNoteColorMapper.normal
+        return {
+            bg: easyNoteColorMapper.normal,
+            tag: easyNoteCardProps.tagList.length > 0 
+            ? easyNoteTagColorMapper[easyNoteCardProps.tagList[0].tagName]
+            : easyNoteTagColorMapper.default
+        }
     }
 });
 
@@ -56,7 +69,7 @@ function onCardClick() {
 <template>
     <view
         class="w-full rounded-2xl flex flex-col justify-between p-4"
-        :style="{ backgroundColor: noteColor }"
+        :style="{ backgroundColor: noteColor.bg }"
         @click="onCardClick"
     >
         <view class="flex items-center justify-between">
@@ -64,9 +77,11 @@ function onCardClick() {
                 <text class="text-md font-bold">
                     {{ easyNoteCardProps.title }}
                 </text>
-                <view class="text-sm flex items-center gap-2 text-black text-opacity-35">
-                    <text>{{ easyNoteCardProps.courseName }}</text>
+                <view 
+                    class="text-sm flex flex-col text-black text-opacity-35"
+                >
                     <text>{{ easyNoteCardProps.deadline }}</text>
+                    <text>{{ easyNoteCardProps.courseName }}</text>
                 </view>
                 <text class="text-sm text-black text-opacity-35">
                     来自 {{ easyNoteCardProps.username }}
@@ -78,12 +93,16 @@ function onCardClick() {
                     有 {{ easyNoteCardProps.seeNumber }} 人查看
                 </text>
                 <!-- 外显 tag -->
-                <view v-if="easyNoteCardProps.tags" class="flex-1">
+                <view 
+                    v-if="easyNoteCardProps.tagList.length !== 0" 
+                    class="flex-1"
+                >
                     <view
-                        class="px-3 py-1 rounded-full text-white font-bold text-sm"
-                        :style="{ backgroundColor: easyNoteTagColorMapper[tags[0].tagName] }"
+                        class="px-3 py-1 rounded-full text-white font-bold text-sm transition-all duration-300"
+                        :class="isCardOpen ? 'scale-0' : 'scale-100'"
+                        :style="{ backgroundColor: noteColor.tag }"
                     >
-                        {{ tags[0].tagName }}
+                        {{ isNoteImportant ? "重要" : tagList[0].tagName }}
                     </view>
                 </view>
             </view>
@@ -100,5 +119,28 @@ function onCardClick() {
                 {{ easyNoteCardProps.content }}
             </view>
         </scroll-view>
+        <!-- 展开卡片的 footer -->
+        <view
+            v-if="isCardOpen"
+            class="flex items-end justify-between"
+        >
+            <view class="flex items-center gap-x-2">
+                <view
+                    v-for="tag in easyNoteCardProps.tagList"
+                    :key="tag.id"
+                    class="px-3 py-1 rounded-full text-white font-bold text-sm"
+                    :style="{ backgroundColor: easyNoteTagColorMapper[tag.tagName] }"
+                >
+                    {{ tag.tagName }}
+                </view>
+            </view>
+            <!-- 击掌数量 -->
+            <view class="flex flex-col items-center">
+                <text class="text-sm text-fit-background-lighter">
+                    {{ easyNoteCardProps.supportNumber }}
+                </text>
+                <image :src="icons.easyNote.haveFive" class="size-9" />
+            </view>
+        </view>
     </view>
 </template>

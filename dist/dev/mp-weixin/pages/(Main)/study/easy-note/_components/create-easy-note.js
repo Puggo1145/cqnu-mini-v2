@@ -56,7 +56,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       imagesUrl: common_vendor.z.array(common_vendor.z.string()),
       deadline: common_vendor.z.string(),
       courseName: common_vendor.z.string(),
-      tagsIds: common_vendor.z.array(common_vendor.z.number())
+      tagIds: common_vendor.z.array(common_vendor.z.number())
     });
     async function createEasyNote() {
       try {
@@ -66,7 +66,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           imagesUrl: [],
           deadline: `${currentDate.value} ${currentTime.value}`,
           courseName: relatedCourses.value[currentCourseIndex.value],
-          tagsIds: selectedTags.value
+          tagIds: selectedTags.value
         });
         const res = await api_easyNote.createNote(form);
         if (res.success) {

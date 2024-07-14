@@ -1,11 +1,37 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 // components
 import easyNoteCard from './easy-note-card.vue';
 import cusSelect from '@/components/cus-select.vue';
+import loading from '@/components/loading.vue';
+import noNote from '@/pages/(Main)/today/_components/no-note.vue';
+// store
+import { useEasyNoteStore } from '@/stores/easy-note/easy-note';
 // mock
 import { mockRelatedCourses } from '@/mock/easy-note';
-import { mockNotes } from '@/mock/easy-note';
+
+
+const store = useEasyNoteStore();
+const current = ref(1);
+const pageSize = ref(5);
+
+async function fetchNotes() {
+    const transformedCourseName = allRelatedCoursesOptions[selectedRelatedCourse.value] === "全部课程" 
+    ? "" 
+    : allRelatedCoursesOptions[selectedRelatedCourse.value];
+
+    const transformedTagName = tagsOptions[selectedTag.value] === "全部标签"
+    ? ""
+    : tagsOptions[selectedTag.value];
+
+    await store.fetchNotes({
+        current: current.value,
+        pageSize: pageSize.value,
+        timespan: timeRangeOptions[selectedTimeRange.value],
+        courseName: transformedCourseName,
+        tagName: transformedTagName,
+    });
+}
 
 
 const timeRangeOptions = [
@@ -17,12 +43,13 @@ const timeRangeOptions = [
     "半年内",
     "今年内",
 ];
-const allRelatedCoursesOptions = ref(mockRelatedCourses);
-const tagsOptions = ref([
+const allRelatedCoursesOptions = mockRelatedCourses;
+const tagsOptions = [
+    "全部标签",
     "重要",
     "作业",
     "考试"
-])
+]
 // 选中 option 的对应 index
 const selectedTimeRange = ref(0);   
 const selectedRelatedCourse = ref(0);
@@ -38,6 +65,14 @@ function onRelatedCourseChange(e: any) {
 function onTagChange(e: any) {
     selectedTag.value = e.value;
 }
+
+
+onMounted(async () => {
+    await fetchNotes();
+})
+watch([selectedTimeRange, selectedRelatedCourse, selectedTag], async () => {
+    await fetchNotes();
+})
 </script>
 
 <template>
@@ -69,8 +104,11 @@ function onTagChange(e: any) {
             scroll-y
         >
             <view class="flex flex-col gap-y-3">
+                <loading v-if="store.notes === undefined" />
+                <no-note v-else-if="store.notes && store.notes.length === 0" />
                 <easy-note-card 
-                    v-for="note in mockNotes"
+                    v-else
+                    v-for="note in store.notes"
                     :key="note.id"
                     
                     :id="note.id"
@@ -79,8 +117,9 @@ function onTagChange(e: any) {
                     :images-url="note.imagesUrl"
                     :deadline="note.deadline"
                     :course-name="note.courseName"
-                    :tags="note.tags"
+                    :tag-list="note.tagList"
                     :openid="note.openid"
+                    :username="note.username"
                     :seeNumber="note.seeNumber"
                     :supportNumber="note.supportNumber"
                 />

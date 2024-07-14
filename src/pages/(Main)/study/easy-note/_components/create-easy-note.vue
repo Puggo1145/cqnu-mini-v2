@@ -71,7 +71,7 @@ const easyNoteSchema = z.object({
     imagesUrl: z.array(z.string()),
     deadline: z.string(),
     courseName: z.string(),
-    tagsIds: z.array(z.number()),
+    tagIds: z.array(z.number()),
 });
 async function createEasyNote() {
     try {
@@ -82,7 +82,7 @@ async function createEasyNote() {
             imagesUrl: [],
             deadline: `${currentDate.value} ${currentTime.value}`,
             courseName: relatedCourses.value[currentCourseIndex.value],
-            tagsIds: selectedTags.value,
+            tagIds: selectedTags.value,
         });
         
         // 2. 创建小记

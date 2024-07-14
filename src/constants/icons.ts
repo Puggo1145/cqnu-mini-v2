@@ -25,6 +25,8 @@ import downSecondary from "@/static/icons/down-secondary.svg"
 import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
 import studyReview from "@/static/icons/study-review.svg"
+// easy-note
+import haveFive from "@/static/icons/have-five.svg"
 
 const icons = {
     wechatIcon,
@@ -55,6 +57,9 @@ const icons = {
         schedule: studySchedule,
         review: studyReview,
     },
+    easyNote: {
+        haveFive
+    }
 };
 
 export default icons;

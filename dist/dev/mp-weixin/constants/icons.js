@@ -28,6 +28,9 @@ const icons = {
     transcript: common_assets.studyTranscript,
     schedule: common_assets.studySchedule,
     review: common_assets.studyReview
+  },
+  easyNote: {
+    haveFive: common_assets.haveFive
   }
 };
 exports.icons = icons;

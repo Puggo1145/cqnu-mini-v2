@@ -49,11 +49,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }, _ctx.placeholder && !hasSelected.value ? {
         d: common_vendor.t(_ctx.placeholder),
         e: common_vendor.n(props.variant === "primary" && "leading-_58px_"),
-        f: common_vendor.n(props.variant === "mini" && "leading-_36px_ mr-8")
+        f: common_vendor.n(props.variant === "mini" && "leading-_36px_ mr-8 line-clamp-1")
       } : {
         g: common_vendor.t(props.range ? props.range[props.value] : props.value),
         h: common_vendor.n(props.variant === "primary" && "leading-_58px_"),
-        i: common_vendor.n(props.variant === "mini" && "leading-_36px_ mr-8")
+        i: common_vendor.n(props.variant === "mini" && "leading-_36px_ mr-8 line-clamp-1")
       }, {
         j: props.mode,
         k: props.value,

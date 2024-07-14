@@ -50,10 +50,7 @@ const Request = async <T>(
                     }
 
                     if (!isFetchSuccess) {
-                        uni.showToast({
-                            title: responseBody.message,
-                            icon: "error"
-                        });
+                        throw new Error(responseBody.message || "请求失败");
                     }
                     
                     resolve(responseBody);
@@ -63,7 +60,7 @@ const Request = async <T>(
                 },
                 fail: (err) => {
                     uni.showToast({
-                        title: "网络错误",
+                        title: err.errMsg,
                         icon: "error"
                     });
 

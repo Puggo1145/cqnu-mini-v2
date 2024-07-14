@@ -1,31 +1,32 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
 const constants_icons = require("../../../../constants/icons.js");
-const api_easyNote = require("../../../../api/easy-note.js");
+const stores_easyNote_classEasyNote = require("../../../../stores/easy-note/class-easy-note.js");
 require("../../../../common/assets.js");
+require("../../../../api/easy-note.js");
 require("../../../../utils/request.js");
 require("../../../../utils/requestManager.js");
 require("../../../../constants/acceptableErrorCode.js");
 if (!Math) {
-  (cusButton + noNote + easyNoteCard)();
+  (cusButton + loading + noNote + easyNoteCard)();
 }
 const cusButton = () => "../../../../components/cus-button.js";
 const noNote = () => "./no-note.js";
 const easyNoteCard = () => "../../study/easy-note/_components/easy-note-card.js";
+const loading = () => "../../../../components/loading.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "easy-note",
   setup(__props) {
-    const notes = common_vendor.ref([]);
+    const store = stores_easyNote_classEasyNote.useClassEasyNoteStore();
     const current = common_vendor.ref(1);
     const pageSize = common_vendor.ref(5);
     common_vendor.onMounted(async () => {
-      const data = await api_easyNote.getNoteList(
-        current.value,
-        pageSize.value,
-        "",
-        ""
-      );
-      notes.value = data.records;
+      await store.fetchNotes({
+        current: current.value,
+        pageSize: pageSize.value,
+        tagName: "",
+        timespan: ""
+      });
     });
     function goToEasyNote() {
       common_vendor.index.navigateTo({
@@ -45,13 +46,15 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           variant: "ghost",
           ["class-name"]: "text-secondary-foreground font-normal"
         }),
-        d: notes.value.length === 0
-      }, notes.value.length === 0 ? {} : {
-        e: common_vendor.f(notes.value, (note, k0, i0) => {
+        d: common_vendor.unref(store).notes === void 0
+      }, common_vendor.unref(store).notes === void 0 ? common_vendor.e({
+        e: common_vendor.unref(store).notes === void 0
+      }, common_vendor.unref(store).notes === void 0 ? {} : {}) : common_vendor.unref(store).notes && common_vendor.unref(store).notes.length === 0 ? {} : {
+        g: common_vendor.f(common_vendor.unref(store).notes, (note, k0, i0) => {
           return {
             a: note.id,
             b: note.id,
-            c: "5af6c310-2-" + i0,
+            c: "5af6c310-3-" + i0,
             d: common_vendor.p({
               id: note.id,
               title: note.title,
@@ -59,7 +62,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
               ["images-url"]: note.imagesUrl,
               deadline: note.deadline,
               ["course-name"]: note.courseName,
-              tags: note.tags,
+              ["tag-list"]: note.tagList,
               openid: note.openid,
               username: note.username,
               seeNumber: note.seeNumber,
@@ -67,8 +70,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             })
           };
         }),
-        f: common_vendor.unref(constants_icons.icons).plus,
-        g: common_vendor.o(goToCreateEasyNote)
+        h: common_vendor.unref(constants_icons.icons).plus,
+        i: common_vendor.o(goToCreateEasyNote)
+      }, {
+        f: common_vendor.unref(store).notes && common_vendor.unref(store).notes.length === 0
       });
     };
   }

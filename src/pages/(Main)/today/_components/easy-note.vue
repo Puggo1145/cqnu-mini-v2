@@ -4,26 +4,23 @@ import { onMounted, ref } from 'vue';
 import cusButton from '@/components/cus-button.vue';
 import noNote from './no-note.vue';
 import easyNoteCard from '@/pages/(Main)/study/easy-note/_components/easy-note-card.vue';
+import loading from '@/components/loading.vue';
 // static
 import icons from '@/constants/icons';
-// api
-import { getNoteList } from '@/api/easy-note';
-// types
-import type { EasyNoteCard } from '@/pages/(Main)/study/easy-note/_components/easy-note-card.vue';
+// store
+import { useClassEasyNoteStore } from '@/stores/easy-note/class-easy-note';
 
 
-const notes = ref<EasyNoteCard[]>([]);
+const store = useClassEasyNoteStore();
 const current = ref(1);
 const pageSize = ref(5);
 onMounted(async () => {
-    const data = await getNoteList(
-        current.value, 
-        pageSize.value,
-        "",
-        ""
-    );
-    
-    notes.value = data.records;
+    await store.fetchNotes({
+        current: current.value,
+        pageSize: pageSize.value,
+        tagName: "",
+        timespan: "",
+    });
 })
 
 
@@ -55,10 +52,13 @@ function goToCreateEasyNote() {
             </cusButton>
         </view>
         <view class="pt-3">
-            <no-note v-if="notes.length === 0" />
+            <view v-if="store.notes === undefined" class="mt-4">
+                <loading v-if="store.notes === undefined" />
+            </view>
+            <no-note v-else-if="store.notes && store.notes.length === 0" />
             <view v-else class="flex flex-col gap-3">
                 <easy-note-card 
-                    v-for="note in notes"
+                    v-for="note in store.notes"
                     :key="note.id"
 
                     :id="note.id"
@@ -67,7 +67,7 @@ function goToCreateEasyNote() {
                     :images-url="note.imagesUrl"
                     :deadline="note.deadline"
                     :course-name="note.courseName"
-                    :tags="note.tags"
+                    :tag-list="note.tagList"
                     :openid="note.openid"
                     :username="note.username"
                     :seeNumber="note.seeNumber"

@@ -85,7 +85,7 @@ defineExpose({ showError, hasSelected });
                         class="text-secondary-foreground"
                         :class="[
                             props.variant === 'primary' && 'leading-[58px]',
-                            props.variant === 'mini' && 'leading-[36px] mr-8'
+                            props.variant === 'mini' && 'leading-[36px] mr-8 line-clamp-1'
                         ]"
                     >
                         {{ placeholder }}
@@ -95,7 +95,7 @@ defineExpose({ showError, hasSelected });
                 <view v-else class="size-full">
                     <text :class="[
                         props.variant === 'primary' && 'leading-[58px]',
-                        props.variant === 'mini' && 'leading-[36px] mr-8'
+                        props.variant === 'mini' && 'leading-[36px] mr-8 line-clamp-1'
                     ]">
                         {{ 
                             props.range 

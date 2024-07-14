@@ -8,7 +8,7 @@ export const mockNotes: EasyNoteCard[] = [
         imagesUrl: [],
         deadline: "2024/9/10 - 10：30",
         courseName: "计算机网络",
-        tags: [
+        tagList: [
             {
                 id: 0,
                 tagName: "重要",
@@ -26,7 +26,8 @@ export const mockNotes: EasyNoteCard[] = [
                 updatedTime: "2024/9/9 - 10：30"
             }
         ],
-        openid: "Puggo",
+        openid: "",
+        username: "Puggo",
         seeNumber: 24,
         supportNumber: 14
     },
@@ -37,7 +38,7 @@ export const mockNotes: EasyNoteCard[] = [
         imagesUrl: [],
         deadline: "2024/9/14 - 10：30",
         courseName: "计算机网络",
-        tags: [
+        tagList: [
             {
                 id: 2,
                 tagName: "作业",
@@ -47,7 +48,8 @@ export const mockNotes: EasyNoteCard[] = [
                 updatedTime: "2024/9/9 - 10：30"
             }
         ],
-        openid: "Puggo",
+        openid: "",
+        username: "Puggo",
         seeNumber: 24,
         supportNumber: 14
     },
@@ -60,6 +62,7 @@ export const mockNoteStatistics = {
 };
 
 export const mockRelatedCourses = [
+    "全部课程",
     "计算机网络",
     "计算机组成原理",
     "操作系统",

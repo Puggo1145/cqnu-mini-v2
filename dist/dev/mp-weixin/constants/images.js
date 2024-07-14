@@ -3,8 +3,8 @@ const common_assets = require("../common/assets.js");
 const images = {
   landing: common_assets.landing,
   welcome: common_assets.welcome,
-  addNote: common_assets.addNote,
   board: common_assets.board,
+  NoEasyNote: common_assets.NoEasyNote,
   study: {
     bg: common_assets.studyBg,
     todo: common_assets.studyTodo,

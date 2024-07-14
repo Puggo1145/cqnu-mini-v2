@@ -39,9 +39,9 @@ export const mockNotes: EasyNoteCard[] = [
         courseName: "计算机网络",
         tags: [
             {
-                id: 0,
-                tagName: "重要",
-                noteId: 1,
+                id: 2,
+                tagName: "作业",
+                noteId: 0,
                 isDelete: 0,
                 createdTime: "2024/9/9 - 10：30",
                 updatedTime: "2024/9/9 - 10：30"

@@ -65,13 +65,13 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
               id: note.id,
               title: note.title,
               content: note.content,
-              images: note.images,
+              ["images-url"]: note.imagesUrl,
               deadline: note.deadline,
-              relatedCourse: note.relatedCourse,
+              ["course-name"]: note.courseName,
               tags: note.tags,
-              from: note.from,
-              seenNumber: note.seenNumber,
-              supportedNumber: note.supportedNumber
+              openid: note.openid,
+              seeNumber: note.seeNumber,
+              supportNumber: note.supportNumber
             })
           };
         })

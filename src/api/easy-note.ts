@@ -6,19 +6,40 @@ import type { EasyNoteCard } from "@/pages/(Main)/study/easy-note/_components/ea
 // 获取分页小记
 export const getNoteList = async (
     current: number,
-    pageSize: number
+    pageSize: number,
+    tagName: string,
+    queryType: string
 ) => {
     const res = await request.POST<PageResponse<EasyNoteCard>>({
-        route: "note/v1/page/note"
+        route: "note/v1/page/note",
+        data: {
+            current,
+            pageSize,
+            tagName,
+            queryType
+        }
     })
-        .usePagination({ current, pageSize })
         .send();
 
-    if (res.success) return res.data
+    return res.data
+}
+
+// 获取小记标签
+export interface Tag {
+    id: number;
+    tagName: string;
+}
+export const getTags = async () => {
+    const res = await request.POST<Tag[]>({
+        route: "tag/v1/listTag"
+    })
+        .send();
+
+    return res.data
 }
 
 // 创建小记
-type OmitParams = "id" | "tags" | "openid" | "seeNumber" | "supportNumber"
+type OmitParams = "id" | "tags" | "openid" | "seeNumber" | "supportNumber" | "username"
 type CreateEasyNote = Omit<EasyNoteCard, OmitParams> & { tagsIds: number[] }
 export const createNote = async (note: CreateEasyNote) => {
     const res = await request.POST<MyResponse<boolean>>({

@@ -47,9 +47,9 @@ const createEasyNote = async () => {
         title: "测试",
         content: "测试",
         imagesUrl: [],
-        deadline: "2021-10-10 00:04:46",
+        deadline: "2024-7-15 00:04:46",
         courseName: "测试",
-        tagsIds: [0],
+        tagsIds: [1],
     });
 
     console.log(res);

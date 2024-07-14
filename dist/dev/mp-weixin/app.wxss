@@ -3249,11 +3249,20 @@ view,text,::before,::after {
 .top-_12px_ {
     top: 12px;
 }
+.-bottom-_50px_ {
+    bottom: -50px;
+}
+.-bottom-_30px_ {
+    bottom: -30px;
+}
 .z-0 {
     z-index: 0;
 }
 .z-10 {
     z-index: 10;
+}
+.z-50 {
+    z-index: 50;
 }
 .col-span-2 {
     grid-column: span 2 / span 2;
@@ -3536,6 +3545,9 @@ view,text,::before,::after {
 }
 .w-screen {
     width: 100vw;
+}
+.w-_220px_ {
+    width: 220px;
 }
 .min-w-_100px_ {
     min-width: 100px;

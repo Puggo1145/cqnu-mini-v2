@@ -1,16 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 // components
 import cusButton from '@/components/cus-button.vue';
 import noNote from './no-note.vue';
 import easyNoteCard from '@/pages/(Main)/study/easy-note/_components/easy-note-card.vue';
 // static
 import icons from '@/constants/icons';
-// mock
-import { mockNotes } from '@/mock/easy-note';
+// api
+import { getNoteList } from '@/api/easy-note';
+// types
+import type { EasyNoteCard } from '@/pages/(Main)/study/easy-note/_components/easy-note-card.vue';
 
 
-const notes = ref(mockNotes);
+const notes = ref<EasyNoteCard[]>([]);
+const current = ref(1);
+const pageSize = ref(5);
+onMounted(async () => {
+    const data = await getNoteList(
+        current.value, 
+        pageSize.value,
+        "",
+        ""
+    );
+    
+    notes.value = data.records;
+})
 
 
 function goToEasyNote() {
@@ -50,13 +64,14 @@ function goToCreateEasyNote() {
                     :id="note.id"
                     :title="note.title"
                     :content="note.content"
-                    :images="note.images"
+                    :images-url="note.imagesUrl"
                     :deadline="note.deadline"
-                    :relatedCourse="note.relatedCourse"
+                    :course-name="note.courseName"
                     :tags="note.tags"
-                    :from="note.from"
-                    :seenNumber="note.seenNumber"
-                    :supportedNumber="note.supportedNumber"
+                    :openid="note.openid"
+                    :username="note.username"
+                    :seeNumber="note.seeNumber"
+                    :supportNumber="note.supportNumber"
                 />
                 <view 
                     class="w-full h-[96px] bg-secondary rounded-2xl flex justify-center items-center"

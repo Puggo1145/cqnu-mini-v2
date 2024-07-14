@@ -72,6 +72,8 @@ defineExpose({ showError, hasSelected });
                 :mode="props.mode"
                 :value="props.value"
                 :range="props.range"
+                :start="props.start"
+                :end="props.end"
                 @change="emitChange"
             >
                 <!-- 有模拟 placeholder -->

@@ -58,15 +58,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         j: props.mode,
         k: props.value,
         l: props.range,
-        m: common_vendor.o(emitChange),
-        n: common_vendor.unref(constants_icons.icons).down,
-        o: common_vendor.n(props.variant === "primary" && "size-6"),
-        p: common_vendor.n(props.variant === "mini" && "size-4"),
-        q: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
-        r: common_vendor.n(variants[props.variant]),
-        s: errorMessage.value
+        m: props.start,
+        n: props.end,
+        o: common_vendor.o(emitChange),
+        p: common_vendor.unref(constants_icons.icons).down,
+        q: common_vendor.n(props.variant === "primary" && "size-6"),
+        r: common_vendor.n(props.variant === "mini" && "size-4"),
+        s: common_vendor.n(errorMessage.value ? "iborder-destructive" : ""),
+        t: common_vendor.n(variants[props.variant]),
+        v: errorMessage.value
       }, errorMessage.value ? {
-        t: common_vendor.t(errorMessage.value)
+        w: common_vendor.t(errorMessage.value)
       } : {});
     };
   }

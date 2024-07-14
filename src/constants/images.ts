@@ -1,7 +1,7 @@
 import landing from "@/static/images/landing-page-img.svg";
 import welcome from "@/static/images/welcome.svg";
-import addNote from "@/static/images/add-note.svg";
 import board from "@/static/images/board.svg";
+import NoEasyNote from "@/static/images/no-easy-note.svg";
 // study
 import studyBg from "@/static/images/study-bg.svg";
 import studyTodo from "@/static/images/study-todo.svg";
@@ -18,8 +18,8 @@ import serviceWater from "@/static/images/service-water.svg";
 const images = {
     landing,
     welcome,
-    addNote,
     board,
+    NoEasyNote,
     study: {
         bg: studyBg,
         todo: studyTodo,

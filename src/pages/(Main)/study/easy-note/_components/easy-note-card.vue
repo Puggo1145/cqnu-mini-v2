@@ -24,7 +24,8 @@ export interface EasyNoteCard {
     deadline: string | Date;
     courseName: string;
     tags: EasyNoteTags[];
-    openid: string; // 来自（创建者）
+    openid: string; // 来自（创建者）id
+    username: string; // 来自（创建者）昵称
     seeNumber: number; // 被多少人查看 
     supportNumber: number; // 有多少人击掌
 }
@@ -32,9 +33,10 @@ const easyNoteCardProps = defineProps<EasyNoteCard>();
 
 
 // 根据 tag 处理 note 的样式表现
-const isNoteImportant = computed(() => 
-    easyNoteCardProps.tags.some(tag => tag.tagName === "重要")
-);
+const isNoteImportant = computed(() => {
+    if (!easyNoteCardProps.tags) return false;
+    easyNoteCardProps.tags.some(tag => tag.tagName === "重要") && true;
+});
 const noteColor = computed(() => {
     if (isNoteImportant.value) {
         return easyNoteColorMapper.important
@@ -67,7 +69,7 @@ function onCardClick() {
                     <text>{{ easyNoteCardProps.deadline }}</text>
                 </view>
                 <text class="text-sm text-black text-opacity-35">
-                    来自 {{ easyNoteCardProps.openid }}
+                    来自 {{ easyNoteCardProps.username }}
                 </text>
             </view>
             <view class="flex flex-col justify-between items-end gap-y-2">
@@ -76,7 +78,7 @@ function onCardClick() {
                     有 {{ easyNoteCardProps.seeNumber }} 人查看
                 </text>
                 <!-- 外显 tag -->
-                <view class="flex-1">
+                <view v-if="easyNoteCardProps.tags" class="flex-1">
                     <view
                         class="px-3 py-1 rounded-full text-white font-bold text-sm"
                         :style="{ backgroundColor: easyNoteTagColorMapper[tags[0].tagName] }"

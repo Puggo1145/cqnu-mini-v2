@@ -5,11 +5,10 @@ export interface MyResponse<T> {
     data: T
 }
 
-type PageResponseBody<T> = {
+export type PageResponse<T> = {
     records: T[]
     total: number
     size: number
     current: number
     pages: number
 }
-export type PageResponse<T> = MyResponse<PageResponseBody<T>>

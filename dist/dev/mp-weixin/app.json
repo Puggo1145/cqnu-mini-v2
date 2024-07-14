@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/(Main)/today/page",
+    "pages/dev/page",
     "pages/index/index",
     "pages/(Onboarding)/sign-up/page",
-    "pages/dev/page",
-    "pages/(Main)/today/page",
     "pages/(Main)/study/page",
     "pages/(Main)/service/page",
     "pages/(Main)/study/easy-note/page",

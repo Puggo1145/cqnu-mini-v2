@@ -1,8 +1,11 @@
 "use strict";
 const common_vendor = require("../../../../common/vendor.js");
 const constants_icons = require("../../../../constants/icons.js");
-const mock_easyNote = require("../../../../mock/easy-note.js");
+const api_easyNote = require("../../../../api/easy-note.js");
 require("../../../../common/assets.js");
+require("../../../../utils/request.js");
+require("../../../../utils/requestManager.js");
+require("../../../../constants/acceptableErrorCode.js");
 if (!Math) {
   (cusButton + noNote + easyNoteCard)();
 }
@@ -12,7 +15,18 @@ const easyNoteCard = () => "../../study/easy-note/_components/easy-note-card.js"
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "easy-note",
   setup(__props) {
-    const notes = common_vendor.ref(mock_easyNote.mockNotes);
+    const notes = common_vendor.ref([]);
+    const current = common_vendor.ref(1);
+    const pageSize = common_vendor.ref(5);
+    common_vendor.onMounted(async () => {
+      const data = await api_easyNote.getNoteList(
+        current.value,
+        pageSize.value,
+        "",
+        ""
+      );
+      notes.value = data.records;
+    });
     function goToEasyNote() {
       common_vendor.index.navigateTo({
         url: "/pages/(Main)/study/easy-note/page"
@@ -42,13 +56,14 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
               id: note.id,
               title: note.title,
               content: note.content,
-              images: note.images,
+              ["images-url"]: note.imagesUrl,
               deadline: note.deadline,
-              relatedCourse: note.relatedCourse,
+              ["course-name"]: note.courseName,
               tags: note.tags,
-              from: note.from,
-              seenNumber: note.seenNumber,
-              supportedNumber: note.supportedNumber
+              openid: note.openid,
+              username: note.username,
+              seeNumber: note.seeNumber,
+              supportNumber: note.supportNumber
             })
           };
         }),

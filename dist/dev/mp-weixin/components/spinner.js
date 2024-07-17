@@ -28,5 +28,5 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-40d3408f"], ["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/components/spinner.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-40d3408f"], ["__file", "/Users/erjietangfeiniao/Desktop/cqnu-mini-v2/src/components/spinner.vue"]]);
 wx.createComponent(Component);

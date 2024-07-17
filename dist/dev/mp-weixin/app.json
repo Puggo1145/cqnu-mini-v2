@@ -6,6 +6,9 @@
     "pages/(Main)/service/page",
     "pages/(Main)/study/easy-note/page",
     "pages/(Main)/study/easy-note/_components/create-easy-note",
+    "pages/(Main)/study/share-todo/page",
+    "pages/(Main)/study/share-todo/_components/create-share-todo",
+    "pages/(Main)/study/share-todo/_components/post-share-todo",
     "pages/(Onboarding)/sign-up/page",
     "pages/(Onboarding)/process-sign-up/page",
     "pages/dev/page"

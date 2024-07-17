@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, withDefaults } from 'vue';
+import { onMounted, ref, withDefaults } from 'vue';
 // static
 import icons from '@/constants/icons';
 

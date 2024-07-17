@@ -1,6 +1,6 @@
 "use strict";
 const common_vendor = require("../../../../../common/vendor.js");
-const utils_getDate = require("../../../../../utils/getDate.js");
+const utils_utils = require("../../../../../utils/utils.js");
 const mock_easyNote = require("../../../../../mock/easy-note.js");
 const constants_icons = require("../../../../../constants/icons.js");
 require("../../../../../common/assets.js");
@@ -16,8 +16,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const tags = common_vendor.ref(["重要", "作业", "考试"]);
     const relatedCourses = common_vendor.ref(mock_easyNote.mockRelatedCourses);
-    const currentDate = common_vendor.ref(utils_getDate.getDate());
-    const currentTime = common_vendor.ref("12:00");
+    const currentDate = common_vendor.ref(utils_utils.getDate());
+    const currentTime = common_vendor.ref(utils_utils.getCurrentTime());
     const currentCourseIndex = common_vendor.ref(0);
     function onDateChange(e) {
       currentDate.value = e.value;
@@ -67,5 +67,5 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/pages/(Main)/study/easy-note/_components/create-easy-note.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/erjietangfeiniao/Desktop/cqnu-mini-v2/src/pages/(Main)/study/easy-note/_components/create-easy-note.vue"]]);
 wx.createPage(MiniProgramPage);

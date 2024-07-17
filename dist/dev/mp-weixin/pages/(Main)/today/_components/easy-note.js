@@ -37,7 +37,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return {
             a: note.id,
             b: note.id,
-            c: "5af6c310-2-" + i0,
+            c: "4ab621e3-2-" + i0,
             d: common_vendor.p({
               id: note.id,
               title: note.title,
@@ -58,5 +58,5 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/pages/(Main)/today/_components/easy-note.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/erjietangfeiniao/Desktop/cqnu-mini-v2/src/pages/(Main)/today/_components/easy-note.vue"]]);
 wx.createComponent(Component);

@@ -8,7 +8,8 @@ const images = {
   study: {
     bg: common_assets.studyBg,
     todo: common_assets.studyTodo,
-    easyNote: common_assets.studyEasyNote
+    easyNote: common_assets.studyEasyNote,
+    shareTodoAvatars: common_assets.shareTodoAvatars
   },
   service: {
     bg: common_assets.serviceBg,

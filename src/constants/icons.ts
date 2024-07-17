@@ -25,6 +25,9 @@ import downSecondary from "@/static/icons/down-secondary.svg"
 import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
 import studyReview from "@/static/icons/study-review.svg"
+import add from '@/static/icons/add.svg'
+
+
 
 const icons = {
     wechatIcon,
@@ -54,6 +57,7 @@ const icons = {
         transcript: studyTranscript,
         schedule: studySchedule,
         review: studyReview,
+        add: add,
     },
 };
 

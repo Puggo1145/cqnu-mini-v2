@@ -6,7 +6,7 @@ import cusInput from '@/components/cus-input.vue';
 import cusSelect from '@/components/cus-select.vue';
 import cusButton from '@/components/cus-button.vue';
 // utils
-import { getDate } from '@/utils/getDate';
+import { getDate, getCurrentTime } from '@/utils/utils';
 // mock
 import { mockRelatedCourses } from '@/mock/easy-note';
 // static
@@ -18,8 +18,8 @@ const relatedCourses = ref(mockRelatedCourses);
 
 
 const currentDate = ref(getDate());
-const currentTime = ref("12:00");
-const currentCourseIndex = ref(0);
+const currentTime = ref<string>(getCurrentTime());
+const currentCourseIndex = ref<number>(0);
 
 function onDateChange(e: any) {
     currentDate.value = e.value;

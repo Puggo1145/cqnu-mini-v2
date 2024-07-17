@@ -37,7 +37,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           title: common_vendor.unref(constants_signup_signupTexts.usernameTexts).title,
           desc: common_vendor.unref(constants_signup_signupTexts.usernameTexts).desc
         }),
-        b: common_vendor.sr(inputRef, "78ae262a-1", {
+        b: common_vendor.sr(inputRef, "87c86a90-1", {
           "k": "inputRef"
         }),
         c: common_vendor.o(handleInput),
@@ -53,5 +53,5 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/pages/(Onboarding)/sign-up/_components/username.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/erjietangfeiniao/Desktop/cqnu-mini-v2/src/pages/(Onboarding)/sign-up/_components/username.vue"]]);
 wx.createComponent(Component);

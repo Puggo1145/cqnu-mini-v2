@@ -2,29 +2,27 @@
 	"pages": [
 		{
 			"path": "pages/(Main)/today/page"
-		},
-		{
+		},{
 			"path": "pages/index/index"
-		},
-		{
+		},{
 			"path": "pages/(Main)/study/page"
-		},
-		{
+		},{
 			"path": "pages/(Main)/service/page"
-		},
-		{
+		},{
 			"path": "pages/(Main)/study/easy-note/page"
-		},
-		{
+		},{
 			"path": "pages/(Main)/study/easy-note/_components/create-easy-note"
-		},
-		{
+		},{
+			"path": "pages/(Main)/study/share-todo/page"
+		},{
+			"path": "pages/(Main)/study/share-todo/_components/create-share-todo"	
+		},{
+			"path": "pages/(Main)/study/share-todo/_components/post-share-todo"
+		},{
 			"path": "pages/(Onboarding)/sign-up/page"
-		},
-		{
+		},{
 			"path": "pages/(Onboarding)/process-sign-up/page"
-		},
-		{
+		},{
 			"path": "pages/dev/page"
 		}
 	],

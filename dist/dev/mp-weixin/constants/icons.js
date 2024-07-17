@@ -27,7 +27,8 @@ const icons = {
   study: {
     transcript: common_assets.studyTranscript,
     schedule: common_assets.studySchedule,
-    review: common_assets.studyReview
+    review: common_assets.studyReview,
+    add: common_assets.add
   }
 };
 exports.icons = icons;

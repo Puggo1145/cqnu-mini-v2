@@ -94,14 +94,14 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           title: common_vendor.unref(constants_signup_signupTexts.campusInfoTexts).title,
           desc: common_vendor.unref(constants_signup_signupTexts.campusInfoTexts).desc
         }),
-        b: common_vendor.sr(inputRef, "4462f7d7-1", {
+        b: common_vendor.sr(inputRef, "f8f7aa2c-1", {
           "k": "inputRef"
         }),
         c: common_vendor.o(handleInput),
         d: common_vendor.p({
           ["field-name"]: "学号（13 位）"
         }),
-        e: common_vendor.sr(identitySelectRef, "4462f7d7-2", {
+        e: common_vendor.sr(identitySelectRef, "f8f7aa2c-2", {
           "k": "identitySelectRef"
         }),
         f: common_vendor.o(handleIdentityChange),
@@ -111,7 +111,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           value: identityIndex.value,
           range: common_vendor.unref(constants_signup_campusInfo.identity)
         }),
-        h: common_vendor.sr(facultySelectRef, "4462f7d7-3", {
+        h: common_vendor.sr(facultySelectRef, "f8f7aa2c-3", {
           "k": "facultySelectRef"
         }),
         i: common_vendor.o(handleFacultyChange),
@@ -123,7 +123,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         k: isMajorShow.value
       }, isMajorShow.value ? {
-        l: common_vendor.sr(majorSelectRef, "4462f7d7-4", {
+        l: common_vendor.sr(majorSelectRef, "f8f7aa2c-4", {
           "k": "majorSelectRef"
         }),
         m: common_vendor.o(handleMajorChange),
@@ -139,5 +139,5 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/puggo/Desktop/coding/cqnu-mini-vue/src/pages/(Onboarding)/sign-up/_components/campus-info.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/erjietangfeiniao/Desktop/cqnu-mini-v2/src/pages/(Onboarding)/sign-up/_components/campus-info.vue"]]);
 wx.createComponent(Component);

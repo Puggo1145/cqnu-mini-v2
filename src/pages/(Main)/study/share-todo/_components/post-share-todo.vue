@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { onLoad } from '@dcloudio/uni-app';
 // components
 import cusPage from '@/components/cus-page.vue';
 import cusButton from '@/components/cus-button.vue';
 
-import { ref } from 'vue';
-import { onLoad } from '@dcloudio/uni-app';
-// utils
-import { getDate, getCurrentTime } from '@/utils/utils'
 
 interface todoForm {
     content: string;
@@ -16,17 +14,17 @@ interface todoForm {
     tag: string[];
 }
 
+
 let todoList = ref<todoForm[]>([]);
+
 
 // 接收参数
 onLoad(options => {
-    let tempTodoList = JSON.parse(options.todoList)
+    let tempTodoList = JSON.parse(options?.todoList)
     console.log(tempTodoList);
     todoList.value = [...tempTodoList];
     console.log(todoList.value);
 });
-
-
 </script>
 
 <template>

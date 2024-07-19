@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
 import cusInput from '@/components/cus-input.vue';
@@ -6,14 +7,13 @@ import cusSelect from '@/components/cus-select.vue'
 import cusButton from '@/components/cus-button.vue';
 // mock
 import { tags } from '@/mock/share-todo';
-// vue
-import { onMounted, ref } from 'vue';
+import { mockShareTodos } from '@/mock/share-todo';
 // icons
 import icons from '@/constants/icons'
 // utils
 import { getDate, getCurrentTime } from '@/utils/utils'
 
-interface todoForm {
+export interface TodoForm {
     content: string;
     reminderDate: string;
     remindertime: string;
@@ -21,12 +21,11 @@ interface todoForm {
     tag: string[];
 }
 
-onMounted(() => {
-    todoForm.value = todoList.value[currentRecourceIndex.value];
-})
+
+
 
 // todo表单信息
-let todoForm = ref<todoForm>(
+let todoForm = ref<TodoForm>(
     {
         content: '',
         reminderDate: getDate(),
@@ -36,26 +35,17 @@ let todoForm = ref<todoForm>(
     }
 )
 // todo列表
-let todoList = ref<todoForm[]>([
-    {
-        content: '吃饭',
-        reminderDate: '2024-07-01',
-        remindertime: '10:14',
-        recur: '',
-        tag: ['重要'],
-    },{
-        content: '睡觉',
-        reminderDate: '2024-07-17',
-        remindertime: '12:10',
-        recur: '',
-        tag: ['日常'],
-    }
-]);
+let todoList = ref<TodoForm[]>(mockShareTodos);
+
+onMounted(() => {
+    todoForm.value = todoList.value[currentRecourceIndex.value];
+})
 
 
 // 重复 select相关
 const recurList = ['每日', '每周'];
 let selectRecurIndex = ref<number>(0);
+
 
 // 标签 tags相关
 const handleAddTag = (item: string) => {
@@ -64,7 +54,6 @@ const handleAddTag = (item: string) => {
     }else {
         todoForm.value.tag.push(item);
     }
-    
 }
 
 
@@ -111,13 +100,14 @@ const resetTodoForm = () => {
         tag: [],
     }
 }
+
+
 // 下一步
 const handleToPost = () => {
     uni.navigateTo({
         url: `/pages/(Main)/study/share-todo/_components/post-share-todo?todoList=${JSON.stringify(todoList.value)}`,
     })
 }
-
 </script>
 
 <template>
@@ -140,7 +130,6 @@ const handleToPost = () => {
             
         </swiper>
 
-       
 
         <view class=" flex flex-col gap-2">
             <text class=" text-black font-bold text-[28px] mt-3">制定你的第一份Todo</text>
@@ -151,7 +140,11 @@ const handleToPost = () => {
             class="mt-3 overflow-hidden flex-1 flex flex-col"
             scroll-y
         >
-            <cus-input @input="setTodoContent" :value="todoForm.content" field-name="计划内容" />
+            <cus-input
+                field-name="计划内容"
+                :value="todoForm.content"
+                @input="setTodoContent"
+            />
 
             <view class="w-full flex justify-between items-center">
                 <view class="mt-3 flex flex-col gap-1 w-[48%]">

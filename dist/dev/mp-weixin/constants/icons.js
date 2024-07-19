@@ -24,6 +24,7 @@ const icons = {
   clock: common_assets.clock,
   academy: common_assets.academy,
   downSecondary: common_assets.downSecondary,
+  syncPrimary: common_assets.syncPrimary,
   study: {
     transcript: common_assets.studyTranscript,
     schedule: common_assets.studySchedule,

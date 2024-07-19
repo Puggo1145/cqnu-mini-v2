@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/(Main)/study/schedule/page",
     "pages/(Main)/today/page",
     "pages/dev/page",
     "pages/index/index",

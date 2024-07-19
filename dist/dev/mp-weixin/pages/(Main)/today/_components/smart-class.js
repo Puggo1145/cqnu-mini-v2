@@ -17,9 +17,15 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         time: "19 : 30"
       }
     ];
+    function goToSchedule() {
+      common_vendor.index.navigateTo({
+        url: "/pages/(Main)/study/schedule/page"
+      });
+    }
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.f(otherClasses, (item, k0, i0) => {
+        a: common_vendor.o(goToSchedule),
+        b: common_vendor.f(otherClasses, (item, k0, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.time),

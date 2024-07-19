@@ -21,12 +21,14 @@ import academy from "@/static/icons/academy.svg"
 import calendar from "@/static/icons/calendar.svg"
 import rightSecondary from "@/static/icons/right-secondary.svg"
 import downSecondary from "@/static/icons/down-secondary.svg"
+import syncPrimary from "@/static/icons/sync-primary.svg"
 // study
 import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
 import studyReview from "@/static/icons/study-review.svg"
 // easy-note
 import haveFive from "@/static/icons/have-five.svg"
+
 
 const icons = {
     wechatIcon,
@@ -52,6 +54,7 @@ const icons = {
     clock,
     academy,
     downSecondary,
+    syncPrimary,
     study: {
         transcript: studyTranscript,
         schedule: studySchedule,

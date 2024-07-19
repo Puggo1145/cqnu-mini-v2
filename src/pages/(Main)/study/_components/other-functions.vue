@@ -7,16 +7,24 @@ const otherFunctions = [
     {
         name: "成绩查询",
         icon: icons.study.transcript,
+        url: ""
     },
     {
         name: "我的课表",
         icon: icons.study.schedule,
+        url: "/pages/(Main)/study/schedule/page"
     },
     {
         name: "复习资料",
         icon: icons.study.review,
+        url: ""
     },
 ];
+
+
+function goToPage(url: string) {
+    uni.navigateTo({ url })
+}
 </script>
 
 <template>
@@ -25,6 +33,7 @@ const otherFunctions = [
             v-for="func in otherFunctions"
             :key="func.name"
             class="flex flex-col items-center gap-1"
+            @click="goToPage(func.url)"
         >
             <image :src="func.icon" class="size-12" />
             <text class="text-sm text-secondary-foreground">{{ func.name }}</text>

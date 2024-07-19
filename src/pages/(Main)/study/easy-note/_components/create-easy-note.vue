@@ -14,10 +14,21 @@ import { getDate, getCurrentTime } from '@/utils/timeHandler';
 import { easyNoteTagColorMapper } from '@/constants/easy-note/easy-note-card';
 // mock
 import { mockRelatedCourses } from '@/mock/easy-note';
+// store
+import { useClassEasyNoteStore } from '@/stores/easy-note/class-easy-note';
+import { useEasyNoteStore } from '@/stores/easy-note/easy-note';
 // static
 import icons from '@/constants/icons';
 // types
 import type { Tag } from '@/api/easy-note';
+
+
+// 初始化 小记 stores
+// 要根据当前课程和小记创建时选择的课程来选择对应的小记 store
+// 如果创建时选择的课程与当前课程相同，同时更新两个 store
+// 如果不同，只更新 easyNoteStore
+const classEasyNoteStore = useClassEasyNoteStore();
+const easyNoteStore = useEasyNoteStore();
 
 
 // 初始化可选数据
@@ -97,6 +108,8 @@ async function createEasyNote() {
                 uni.navigateBack();
             }, 1500);
         }
+
+        // TODO - 3. 更新 notes
 
     } catch (err) {
         if (err instanceof z.ZodError) {

@@ -4,6 +4,8 @@ const api_easyNote = require("../../../../../api/easy-note.js");
 const utils_timeHandler = require("../../../../../utils/timeHandler.js");
 const constants_easyNote_easyNoteCard = require("../../../../../constants/easy-note/easy-note-card.js");
 const mock_easyNote = require("../../../../../mock/easy-note.js");
+const stores_easyNote_classEasyNote = require("../../../../../stores/easy-note/class-easy-note.js");
+const stores_easyNote_easyNote = require("../../../../../stores/easy-note/easy-note.js");
 const constants_icons = require("../../../../../constants/icons.js");
 require("../../../../../utils/request.js");
 require("../../../../../utils/requestManager.js");
@@ -19,6 +21,8 @@ const cusButton = () => "../../../../../components/cus-button.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "create-easy-note",
   setup(__props) {
+    stores_easyNote_classEasyNote.useClassEasyNoteStore();
+    stores_easyNote_easyNote.useEasyNoteStore();
     const tags = common_vendor.ref([]);
     const relatedCourses = common_vendor.ref(mock_easyNote.mockRelatedCourses);
     common_vendor.onMounted(async () => {

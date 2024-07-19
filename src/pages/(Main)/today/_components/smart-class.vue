@@ -13,13 +13,23 @@ const otherClasses = [
         time: "19 : 30",
     }
 ]
+
+
+function goToSchedule() {
+    uni.navigateTo({
+        url: '/pages/(Main)/study/schedule/page'
+    })
+}
 </script>
 
 <template>
     <!-- 最近一节课程 -->
     <view class="w-full">
-        <view class="w-full p-6 flex flex-col justify-between gap-2 
-        rounded-2xl text-white leading-none bg-[#5670FD] shadow-lg shadow-[#5670FD]/20">
+        <view 
+            class="w-full p-6 flex flex-col justify-between gap-2 
+            rounded-2xl text-white leading-none bg-[#5670FD] shadow-lg shadow-[#5670FD]/20"
+            @click="goToSchedule"
+        >
             <view>
                 <text class="text-sm">
                     距离上课还有 30 分钟

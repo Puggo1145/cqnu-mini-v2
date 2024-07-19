@@ -1,9 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "easy-note-card": "./easy-note-card",
-    "cus-select": "../../../../../components/cus-select",
-    "loading": "../../../../../components/loading",
-    "no-note": "../../../today/_components/no-note"
-  }
-}

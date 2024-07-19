@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "cus-page": "../../../components/cus-page",
-    "todo-note-cards": "./_components/todo-note-cards",
-    "other-functions": "./_components/other-functions",
-    "card-need-new-function": "../../../components/card-need-new-function"
-  }
-}

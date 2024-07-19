@@ -9,7 +9,7 @@ const cards = [
         description: "发现学搭 共同进步",
         image: images.study.todo,
         backgroundColor: "#598af6",
-        url: "/study/todo",
+        url: "/pages/(Main)/study/share-todo/page",
     },
     {
         name: "班级小记",

@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       fontSize: {
         md: "16px",
-        "3xl": "32px"
+        "3xl": "32px",
+        xb: "32px",
       },
       colors: {
         background: "hsl(var(--background))",

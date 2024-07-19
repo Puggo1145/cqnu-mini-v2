@@ -28,6 +28,8 @@ import studySchedule from "@/static/icons/study-schedule.svg"
 import studyReview from "@/static/icons/study-review.svg"
 // easy-note
 import haveFive from "@/static/icons/have-five.svg"
+import add from '@/static/icons/add.svg'
+
 
 
 const icons = {
@@ -59,6 +61,7 @@ const icons = {
         transcript: studyTranscript,
         schedule: studySchedule,
         review: studyReview,
+        add: add,
     },
     easyNote: {
         haveFive

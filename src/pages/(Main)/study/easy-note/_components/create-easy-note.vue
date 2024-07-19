@@ -44,8 +44,8 @@ onMounted(async () => {
 
 
 const currentDate = ref(getDate());
-const currentTime = ref(getCurrentTime());
-const currentCourseIndex = ref(0);
+const currentTime = ref<string>(getCurrentTime());
+const currentCourseIndex = ref<number>(0);
 
 function onDateChange(e: any) {
     currentDate.value = e.value;

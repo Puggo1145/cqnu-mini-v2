@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "signup-texts": "./signup-texts",
-    "cus-input": "../../../../components/cus-input",
-    "cus-button": "../../../../components/cus-button"
-  }
-}

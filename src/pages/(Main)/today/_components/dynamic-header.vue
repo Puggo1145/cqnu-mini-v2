@@ -22,7 +22,7 @@ const goto = (url: string) => uni.navigateTo({ url });
     <view class="w-full h-[80px] flex items-center justify-between mt-12">
         <!-- 动态提醒文本 -->
         <view class="font-bold text-3xl">
-            早上好 Puggo
+            早上好 Asuka
         </view>
         <!-- 右侧功能 -->
         <view class="flex items-center gap-5">

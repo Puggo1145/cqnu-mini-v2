@@ -28,7 +28,22 @@
 			"path": "pages/(Main)/study/easy-note/_components/create-easy-note"
 		},
 		{
+			"path": "pages/(Main)/study/share-todo/page"
+		},
+		{
+			"path": "pages/(Main)/study/share-todo/_components/create-share-todo"
+		},
+		{
+			"path": "pages/(Main)/study/share-todo/_components/post-share-todo"
+		},
+		{
+			"path": "pages/(Onboarding)/sign-up/page"
+		},
+		{
 			"path": "pages/(Onboarding)/process-sign-up/page"
+		},
+		{
+			"path": "pages/dev/page"
 		}
 	],
 	"globalStyle": {
@@ -66,7 +81,7 @@
 		"custom": {
 			"^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
 			"^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
-	        "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue"
+			"^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue"
 		}
 	}
 }

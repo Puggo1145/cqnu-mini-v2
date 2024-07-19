@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "cus-page": "../../../components/cus-page",
-    "utility-consume-cards": "./_components/utility-consume-cards",
-    "cards": "./_components/cards"
-  }
-}

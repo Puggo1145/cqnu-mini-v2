@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "cus-page": "../../../../../components/cus-page",
-    "cus-input": "../../../../../components/cus-input",
-    "cus-select": "../../../../../components/cus-select",
-    "cus-button": "../../../../../components/cus-button"
-  }
-}

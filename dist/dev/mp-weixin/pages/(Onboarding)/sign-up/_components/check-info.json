@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "signup-texts": "./signup-texts",
-    "cus-button": "../../../../components/cus-button"
-  }
-}

@@ -20,11 +20,21 @@ const getCurrent = (e: any) => current.value = e.detail.current;
 <template>
     <cus-page header-type="nav">
         <visual-signup-info :current="current" />
-        <swiper class="w-screen flex-1 box-border mt-8" :current="current" @change="getCurrent">
-            <swiper-item class="box-border flex flex-col gap-6 px-4" @touchmove.stop>
+        <swiper 
+            class="w-screen flex-1 box-border mt-8" 
+            :current="current" 
+            @change="getCurrent"
+        >
+            <swiper-item 
+                class="box-border flex flex-col gap-6 px-4" 
+                @touchmove.stop
+            >
                 <link-official @update:current="nextPage" />
             </swiper-item>
-            <swiper-item class="box-border flex flex-col gap-6 px-4" @touchmove.stop>
+            <swiper-item 
+                class="box-border flex flex-col gap-6 px-4" 
+                @touchmove.stop
+            >
                 <username @update:current="nextPage" />
             </swiper-item>
             <!-- <swiper-item 

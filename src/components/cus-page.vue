@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed, withDefaults } from 'vue';
+import { 
+    computed, 
+    withDefaults, 
+} from 'vue';
 // stores
 import { useStatusBarHeight } from '@/stores/statusBarHeight';
 // static
@@ -12,11 +15,13 @@ interface Props {
     backgroundStyle?: "none" | "default" | "modern"
     // 页面两侧边距 => 为了保证页面高度一致使用了 overflow-hidden，因此会裁切掉部分内容，需要酌情使用
     paddingX?: number | string; 
+    className?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
     headerType: "default",
     backgroundStyle: "default",
-    paddingX: 0
+    paddingX: 0,
+    className: ""
 });
 
 
@@ -43,7 +48,7 @@ const goBack = () => uni.navigateBack();
 <template>
     <view 
         class="w-screen h-screen flex flex-col fixed"
-        :class="backgroundStyle[props.backgroundStyle]"
+        :class="[backgroundStyle[props.backgroundStyle]]"
         :style="{ paddingTop: paddingTop }"
     >
         <!-- nav bar -->
@@ -58,6 +63,7 @@ const goBack = () => uni.navigateBack();
         <!-- 页面 -->
         <view 
             class="w-screen overflow-y-hidden flex-1 flex flex-col"
+            :class="props.className"
             :style="{
                 paddingLeft: props.paddingX + 'px',
                 paddingRight: props.paddingX + 'px',

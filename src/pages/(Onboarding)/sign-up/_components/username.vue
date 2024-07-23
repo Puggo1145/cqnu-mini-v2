@@ -2,8 +2,8 @@
 import { ref } from 'vue';
 // components
 import cusInput from '@/components/cus-input.vue';
-import signupTexts from '../_components/signup-texts.vue';
 import cusButton from '@/components/cus-button.vue';
+import titleDesc from '@/components/title-desc.vue';
 // constants
 import { usernameTexts } from '@/constants/signup/signup-texts';
 // store
@@ -37,7 +37,7 @@ const validateValue = () => {
 
 <template>
     <view class="flex flex-col gap-6">
-        <signup-texts 
+        <title-desc
             :title="usernameTexts.title" 
             :desc="usernameTexts.desc" 
         />

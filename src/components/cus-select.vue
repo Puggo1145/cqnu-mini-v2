@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref, withDefaults } from 'vue';
+import { ref, withDefaults } from 'vue';
 // static
 import icons from '@/constants/icons';
+
+export type CusSelectEvent = {
+    value: any;
+    hasSelected?: string;
+}
 
 
 interface Props {

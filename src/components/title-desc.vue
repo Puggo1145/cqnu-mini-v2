@@ -12,7 +12,7 @@ const { title, desc } = defineProps<Props>();
         <text class="font-bold text-[32px]">
             {{ title }}
         </text>
-        <text class="text-md">
+        <text class="text-sm text-secondary-foreground">
             {{ desc }}
         </text>
     </view>

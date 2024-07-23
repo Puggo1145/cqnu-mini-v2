@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 // components
-import signupTexts from '../_components/signup-texts.vue';
+import titleDesc from '@/components/title-desc.vue';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
 // constants
@@ -120,9 +120,9 @@ async function handleLinkOfficial() {
 
 <template>
     <view class="flex flex-col gap-6">
-        <signup-texts 
-            :title="linkOfficialTexts.title" 
-            :desc="linkOfficialTexts.desc" 
+        <title-desc
+            :title="linkOfficialTexts.title"
+            :desc="linkOfficialTexts.desc"
         />
         <cusInput 
             field-name="学号" 

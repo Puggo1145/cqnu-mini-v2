@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 // components
-import signupTexts from './signup-texts.vue';
+import titleDesc from '@/components/title-desc.vue';
 import cusButton from '@/components/cus-button.vue';
 // api
 import { signup } from '@/api/auth';
@@ -38,7 +38,7 @@ async function goToSignUpProcess() {
 
 <template>
     <view class="flex flex-col gap-6">
-        <signup-texts 
+        <title-desc 
             title="请核对信息"
             desc="请核对您填写的信息，您当前依然可以返回修改。提交后，您将无法再修改这些信息"
         />

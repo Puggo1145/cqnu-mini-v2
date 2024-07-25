@@ -2,6 +2,7 @@ import landing from "@/static/images/landing-page-img.svg";
 import welcome from "@/static/images/welcome.svg";
 import board from "@/static/images/board.svg";
 import NoEasyNote from "@/static/images/no-easy-note.svg";
+import networkError from "@/static/images/network-error.svg";
 // study
 import studyBg from "@/static/images/study-bg.svg";
 import studyTodo from "@/static/images/study-todo.svg";
@@ -23,6 +24,7 @@ const images = {
     welcome,
     board,
     NoEasyNote,
+    networkError,
     study: {
         bg: studyBg,
         todo: studyTodo,

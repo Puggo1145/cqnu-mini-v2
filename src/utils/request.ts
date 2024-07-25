@@ -2,6 +2,10 @@ import RequestManager from "./requestManager";
 import { acceptableErrorCode } from "@/constants/acceptableErrorCode";
 // types
 import type { MyResponse } from "@/types/response";
+type ResponseError = {
+    success: false;
+    message: string;
+};
 export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export type Where = 'base' | 'linkOfficial';
 
@@ -16,7 +20,7 @@ const Request = async <T>(
     method: Methods,
     data: any,
     showLoading?: boolean // 该请求是否显示 loading
-): Promise<MyResponse<T>> => {
+): Promise<MyResponse<T> | ResponseError> => {
     try {
         // 生成请求唯一 id，加入请求队列, 防止重复请求
         const requestId = requestManager.generateId(method, route, data);
@@ -30,7 +34,7 @@ const Request = async <T>(
             "Authentication": authorization,
         }
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             showLoading && uni.showLoading({ title: '加载中' });
 
             uni.request({
@@ -58,13 +62,16 @@ const Request = async <T>(
                     showLoading && uni.hideLoading();
                     requestManager.deleteById(requestId);
                 },
-                fail: (err) => {
+                fail: () => {
                     uni.showToast({
-                        title: err.errMsg,
+                        title: "网络错误",
                         icon: "error"
                     });
 
-                    reject(err.errMsg);
+                    resolve({ 
+                        success: false,
+                        message: '网络错误'
+                    });
 
                     showLoading && uni.hideLoading();
                     requestManager.deleteById(requestId);
@@ -76,7 +83,10 @@ const Request = async <T>(
             title: '应用出现错误',
             icon: 'error'
         });
-        return Promise.reject(err);
+        return Promise.reject({ 
+            success: false,
+            message: '应用出现错误'
+        });
     }
 }
 
@@ -138,7 +148,7 @@ class RequestBuilder<T> {
     }
 
     // 发送请求
-    async send(): Promise<MyResponse<T>> {
+    async send(): Promise<MyResponse<T> | ResponseError> {
         // 构建最终的查询字符串
         const queryString = this.buildQueryString();  
         

@@ -49,7 +49,7 @@ const createEasyNote = async () => {
         imagesUrl: [],
         deadline: "2024-7-15 00:04:46",
         courseName: "测试",
-        tagsIds: [1],
+        tagIds: [1],
     });
 
     console.log(res);
@@ -85,7 +85,7 @@ const createEasyNote = async () => {
         <view class="mt-4">
             <text class="mb-2 text-xl font-bold">小记</text>
             <view class="flex flex-col">
-                <cus-button @click="() => getNoteList(1, 10)">
+                <cus-button @click="() => getNoteList({current: 1, pageSize: 10})">
                     获取小记
                 </cus-button>
                 <cus-button class-name="mt-4" @click="createEasyNote">

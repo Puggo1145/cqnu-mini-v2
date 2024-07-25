@@ -5,6 +5,7 @@ import easyNoteCard from './easy-note-card.vue';
 import cusSelect from '@/components/cus-select.vue';
 import loading from '@/components/loading.vue';
 import noNote from '@/pages/(Main)/today/_components/no-note.vue';
+import cusError from '@/components/cus-error.vue';
 // store
 import { useEasyNoteStore } from '@/stores/easy-note/easy-note';
 // mock
@@ -104,8 +105,9 @@ watch([selectedTimeRange, selectedRelatedCourse, selectedTag], async () => {
             scroll-y
         >
             <view class="flex flex-col gap-y-3">
-                <loading v-if="store.notes === undefined" />
+                <loading v-if="store.notes === undefined && !store.error" />
                 <no-note v-else-if="store.notes && store.notes.length === 0" />
+                <cus-error v-else-if="store.error" />
                 <easy-note-card 
                     v-else
                     v-for="note in store.notes"

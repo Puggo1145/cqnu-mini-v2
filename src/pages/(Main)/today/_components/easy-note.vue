@@ -5,6 +5,7 @@ import cusButton from '@/components/cus-button.vue';
 import noNote from './no-note.vue';
 import easyNoteCard from '@/pages/(Main)/study/easy-note/_components/easy-note-card.vue';
 import loading from '@/components/loading.vue';
+import cusError from '@/components/cus-error.vue';
 // static
 import icons from '@/constants/icons';
 // store
@@ -52,10 +53,11 @@ function goToCreateEasyNote() {
             </cusButton>
         </view>
         <view class="pt-3">
-            <view v-if="store.notes === undefined" class="mt-4">
+            <view v-if="store.notes === undefined && !store.error" class="mt-4">
                 <loading v-if="store.notes === undefined" />
             </view>
             <no-note v-else-if="store.notes && store.notes.length === 0" />
+            <cus-error v-else-if="store.error" />
             <view v-else class="flex flex-col gap-3">
                 <easy-note-card 
                     v-for="note in store.notes"

@@ -23,15 +23,19 @@ export const signin = async () => {
             .send();
 
         // 登录成功，保存 token
-        if (res.data.token) {
-            uni.setStorageSync("token", res.data.token);
+        if (res.success) {
+            if (res.data.token) {
+                uni.setStorageSync("token", res.data.token);
+            }
         }
 
         // 放行用户不存在 => 跳转注册
-        if (res.code === acceptableErrorCode[0]) {
-            return { toSignUp: true };
-        } else {
-            return { toSignUp: false };
+        if (res.success) {
+            if (res.code === acceptableErrorCode[0]) {
+                return { toSignUp: true };
+            } else {
+                return { toSignUp: false };
+            }
         }
     } catch (err) {
         uni.showToast({
@@ -64,9 +68,11 @@ export const signup = async (signupData: SignUpData) => {
             .send();
 
         // 注册成功，保存 token
-        uni.setStorageSync("token", res.data.token);
-
-        return { success: true };
+        if (res.success) {
+            uni.setStorageSync("token", res.data.token);
+            
+            return { success: res.success };
+        }
     } catch (err) {
         uni.showToast({
             title: "注册失败",

@@ -10,12 +10,17 @@ import type { CreateEasyNote } from "@/api/easy-note";
 
 export const useClassEasyNoteStore = defineStore('classEasyNote', {
     state: () => ({
-        notes: undefined as EasyNoteCard[] | undefined
+        notes: undefined as EasyNoteCard[] | undefined,
+        error: false
     }),
     actions: {
         async fetchNotes(params: GetNoteListParams) {
-            const data = await getNoteList(params);
-            this.notes = data.records;
+            const res = await getNoteList(params);
+            if (res.success) {
+                this.notes = res.data.records;
+            } else {
+                this.error = true;
+            }
         },
         // TODO - 根据课程名称查询小记
         async createNote(data: CreateEasyNote) {

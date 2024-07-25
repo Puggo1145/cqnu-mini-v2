@@ -18,7 +18,7 @@ export const getNoteList = async (params: GetNoteListParams) => {
     })
         .send();
 
-    return res.data
+    return res;
 }
 
 // 获取小记标签
@@ -32,7 +32,7 @@ export const getTags = async () => {
     })
         .send();
 
-    return res.data
+    return res;
 }
 
 // 创建小记

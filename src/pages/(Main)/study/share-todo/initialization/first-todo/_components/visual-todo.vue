@@ -9,6 +9,26 @@ const props = defineProps<{current: number}>();
 
 
 const initialTodoStore = useInitalTodo();
+const todoStatus = (index: number) => {
+    if (props.current === 1) {
+        return 'w-full';
+    } else {
+        return index === initialTodoStore.currentTodo ? 'w-full' : 'w-3/4';
+    }
+}
+
+
+function switchCurrentTodo(e: any) {
+    const { scrollTop } = e.detail;
+    const currentTodo = Math.round(scrollTop / 92);
+    initialTodoStore.setCurrentTodo(currentTodo);
+}
+function switchToFirstTodo() {
+    initialTodoStore.setCurrentTodo(0);
+}
+function switchToLastTodo() {
+    initialTodoStore.setCurrentTodo(initialTodoStore.todos.length - 1);
+}
 </script>
 
 <template>
@@ -31,14 +51,21 @@ const initialTodoStore = useInitalTodo();
                 {{ initialTodoStore.listName }}
             </text>
             <scroll-view
-                class="overflow-hidden w-full h-[136px]"
+                class="overflow-hidden w-full h-[136px] transition-all duration-500"
+                :class="props.current === 1 && 'h-[200px]'"
                 scroll-y
+                enable-passive
+                upper-threshold="20"
+                lower-threshold="20"
+                @scroll="switchCurrentTodo"
+                @scrolltoupper="switchToFirstTodo"
+                @scrolltolower="switchToLastTodo"
             >
-                <view class="w-full flex flex-col gap-y-3 justify-center">
+                <view class="w-full flex flex-col gap-y-3 justify-center pb-4">
                     <todo-card
                         v-for="todo, index in initialTodoStore.todos"
-                        class="origin-left"
-                        :class="index === initialTodoStore.currentTodo ? 'scale-100' : 'scale-75'"
+                        class="origin-top-left transition-all duration-500"
+                        :class="todoStatus(index)"
                         :key="index"
                         :content="todo.content"
                         :remindDate="todo.remindDate"

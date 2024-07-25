@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, withDefaults } from 'vue';
+import { computed, withDefaults } from 'vue';
 
 export type Tag =  {
     name: string;
@@ -15,18 +15,16 @@ const props = withDefaults(defineProps<TagSelectorProps>(), {
 });
 
 
-const selectedTags = ref<Tag[]>(props.selectedTags);
+const selectedTags = computed(() => props.selectedTags);
 
 
-const emit = defineEmits(['update:selectedTags']);
+const emit = defineEmits(['change']);
 function selectTag(tag: Tag) {
-    if (selectedTags.value.some(stag => stag.name === tag.name)) {
-        selectedTags.value = selectedTags.value.filter(stag => stag.name !== tag.name);
-        emit('update:selectedTags', selectedTags.value);
-    } else {
-        selectedTags.value.push(tag);
-        emit('update:selectedTags', selectedTags.value);
-    }
+    const updatedTags = props.selectedTags.some(stag => stag.name === tag.name)
+        ? props.selectedTags.filter(stag => stag.name !== tag.name)
+        : [...props.selectedTags, tag];
+    
+    emit('change', updatedTags);
 }
 </script>
 

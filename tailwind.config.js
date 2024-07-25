@@ -36,6 +36,15 @@ module.exports = {
           secondary: "#B9BBBB"
         },
       },
+      animation: {
+        "magnify": "magnify 0.3s ease",
+      },
+      keyframes: {
+        "magnify": {
+          "0%": { transform: "scale(0)" },
+          "100%": { transform: "scale(1)" },
+        },
+      }
     },
   },
   plugins: [],

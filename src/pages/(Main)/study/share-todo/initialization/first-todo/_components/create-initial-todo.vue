@@ -53,9 +53,11 @@ const tags = ref<Tag[]>([
     { name: "学习", color: "#5b6ff4" },
     { name: "日常", color: "#5b6ff4" },
 ]);
-const selectedTags = computed(() => 
-    initialTodoStore.todos[initialTodoStore.currentTodo].tags
-);
+const selectedTags = computed(() => {
+    console.log(initialTodoStore.todos[initialTodoStore.currentTodo].tags);
+    
+    return initialTodoStore.todos[initialTodoStore.currentTodo].tags
+});
 function onTagChange(e: Tag[]) {
     initialTodoStore.setTags(e);
 }

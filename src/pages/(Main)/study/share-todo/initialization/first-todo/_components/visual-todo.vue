@@ -30,18 +30,23 @@ const initialTodoStore = useInitalTodo();
             >
                 {{ initialTodoStore.listName }}
             </text>
-            <view class="w-full flex flex-col gap-y-3 justify-center">
-                <todo-card
-                    v-for="todo, index in initialTodoStore.todos"
-                    class="origin-left"
-                    :class="index === 0 ? 'scale-100' : 'scale-75'"
-                    :key="index"
-                    :content="todo.content"
-                    :remindDate="todo.remindDate"
-                    :remindTime="todo.remindTime"
-                    :tags="todo.tags"
-                />
-            </view>
+            <scroll-view
+                class="overflow-hidden w-full h-[136px]"
+                scroll-y
+            >
+                <view class="w-full flex flex-col gap-y-3 justify-center">
+                    <todo-card
+                        v-for="todo, index in initialTodoStore.todos"
+                        class="origin-left"
+                        :class="index === initialTodoStore.currentTodo ? 'scale-100' : 'scale-75'"
+                        :key="index"
+                        :content="todo.content"
+                        :remindDate="todo.remindDate"
+                        :remindTime="todo.remindTime"
+                        :tags="todo.tags"
+                    />
+                </view>
+            </scroll-view>
         </view>
     </view>
 </template>

@@ -40,7 +40,6 @@ export const useInitalTodo = defineStore('initialTodo', {
                 repeat: 0,
                 tags: [],
             });
-            this.setCurrentTodo(this.$state.todos.length - 1);
         },
         setCurrentTodo(index: number) {
             this.currentTodo = index;

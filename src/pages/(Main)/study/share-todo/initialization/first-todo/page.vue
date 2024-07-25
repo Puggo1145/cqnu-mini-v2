@@ -17,18 +17,18 @@ const getCurrent = (e: any) => current.value = e.detail.current;
 <template>
     <cus-page header-type="nav">
         <visual-todo :current="current" />
-        <swiper 
+        <swiper
             class="size-full"
             :current="current"
             @change="getCurrent"
         >
-            <swiper-item 
+            <swiper-item
                 class="box-border px-4"
                 @touchmove.stop
             >
                 <create-initial-todo @update:current="nextPage" />
             </swiper-item>
-            <swiper-item 
+            <swiper-item
                 class="box-border px-4"
                 @touchmove.stop
             >

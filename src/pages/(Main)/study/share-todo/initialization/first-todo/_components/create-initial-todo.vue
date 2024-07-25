@@ -46,6 +46,13 @@ function onRepeatChange(e: CusSelectEvent) {
     initialTodoStore.setRepeat(e.value);
 }
 
+
+// TODO - 从服务器获取 tags
+const tags = ref<Tag[]>([
+    { name: "重要", color: "#df625e" },
+    { name: "学习", color: "#5b6ff4" },
+    { name: "日常", color: "#5b6ff4" },
+]);
 const selectedTags = computed(() => 
     initialTodoStore.todos[initialTodoStore.currentTodo].tags
 );
@@ -54,13 +61,10 @@ function onTagChange(e: Tag[]) {
 }
 
 
-// TODO - 从服务器获取 tags
-const tags = ref<Tag[]>([
-    { name: "重要", color: "#df625e" },
-    { name: "学习", color: "#5b6ff4" },
-    { name: "日常", color: "#5b6ff4" },
-]);
-
+const emit = defineEmits(['update:current']);
+function nextPage() {
+    emit('update:current');
+}
 </script>
 
 <template>
@@ -137,6 +141,7 @@ const tags = ref<Tag[]>([
         </cus-button>
         <cus-button
             variant="outline"
+            @click="nextPage"
         >
             下一步
         </cus-button>

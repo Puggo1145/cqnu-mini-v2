@@ -23,7 +23,7 @@ const variants = {
     secondary: "bg-secondary text-secondary-foreground",
     muted: "!bg-muted text-secondary-foreground",
     outline: "border border-primary border-solid text-primary bg-white",
-    ghost: '!h-[32px] !leading-[32px] text-primary bg-transparent border-none',
+    ghost: '!leading-[32px] text-primary bg-transparent border-none',
     loading: '!bg-muted text-secondary-foreground'
 };
 

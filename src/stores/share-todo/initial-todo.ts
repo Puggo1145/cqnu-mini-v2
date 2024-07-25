@@ -20,6 +20,7 @@ type InitialTodo = {
 export const useInitalTodo = defineStore('initialTodo', {
     state: () => ({
         currentTodo: 0,
+        listName: "我的第一份 Todo",
         todos: [
             {
                 content: null,
@@ -59,5 +60,8 @@ export const useInitalTodo = defineStore('initialTodo', {
         setTags(tags: Tag[]) {
             this.$state.todos[this.currentTodo].tags = tags;
         },
+        setListName(name: string) {
+            this.listName = name;
+        }
     }
 });

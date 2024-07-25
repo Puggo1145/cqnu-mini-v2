@@ -15,12 +15,12 @@ const initialTodoStore = useInitalTodo();
     <view 
         class="px-4 overflow-hidden w-full h-[136px] 
         transition-all duration-500 flex justify-center items-center"
-        :class="props.current === 1 && 'h-[386px]'"
+        :class="props.current === 1 && 'h-[320px]'"
     >
         <view :class="[
-            'w-full p-4 rounded-2xl bg-transparent transition-all duration-500',
+            'w-full rounded-2xl bg-transparent transition-all duration-500',
             'flex flex-col gap-y-3',
-            props.current === 1 && 'bg-white'
+            props.current === 1 && 'bg-white p-4'
         ]">
             <text 
                 :class="[

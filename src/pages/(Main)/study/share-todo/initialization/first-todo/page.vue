@@ -22,10 +22,16 @@ const getCurrent = (e: any) => current.value = e.detail.current;
             :current="current"
             @change="getCurrent"
         >
-            <swiper-item class="box-border px-4">
+            <swiper-item 
+                class="box-border px-4"
+                @touchmove.stop
+            >
                 <create-initial-todo @update:current="nextPage" />
             </swiper-item>
-            <swiper-item class="box-border px-4">
+            <swiper-item 
+                class="box-border px-4"
+                @touchmove.stop
+            >
                 <finish-create @update:current="prevPage" />
             </swiper-item>
         </swiper>

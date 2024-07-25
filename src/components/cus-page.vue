@@ -42,7 +42,7 @@ const backgroundStyle: Record<string, string> = {
 }
 
 
-const goBack = () => uni.navigateBack();
+const goBack = () => uni.navigateBack()
 </script>
 
 <template>

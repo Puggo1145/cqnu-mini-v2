@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
+import spinner from '@/components/spinner.vue';
 // components
 import cusSelect from '@/components/cus-select.vue';
 // link official
 import { getTermGrade } from '@/utils/link-official/scripts/jwxt';
+// static
+import icons from '@/constants/icons';
 // types
 import type { CusSelectEvent } from '@/components/cus-select.vue';
 import type { OriginalTermGrade } from '@/utils/link-official/scripts/jwxt';
@@ -24,10 +27,31 @@ function changeSemester(e: CusSelectEvent) {
     semesterIndex.value = e.value;
 }
 
-const transcript = ref<OriginalTermGrade["items"]>()
 
+const isTranscriptLoading = ref(false);
+const transcript = ref<OriginalTermGrade["items"]>();
+const transcriptSearchResult = ref<OriginalTermGrade["items"]>();
+const transcriptSearchInput = ref("");
+function searchTranscript(e: Event) {
+    // @ts-expect-error uniapp input 无类型标注
+    transcriptSearchInput.value = e.detail.value;
+
+    if (!transcriptSearchInput.value || transcriptSearchInput.value === "") {
+        transcriptSearchResult.value = transcript.value;
+        return;
+    }
+    
+    transcriptSearchResult.value = transcript.value?.filter(item => {
+        return item.kcmc.includes(transcriptSearchInput.value);
+    });
+}
 
 async function getTranscript() {
+    isTranscriptLoading.value = true;
+
+    // 清空搜索框
+    transcriptSearchInput.value = "";
+
     // 将年级转换为学年码
     const firstYear = Number(studentId.slice(0, 4));
     const gradesInNums = Array.from(gradeOptions).map((_, i) => {
@@ -42,16 +66,16 @@ async function getTranscript() {
     const xnm = gradesInNums[gradeIndex.value];
     const xqm = semesterMapper[semesterIndex.value];
 
-    console.log(xnm, xqm);
-    
 
-    // TODO - 请求成绩单
     const res = await getTermGrade(xnm, xqm)
-    
     if (res) {
         transcript.value = res.items;
+        transcriptSearchResult.value = res.items;
     }
+
+    isTranscriptLoading.value = false;
 }
+
 
 
 onMounted(() => {
@@ -87,22 +111,62 @@ watch([gradeIndex, semesterIndex], getTranscript)
                 :range="semesterOptions"
                 @change="changeSemester"
             />
+            <view
+                class="flex-1 bg-secondary rounded-2xl h-9 px-4 text-sm flex gap-x-2 items-center"
+            >
+                <image :src="icons.search" class="w-4 h-4" />
+                <input
+                    type="text"
+                    placeholder="用课程名搜索"
+                    :value="transcriptSearchInput"
+                    @input="searchTranscript"
+                >
+            </view>
         </view>
         <scroll-view
             scroll-y
-            class="mt-4 overflow-hidden flex-1 bg-secondary rounded-2xl p-4"
+            class="mt-4 overflow-hidden flex-1 bg-secondary rounded-2xl px-4 py-2"
         >
-            <view
-                v-for="(item, index) in transcript"
-                :key="index"
-                class="w-full h-12 flex justify-between border-b border-gray-200"
+            <view 
+                v-if="isTranscriptLoading"
+                class="mt-[92px] w-full h-12 flex flex-col gap-y-2 items-center justify-center"
             >
-                <text class="text-sm leading-[48px]">
-                    {{ item.kcmc }}
-                </text>
-                <text class="text-sm font-bold leading-[48px]">
-                    {{ item.bfzcj }}
-                </text>
+                <spinner size="medium" />
+                <text class="text-sm text-gray-400">加载中</text>
+            </view>
+            <view
+                v-else
+                v-for="(item, index) in transcriptSearchResult"
+                :key="index"
+                class="w-full flex justify-between items-center border-b border-gray-200 py-3"
+            >
+                <view class="flex flex-col gap-y-1 flex-1">
+                    <text class="text-sm line-clamp-1">
+                        {{ item.kcmc }}
+                    </text>
+                    <view class="flex gap-x-2">
+                        <!-- 学分 -->
+                        <text class="text-xs text-gray-400 font-bold">
+                            {{ item.xf }} 学分
+                        </text>
+                        <!-- 课程性质 -->
+                        <text class="text-xs text-gray-400">
+                            {{ item.kcxzmc }}
+                        </text>
+                        <!-- 课程性质 -->
+                        <text class="text-xs text-gray-400">
+                            {{ item.ksxz }}
+                        </text>
+                    </view>
+                </view>
+                <view class="w-[72px]">
+                    <text class="text-md font-bold">
+                        {{ item.bfzcj }}
+                    </text>
+                    <text class="text-xs font-bold">
+                        / {{ item.jd }}
+                    </text>
+                </view>
             </view>
         </scroll-view>
         <!-- 占位 -->

@@ -106,6 +106,8 @@ export interface OriginalTermGrade {
         jd: string // 绩点
         kcmc: string // 课程名称
         kcxzmc: string // 课程性质
+        ksxz: string // 成绩性质
+        xf: string // 学分
     } []
 }
 export const getTermGrade = async (
@@ -121,7 +123,8 @@ export const getTermGrade = async (
             url: urls.termGrade,
             data: {
                 xnm,
-                xqm
+                xqm,
+                "queryModel.showCount": 50
             },
             header: {
                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",

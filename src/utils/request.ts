@@ -53,24 +53,20 @@ const Request = async <T>(
                         isFetchSuccess = true;
                     }
 
-                    if (!isFetchSuccess) {
-                        throw new Error(responseBody.message || "请求失败");
-                    }
-                    
                     resolve(responseBody);
                     
                     showLoading && uni.hideLoading();
                     requestManager.deleteById(requestId);
                 },
-                fail: () => {
+                fail: (res) => {
                     uni.showToast({
-                        title: "网络错误",
+                        title: res.errMsg || "网络错误",
                         icon: "error"
                     });
 
                     resolve({ 
                         success: false,
-                        message: '网络错误'
+                        message: res.errMsg || "网络错误"
                     });
 
                     showLoading && uni.hideLoading();

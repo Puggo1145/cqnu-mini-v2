@@ -4,7 +4,6 @@ import { ref, onMounted } from 'vue';
 import titleDesc from '@/components/title-desc.vue';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
-// constants
 // linkOfficial
 import LinkOfficial from '@/utils/link-official';
 import { linkOfficialTexts } from '@/constants/signup/signup-texts';

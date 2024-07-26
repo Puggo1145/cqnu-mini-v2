@@ -5,6 +5,8 @@ import {
     resolveSchedule
 } from "../libs/jwxt/scheduleHandlers";
 import { resolveStudentInfo } from "../libs/jwxt/studentInfoHandler";
+// utils
+import { parseOverallGrade } from "../utils/htmlparser";
 // constants
 import urls from "../constants/urls";
 
@@ -84,9 +86,9 @@ export const getOverallGrade = async () => {
             }
         })
 
-        console.log(res);
+        const overallGrade = parseOverallGrade((res.data as string));
 
-        // return res.data;
+        return overallGrade;
     } catch {
         uni.showToast({
             title: "网络错误",

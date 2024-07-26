@@ -1,18 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+// linkOfficial
+import { getOverallGrade } from '@/utils/link-official';
 
 
-interface CourseDetail {
+interface StudyDetail {
     name: string;
-    count: number;
+    count: string;
 }
-const gpa = ref(3.73);
-const courseDetails = ref<CourseDetail[]>([
-    { name: "未通过", count: 0 },
-    { name: "未修", count: 3 },
-    { name: "在读", count: 8 },
-    { name: "通过", count: 46 },
+const gpa = ref<string>("--");
+const studyDetails = ref<StudyDetail[]>([
+    { name: "未通过", count: "-" },
+    { name: "未修", count: "-" },
+    { name: "在读", count: "-" },
+    { name: "通过", count: "-" },
 ])
+
+onMounted(async() => {
+    uni.showLoading({ title: "加载中" });
+    const res = await getOverallGrade();
+    if (res) {
+        gpa.value = res.gpa;
+        studyDetails.value = res.studyDetail;
+    }
+    uni.hideLoading();
+})
 </script>
 
 <template>
@@ -31,14 +43,15 @@ const courseDetails = ref<CourseDetail[]>([
     </view>
     <view class="mt-3 w-full p-4 bg-secondary rounded-2xl flex justify-evenly">
         <view
-            v-for="courseDetail in courseDetails"
+            v-for="studyDetail in studyDetails"
+            :key="studyDetail.name"
             class="w-12 flex flex-col items-center"
         >
             <text class="font-bold">
-                {{ courseDetail.count }}
+                {{ studyDetail.count }}
             </text>
             <text class="text-sm text-secondary-foreground">
-                {{ courseDetail.name }}
+                {{ studyDetail.name }}
             </text>
         </view>
     </view>

@@ -5,8 +5,21 @@ import {
 } from "./scripts/sign-in"
 import { 
     getSchedules,
-    getStudentInfo
+    getStudentInfo,
+    getOverallGrade
 } from "./scripts/jwxt"
+
+
+export {
+    getSignInSessionAndAuthCode,
+    signInToOfficial
+}
+
+export {
+    getSchedules,
+    getStudentInfo,
+    getOverallGrade
+}
 
 const LinkOfficial = {
     getSignInSessionAndAuthCode,

@@ -51,8 +51,11 @@ export const signInToOfficial = async (
     })
         .send();
 
-    // 保存登录后的主 cookie        
-    uni.setStorageSync('Cookie', res.data);
+
+    // 保存登录后的主 cookie
+    if (res.success) {
+        uni.setStorageSync('Cookie', res.data);
+    }
 
     return res;
 }

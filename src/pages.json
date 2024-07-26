@@ -4,6 +4,15 @@
 			"path": "pages/(Main)/study/grades/page"
 		},
 		{
+			"path": "pages/(Main)/link-official/page"
+		},
+		{
+			"path": "pages/(Onboarding)/sign-up/page"
+		},
+		{
+			"path": "pages/index/index"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{
@@ -11,12 +20,6 @@
 		},
 		{
 			"path": "pages/(Main)/study/share-todo/initialization/page"
-		},
-		{
-			"path": "pages/(Onboarding)/sign-up/page"
-		},
-		{
-			"path": "pages/index/index"
 		},
 		{
 			"path": "pages/(Main)/study/schedule/page"

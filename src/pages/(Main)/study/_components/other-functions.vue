@@ -7,7 +7,7 @@ const otherFunctions = [
     {
         name: "成绩查询",
         icon: icons.study.transcript,
-        url: ""
+        url: "/pages/(Main)/study/grades/page"
     },
     {
         name: "我的课表",

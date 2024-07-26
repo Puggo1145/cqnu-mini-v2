@@ -17,9 +17,10 @@ export const getJwxtCookie = async () => {
         })
             .send();
 
-        uni.setStorageSync('JwxtCookie', res.data);
-        
-        return res.data;
+        if (res.success) {
+            uni.setStorageSync('JwxtCookie', res.data);
+            return res.data;
+        }
     } catch {
         uni.showToast({
             title: "网络错误",

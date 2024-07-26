@@ -1,5 +1,5 @@
 // libs
-import { getJwxtCookie } from "../libs/jwxt/getJwxtCookie";
+import { getJwxtCookie } from "../libs/jwxt/get-jwxt-cookie";
 import { 
     getYearAndTerm,
     resolveSchedule
@@ -60,6 +60,33 @@ export const getStudentInfo = async () => {
         const resolvedStudentInfo = resolveStudentInfo((res.data as OriginalStudentInfo));
 
         return resolvedStudentInfo;
+    } catch {
+        uni.showToast({
+            title: "网络错误",
+            icon: "error",
+        })
+
+        return null;
+    }
+}
+
+
+export const getOverallGrade = async () => {
+    try {
+        const jwxtCookie = await getJwxtCookie();
+
+        // 返回的是 html 文档
+        const res = await uni.request({
+            method: "GET",
+            url: urls.overallGrade,
+            header: {
+                "Cookie": jwxtCookie
+            }
+        })
+
+        console.log(res);
+
+        // return res.data;
     } catch {
         uni.showToast({
             title: "网络错误",

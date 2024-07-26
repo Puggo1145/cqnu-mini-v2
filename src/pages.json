@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/(Main)/study/grades/page"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{

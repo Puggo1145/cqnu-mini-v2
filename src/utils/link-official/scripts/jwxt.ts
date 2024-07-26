@@ -1,6 +1,6 @@
 // libs
 import { getJwxtCookie } from "../libs/jwxt/get-jwxt-cookie";
-import { 
+import {
     getYearAndTerm,
     resolveSchedule
 } from "../libs/jwxt/scheduleHandlers";
@@ -13,9 +13,9 @@ import urls from "../constants/urls";
 export const getSchedules = async () => {
     try {
         const jwxtCookie = await getJwxtCookie();
-        
+
         // 获取当前学年和学期
-        const scheduleFormData = getYearAndTerm(); 
+        const scheduleFormData = getYearAndTerm();
 
         const res = await uni.request({
             method: "POST",
@@ -56,8 +56,6 @@ export const getStudentInfo = async () => {
                 "Cookie": jwxtCookie
             }
         })
-        console.log(res);
-        
 
         const resolvedStudentInfo = resolveStudentInfo((res.data as OriginalStudentInfo));
 
@@ -89,6 +87,49 @@ export const getOverallGrade = async () => {
         const overallGrade = parseOverallGrade((res.data as string));
 
         return overallGrade;
+    } catch {
+        uni.showToast({
+            title: "网络错误",
+            icon: "error",
+        })
+
+        return null;
+    }
+}
+
+
+export interface OriginalTermGrade {
+    currentPage: number
+    currentResult: number
+    items: {
+        bfzcj: string // 本学期成绩
+        jd: string // 绩点
+        kcmc: string // 课程名称
+        kcxzmc: string // 课程性质
+    } []
+}
+export const getTermGrade = async (
+    xnm: number, // 学年
+    xqm: number // 学期
+) => {
+    try {
+        const jwxtCookie = await getJwxtCookie();
+
+        // 返回的是 html 文档
+        const res = await uni.request({
+            method: "POST",
+            url: urls.termGrade,
+            data: {
+                xnm,
+                xqm
+            },
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+                "Cookie": jwxtCookie
+            }
+        })
+
+        return res.data as OriginalTermGrade;
     } catch {
         uni.showToast({
             title: "网络错误",

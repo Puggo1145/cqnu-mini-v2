@@ -28,31 +28,33 @@ onMounted(async() => {
 </script>
 
 <template>
-    <view class="w-full p-4 rounded-2xl bg-primary flex flex-col gap-y-1">
-        <text class="text-primary-foreground text-sm font-bold">
-            平均学分绩点（GPA）
-        </text>
-        <view>
-            <text class="text-primary-foreground font-bold text-3xl">
-                {{ gpa }}
+    <view class="w-full flex gap-x-3">
+        <view class="w-full p-4 pr-2 rounded-2xl bg-primary flex flex-col justify-between">
+            <text class="text-primary-foreground text-sm font-bold">
+                平均学分绩点（GPA）
             </text>
-            <text class="text-primary-foreground font-bold text-sm">
-                / 5
-            </text>
+            <view>
+                <text class="text-primary-foreground font-bold text-3xl">
+                    {{ gpa }}
+                </text>
+                <text class="text-primary-foreground font-bold text-sm">
+                    / 5
+                </text>
+            </view>
         </view>
-    </view>
-    <view class="mt-3 w-full p-4 bg-secondary rounded-2xl flex justify-evenly">
-        <view
-            v-for="studyDetail in studyDetails"
-            :key="studyDetail.name"
-            class="w-12 flex flex-col items-center"
-        >
-            <text class="font-bold">
-                {{ studyDetail.count }}
-            </text>
-            <text class="text-sm text-secondary-foreground">
-                {{ studyDetail.name }}
-            </text>
+        <view class="w-full h-full p-4 pr-0 bg-secondary rounded-2xl grid grid-cols-2 grid-rows-2 gap-2">
+            <view
+                v-for="studyDetail in studyDetails"
+                :key="studyDetail.name"
+                class="w-12 flex flex-col items-center"
+            >
+                <text class="font-bold">
+                    {{ studyDetail.count }}
+                </text>
+                <text class="text-sm text-secondary-foreground">
+                    {{ studyDetail.name }}
+                </text>
+            </view>
         </view>
     </view>
 </template>

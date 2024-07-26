@@ -9,13 +9,9 @@ import termGrade from './_components/term-grade.vue';
     <cus-page 
         header-type="nav" 
         padding-x="16" 
-        class-name="gap-y-8"
     >
         <overall-grade />
-        <view class="flex flex-col gap-y-2">
-            <text class="ml-2 font-bold text-2xl">
-                学期成绩
-            </text>
+        <view class="mt-4 flex-1 overflow-hidden">
             <term-grade />
         </view>
     </cus-page>

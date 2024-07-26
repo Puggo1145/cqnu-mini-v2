@@ -3,7 +3,8 @@ const urls = {
     captcha: "https://csxrz.cqnu.edu.cn:443/cas/verCode?random=",
     schedule: "https://jwglxt.cqnu.edu.cn/jwglxt/kbcx/xskbcx_cxXsgrkb.html",
     studentInfo: "https://jwglxt.cqnu.edu.cn/jwglxt/xsxxxggl/xsxxwh_cxCkDgxsxx.html?gnmkdm=N100801",
-    overallGrade: "https://jwglxt.cqnu.edu.cn/jwglxt/xsxy/xsxyqk_cxXsxyqkIndex.html?gnmkdm=N105515"
+    overallGrade: "https://jwglxt.cqnu.edu.cn/jwglxt/xsxy/xsxyqk_cxXsxyqkIndex.html?gnmkdm=N105515",
+    termGrade: "https://jwglxt.cqnu.edu.cn/jwglxt/cjcx/cjcx_cxXsgrcj.html?doType=query&gnmkdm=N305005",
 }
 
 export default urls;

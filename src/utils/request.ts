@@ -31,14 +31,14 @@ const Request = async <T>(
         "Authentication": authorization,
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         showLoading && uni.showLoading({ title: '加载中' });
 
         uni.request({
             url: targetURL + route,
             method: method || 'GET',
             header: header,
-            timeout: 100,
+            timeout: 8000,
             data: data,
 
             success: (res) => {
@@ -65,10 +65,15 @@ const Request = async <T>(
                 });
             },
             fail: (res) => {
-                if (res.errMsg !== "request:fail timeout") {
+                if (res.errMsg === "request:fail timeout") {
+                    uni.showToast({
+                        title: "网络错误",
+                        icon: "error"
+                    });
+                } else {
                     uni.showToast({
                         title: res.errMsg,
-                        icon: "error"
+                        icon: "none"
                     });
                 }
 

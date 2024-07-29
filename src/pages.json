@@ -1,10 +1,10 @@
 {
 	"pages": [
 		{
-			"path": "pages/(Main)/today/page"
+			"path": "pages/index/index"
 		},
 		{
-			"path": "pages/index/index"
+			"path": "pages/(Main)/today/page"
 		},
 		{
 			"path": "pages/(Main)/study/grades/page"

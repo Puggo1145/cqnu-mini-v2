@@ -22,19 +22,21 @@ export const signin = async () => {
             .useParams({ code: wxloginRes.code })
             .send();
 
-        // 登录成功，保存 token
         if (res.ok) {
-            if (res.data.data.token && res.data.data.openid ) {
+            // 登录成功，保存 token
+            if (res.data.data.token && res.data.data.openid) {
                 uni.setStorageSync("token", res.data.data.token);
                 uni.setStorageSync("openid", res.data.data.openid);
-                
+
                 return { action: "signin" };
             }
-            
+
             // 放行用户不存在 => 跳转注册
             if (res.data.code === acceptableErrorCode[0]) {
                 return { action: "signup" };
             }
+        } else {
+            return { action: null };
         }
     } catch (err) {
         uni.showToast({
@@ -69,7 +71,7 @@ export const signup = async (signupData: SignUpData) => {
         // 注册成功，保存 token
         if (res.ok) {
             uni.setStorageSync("token", res.data.data.token);
-            
+
             return { success: res.ok };
         }
     } catch (err) {

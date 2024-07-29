@@ -23,16 +23,18 @@ export const signin = async () => {
             .send();
 
         // 登录成功，保存 token
-        if (res.data.token && res.data.openid) {
-            uni.setStorageSync("token", res.data.token);
-            uni.setStorageSync("openid", res.data.openid);
-
-            return { action: "signin" };
-        }
-
-        // 放行用户不存在 => 跳转注册
-        if (res.code === acceptableErrorCode[0]) {
-            return { action: "signup" };
+        if (res.ok) {
+            if (res.data.data.token && res.data.data.openid ) {
+                uni.setStorageSync("token", res.data.data.token);
+                uni.setStorageSync("openid", res.data.data.openid);
+                
+                return { action: "signin" };
+            }
+            
+            // 放行用户不存在 => 跳转注册
+            if (res.data.code === acceptableErrorCode[0]) {
+                return { action: "signup" };
+            }
         }
     } catch (err) {
         uni.showToast({
@@ -65,10 +67,10 @@ export const signup = async (signupData: SignUpData) => {
             .send();
 
         // 注册成功，保存 token
-        if (res.success) {
-            uni.setStorageSync("token", res.data.token);
+        if (res.ok) {
+            uni.setStorageSync("token", res.data.data.token);
             
-            return { success: res.success };
+            return { success: res.ok };
         }
     } catch (err) {
         uni.showToast({

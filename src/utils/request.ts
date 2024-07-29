@@ -2,10 +2,8 @@ import RequestManager from "./requestManager";
 import { acceptableErrorCode } from "@/constants/acceptableErrorCode";
 // types
 import type { MyResponse } from "@/types/response";
-type ResponseError = {
-    success: false;
-    message: string;
-};
+type ResponseError = { ok: false };
+type ResponseSuccess<T> = { ok: true; data: MyResponse<T> };
 export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export type Where = 'base' | 'linkOfficial';
 
@@ -20,7 +18,7 @@ const Request = async <T>(
     method: Methods,
     data: any,
     showLoading?: boolean // 该请求是否显示 loading
-): Promise<MyResponse<T>> => {
+): Promise<ResponseSuccess<T> | ResponseError> => {
     // 生成请求唯一 id，加入请求队列, 防止重复请求
     const requestId = requestManager.generateId(method, route, data);
     if (!requestId) {
@@ -40,7 +38,7 @@ const Request = async <T>(
             url: targetURL + route,
             method: method || 'GET',
             header: header,
-            timeout: 8000,
+            timeout: 100,
             data: data,
 
             success: (res) => {
@@ -57,21 +55,24 @@ const Request = async <T>(
                         title: responseBody.message || '请求错误',
                         icon: 'error'
                     });
-                    reject({
-                        success: false,
-                        message: responseBody.message || '请求错误'
+
+                    resolve({ ok: false });
+                }
+
+                resolve({
+                    ok: true,
+                    data: responseBody
+                });
+            },
+            fail: (res) => {
+                if (res.errMsg !== "request:fail timeout") {
+                    uni.showToast({
+                        title: res.errMsg,
+                        icon: "error"
                     });
                 }
 
-                resolve(responseBody);
-            },
-            fail: (res) => {
-                uni.showToast({
-                    title: res.errMsg || "网络错误",
-                    icon: "error"
-                });
-
-                reject({ success: false });
+                resolve({ ok: false });
             },
             complete: () => {
                 showLoading && uni.hideLoading();
@@ -139,7 +140,7 @@ class RequestBuilder<T> {
     }
 
     // 发送请求
-    async send(): Promise<MyResponse<T>> {
+    async send(): Promise<ResponseSuccess<T> | ResponseError> {
         // 构建最终的查询字符串
         const queryString = this.buildQueryString();
 

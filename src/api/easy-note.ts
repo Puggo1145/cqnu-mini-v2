@@ -3,6 +3,7 @@ import request from "@/utils/request";
 import type { MyResponse, PageResponse } from "@/types/response";
 import type { EasyNoteCard } from "@/pages/(Main)/study/easy-note/_components/easy-note-card.vue";
 
+
 // 获取分页小记
 export interface GetNoteListParams {
     current: number;
@@ -18,7 +19,7 @@ export const getNoteList = async (params: GetNoteListParams) => {
     })
         .send();
 
-    return res;
+    return res
 }
 
 // 获取小记标签
@@ -32,7 +33,7 @@ export const getTags = async () => {
     })
         .send();
 
-    return res;
+    return res
 }
 
 // 创建小记
@@ -45,5 +46,5 @@ export const createNote = async (note: CreateEasyNote) => {
     })
         .send();
 
-    return { success: res.success };
+    return res
 }

@@ -53,8 +53,8 @@ export const signInToOfficial = async (
 
 
     // 保存登录后的主 cookie
-    if (res.success) {
-        uni.setStorageSync('Cookie', res.data);
+    if (res.ok) {
+        uni.setStorageSync('Cookie', res.data.data);
     }
 
     return res;

@@ -17,9 +17,9 @@ export const getJwxtCookie = async () => {
         })
             .send();
 
-        if (res.success) {
-            uni.setStorageSync('JwxtCookie', res.data);
-            return res.data;
+        if (res.ok) {
+            uni.setStorageSync('JwxtCookie', res.data.data);
+            return res.data.data;
         }
     } catch {
         uni.showToast({

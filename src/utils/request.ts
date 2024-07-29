@@ -20,70 +20,65 @@ const Request = async <T>(
     method: Methods,
     data: any,
     showLoading?: boolean // 该请求是否显示 loading
-): Promise<MyResponse<T> | ResponseError> => {
-    try {
-        // 生成请求唯一 id，加入请求队列, 防止重复请求
-        const requestId = requestManager.generateId(method, route, data);
-        if (!requestId) {
-            return Promise.reject('当前请求还未完成，请勿重复请求');
-        }
-        
-        // 构造 headers
-        const authorization = uni.getStorageSync('token') || '';
-        const header = {
-            "Authentication": authorization,
-        }
-
-        return new Promise((resolve) => {
-            showLoading && uni.showLoading({ title: '加载中' });
-
-            uni.request({
-                url: targetURL + route,
-                method: method || 'GET',
-                header: header,
-                timeout: 8000,
-                data: data,
-
-                success: (res) => {
-                    const responseBody = res.data as MyResponse<T>;
-
-                    let isFetchSuccess = responseBody.code === '0' && responseBody.success;
-                    // 放行部分错误码
-                    if (acceptableErrorCode.includes(responseBody.code)) {
-                        isFetchSuccess = true;
-                    }
-
-                    resolve(responseBody);
-                    
-                    showLoading && uni.hideLoading();
-                    requestManager.deleteById(requestId);
-                },
-                fail: (res) => {
-                    uni.showToast({
-                        title: res.errMsg || "网络错误",
-                        icon: "error"
-                    });
-
-                    resolve({ 
-                        success: false,
-                        message: res.errMsg || "网络错误"
-                    });
-
-                    showLoading && uni.hideLoading();
-                    requestManager.deleteById(requestId);
-                }
-            })
-        })
-    } catch (err) {
-        uni.showToast({
-            title: '应用出现错误',
-            icon: 'error'
-        });
-        return Promise.reject({ 
-            success: false,
-            message: '应用出现错误'
-        });
+): Promise<MyResponse<T>> => {
+    // 生成请求唯一 id，加入请求队列, 防止重复请求
+    const requestId = requestManager.generateId(method, route, data);
+    if (!requestId) {
+        return Promise.reject('当前请求还未完成，请勿重复请求');
     }
+
+    // 构造 headers
+    const authorization = uni.getStorageSync('token') || '';
+    const header = {
+        "Authentication": authorization,
+    }
+
+    return new Promise((resolve, reject) => {
+        showLoading && uni.showLoading({ title: '加载中' });
+
+        uni.request({
+            url: targetURL + route,
+            method: method || 'GET',
+            header: header,
+            timeout: 8000,
+            data: data,
+
+            success: (res) => {
+                const responseBody = res.data as MyResponse<T>;
+
+                let isFetchSuccess = responseBody.code === '0' && responseBody.success;
+                // 放行部分错误码
+                if (acceptableErrorCode.includes(responseBody.code)) {
+                    isFetchSuccess = true;
+                }
+
+                if (!isFetchSuccess) {
+                    uni.showToast({
+                        title: responseBody.message || '请求错误',
+                        icon: 'error'
+                    });
+                    reject({
+                        success: false,
+                        message: responseBody.message || '请求错误'
+                    });
+                }
+
+                resolve(responseBody);
+            },
+            fail: (res) => {
+                uni.showToast({
+                    title: res.errMsg || "网络错误",
+                    icon: "error"
+                });
+
+                reject({ success: false });
+            },
+            complete: () => {
+                showLoading && uni.hideLoading();
+                requestManager.deleteById(requestId);
+            }
+        })
+    })
 }
 
 // 实现 请求 + 分页 + 参数等功能的链式调用
@@ -144,13 +139,13 @@ class RequestBuilder<T> {
     }
 
     // 发送请求
-    async send(): Promise<MyResponse<T> | ResponseError> {
+    async send(): Promise<MyResponse<T>> {
         // 构建最终的查询字符串
-        const queryString = this.buildQueryString();  
-        
+        const queryString = this.buildQueryString();
+
         // 选择请求地址
-        const targetURL = this.where === 'base' ? 
-            import.meta.env.VITE_BASE_URL : 
+        const targetURL = this.where === 'base' ?
+            import.meta.env.VITE_BASE_URL :
             import.meta.env.VITE_LINKOFFICIAL_URL
 
         return Request<T>(targetURL, this.route + queryString, this.method, this.data, this.showLoading);
@@ -168,34 +163,34 @@ interface RequestOptions {
 const request:
     Record<Methods, <T>({ where, route, showLoading, data }: RequestOptions) => RequestBuilder<T>>
     = {
-    GET: ({ 
-        where = "base", 
-        route, 
-        showLoading 
+    GET: ({
+        where = "base",
+        route,
+        showLoading
     }) => {
         return new RequestBuilder(where, route, 'GET', {}, showLoading)
     },
     POST: ({
-        where = "base", 
-        route, 
-        data, 
-        showLoading 
+        where = "base",
+        route,
+        data,
+        showLoading
     }) => {
         return new RequestBuilder(where, route, 'POST', data, showLoading)
     },
-    PUT: ({ 
-        where = "base", 
-        route, 
-        data, 
-        showLoading 
+    PUT: ({
+        where = "base",
+        route,
+        data,
+        showLoading
     }) => {
         return new RequestBuilder(where, route, 'PUT', data, showLoading)
     },
-    DELETE: ({ 
-        where = "base", 
-        route, 
-        data, 
-        showLoading 
+    DELETE: ({
+        where = "base",
+        route,
+        data,
+        showLoading
     }) => {
         return new RequestBuilder(where, route, 'DELETE', data, showLoading)
     },

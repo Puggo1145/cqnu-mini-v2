@@ -23,19 +23,16 @@ export const signin = async () => {
             .send();
 
         // 登录成功，保存 token
-        if (res.success) {
-            if (res.data.token) {
-                uni.setStorageSync("token", res.data.token);
-            }
+        if (res.data.token && res.data.openid) {
+            uni.setStorageSync("token", res.data.token);
+            uni.setStorageSync("openid", res.data.openid);
+
+            return { action: "signin" };
         }
 
         // 放行用户不存在 => 跳转注册
-        if (res.success) {
-            if (res.code === acceptableErrorCode[0]) {
-                return { toSignUp: true };
-            } else {
-                return { toSignUp: false };
-            }
+        if (res.code === acceptableErrorCode[0]) {
+            return { action: "signup" };
         }
     } catch (err) {
         uni.showToast({

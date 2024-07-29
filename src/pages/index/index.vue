@@ -12,18 +12,18 @@ import { signin } from "@/api/auth";
 const isSigningIn = ref(false);
 const handleSignIn = async () => {
     isSigningIn.value = true;
-    
+
     const res = await signin();
     // 用户不存在，跳转到注册页
-    if (res?.toSignUp) {
+    if (res?.action === "signup") {
         uni.navigateTo({ url: "/pages/(Onboarding)/sign-up/page" });
         isSigningIn.value = false;
-
-        return;
+    } else if (res?.action === "signin") {
+        // 登录成功后跳转主页
+        uni.switchTab({ url: "/pages/(Main)/today/page" });
     }
-    
-    // 登录成功后跳转主页
-    uni.switchTab({ url: "/pages/(Main)/today/page" });
+
+    isSigningIn.value = false;
 };
 
 

@@ -24,8 +24,8 @@ export const useClassEasyNoteStore = defineStore('classEasyNote', {
         },
         // TODO - 根据课程名称查询小记
         async createNote(data: CreateEasyNote) {
-            const res = await createNote(data);
-            if (res.ok) {
+            const isSuccess = await createNote(data);
+            if (isSuccess) {
                 await this.fetchNotes({
                     current: 1,
                     pageSize: 10,

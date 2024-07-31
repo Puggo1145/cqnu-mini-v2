@@ -1,6 +1,6 @@
 import request from "@/utils/request";
 // types
-import type { MyResponse, PageResponse } from "@/types/response";
+import type { PageResponse } from "@/types/response";
 import type { EasyNoteCard } from "@/pages/(Main)/study/easy-note/_components/easy-note-card.vue";
 
 
@@ -33,18 +33,22 @@ export const getTags = async () => {
     })
         .send();
 
-    return res
+    if (res.ok) {
+        return res.data.data
+    }
 }
 
 // 创建小记
 type OmitParams = "id" | "tagList" | "openid" | "seeNumber" | "supportNumber" | "username"
 export type CreateEasyNote = Omit<EasyNoteCard, OmitParams> & { tagIds: number[] }
 export const createNote = async (note: CreateEasyNote) => {
-    const res = await request.POST<MyResponse<boolean>>({
+    const res = await request.POST<boolean>({
         route: "note/v1/addNote",
         data: note
     })
         .send();
 
-    return res
+    if (res.ok) {
+        return res.data.data
+    }
 }

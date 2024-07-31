@@ -37,7 +37,7 @@ const relatedCourses = ref(mockRelatedCourses);
 onMounted(async () => {
     // 从后端拉取可选的标签数据
     const data = await getTags();
-    if (tags) {
+    if (data) {
         tags.value = data;
     }
 })
@@ -97,9 +97,9 @@ async function createEasyNote() {
         });
         
         // 2. 创建小记
-        const res = await createNote(form);
+        const isSuccess = await createNote(form);
 
-        if (res.success) {
+        if (isSuccess) {
             uni.showToast({
                 title: '创建成功',
                 icon: 'success',

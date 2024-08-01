@@ -22,8 +22,6 @@ async function goToSignUpProcess() {
 
     const encryptedLinker = encryptLinker(stores.linker);
 
-    console.log(encryptedLinker);
-    
     const res = await signup({
         username: stores.username,
         studentId: stores.studentId,

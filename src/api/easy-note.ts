@@ -48,7 +48,5 @@ export const createNote = async (note: CreateEasyNote) => {
     })
         .send();
 
-    if (res.ok) {
-        return res.data.data
-    }
+    return res.ok
 }

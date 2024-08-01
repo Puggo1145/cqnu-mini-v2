@@ -27,7 +27,7 @@ onMounted(async () => {
 
 function goToEasyNote() {
     uni.navigateTo({
-        url: '/pages/(Main)/study/easy-note/page'
+        url: '/pages/(Main)/study/easy-note/page',
     });
 }
 function goToCreateEasyNote() {

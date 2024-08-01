@@ -2,7 +2,7 @@ import request from "@/utils/request";
 
 export const validateTokenAndSyncUserInfo = async () => {
     const res = await request.GET({
-        route: "user/v1/getUserInfo"
+        route: "user/v1/self"
     })
         .send();
 

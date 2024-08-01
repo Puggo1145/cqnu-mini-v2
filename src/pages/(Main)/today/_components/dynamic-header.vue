@@ -10,7 +10,7 @@ const functionBtns = {
     },
     me: {
         icon: icons.me,
-        url: "/me"
+        url: "/pages/(Main)/me/page"
     }
 }
 

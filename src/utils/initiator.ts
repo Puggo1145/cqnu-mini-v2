@@ -1,5 +1,9 @@
 import { validateTokenAndSyncUserInfo } from "@/api/user";
 
+
+/**
+ * @description 小程序初始化器
+ */
 class Initiator {
     // 检查 token 有效性
     async validateSignInStatus() {
@@ -29,6 +33,34 @@ class Initiator {
                 url: "/pages/(Main)/today/page"
             });
         }
+    }
+
+    // 验证 link Official cookie 有效性
+    async validateLinkOfficialCookie() {
+        // const cookie = uni.getStorageSync("Cookie");
+        // if (!cookie) {
+        //     uni.navigateTo({
+        //         url: "/pages/index/index"
+        //     });
+        // }
+    }
+
+    // 添加页面拦截规则
+    addInterceptPages(pagesOnIntercept: string[] = []) {
+        // function isInterceptPage(page: string) {
+        //     return pagesOnIntercept.includes(page);
+        // }
+
+        // uni.addInterceptor('navigateTo', {
+        //     invoke(e) {
+        //         if (isInterceptPage(e.url)) {
+        //             uni.navigateTo({
+        //                 url: "/pages/index/index"
+        //             });
+        //             return false;
+        //         }
+        //     }
+        // })
     }
 }
 

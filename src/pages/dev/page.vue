@@ -9,6 +9,9 @@ import cusInput from '@/components/cus-input.vue';
 import { getNoteList, createNote } from '@/api/easy-note';
 // 爬虫测试
 import LinkOfficial from '@/utils/link-official';
+// linker 加密和解密测试
+import { encryptLinker, rsaDecrypt } from '@/utils/encrypter';
+
 
 const captchaBase64 = ref<string>('');
 const authCode = ref<string>('');
@@ -55,6 +58,15 @@ const createEasyNote = async () => {
     console.log(res);
 };
 
+
+const testRSA = () => {
+    const data = "281733";
+    const encrypted = encryptLinker(data);
+    console.log("加密后：" + encrypted);
+    const decrypted = rsaDecrypt(encrypted);
+    console.log("解密后：" + decrypted);
+}
+
 </script>
 
 <template>
@@ -92,6 +104,11 @@ const createEasyNote = async () => {
                     创建小记
                 </cus-button>
             </view>
+        </view>
+        <view class="mt-4">
+            <cus-button @click="testRSA">
+                测试RSA
+            </cus-button>
         </view>
     </cus-page>
 </template>

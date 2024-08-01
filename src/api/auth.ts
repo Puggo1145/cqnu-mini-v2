@@ -17,23 +17,24 @@ export const signin = async () => {
         const wxloginRes = await uni.login();
 
         const res = await request.POST<SignInResponse>({
-            route: "auth/v1/wx/login",
+            route: "user/v1/wx/login",
         })
             .useParams({ code: wxloginRes.code })
             .send();
 
+
         if (res.ok) {
+            // 放行用户不存在 => 跳转注册
+            if (res.data.code === acceptableErrorCode[0]) {
+                return { action: "signup" };
+            }
+
             // 登录成功，保存 token
             if (res.data.data.token && res.data.data.openid) {
                 uni.setStorageSync("token", res.data.data.token);
                 uni.setStorageSync("openid", res.data.data.openid);
 
                 return { action: "signin" };
-            }
-
-            // 放行用户不存在 => 跳转注册
-            if (res.data.code === acceptableErrorCode[0]) {
-                return { action: "signup" };
             }
         } else {
             return { action: null };
@@ -53,14 +54,14 @@ interface SignUpData {
     faculty: string,
     major: string,
     stuClass: string,
-    password?: string // 校园官网密码
+    linker?: string // 校园官网密码
 }
 export const signup = async (signupData: SignUpData) => {
     try {
         const { code } = await uni.login();
 
         const res = await request.POST<SignUpResponse>({
-            route: "auth/v1/wx/register",
+            route: "user/v1/wx/register",
             data: {
                 code,
                 ...signupData

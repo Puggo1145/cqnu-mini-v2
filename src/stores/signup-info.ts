@@ -4,7 +4,7 @@ export const useSignupInfo = defineStore('signupInfo', {
     state: () => ({
         username: '',
         studentId: '',
-        password: '',
+        linker: '',
         identity: null as number | null,
         faculty: null as string | null,
         major: null as string | null,
@@ -26,8 +26,8 @@ export const useSignupInfo = defineStore('signupInfo', {
         setMajor(newMajor: string) {
             this.major = newMajor;
         },
-        setPassword(newPassword: string) {
-            this.password = newPassword;
+        setLinker(newLinker: string) {
+            this.linker = newLinker;
         },
         setStuClass(newStuClass: string) {
             this.stuClass = newStuClass;

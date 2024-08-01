@@ -7,6 +7,10 @@ import cusButton from '@/components/cus-button.vue';
 import { signup } from '@/api/auth';
 // stores
 import { useSignupInfo } from '@/stores/signup-info';
+// utils
+import { encryptLinker } from '@/utils/encrypter';
+
+
 
 const stores = useSignupInfo();
 
@@ -16,10 +20,14 @@ const isSigningUp = ref(false);
 async function goToSignUpProcess() {
     isSigningUp.value = true;
 
+    const encryptedLinker = encryptLinker(stores.linker);
+
+    console.log(encryptedLinker);
+    
     const res = await signup({
         username: stores.username,
         studentId: stores.studentId,
-        password: stores.password,
+        linker: encryptedLinker,
         identity: stores.identity!,
         faculty: stores.faculty!,
         major: stores.major!,

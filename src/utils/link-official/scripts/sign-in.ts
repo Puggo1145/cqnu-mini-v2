@@ -11,8 +11,6 @@ export const getSignInSessionAndAuthCode = async () => {
         // const cookie = uni.getStorageSync('Cookie') as string;
         // if (cookie.startsWith("CASTGC")) return;
 
-        uni.showLoading({ title: "正在加载验证码" });
-
         const dataObj = await getDynamicData();
         const authCodeImg = await getCaptcha();
 
@@ -23,7 +21,6 @@ export const getSignInSessionAndAuthCode = async () => {
             dataObj,
         };
     } catch {
-        uni.hideLoading();
         uni.showToast({
             title: "网络错误，请重试",
             icon: "error",

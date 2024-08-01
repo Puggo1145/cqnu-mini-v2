@@ -10,9 +10,11 @@ class Initiator {
         const token = uni.getStorageSync("token");
         // 检查 token 是否存在，不存在则跳转到首页登录
         if (!token) {
-            uni.navigateTo({
+            uni.redirectTo({
                 url: "/pages/index/index"
             });
+
+            return;
         };
 
         // 有 token 检查 token 是否有效
@@ -23,13 +25,13 @@ class Initiator {
             const pages = getCurrentPages();
             const currentPage = pages[pages.length - 1];
             if (currentPage.route !== "pages/index/index") {
-                uni.navigateTo({
+                uni.redirectTo({
                     url: "/pages/index/index"
                 });
-            }           
+            }
         } else {
             // token 有效，跳转到首页
-            uni.navigateTo({
+            uni.switchTab({
                 url: "/pages/(Main)/today/page"
             });
         }

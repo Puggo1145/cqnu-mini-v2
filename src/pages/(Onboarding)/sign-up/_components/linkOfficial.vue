@@ -59,11 +59,9 @@ async function handleLinkOfficial() {
         // 1. 验证表单
         const form = linkOfficialSchema.parse({
             studentId: stores.studentId,
-            password: stores.password,
+            password: stores.linker,
             authCode: authCode.value,
         });
-        console.log(form);
-        
         
         // 2. 登录官网
         const signInRes = await LinkOfficial.signInToOfficial(
@@ -72,12 +70,8 @@ async function handleLinkOfficial() {
             form.authCode,
             dataObj.value,
         )
-        if (!signInRes.success) {
+        if (!signInRes.ok) {
             await refreshAuthCode();
-            uni.showToast({
-                title: signInRes.message,
-                icon: 'none',
-            });
             isLinkingOfficial.value = false;
 
             return;
@@ -86,7 +80,6 @@ async function handleLinkOfficial() {
         // 3. 获取学生信息
         const userInfoRes = await LinkOfficial.getStudentInfo();
         if (userInfoRes) {
-            console.log(userInfoRes);
             // 设定用户身份
             stores.setIdentity(identityMapper[userInfoRes.identity]);
             stores.setFaculty(userInfoRes.faculty);
@@ -127,15 +120,15 @@ async function handleLinkOfficial() {
             field-name="学号" 
             ref="studentIdInputRef"
             :value="stores.studentId"
-            @input="e => stores.studentId = e.value"
+            @input="e => stores.setStudentId(e.value)"
         
         />
         <cusInput 
             field-name="官网密码"
             type="password"
             ref="passwordInputRef"
-            :value="stores.password"
-            @input="e => stores.password = e.value"
+            :value="stores.linker"
+            @input="e => stores.setLinker(e.value)"
         />
         <view class="flex items-start gap-x-4">
             <cusInput

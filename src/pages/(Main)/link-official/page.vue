@@ -71,10 +71,10 @@ async function handleLinkOfficial() {
             dataObj.value,
         )
         
-        if (!res.success) {
+        if (!res.ok) {
             await refreshAuthCode();
             uni.showToast({
-                title: res.message,
+                title: "登录失败，请检查输入",
                 icon: 'none',
             });
             isLinkingOfficial.value = false;

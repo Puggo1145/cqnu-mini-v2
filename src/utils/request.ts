@@ -2,7 +2,7 @@ import RequestManager from "./requestManager";
 import { acceptableErrorCode } from "@/constants/acceptableErrorCode";
 // types
 import type { MyResponse } from "@/types/response";
-type ResponseError = { ok: false };
+type ResponseError = { ok: false, message: string | undefined };
 type ResponseSuccess<T> = { ok: true; data: MyResponse<T> };
 export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export type Where = 'base' | 'linkOfficial';
@@ -51,12 +51,17 @@ const Request = async <T>(
                 }
 
                 if (!isFetchSuccess) {
+                    console.log(responseBody);
+                    
                     uni.showToast({
                         title: responseBody.message || '请求错误',
                         icon: 'error'
                     });
 
-                    resolve({ ok: false });
+                    resolve({ 
+                        ok: false,
+                        message: responseBody.message
+                    });
                 }
 
                 resolve({
@@ -77,7 +82,7 @@ const Request = async <T>(
                     });
                 }
 
-                resolve({ ok: false });
+                resolve({ ok: false, message: res.errMsg });
             },
             complete: () => {
                 showLoading && uni.hideLoading();

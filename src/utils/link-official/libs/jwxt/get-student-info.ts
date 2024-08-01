@@ -1,6 +1,6 @@
 import { getJwxtCookie } from "./get-jwxt-cookie"
 import urls from "../../constants/urls"
-import { resolveStudentInfo } from "./studentInfoHandler"
+import { resolveStudentInfo } from "../../utils/studentInfoHandler"
 
 
 export interface OriginalStudentInfo {

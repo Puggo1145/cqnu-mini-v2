@@ -1,7 +1,7 @@
 import { getJwxtCookie } from "./get-jwxt-cookie";
-import { getYearAndTerm } from "./scheduleHandlers";
+import { getYearAndTerm } from "../../utils/scheduleHandlers";
 import urls from "../../constants/urls";
-import { resolveSchedule } from "./scheduleHandlers";
+import { resolveSchedule } from "../../utils/scheduleHandlers";
 
 export const getSchedules = async () => {
     try {

@@ -1,4 +1,4 @@
-import type { OriginalStudentInfo } from "../../scripts/jwxt"
+import type { OriginalStudentInfo } from "../libs/jwxt/get-student-info"
 
 export const resolveStudentInfo = (originalData: OriginalStudentInfo) => {
     return {

@@ -4,12 +4,12 @@ import spinner from '@/components/spinner.vue';
 // components
 import cusSelect from '@/components/cus-select.vue';
 // link official
-import { getTermGrade } from '@/utils/link-official/scripts/jwxt';
+import { getTermGrade } from '@/utils/link-official';
 // static
 import icons from '@/constants/icons';
 // types
 import type { CusSelectEvent } from '@/components/cus-select.vue';
-import type { OriginalTermGrade } from '@/utils/link-official/scripts/jwxt';
+import type { OriginalTermGrade } from '@/utils/link-official/libs/jwxt/get-term-grade';
 
 
 // TODO - 从缓存获取学号以计算年级对应的学年码

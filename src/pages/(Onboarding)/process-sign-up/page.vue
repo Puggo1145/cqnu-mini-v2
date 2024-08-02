@@ -9,6 +9,8 @@ onMounted(() => {
             url: '/pages/(Main)/today/page'
         });
     }, 2000);
+
+    // TODO - 完成一卡通卡号的获取，课表同步
 });
 </script>
 

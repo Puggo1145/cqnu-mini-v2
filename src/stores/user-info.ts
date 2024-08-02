@@ -14,7 +14,7 @@ interface UserInfo extends Record<string, any> {
     identity: number | undefined;
     
     dormitory?: string;
-    roomId?: number;
+    roomNumber?: string;
     eCardId?: string;
 
     showFlag: number | undefined;
@@ -46,9 +46,9 @@ const useUserInfo = defineStore("useUserInfo", {
         stuClass: "网络与新媒体1班",
         identity: 0,
         
-        // dormitory: "嘉风B",
-        // roomId: 1050,
-        // eCardId: "123560"
+        dormitory: undefined,
+        roomNumber: undefined,
+        eCardId: "125630",
 
         showFlag: 0,
     }) as UserInfo,

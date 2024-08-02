@@ -20,14 +20,13 @@ const isSigningUp = ref(false);
 async function goToSignUpProcess() {
     isSigningUp.value = true;
 
-    const encryptedLinker = encryptLinker(stores.linker);
-    console.log(encryptedLinker[encryptLinker.length - 1]);
-    
+    // 预留服务端保存门户密码的业务逻辑
+    // const encryptedLinker = encryptLinker(stores.linker);
 
     const res = await signup({
         username: stores.username,
         studentId: stores.studentId,
-        linker: encryptedLinker,
+        // linker: encryptedLinker,
         identity: stores.identity!,
         faculty: stores.faculty!,
         major: stores.major!,

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // components
 import cusPage from '@/components/cus-page.vue';
-import utilityConsumeCards from './_components/utility-consume-cards.vue';
+import utilityCard from './_components/utility-card.vue';
+import consumeCard from './_components/consume-card.vue';
 import cards from './_components/cards.vue';
 // static
 import images from '@/constants/images';
@@ -18,7 +19,10 @@ import images from '@/constants/images';
                 <text class="font-bold text-3xl text-modern">生活服务</text>
             </view>
             <view class="flex-1 relative z-10 flex flex-col gap-y-[14px]">
-                <utility-consume-cards />
+                <view class="w-full grid grid-cols-2 gap-x-[14px]">
+                    <utility-card />
+                    <consume-card />
+                </view>
                 <!-- 瓷片入口 -->
                 <cards />
             </view>

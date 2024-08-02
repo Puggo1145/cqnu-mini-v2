@@ -8,7 +8,7 @@ interface StudyDetail {
     name: string;
     count: string;
 }
-const gpa = ref<string>("--");
+const gpa = ref<string>("获取中");
 const studyDetails = ref<StudyDetail[]>([
     { name: "未通过", count: "-" },
     { name: "未修", count: "-" },
@@ -17,13 +17,11 @@ const studyDetails = ref<StudyDetail[]>([
 ])
 
 onMounted(async() => {
-    uni.showLoading({ title: "加载中" });
     const res = await getOverallGrade();
     if (res) {
         gpa.value = res.gpa;
         studyDetails.value = res.studyDetail;
     }
-    uni.hideLoading();
 })
 </script>
 

@@ -3,14 +3,20 @@ import { defineStore } from "pinia";
 interface UserInfo extends Record<string, any> {
     id: number | undefined;
     openid: string | undefined;
-    studentId: string | undefined;
-    linker: string | undefined; // 门户密码
     username: string | undefined;
+    studentId: string | undefined;
+    linker?: string; // 门户密码，预留字段
+    
     faculty: string | undefined;
     major: string | undefined;
     stuClass: string | undefined;
     grade: number | undefined;
     identity: number | undefined;
+    
+    dormitory?: string;
+    roomId?: number;
+    eCardId?: string;
+
     showFlag: number | undefined;
 }
 
@@ -29,29 +35,26 @@ const useUserInfo = defineStore("useUserInfo", {
         // showFlag: undefined,
         id: 1,
         openid: "qw0d9ef8hufbh13q9efuwrv8hufgydbhsc",
+
+        username: "puggo",
         studentId: "2021050919079",
         linker: undefined,
-        username: "puggo",
+        
+        grade: 2021,
         faculty: "新闻与传媒学院",
         major: "网络与新媒体",
         stuClass: "网络与新媒体1班",
-        grade: 2021,
         identity: 0,
+        
+        // dormitory: "嘉风B",
+        // roomId: 1050,
+        // eCardId: "123560"
+
         showFlag: 0,
     }) as UserInfo,
     actions: {
         setUserInfo(userInfo: UserInfo) {
-            this.id = userInfo.id;
-            this.openid = userInfo.openid;
-            this.studentId = userInfo.studentId;
-            this.linker = userInfo.linker;
-            this.username = userInfo.username;
-            this.faculty = userInfo.faculty;
-            this.major = userInfo.major;
-            this.stuClass = userInfo.stuClass;
-            this.grade = userInfo.grade;
-            this.identity = userInfo.identity;
-            this.showFlag = userInfo.showFlag;
+            this.$state = userInfo;
         },
         clearUserInfo() {
             Object.keys(this.$state).forEach((key) => {

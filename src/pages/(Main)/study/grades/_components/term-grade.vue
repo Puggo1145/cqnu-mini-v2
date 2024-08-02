@@ -91,7 +91,6 @@ onMounted(() => {
     gradeIndex.value = currentGradeIndex;
     semesterIndex.value = currentSemesterIndex;
 
-    getTranscript();
 })
 watch([gradeIndex, semesterIndex], getTranscript)
 </script>

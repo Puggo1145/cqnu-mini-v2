@@ -3,23 +3,27 @@ type Obj = Record<string, any>;
 type Params = Record<string, Obj | any>;
 
 class RequestManager {
-    idMap: Map<string, string>;
+    idMap: Map<string, Promise<any>>;
 
     constructor() {
         this.idMap = new Map();
     }
 
-    // 生成唯一 id 并将其存储到 map 中
-    // id 存在，返回 false
-    generateId(method: string, route: string, data: any = {}) {
+    // 检查是否存在相同请求，如果存在则返回该请求的 Promise，否则返回 null
+    checkExistingRequest(method: string, route: string, data: any = {}) {
         const id = this.generateUniqueId(method, route, data);
+        return this.idMap.get(id) || null;
+    }
 
-        if (this.idMap.has(id)) {
-            return false;
-        }
-
-        this.idMap.set(id, id);
+    addRequest(method: string, route: string, data: any = {}, requestPromise: Promise<any>) {
+        const id = this.generateUniqueId(method, route, data);
+        this.idMap.set(id, requestPromise);
         return id;
+    }
+
+    removeRequest(method: string, route: string, data: any = {}) {
+        const id = this.generateUniqueId(method, route, data);
+        this.idMap.delete(id);
     }
 
     // 使用请求 method，url，params 生成唯一 id
@@ -34,30 +38,26 @@ class RequestManager {
         return id.toString();
     }
 
-    // 根据 id 删除 map 中的请求信息
-    deleteById(id: string) {
-        this.idMap.delete(id);
-    }
-
     // 需要对 params 进行序列化，防止参数顺序不同导致的 id 不同
     serializeObject(obj: Params): string {
         // 取 key 进行排序
         const keys = Object.keys(obj).sort();
-        const seriaizedObj: Record<string, string> = {};
+        const serializedObj: Record<string, string> = {};
 
         for (let key of keys) {
             const value = obj[key]
 
             if (value !== null && typeof value === 'object') {
                 // 如果 value 是一个对象，递归展开
-                seriaizedObj[key] = this.serializeObject(value);
+                serializedObj[key] = this.serializeObject(value);
             } else {
-                seriaizedObj[key] = value;
+                serializedObj[key] = value;
             }
         }
 
-        return JSON.stringify(seriaizedObj);
+        return JSON.stringify(serializedObj);
     }
 }
+
 
 export default RequestManager;

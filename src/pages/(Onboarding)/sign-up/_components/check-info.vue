@@ -21,6 +21,8 @@ async function goToSignUpProcess() {
     isSigningUp.value = true;
 
     const encryptedLinker = encryptLinker(stores.linker);
+    console.log(encryptedLinker[encryptLinker.length - 1]);
+    
 
     const res = await signup({
         username: stores.username,

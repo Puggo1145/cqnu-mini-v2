@@ -1,13 +1,16 @@
 import request from "@/utils/request";
+import { useLinkOfficialAuth } from "@/stores/link-official-auth";
+
+const linkOfficialAuth = useLinkOfficialAuth();
 
 export const getJwxtCookie = async () => {
-    const jwxtCookie = uni.getStorageSync('JwxtCookie');
+    const jwxtCookie = linkOfficialAuth.jwxtCookie;
     if (jwxtCookie) {
         return jwxtCookie
     };
 
     try {
-        const cookie = uni.getStorageSync('Cookie');
+        const cookie = linkOfficialAuth.mainCookie;
         const res = await request.POST({
             where: "linkOfficial",
             route: "/getJwxtCookie",
@@ -18,10 +21,10 @@ export const getJwxtCookie = async () => {
             .send();
 
         if (res.ok) {
-            uni.setStorageSync('JwxtCookie', res.data.data);
+            linkOfficialAuth.setJwxtCookie(res.data.data as string);
             return res.data.data;
         }
-    } catch {
+    } catch (err) {
         uni.showToast({
             title: "网络错误",
             icon: "error",

@@ -1,5 +1,8 @@
 import request from "@/utils/request";
+import { useLinkOfficialAuth } from "@/stores/link-official-auth";
 import type { DataObj } from "./getDynamicData";
+
+const linkOfficialAuth = useLinkOfficialAuth();
 
 export const signInToOfficial = async (
     username: string,
@@ -24,7 +27,7 @@ export const signInToOfficial = async (
 
     // 保存登录后的主 cookie
     if (res.ok) {
-        uni.setStorageSync('Cookie', res.data.data);
+        linkOfficialAuth.setMainCookie(res.data.data as string);
     }
 
     return res;

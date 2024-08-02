@@ -5,6 +5,7 @@ import titleDesc from '@/components/title-desc.vue';
 import cusPage from '@/components/cus-page.vue';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
+import spinner from '@/components/spinner.vue';
 // linkOfficial
 import { 
     signInToOfficial,
@@ -13,22 +14,35 @@ import {
 // zod
 import { ZodError, z } from 'zod';
 
+
+
+const backPage = ref<string>();
+const isAuthCodeRefreshing = ref(false);
+
 const captchaBase64 = ref<string>('');
 const authCode = ref<string>('');
 const dataObj = ref();
 
 async function refreshAuthCode() {
+    isAuthCodeRefreshing.value = true;
+    
     authCode.value = '';
     const data = await getSignInSessionAndAuthCode();
     if (data) {
         captchaBase64.value = "data:image/png;base64," + data.authCodeImg;
         dataObj.value = data.dataObj;
     }
+
+    isAuthCodeRefreshing.value = false;
 }
 onMounted(async () => {
-    // 清除教务系统 cookie 缓存
-    uni.setStorageSync('JwxtCookie', null);
     await refreshAuthCode();
+
+    // 登录成功后返回目标页面
+    const pages = getCurrentPages();
+    const currentPage = pages[pages.length - 1];
+    // @ts-expect-error uniapp 没有标注 options 类型
+    backPage.value = currentPage.options.backPage;
 })
 
 
@@ -73,11 +87,6 @@ async function handleLinkOfficial() {
         
         if (!res.ok) {
             await refreshAuthCode();
-            uni.showToast({
-                title: "登录失败，请检查输入",
-                icon: 'none',
-            });
-            isLinkingOfficial.value = false;
 
             return;
         }
@@ -86,11 +95,15 @@ async function handleLinkOfficial() {
             title: "登录成功",
             icon: "success",
         });
-        isLinkingOfficial.value = false;
-        uni.navigateBack();
-    } catch (err) {
-        isLinkingOfficial.value = false;
 
+        if (backPage.value) {
+            uni.redirectTo({
+                url: backPage.value,
+            });
+        } else {
+            uni.navigateBack();
+        }
+    } catch (err) {
         if (err instanceof ZodError) {
             // 显示错误消息
             err.errors.forEach((error) => {
@@ -103,6 +116,8 @@ async function handleLinkOfficial() {
                 }
             });
         }
+    } finally {
+        isLinkingOfficial.value = false;
     }
 }
 </script>
@@ -119,7 +134,6 @@ async function handleLinkOfficial() {
                 ref="studentIdInputRef"
                 :value="studentId"
                 @input="e => studentId = e.value"
-            
             />
             <cusInput 
                 field-name="官网密码"
@@ -141,11 +155,15 @@ async function handleLinkOfficial() {
                     flex items-center justify-center"
                     @click="refreshAuthCode"
                 >
+                    <spinner 
+                        v-if="isAuthCodeRefreshing" 
+                        size="medium" 
+                    />
                     <text
                         class="font-bold"
-                        v-if="captchaBase64 === ''"
+                        v-else-if="captchaBase64 === ''"
                     >
-                        手动刷新验证码
+                        点击刷新验证码
                     </text>
                     <image
                         v-else

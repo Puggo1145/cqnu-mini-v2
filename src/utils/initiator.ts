@@ -1,10 +1,21 @@
 import { validateTokenAndSyncUserInfo } from "@/api/user";
-
+import { useLinkOfficialAuth } from "@/stores/link-official-auth";
+// intercepted pages
+import { pagesRequireLinkOfficial } from "@/constants/pagesOnIntercept";
+// types
+import type { Store } from "pinia";
+import type { LinkOfficialAuthState } from "@/stores/link-official-auth";
 
 /**
  * @description 小程序初始化器
  */
 class Initiator {
+    private linkOfficialAuth: Store<"useLinkOfficialAuth", LinkOfficialAuthState>;
+
+    constructor() {
+        this.linkOfficialAuth = useLinkOfficialAuth();
+    }
+
     // 检查 token 有效性
     async validateSignInStatus() {
         const token = uni.getStorageSync("token");
@@ -37,32 +48,23 @@ class Initiator {
         }
     }
 
-    // 验证 link Official cookie 有效性
-    async validateLinkOfficialCookie() {
-        // const cookie = uni.getStorageSync("Cookie");
-        // if (!cookie) {
-        //     uni.navigateTo({
-        //         url: "/pages/index/index"
-        //     });
-        // }
-    }
-
     // 添加页面拦截规则
-    addInterceptPages(pagesOnIntercept: string[] = []) {
-        // function isInterceptPage(page: string) {
-        //     return pagesOnIntercept.includes(page);
-        // }
+    addInterceptPages() {
+        const isPageIntercepted = (page: string) => {
+            return pagesRequireLinkOfficial.includes(page) && !this.linkOfficialAuth.mainCookie;
+        }
 
-        // uni.addInterceptor('navigateTo', {
-        //     invoke(e) {
-        //         if (isInterceptPage(e.url)) {
-        //             uni.navigateTo({
-        //                 url: "/pages/index/index"
-        //             });
-        //             return false;
-        //         }
-        //     }
-        // })
+        uni.addInterceptor('navigateTo', {
+            invoke(e) {
+                if (isPageIntercepted(e.url)) {
+                    uni.navigateTo({
+                        url: `/pages/(Main)/link-official/page?backPage=${e.url}`
+                    });
+
+                    return false;
+                }
+            }
+        })
     }
 }
 

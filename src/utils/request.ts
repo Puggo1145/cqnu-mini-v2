@@ -19,10 +19,10 @@ const Request = async <T>(
     data: any,
     showLoading?: boolean // 该请求是否显示 loading
 ): Promise<ResponseSuccess<T> | ResponseError> => {
-    // 生成请求唯一 id，加入请求队列, 防止重复请求
-    const requestId = requestManager.generateId(method, route, data);
-    if (!requestId) {
-        return Promise.reject('当前请求还未完成，请勿重复请求');
+    // 检查是否存在相同请求
+    const existingRequest = requestManager.checkExistingRequest(method, route, data);
+    if (existingRequest) {
+        return existingRequest;
     }
 
     // 构造 headers
@@ -31,7 +31,7 @@ const Request = async <T>(
         "Authentication": authorization,
     }
 
-    return new Promise((resolve) => {
+    const requestPromise = new Promise<ResponseSuccess<T> | ResponseError>((resolve) => {
         showLoading && uni.showLoading({ title: '加载中' });
 
         uni.request({
@@ -52,13 +52,13 @@ const Request = async <T>(
 
                 if (!isFetchSuccess) {
                     console.log(responseBody);
-                    
+
                     uni.showToast({
                         title: responseBody.message || '请求错误',
                         icon: 'error'
                     });
 
-                    resolve({ 
+                    resolve({
                         ok: false,
                         message: responseBody.message
                     });
@@ -70,26 +70,24 @@ const Request = async <T>(
                 });
             },
             fail: (res) => {
-                if (res.errMsg === "request:fail timeout") {
-                    uni.showToast({
-                        title: "网络错误",
-                        icon: "error"
-                    });
-                } else {
-                    uni.showToast({
-                        title: res.errMsg,
-                        icon: "none"
-                    });
-                }
+                uni.showToast({
+                    title: "网络错误",
+                    icon: "error"
+                });
 
                 resolve({ ok: false, message: res.errMsg });
             },
             complete: () => {
                 showLoading && uni.hideLoading();
-                requestManager.deleteById(requestId);
+                requestManager.removeRequest(method, route, data);
             }
         })
-    })
+    });
+
+    // 将新请求添加到 requestManager
+    requestManager.addRequest(method, route, data, requestPromise);
+
+    return requestPromise;
 }
 
 // 实现 请求 + 分页 + 参数等功能的链式调用

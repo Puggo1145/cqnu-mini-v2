@@ -3,7 +3,7 @@ import cusButton from '@/components/cus-button.vue';
 
 function gotoCreateEasyNote() {
     uni.navigateTo({
-        url: '/pages/(Main)/study/easy-note/_components/create-easy-note'
+        url: "/pages/(Main)/study/easy-note/create/page"
     });
 }
 </script>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, getCurrentInstance } from 'vue';
 // components
 import titleDesc from '@/components/title-desc.vue';
 import cusInput from '@/components/cus-input.vue';
@@ -28,7 +28,6 @@ async function refreshAuthCode() {
 }
 onMounted(async () => {
     // 清除教务系统 cookie 缓存
-    uni.setStorageSync('JwxtCookie', null);
     await refreshAuthCode();
 })
 

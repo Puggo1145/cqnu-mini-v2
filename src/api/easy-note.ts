@@ -9,8 +9,8 @@ export interface GetNoteListParams {
     current: number;
     pageSize: number;
     timespan?: string; // 截止时间范围
-    courseName?: string; // 课程名称
-    tagName?: string; // 小记标签名
+    courseName?: string | any[]; // 课程名称
+    tagName?: string | any[]; // 小记标签名
 }
 export const getNoteList = async (params: GetNoteListParams) => {
     const res = await request.POST<PageResponse<EasyNoteCard>>({
@@ -21,6 +21,24 @@ export const getNoteList = async (params: GetNoteListParams) => {
 
     return res
 }
+
+
+export interface EasyNoteStatistics {
+    allCount: number | undefined;
+    importanceCount: number | undefined;
+    weekCount: number | undefined;
+}
+export const getNoteStatistics = async () => {
+    const res = await request.GET<EasyNoteStatistics>({
+        route: "note/v1/count"
+    })
+        .send();
+
+    if (res.ok) {
+        return res.data.data;
+    }
+}
+
 
 // 获取小记标签
 export interface Tag {

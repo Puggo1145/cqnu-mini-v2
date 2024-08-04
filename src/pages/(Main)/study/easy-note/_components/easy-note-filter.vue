@@ -18,7 +18,7 @@ const pageSize = ref(5);
 
 async function fetchNotes() {
     const transformedCourseName = allRelatedCoursesOptions[selectedRelatedCourse.value] === "全部课程" 
-    ? "" 
+    ? ""
     : allRelatedCoursesOptions[selectedRelatedCourse.value];
 
     const transformedTagName = tagsOptions[selectedTag.value] === "全部标签"
@@ -108,7 +108,7 @@ watch([selectedTimeRange, selectedRelatedCourse, selectedTag], async () => {
                 <loading v-if="store.notes === undefined && !store.error" />
                 <no-note v-else-if="store.notes && store.notes.length === 0" />
                 <cus-error v-else-if="store.error" />
-                <easy-note-card 
+                <easy-note-card
                     v-else
                     v-for="note in store.notes"
                     :key="note.id"

@@ -15,6 +15,8 @@ export const useEasyNoteStore = defineStore('easyNote', {
     }),
     actions: {
         async fetchNotes(params: GetNoteListParams) {
+            this.notes = undefined;
+
             const res = await getNoteList(params);
             if (res.ok) {
                 this.notes = res.data.data.records;
@@ -24,8 +26,8 @@ export const useEasyNoteStore = defineStore('easyNote', {
         },
         // TODO - 根据课程名称查询小记
         async createNote(data: CreateEasyNote) {
-            const res = await createNote(data);
-            if (res.ok) {
+            const isSuccess = await createNote(data);
+            if (isSuccess) {
                 await this.fetchNotes({
                     current: 1,
                     pageSize: 10,

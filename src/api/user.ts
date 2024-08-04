@@ -17,3 +17,21 @@ export const validateTokenAndSyncUserInfo = async () => {
 
     return res.ok;
 }
+
+
+interface FeedbackParams {
+    openid: string;
+    type: string;
+    content: string;
+}
+export const submitUserFeedback = async (params: FeedbackParams) => {
+    const res = await request.POST<FeedbackParams>({
+        route: "user/v1/feedback/add",
+        data: params
+    })
+        .send();
+
+    if (res.ok) {
+        return true;
+    }
+}

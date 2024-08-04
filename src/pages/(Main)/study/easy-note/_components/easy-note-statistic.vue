@@ -1,38 +1,54 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
+import spinner from '@/components/spinner.vue';
 // static
 import icons from '@/constants/icons';
-// mock
-import { mockNoteStatistics } from '@/mock/easy-note';
+// api
+import { getNoteStatistics } from '@/api/easy-note';
+// types
+import type { EasyNoteStatistics } from '@/api/easy-note';
+
+
+const statistics = reactive<EasyNoteStatistics>({
+    weekCount: undefined,
+    importanceCount: undefined,
+    allCount: undefined,
+});
+onMounted(async () => {
+    const data = await getNoteStatistics();
+    if (data) {
+        Object.assign(statistics, data);
+    }
+});
 
 
 interface NoteStatisticsBlock {
     icon: string;
     iconBackgroundColor: string;
     title: string;
-    count: number;
+    count: number | undefined;
     backgroundColor: string;
 }
-const noteStatistics = ref<NoteStatisticsBlock[]>([
+const noteStatistics = computed<NoteStatisticsBlock[]>(() => [
     { 
         icon: icons.calendarWhite,
         iconBackgroundColor: "#90ad5f",
         title: "周内小记", 
-        count: mockNoteStatistics.thisWeek ?? 0,
+        count: statistics.weekCount ?? undefined,
         backgroundColor: "#e1ecc8"
     },
     { 
         icon: icons.attentionWhite, 
         iconBackgroundColor: "#a6765a",
         title: "重要小记", 
-        count: mockNoteStatistics.important ?? 0,
+        count: statistics.importanceCount ?? undefined,
         backgroundColor: "#f4ded1"
     },
     { 
         icon: icons.boxWhite, 
         iconBackgroundColor: "#638fac",
         title: "所有小记", 
-        count: mockNoteStatistics.total ?? 0,
+        count: statistics.allCount ?? undefined,
         backgroundColor: "#d4ebfa"
     },
 ]);
@@ -61,7 +77,15 @@ const noteStatistics = ref<NoteStatisticsBlock[]>([
                     {{ item.title }}
                 </text>
                 <view class="flex font-bold gap-1 items-end">
-                    <text class="text-fit-background-darker text-4xl font-bold leading-none">
+                    <spinner 
+                        v-if="item.count === undefined"
+                        size="small" 
+                        color="black" 
+                    />
+                    <text
+                        v-else
+                        class="text-fit-background-darker text-4xl font-bold leading-none"
+                    >
                         {{ item.count }}
                     </text>
                     <text class="text-fit-background-darker  text-sm font-bold">条</text>

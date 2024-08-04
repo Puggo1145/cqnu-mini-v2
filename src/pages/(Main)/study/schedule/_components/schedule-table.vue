@@ -11,7 +11,7 @@ interface Lesson {
 	color: string;
 }
 
-const { lessons } = defineProps<{lessons: Lesson[] | null}>();
+const props = defineProps<{lessons: Lesson[]}>();
 
 const weekList = [
 	"一",
@@ -39,12 +39,13 @@ const courseTimeList = [
 <template>
 	<view class="w-full h-full flex flex-col gap-3">
 		<!-- 周列 -->
-		<view class="grid grid-cols-8 grid-rows-1">
+		<view class="grid grid-cols-8 grid-rows-1 gap-1">
 			<text class="col-span-1 p-2 flex justify-center items-center font-bold text-sm">
 				{{ new Date().getMonth() + 1 }}月
 			</text>
 			<view
 				v-for="(day, index) in weekList"
+				:key="index"
 				:class="`col-start-${index + 2} p-2 flex justify-center items-center font-bold`"
 			>
 				<text class="text-sm text-modern">
@@ -57,12 +58,12 @@ const courseTimeList = [
 			scroll-y
 			class="flex-1 overflow-hidden"
 		>
-			<view class="grid grid-cols-8 grid-rows-10">
+			<view class="grid grid-cols-8 grid-rows-10 gap-1">
 				<!-- 课程时间列 -->
 				<view 
 					v-for="(time, index) in courseTimeList" 
 					:key="index"
-					:class="`col-span-1 row-start-${index + 1}`"
+					:class="`col-span-1 row-start-${index + 1} row-end-${index + 2}`"
 				>
 					<view class="p-3 flex flex-col justify-center items-center font-bold text-modern text-xs">
 						<text class="text-sm">{{ index + 1 }}</text>
@@ -71,30 +72,32 @@ const courseTimeList = [
 					</view>
 				</view>
 				<!-- 课程 -->
-				<view class="col-span-5 row-span-10 grid grid-cols-5 grid-rows-10 gap-1">
-					<view 
-						v-for="_ in 7" 
-						class="col-span-1 row-span-10 grid grid-rows-10 grid-cols-1 gap-1"
-					>
-						<view
-							v-for="lesson in lessons"
-							:class="[
-								`row-start-${lesson.start_time}, 'row-span-${(lesson.end_time - lesson.start_time + 1)}`, 
-								'text-xs text-modern bg-secondary p-1 rounded-md text-center',
-								'overflow-hidden flex flex-col gap-y-1',
-							]"
-						>
-							<text class="font-bold text-primary">
-								{{ lesson.name }}
-							</text>
-							<text class="font-bold">
-								{{ lesson.place }}
-							</text>
-							<text>
-								{{ lesson.teacher }}
-							</text>
-						</view>
-					</view>
+				<!-- <view class="row-start-1 row-end-3 col-start-2 bg-black">
+
+				</view> -->
+				<view
+					v-for="lesson in props.lessons"
+					:key="lesson.lesson_id"
+					:style="{
+						// 微信小程序无法正确通过 tailwind 设置 grid row 和 column，所以使用 css
+						gridRowStart: lesson.start_time,
+						gridRowEnd: lesson.end_time + 1,
+						gridColumnStart: lesson.day + 1,
+					}"
+					:class="[
+						'text-xs text-modern py-2 p-1 rounded-md text-center bg-secondary',
+						'overflow-hidden flex flex-col gap-y-1',
+					]"
+				>
+					<text class="font-bold text-primary">
+						{{ lesson.name }}
+					</text>
+					<text class="font-bold">
+						{{ lesson.place }}
+					</text>
+					<text>
+						{{ lesson.teacher }}
+					</text>
 				</view>
 			</view>
 		</scroll-view>

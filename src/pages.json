@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/(Main)/study/schedule/page"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{
@@ -8,9 +11,6 @@
 		},
 		{
 			"path": "pages/index/index"
-		},
-		{
-			"path": "pages/(Main)/study/schedule/page"
 		},
 		{
 			"path": "pages/(Main)/service/page"

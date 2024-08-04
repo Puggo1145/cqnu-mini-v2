@@ -19,6 +19,20 @@ export const validateTokenAndSyncUserInfo = async () => {
 }
 
 
+type Optional<T> = {
+    [P in keyof T]?: T[P];
+}
+export const updateUserInfo = async (params: Optional<UserInfo>) => {
+    const res = await request.POST({
+        route: "user/v1/updateUser",
+        data: params
+    })
+        .send();
+
+    return res
+}
+
+
 interface FeedbackParams {
     openid: string;
     type: string;

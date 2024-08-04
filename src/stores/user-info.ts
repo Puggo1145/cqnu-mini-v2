@@ -35,9 +35,9 @@ const useUserInfo = defineStore("useUserInfo", {
         stuClass: undefined,
         identity: undefined,
 
-        // dormitory: undefined,
-        // roomNumber: undefined,
-        // eCardId: "125630",
+        dormitory: undefined,
+        roomNumber: undefined,
+        eCardId: "125630",
 
         showFlag: undefined,
         // id: 1,
@@ -55,7 +55,6 @@ const useUserInfo = defineStore("useUserInfo", {
 
         // dormitory: undefined,
         // roomNumber: undefined,
-        // eCardId: "125630",
 
         // showFlag: 0,
     }) as UserInfo,

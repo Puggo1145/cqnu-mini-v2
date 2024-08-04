@@ -4,7 +4,13 @@ import { getDate } from '@/utils/timeHandler';
 // static
 import icons from '@/constants/icons';
 
-const props = defineProps<{currentWeek: number}>();
+
+interface ScheduleHeaderProps {
+    currentWeek: number;
+    currentViewingWeek: number;
+    isTermStarted: boolean;
+}
+const props = defineProps<ScheduleHeaderProps>();
 </script>
 
 <template>
@@ -13,9 +19,17 @@ const props = defineProps<{currentWeek: number}>();
             <text class="font-bold">
                 {{ getDate("/") }}
             </text>
-            <text class="text-secondary-foreground">
-                第{{ props.currentWeek }}周
-            </text>
+            <view class="text-secondary-foreground">
+                <text>
+                    第{{ props.currentWeek }}周
+                </text>
+                <text 
+                    v-if="props.currentWeek !== props.currentViewingWeek || !props.isTermStarted"
+                    class="ml-2"
+                >
+                    非本周
+                </text>
+            </view>
         </view>
         <!-- 课表相关功能 -->
         <view class="flex items-center gap-x-3">

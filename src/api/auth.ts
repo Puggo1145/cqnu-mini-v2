@@ -50,6 +50,7 @@ export const signin = async () => {
 interface SignUpData {
     username: string,
     studentId: string,
+    grade: number,
     identity: number,
     faculty: string,
     major: string,

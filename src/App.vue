@@ -4,14 +4,21 @@ import { onLaunch } from '@dcloudio/uni-app';
 import Initiator from './utils/initiator';
 import { useStatusBarHeight } from './stores/statusBarHeight';
 
+// 需要初始化的 store
+import useUserInfo from './stores/user-info';
+
+
 onLaunch(() => {
     // 自适应状态栏高度
     const statusBarHeight = uni.getMenuButtonBoundingClientRect().top;
     useStatusBarHeight().set(statusBarHeight - 15);
 
+    // 初始化全局状态
+    useUserInfo();
+
     // 初始化
     const initiator = new Initiator();
-    // initiator.validateSignInStatus();
+    initiator.validateSignInStatus();
     initiator.addInterceptPages()
 });
 

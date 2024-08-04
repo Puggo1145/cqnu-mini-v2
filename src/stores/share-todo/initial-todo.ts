@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import {
     getCurrentTime,
     getDate
-} from "@/utils/utils";
+} from "@/utils/timeHandler";
 // types
 import type { Tag } from "@/components/tag-selector.vue";
 

@@ -20,7 +20,7 @@ export const getStudentInfo = async () => {
             header: {
                 "Cookie": jwxtCookie
             }
-        })
+        });
 
         const resolvedStudentInfo = resolveStudentInfo((res.data as OriginalStudentInfo));
 

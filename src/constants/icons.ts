@@ -17,6 +17,8 @@ import boxWhite from "@/static/icons/box-white.svg"
 import image from "@/static/icons/image.svg"
 import clock from "@/static/icons/clock.svg"
 import academy from "@/static/icons/academy.svg"
+import sync from "@/static/icons/sync.svg"
+import syncBlack from "@/static/icons/sync-black.svg"
 import syncPrimary from "@/static/icons/sync-primary.svg"
 import switchWhite from "@/static/icons/switch-white.svg"
 
@@ -61,6 +63,8 @@ const icons = {
     clock,
     academy,
     downSecondary,
+    sync,
+    syncBlack,
     syncPrimary,
     switchWhite,
     study: {

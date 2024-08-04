@@ -1,13 +1,18 @@
 import request from "@/utils/request";
+import useUserInfo from "@/stores/user-info";
+import type { UserInfo } from "@/stores/user-info";
+
 
 export const validateTokenAndSyncUserInfo = async () => {
-    const res = await request.GET({
+    const userInfo = useUserInfo()
+
+    const res = await request.GET<UserInfo>({
         route: "user/v1/self"
     })
         .send();
 
     if (res.ok) {
-        // TODO: 同步用户信息到全局状态
+        userInfo.setUserInfo(res.data.data);
     }
 
     return res.ok;

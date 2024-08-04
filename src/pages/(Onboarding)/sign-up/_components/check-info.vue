@@ -8,8 +8,7 @@ import { signup } from '@/api/auth';
 // stores
 import { useSignupInfo } from '@/stores/signup-info';
 // utils
-import { encryptLinker } from '@/utils/encrypter';
-
+// import { encryptLinker } from '@/utils/encrypter';
 
 
 const stores = useSignupInfo();
@@ -28,6 +27,7 @@ async function goToSignUpProcess() {
         studentId: stores.studentId,
         // linker: encryptedLinker,
         identity: stores.identity!,
+        grade: Number(stores.studentId!.toString().slice(0, 4)),
         faculty: stores.faculty!,
         major: stores.major!,
         stuClass: stores.stuClass!,

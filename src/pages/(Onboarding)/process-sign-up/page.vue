@@ -2,15 +2,24 @@
 import { onMounted } from 'vue';
 import cusPage from '@/components/cus-page.vue';
 import spinner from '@/components/spinner.vue';
+// api
+import { validateTokenAndSyncUserInfo } from '@/api/user';
 
-onMounted(() => {
-    setTimeout(() => {
+onMounted(async () => {
+    const process = [];
+
+    // 1. 同步用户信息
+    const isSuccess = await validateTokenAndSyncUserInfo();
+    if (isSuccess) {
+        process.push("userInfo");
+    };
+
+    // 检查流程是否完成
+    if (process.length === 1) {
         uni.switchTab({
             url: '/pages/(Main)/today/page'
         });
-    }, 2000);
-
-    // TODO - 完成一卡通卡号的获取，课表同步
+    };
 });
 </script>
 

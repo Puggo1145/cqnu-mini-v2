@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 
+
 export interface Lesson {
   lesson_id: number;
   name: string;
@@ -16,9 +17,4 @@ export const useSchedule = defineStore("useSchedule", {
   state: () => ({
     lessons: [] as Lesson[],
   }),
-  actions: {
-    addLessons(schedule: Lesson[]) {
-      this.lessons.push(...schedule);
-    },
-  },
 });

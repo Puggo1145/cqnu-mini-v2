@@ -1,4 +1,12 @@
 <script lang="ts" setup>
+// components
+import noData from '@/components/no-data.vue';
+// stores
+import { useLinkOfficialAuth } from '@/stores/link-official-auth';
+import { useSchedule } from '@/stores/useSchedule';
+// api
+import { getSchedules } from '@/utils/link-official';
+
 interface Lesson {
 	lesson_id: number;
 	name: string;
@@ -34,6 +42,28 @@ const courseTimeList = [
 	["19:30", "20:15"],
 	["20:25", "21:10"],
 ]
+
+
+const linkOfficialAuth = useLinkOfficialAuth();
+const schedule = useSchedule();
+async function updateSchedule() {
+    if (!linkOfficialAuth.mainCookie) {
+        uni.navigateTo({
+            url: `/pages/(Main)/link-official/page`,
+        });
+
+        return;
+    }
+
+    uni.showLoading({ title: '正在同步' });
+
+    const res = await getSchedules();
+    if (res) {
+        schedule.lessons = res;
+    }
+
+    uni.hideLoading();
+}
 </script>
 
 <template>
@@ -75,7 +105,16 @@ const courseTimeList = [
 				<!-- <view class="row-start-1 row-end-3 col-start-2 bg-black">
 
 				</view> -->
+				<no-data 
+					v-if="props.lessons.length === 0 || !props.lessons"
+					class="col-span-8 row-span-10 row-start-3"
+					title="暂无课表"
+					desc="快来一键同步课表数据吧！"
+					:action="updateSchedule"
+					actionText="同步"
+				/>
 				<view
+					v-else
 					v-for="lesson in props.lessons"
 					:key="lesson.lesson_id"
 					:style="{
@@ -85,17 +124,20 @@ const courseTimeList = [
 						gridColumnStart: lesson.day + 1,
 					}"
 					:class="[
-						'text-xs text-modern py-2 p-1 rounded-md text-center bg-secondary',
-						'overflow-hidden flex flex-col gap-y-1',
+						'text-xs text-modern py-2 p-1 rounded-md bg-secondary text-center',
+						'flex flex-col gap-y-1',
 					]"
 				>
 					<text class="font-bold text-primary">
 						{{ lesson.name }}
 					</text>
 					<text class="font-bold">
-						{{ lesson.place }}
+						{{ lesson.place.split("-")[0] }}
 					</text>
-					<text>
+					<text class="font-bold">
+						{{ lesson.place.split("-")[1] }}
+					</text>
+					<text class="mt-1">
 						{{ lesson.teacher }}
 					</text>
 				</view>

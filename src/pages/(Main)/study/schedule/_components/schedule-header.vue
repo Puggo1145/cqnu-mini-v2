@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 // utils
 import { getDate } from '@/utils/timeHandler';
+// api
+import { getSchedules } from '@/utils/link-official';
+// stores
+import { useSchedule } from '@/stores/useSchedule';
+import { useLinkOfficialAuth } from '@/stores/link-official-auth';
 // static
 import icons from '@/constants/icons';
 
@@ -11,6 +17,29 @@ interface ScheduleHeaderProps {
     isTermStarted: boolean;
 }
 const props = defineProps<ScheduleHeaderProps>();
+
+
+const schedule = useSchedule();
+const linkOfficialAuth = useLinkOfficialAuth();
+
+async function updateSchedule() {
+    if (!linkOfficialAuth.mainCookie) {
+        uni.navigateTo({
+            url: `/pages/(Main)/link-official/page`,
+        });
+
+        return;
+    }
+
+    uni.showLoading({ title: '正在同步' });
+
+    const res = await getSchedules();
+    if (res) {
+        schedule.lessons = res;
+    }
+
+    uni.hideLoading();
+}
 </script>
 
 <template>
@@ -33,7 +62,10 @@ const props = defineProps<ScheduleHeaderProps>();
         </view>
         <!-- 课表相关功能 -->
         <view class="flex items-center gap-x-3">
-            <button class="size-8 flex items-center justify-center">
+            <button 
+                class="size-8 flex items-center justify-center"
+                @click="updateSchedule"
+            >
                 <image :src="icons.syncBlack" class="size-6" />
             </button>
         </view>

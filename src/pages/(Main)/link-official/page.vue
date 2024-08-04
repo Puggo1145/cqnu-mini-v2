@@ -177,7 +177,7 @@ async function handleLinkOfficial() {
                 :variant="isLinkingOfficial ? 'loading' : 'primary'"
                 @click="handleLinkOfficial"
             >
-                {{ isLinkingOfficial ? "" : "绑定" }}
+                {{ isLinkingOfficial ? "" : "登录" }}
             </cusButton>
         </view>
 

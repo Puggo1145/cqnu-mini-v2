@@ -20,7 +20,20 @@ export const getSchedules = async () => {
             }
         })
 
-        return resolveSchedule((res.data as any).kbList);
+        if (res.statusCode !== 200) {
+            uni.showToast({
+                title: "网络错误",
+                icon: "error",
+            })
+
+            return null;
+        }
+
+        const resolvedSchedule = resolveSchedule((res.data as any).kbList);
+        // 缓存课表
+        uni.setStorageSync("schedule", resolvedSchedule);
+
+        return resolvedSchedule;
     } catch {
         uni.showToast({
             title: "网络错误",

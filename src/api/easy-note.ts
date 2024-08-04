@@ -29,7 +29,7 @@ export interface Tag {
 }
 export const getTags = async () => {
     const res = await request.POST<Tag[]>({
-        route: "tag/v1/listTag"
+        route: "note/tag/v1/listTag"
     })
         .send();
 

@@ -91,7 +91,7 @@ async function createEasyNote() {
             title: title.value,
             content: content.value,
             imagesUrl: [],
-            deadline: `${currentDate.value} ${currentTime.value}`,
+            deadline: `${currentDate.value} ${currentTime.value}:00`,
             courseName: relatedCourses.value[currentCourseIndex.value],
             tagIds: selectedTags.value,
         });

@@ -19,10 +19,7 @@ export const validateTokenAndSyncUserInfo = async () => {
 }
 
 
-type Optional<T> = {
-    [P in keyof T]?: T[P];
-}
-export const updateUserInfo = async (params: Optional<UserInfo>) => {
+export const updateUserInfo = async (params: Partial<UserInfo>) => {
     const res = await request.POST({
         route: "user/v1/updateUser",
         data: params

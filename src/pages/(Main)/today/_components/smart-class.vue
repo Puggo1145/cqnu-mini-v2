@@ -1,4 +1,13 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+// store
+import { useSchedule } from '@/stores/useSchedule';
+
+
+const schedule = useSchedule();
+// const courseOfToday = computed()
+
+
 const otherClasses = [
     {
         name: "计算机组成原理",

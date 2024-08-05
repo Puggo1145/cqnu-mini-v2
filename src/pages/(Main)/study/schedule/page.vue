@@ -15,27 +15,14 @@ const schedule = useSchedule();
 const startDate = new Date('2024-09-01');  // 开学日期
 const isTermStarted = ref(true);  // 是否开学
 
-const totalWeeks = ref(20);  // 总周数
+const totalWeeks = 20;  // 总周数
 const currentWeek = ref(1);  // 当前周次
-function calculateCurrentWeek(): number {
-	const now = new Date();
-	if (now < startDate) {
-		isTermStarted.value = false;
-		return 1;  // 如果还未开学，返回第一周
-	}
-
-	const diffTime = Math.abs(now.getTime() - startDate.getTime());
-	const weeksPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7)) + 1;
-
-	return Math.min(weeksPassed, totalWeeks.value);  // 确保不超过总周数
-};
 
 
 const currentSwiperIndex = ref(0);  // 当前 swiper 索引
 const visibleRange = ref({ start: 0, end: 2 });
 
 function handleSwiperChange(e: any) {
-	currentWeek.value = e.detail.current + 1;
 	currentSwiperIndex.value = e.detail.current;
 	updateVisibleRange();
 };
@@ -43,7 +30,7 @@ function handleSwiperChange(e: any) {
 function updateVisibleRange() {
 	visibleRange.value = {
 		start: Math.max(0, currentSwiperIndex.value - 1),
-		end: Math.min(totalWeeks.value - 1, currentSwiperIndex.value + 1)
+		end: Math.min(totalWeeks - 1, currentSwiperIndex.value + 1)
 	};
 };
 
@@ -54,7 +41,7 @@ const lessonsOfAllWeeks = computed(() => {
 	if (!schedule.lessons) return null;
 
 	return Array.from(
-		{ length: totalWeeks.value }, 
+		{ length: totalWeeks }, 
 		(_, index) => schedule.getLessons({ week: index + 1 })
 	);
 });
@@ -62,7 +49,14 @@ const lessonsOfAllWeeks = computed(() => {
 
 // 初始化当前周和 swiper 索引
 onMounted(() => {
-	currentWeek.value = calculateCurrentWeek();
+	// 没有开学将日期设为第一周
+	if (startDate > new Date()) {
+		currentWeek.value = 1;
+		isTermStarted.value = false;
+	} else {
+		currentWeek.value = schedule.getCurrentWeek(startDate, totalWeeks)
+	}
+
 	currentSwiperIndex.value = currentWeek.value - 1;
 })
 </script>

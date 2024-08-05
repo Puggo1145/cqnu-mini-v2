@@ -55,7 +55,7 @@ onLoad((option) => {
                             </text>
                             <view class="mt-4 grid grid-cols-2 grid-rows-2 gap-4">
                                 <view
-                                    v-for="(item2, index2) in item1.arr" 
+                                    v-for="(item2) in item1.arr" 
                                     :key="item2.name"
                                     class="px-4 py-6 rounded-xl bg-[#E0E0E0] flex flex-col justify-center gap-y-1" 
                                 >

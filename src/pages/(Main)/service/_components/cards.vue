@@ -4,6 +4,35 @@ import cardGlass from '@/components/card-glass.vue';
 import cardNeedNewFunction from '@/components/card-need-new-function.vue';
 // static
 import images from '@/constants/images';
+
+
+const handleToNavPage = () => {
+    console.log("???")
+    uni.navigateTo({
+        url: '/pages/(Main)/service/school-nav/page'
+    })
+}
+// 跳转到送水微信小程序
+const handleToMiniprogram = () => {
+    uni.navigateToMiniProgram({
+        appId: 'wx600e85d92f102852',
+        path: '',
+        extraData: {
+
+        },
+        success(res) {
+            console.log('跳转成功');
+            
+        },
+        fail(err) {
+            uni.showToast({
+                title: `跳转失败！`,
+                icon: 'none',
+                duration: 2000
+            })
+        }
+    })
+}
 </script>
 
 <template>
@@ -20,6 +49,7 @@ import images from '@/constants/images';
                 title="校园导航" 
                 desc="教学楼/快递/商铺" 
                 :img="images.service.location"
+                @click="handleToNavPage"
                 clip-content
             />
             <card-glass 
@@ -27,6 +57,7 @@ import images from '@/constants/images';
                 title="送水服务" 
                 desc="跳转购水小程序"
                 :img="images.service.water"
+                @click="handleToMiniprogram"
                 clip-content
             />
         </view>

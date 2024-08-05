@@ -50,6 +50,15 @@
 		},
 		{
 			"path": "pages/(Onboarding)/process-sign-up/page"
+		},
+		{
+			"path": "pages/(Main)/service/school-nav/page"
+		},
+		{
+			"path": "pages/(Main)/service/school-nav/detail-page/page"	
+		},
+		{
+			"path": "pages/(Main)/service/school-nav/school-scenery/page"
 		}
 	],
 	"globalStyle": {

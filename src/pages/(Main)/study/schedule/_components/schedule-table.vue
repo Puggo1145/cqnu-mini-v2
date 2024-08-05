@@ -1,12 +1,4 @@
 <script lang="ts" setup>
-// components
-import noData from '@/components/no-data.vue';
-// stores
-import { useLinkOfficialAuth } from '@/stores/link-official-auth';
-import { useSchedule } from '@/stores/useSchedule';
-// api
-import { getSchedules } from '@/utils/link-official';
-
 interface Lesson {
 	lesson_id: number;
 	name: string;
@@ -18,8 +10,8 @@ interface Lesson {
 	include_week: number[];
 	color: string;
 }
+const props = defineProps<{lessons: Lesson[] | undefined}>();
 
-const props = defineProps<{lessons: Lesson[]}>();
 
 const weekList = [
 	"一",
@@ -42,28 +34,6 @@ const courseTimeList = [
 	["19:30", "20:15"],
 	["20:25", "21:10"],
 ]
-
-
-const linkOfficialAuth = useLinkOfficialAuth();
-const schedule = useSchedule();
-async function updateSchedule() {
-    if (!linkOfficialAuth.mainCookie) {
-        uni.navigateTo({
-            url: `/pages/(Main)/link-official/page`,
-        });
-
-        return;
-    }
-
-    uni.showLoading({ title: '正在同步' });
-
-    const res = await getSchedules();
-    if (res) {
-        schedule.lessons = res;
-    }
-
-    uni.hideLoading();
-}
 </script>
 
 <template>
@@ -105,16 +75,7 @@ async function updateSchedule() {
 				<!-- <view class="row-start-1 row-end-3 col-start-2 bg-black">
 
 				</view> -->
-				<no-data 
-					v-if="props.lessons.length === 0 || !props.lessons"
-					class="col-span-8 row-span-10 row-start-3"
-					title="暂无课表"
-					desc="快来一键同步课表数据吧！"
-					:action="updateSchedule"
-					actionText="同步"
-				/>
 				<view
-					v-else
 					v-for="lesson in props.lessons"
 					:key="lesson.lesson_id"
 					:style="{

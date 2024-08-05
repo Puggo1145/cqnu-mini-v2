@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 // utils
 import { getDate } from '@/utils/timeHandler';
 // api

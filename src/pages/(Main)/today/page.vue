@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import cusPage from '@/components/cus-page.vue';
 import dynamicHeader from './_components/dynamic-header.vue';
-import tabs from './_components/tabs.vue';
+// import tabs from './_components/tabs.vue';
 import smartClass from './_components/smart-class.vue';
 import easyNote from './_components/easy-note.vue';
 </script>
@@ -10,7 +10,7 @@ import easyNote from './_components/easy-note.vue';
     <cus-page>
         <view class="px-4">
             <dynamic-header />
-            <tabs />
+            <!-- <tabs /> -->
         </view>
         <scroll-view 
             class="mt-4 flex-1 overflow-hidden"

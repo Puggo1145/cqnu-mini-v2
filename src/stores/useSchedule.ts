@@ -13,8 +13,21 @@ export interface Lesson {
   color: string;
 }
 
+interface GetLessonsParams {
+  week: number;
+  day?: number;
+}
+
 export const useSchedule = defineStore("useSchedule", {
   state: () => ({
-    lessons: [] as Lesson[],
+    lessons: undefined as Lesson[] | undefined,
   }),
+  actions: {
+    getLessons({ week, day }: GetLessonsParams) {
+      return this.lessons?.filter(lesson =>
+        lesson.include_week.includes(week)
+        && (day === undefined || lesson.day === day)
+      )
+    }
+  }
 });

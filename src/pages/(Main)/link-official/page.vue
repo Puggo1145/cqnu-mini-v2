@@ -96,13 +96,15 @@ async function handleLinkOfficial() {
             icon: "success",
         });
 
-        if (backPage.value) {
-            uni.redirectTo({
-                url: backPage.value,
-            });
-        } else {
-            uni.navigateBack();
-        }
+        setTimeout(() => {
+            if (backPage.value) {
+                uni.redirectTo({
+                    url: backPage.value,
+                });
+            } else {
+                uni.navigateBack();
+            }
+        }, 1000);
     } catch (err) {
         if (err instanceof ZodError) {
             // 显示错误消息

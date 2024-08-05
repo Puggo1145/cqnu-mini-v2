@@ -67,6 +67,21 @@ const testRSA = () => {
     console.log("解密后：" + decrypted);
 }
 
+
+const testWebSocket = () => {
+    uni.connectSocket({
+        url: "wss://localhost:3000",
+        header: {
+            'content-type': 'application/json'
+        },
+        success: (res) => {
+            console.log(res);
+            
+            console.log("连接成功");
+        },
+
+    })
+}
 </script>
 
 <template>
@@ -108,6 +123,11 @@ const testRSA = () => {
         <view class="mt-4">
             <cus-button @click="testRSA">
                 测试RSA
+            </cus-button>
+        </view>
+        <view class="mt-4">
+            <cus-button @click="testWebSocket">
+                测试 websocket
             </cus-button>
         </view>
     </cus-page>

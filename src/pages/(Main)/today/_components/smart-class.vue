@@ -5,6 +5,7 @@ import { useSchedule } from '@/stores/useSchedule';
 // constants
 import { baseConfigs } from '@/constants/baseConfig';
 
+
 const courseStartTime = [
     "8 : 30",
     "9 : 25",
@@ -18,10 +19,25 @@ const courseStartTime = [
     "20 : 25",
 ]
 
+
 const schedule = useSchedule();
-const currentTime = ref(new Date());
+const currentTime = ref(new Date()); // 每分钟更新一次时间，令视图基于时间响应
+
+let timer: number;
+onMounted(() => {
+    timer = setInterval(() => {
+        currentTime.value = new Date();
+    }, 60000); // 每分钟重新计算一次剩余课程
+});
+onUnmounted(() => {
+    clearInterval(timer);
+});
+
 
 const courseOfToday = computed(() => {
+    // 未开学的不算
+    if (new Date(baseConfigs.termStartDate) > currentTime.value) return [];
+
     const allCoursesOfToday = schedule.getLessons({
         week: schedule.getCurrentWeek(new Date(baseConfigs.termStartDate), baseConfigs.totalWeeks),
         day: currentTime.value.getDay(),
@@ -51,19 +67,6 @@ function goToSchedule() {
         url: '/pages/(Main)/study/schedule/page'
     })
 }
-
-
-let timer: number;
-
-onMounted(() => {
-    timer = setInterval(() => {
-        currentTime.value = new Date();
-    }, 60000); // 每分钟重新计算一次剩余课程
-});
-
-onUnmounted(() => {
-    clearInterval(timer);
-});
 </script>
 
 <template>
@@ -75,8 +78,14 @@ onUnmounted(() => {
         >
             <view 
                 v-if="courseOfToday.length === 0"
+                class="flex flex-col gap-y-2"
             >
-                <text class="text-white text-3xl">今日无课</text>
+                <text class="text-white text-3xl font-bold">
+                    今日无课
+                </text>
+                <text class="text-sm text-white">
+                    学习辛苦，好好休息一下吧
+                </text>
             </view>
             <view 
                 v-else

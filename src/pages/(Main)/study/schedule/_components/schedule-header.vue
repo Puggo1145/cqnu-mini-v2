@@ -49,9 +49,9 @@ async function updateSchedule() {
             </text>
             <view class="text-secondary-foreground">
                 <text>
-                    第{{ props.currentWeek }}周
+                    第{{ props.currentViewingWeek }}周
                 </text>
-                <text 
+                <text
                     v-if="props.currentWeek !== props.currentViewingWeek || !props.isTermStarted"
                     class="ml-2"
                 >

@@ -7,35 +7,17 @@ import scheduleHeader from './_components/schedule-header.vue';
 import noSchedule from './_components/no-schedule.vue';
 // store
 import { useSchedule } from '@/stores/useSchedule';
+// constants
+import { baseConfigs } from '@/constants/baseConfig';
 
 
 const schedule = useSchedule();
 
 
-const startDate = new Date('2024-09-01');  // 开学日期
+const startDate = new Date(baseConfigs.termStartDate);  // 开学日期
+const totalWeeks = baseConfigs.totalWeeks;  // 总周数
 const isTermStarted = ref(true);  // 是否开学
-
-const totalWeeks = 20;  // 总周数
 const currentWeek = ref(1);  // 当前周次
-
-
-const currentSwiperIndex = ref(0);  // 当前 swiper 索引
-const visibleRange = ref({ start: 0, end: 2 });
-
-function handleSwiperChange(e: any) {
-	currentSwiperIndex.value = e.detail.current;
-	updateVisibleRange();
-};
-
-function updateVisibleRange() {
-	visibleRange.value = {
-		start: Math.max(0, currentSwiperIndex.value - 1),
-		end: Math.min(totalWeeks - 1, currentSwiperIndex.value + 1)
-	};
-};
-
-watch(currentSwiperIndex, updateVisibleRange);
-
 
 const lessonsOfAllWeeks = computed(() => {
 	if (!schedule.lessons) return null;
@@ -45,6 +27,22 @@ const lessonsOfAllWeeks = computed(() => {
 		(_, index) => schedule.getLessons({ week: index + 1 })
 	);
 });
+
+
+const currentSwiperIndex = ref(0);  // 当前 swiper 索引
+const visibleRange = ref({ start: 0, end: 2 });
+
+function handleSwiperChange(e: any) {
+	currentSwiperIndex.value = e.detail.current;
+	updateVisibleRange();
+};
+function updateVisibleRange() {
+	visibleRange.value = {
+		start: Math.max(0, currentSwiperIndex.value - 1),
+		end: Math.min(totalWeeks - 1, currentSwiperIndex.value + 1)
+	};
+};
+watch(currentSwiperIndex, updateVisibleRange);
 
 
 // 初始化当前周和 swiper 索引

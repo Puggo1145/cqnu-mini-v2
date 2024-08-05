@@ -20,7 +20,7 @@ interface GetLessonsParams {
 
 export const useSchedule = defineStore("useSchedule", {
   state: () => ({
-    lessons: undefined as Lesson[] | undefined,
+    lessons: [] as Lesson[],
   }),
   actions: {
     getLessons({ week, day }: GetLessonsParams) {

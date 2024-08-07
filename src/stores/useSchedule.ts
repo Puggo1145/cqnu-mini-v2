@@ -36,6 +36,9 @@ export const useSchedule = defineStore("useSchedule", {
       const weeksPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7)) + 1;
 
       return Math.min(weeksPassed, totalWeeks);  // 确保不超过总周数
+    },
+    getNamesOfLessons() {
+      return this.lessons?.map(lesson => lesson.name);
     }
   }
 });

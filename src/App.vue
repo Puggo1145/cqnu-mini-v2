@@ -22,7 +22,7 @@ onLaunch(async () => {
 
     // 初始化
     const initiator = new Initiator();
-    // initiator.validateSignInStatus();
+    initiator.validateSignInStatus();
     initiator.addInterceptPages()
 });
 

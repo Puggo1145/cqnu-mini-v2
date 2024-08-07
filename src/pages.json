@@ -1,13 +1,13 @@
 {
 	"pages": [
 		{
-			"path": "pages/dev/page"
-		},
-		{
 			"path": "pages/(Main)/today/page"
 		},
 		{
 			"path": "pages/(Main)/study/schedule/page"
+		},
+		{
+			"path": "pages/dev/page"
 		},
 		{
 			"path": "pages/(Main)/me/feedback/page"

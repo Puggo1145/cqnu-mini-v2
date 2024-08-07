@@ -12,11 +12,10 @@ import { z } from 'zod';
 // utils
 import { getDate, getCurrentTime } from '@/utils/timeHandler';
 import { easyNoteTagColorMapper } from '@/constants/easy-note/easy-note-card';
-// mock
-import { mockRelatedCourses } from '@/mock/easy-note';
 // store
 import { useClassEasyNoteStore } from '@/stores/easy-note/class-easy-note';
 import { useEasyNoteStore } from '@/stores/easy-note/easy-note';
+import { useSchedule } from '@/stores/useSchedule';
 // static
 import icons from '@/constants/icons';
 // types
@@ -25,15 +24,15 @@ import type { Tag } from '@/api/easy-note';
 
 // TODO - 初始化 小记 stores
 // 要根据当前课程和小记创建时选择的课程来选择对应的小记 store
-// 如果创建时选择的课程与当前课程相同，同时更新两个 store
-// 如果不同，只更新 easyNoteStore
+// 如果创建时选择的课程与当前课程相同，同时刷新两个 store 的内容
+// 如果不同，只刷新 easyNoteStore
 const classEasyNoteStore = useClassEasyNoteStore();
 const easyNoteStore = useEasyNoteStore();
 
 
 // 初始化可选数据
-const tags = ref<Tag[]>([]);
-const relatedCourses = ref(mockRelatedCourses);
+const tags = ref<Tag[]>();
+const relatedCourses = useSchedule().getNamesOfLessons();
 onMounted(async () => {
     // 从后端拉取可选的标签数据
     const data = await getTags();
@@ -92,7 +91,7 @@ async function createEasyNote() {
             content: content.value,
             imagesUrl: [],
             deadline: `${currentDate.value} ${currentTime.value}:00`,
-            courseName: relatedCourses.value[currentCourseIndex.value],
+            courseName: relatedCourses[currentCourseIndex.value],
             tagIds: selectedTags.value,
         });
         
@@ -198,9 +197,16 @@ async function createEasyNote() {
                     标签(点击选择)
                 </text>
                 <view class="flex items-center gap-2 mb-12">
-                    <view 
-                        v-for="tag in tags" 
-                        :key="tag.id" 
+                    <text
+                        v-if="!tags"
+                        class="ml-2 text-sm text-secondary-foreground"
+                    >
+                        获取标签失败
+                    </text>
+                    <view
+                        v-else
+                        v-for="tag in tags"
+                        :key="tag.id"
                         class="px-4 py-2 rounded-full text-secondary-foreground
                         text-sm font-bold leading-none"
                         :class="selectedTags.includes(tag.id) && 'text-white'"
@@ -213,7 +219,11 @@ async function createEasyNote() {
             </view>
         </scroll-view>
         <view class="mb-5">
-            <cus-button @click="createEasyNote">
+            <cus-button 
+                :variant="tags === undefined ? 'muted' : 'primary'"
+                @click="createEasyNote"
+                :disabled="tags === undefined"
+            >
                 创建
             </cus-button>
         </view>

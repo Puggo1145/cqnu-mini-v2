@@ -14,6 +14,7 @@ export const useClassEasyNoteStore = defineStore('classEasyNote', {
         error: false
     }),
     actions: {
+        // 课堂小记只获取当前课程的小记
         async fetchNotes(params: GetNoteListParams) {
             const res = await getNoteList(params);
             if (res.ok) {

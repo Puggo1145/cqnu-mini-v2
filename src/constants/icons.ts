@@ -27,7 +27,6 @@ import rightSecondary from "@/static/icons/right-secondary.svg"
 import rightWhite from "@/static/icons/right-white.svg"
 import downSecondary from "@/static/icons/down-secondary.svg"
 import down from "@/static/icons/down.svg"
-
 // study
 import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
@@ -35,7 +34,9 @@ import studyReview from "@/static/icons/study-review.svg"
 // easy-note
 import haveFive from "@/static/icons/have-five.svg"
 import add from '@/static/icons/add.svg'
-
+// me
+import modifyUserInfo from '@/static/icons/modify-user-info.svg'
+import about from '@/static/icons/about.svg'
 
 
 const icons = {
@@ -75,7 +76,9 @@ const icons = {
     },
     easyNote: {
         haveFive
-    }
+    },
+    modifyUserInfo,
+    about
 };
 
 export default icons;

@@ -10,9 +10,9 @@ import type { EasyNoteStatistics } from '@/api/easy-note';
 
 
 const statistics = reactive<EasyNoteStatistics>({
-    weekCount: undefined,
-    importanceCount: undefined,
-    allCount: undefined,
+    weekCount: 0,
+    importanceCount: 0,
+    allCount: 0,
 });
 onMounted(async () => {
     const data = await getNoteStatistics();

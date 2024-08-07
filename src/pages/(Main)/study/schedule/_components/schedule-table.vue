@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+import { ref } from 'vue';
+// components
+import scheduleDetail from './schedule-detail.vue';
+
+
 interface Lesson {
 	lesson_id: number;
 	name: string;
@@ -34,6 +39,21 @@ const courseTimeList = [
 	["19:30", "20:15"],
 	["20:25", "21:10"],
 ]
+
+
+const isDetailShow = ref(false);
+function onOpen() {
+	isDetailShow.value = true;
+}
+function onClose() {
+	isDetailShow.value = false;
+}
+
+const selectedLesson = ref<Lesson>();
+function selectLesosn(lesson: Lesson) {
+	selectedLesson.value = lesson;
+	onOpen();
+}
 </script>
 
 <template>
@@ -88,6 +108,7 @@ const courseTimeList = [
 						'text-xs text-modern py-2 p-1 rounded-md bg-secondary text-center',
 						'flex flex-col gap-y-1',
 					]"
+					@click="() => selectLesosn(lesson)"
 				>
 					<text class="font-bold text-primary">
 						{{ lesson.name }}
@@ -105,4 +126,14 @@ const courseTimeList = [
 			</view>
 		</scroll-view>
 	</view>
+	<!-- 课程详情弹出层 -->
+	<!-- <up-popup
+		:show="isDetailShow"
+		mode="bottom"
+		:round="16"
+		@open="onOpen"
+		@close="onClose"
+	>
+		<schedule-detail :lesson="selectedLesson" />
+	</up-popup> -->
 </template>

@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
+import functions from './_components/functions.vue';
 // store
 import useUserInfo from '@/stores/user-info';
 // illustration
@@ -39,5 +40,6 @@ const userPublicInfo = computed(() => userInfo.getUserPublicInfo());
                 在想什么？
             </text>
         </view>
+        <functions class="mt-2" />
     </cus-page>
 </template>

@@ -8,11 +8,11 @@ import noNote from '@/pages/(Main)/today/_components/no-note.vue';
 import cusError from '@/components/cus-error.vue';
 // store
 import { useEasyNoteStore } from '@/stores/easy-note/easy-note';
-// mock
-import { mockRelatedCourses } from '@/mock/easy-note';
+import { useSchedule } from '@/stores/useSchedule';
 
 
-const store = useEasyNoteStore();
+const easyNoteStore = useEasyNoteStore();
+
 const current = ref(1);
 const pageSize = ref(5);
 
@@ -25,7 +25,7 @@ async function fetchNotes() {
     ? ""
     : tagsOptions[selectedTag.value];
 
-    await store.fetchNotes({
+    await easyNoteStore.fetchNotes({
         current: current.value,
         pageSize: pageSize.value,
         timespan: timeRangeOptions[selectedTimeRange.value],
@@ -35,6 +35,7 @@ async function fetchNotes() {
 }
 
 
+const allRelatedCoursesOptions = ["全部课程", ...useSchedule().getNamesOfLessons()];
 const timeRangeOptions = [
     "今日内",
     "本周内",
@@ -44,7 +45,6 @@ const timeRangeOptions = [
     "半年内",
     "今年内",
 ];
-const allRelatedCoursesOptions = mockRelatedCourses;
 const tagsOptions = [
     "全部标签",
     "重要",
@@ -105,12 +105,12 @@ watch([selectedTimeRange, selectedRelatedCourse, selectedTag], async () => {
             scroll-y
         >
             <view class="flex flex-col gap-y-3">
-                <loading v-if="store.notes === undefined && !store.error" />
-                <no-note v-else-if="store.notes && store.notes.length === 0" />
-                <cus-error v-else-if="store.error" />
+                <loading v-if="easyNoteStore.notes === undefined && !easyNoteStore.error" />
+                <no-note v-else-if="easyNoteStore.notes && easyNoteStore.notes.length === 0" />
+                <cus-error v-else-if="easyNoteStore.error" />
                 <easy-note-card
                     v-else
-                    v-for="note in store.notes"
+                    v-for="note in easyNoteStore.notes"
                     :key="note.id"
                     
                     :id="note.id"

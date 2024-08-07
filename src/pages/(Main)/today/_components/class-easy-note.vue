@@ -12,15 +12,24 @@ import icons from '@/constants/icons';
 import { useClassEasyNoteStore } from '@/stores/easy-note/class-easy-note';
 
 
-const store = useClassEasyNoteStore();
+interface ClassEasyNoteProps {
+    currentCourseName: string | null;
+}
+const props = defineProps<ClassEasyNoteProps>();
+
+
 const current = ref(1);
 const pageSize = ref(5);
+
+const store = useClassEasyNoteStore();
 onMounted(async () => {
+    // 今日无课，显示今天的小记
     await store.fetchNotes({
         current: current.value,
         pageSize: pageSize.value,
+        courseName: props.currentCourseName || "",
         tagName: "",
-        timespan: "",
+        timespan: "今日内",
     });
 })
 
@@ -41,7 +50,7 @@ function goToCreateEasyNote() {
     <view class="mt-8">
         <view class="flex items-center justify-between">
             <text class="text-2xl font-bold">
-                课堂小记
+                {{ !props.currentCourseName ? "今日小记" : "课堂小记" }}
             </text>
             <cusButton 
                 variant="ghost" 
@@ -52,6 +61,14 @@ function goToCreateEasyNote() {
                 <image :src="icons.rightSecondary" class="w-5 h-5" />
             </cusButton>
         </view>
+        
+        <text
+            v-if="!props.currentCourseName"
+            class="text-sm text-secondary-foreground"
+        >
+            今日课程已结束，快来看看今天有什么小记吧
+        </text>
+        
         <view class="pt-3">
             <view v-if="store.notes === undefined && !store.error" class="mt-4">
                 <loading v-if="store.notes === undefined" />

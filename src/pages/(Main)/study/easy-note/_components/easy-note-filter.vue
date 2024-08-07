@@ -4,6 +4,7 @@ import { ref, onMounted, watch } from 'vue';
 import easyNoteCard from './easy-note-card.vue';
 import cusSelect from '@/components/cus-select.vue';
 import loading from '@/components/loading.vue';
+import requireSchedule from './require-schedule.vue';
 import noNote from '@/pages/(Main)/today/_components/no-note.vue';
 import cusError from '@/components/cus-error.vue';
 // store
@@ -12,6 +13,7 @@ import { useSchedule } from '@/stores/useSchedule';
 
 
 const easyNoteStore = useEasyNoteStore();
+const scheduleStore = useSchedule();
 
 const current = ref(1);
 const pageSize = ref(5);
@@ -35,7 +37,7 @@ async function fetchNotes() {
 }
 
 
-const allRelatedCoursesOptions = ["全部课程", ...useSchedule().getNamesOfLessons()];
+const allRelatedCoursesOptions = ["全部课程", ...scheduleStore.getNamesOfLessons()];
 const timeRangeOptions = [
     "今日内",
     "本周内",
@@ -69,11 +71,19 @@ function onTagChange(e: any) {
 
 
 onMounted(async () => {
+    if (scheduleStore.lessons.length === 0) return;
+
     await fetchNotes();
-})
-watch([selectedTimeRange, selectedRelatedCourse, selectedTag], async () => {
-    await fetchNotes();
-})
+});
+watch(
+    [
+        selectedTimeRange, 
+        selectedRelatedCourse, 
+        selectedTag, 
+        () => scheduleStore.lessons
+    ], 
+    async () => await fetchNotes()
+);
 </script>
 
 <template>
@@ -105,9 +115,23 @@ watch([selectedTimeRange, selectedRelatedCourse, selectedTag], async () => {
             scroll-y
         >
             <view class="flex flex-col gap-y-3">
-                <loading v-if="easyNoteStore.notes === undefined && !easyNoteStore.error" />
-                <no-note v-else-if="easyNoteStore.notes && easyNoteStore.notes.length === 0" />
-                <cus-error v-else-if="easyNoteStore.error" />
+                <require-schedule 
+                    v-if="scheduleStore.lessons.length === 0"
+                    class="mt-4"
+                />
+                <loading 
+                    v-else-if="easyNoteStore.notes === undefined && !easyNoteStore.error"
+                    class="mt-4"
+                />
+                <no-note 
+                    v-else-if="easyNoteStore.notes && easyNoteStore.notes.length === 0"
+                    class="mt-4"
+                />
+                <cus-error 
+                    v-else-if="easyNoteStore.error"
+                    class="mt-4"
+                />
+
                 <easy-note-card
                     v-else
                     v-for="note in easyNoteStore.notes"

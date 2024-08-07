@@ -1,11 +1,21 @@
 <script setup lang="ts">
+import { withDefaults } from 'vue';
 // components
 import cusButton from '@/components/cus-button.vue';
 import images from '@/constants/images';
 
+
+interface NoNoteProps {
+    currentCourseName?: string | null;
+}
+const props = withDefaults(defineProps<NoNoteProps>(), {
+    currentCourseName: null,
+});
+
+
 function goToCreateEasyNote() {
     uni.navigateTo({
-        url: '/pages/(Main)/study/easy-note/create/page'
+        url: `/pages/(Main)/study/easy-note/create/page?courseName=${props.currentCourseName}`
     });
 }   
 </script>

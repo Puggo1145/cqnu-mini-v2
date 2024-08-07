@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
 import dynamicHeader from './_components/dynamic-header.vue';

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 // components
 import cusButton from '@/components/cus-button.vue';
 import noNote from './no-note.vue';
@@ -20,7 +20,6 @@ const props = defineProps<ClassEasyNoteProps>();
 
 const current = ref(1);
 const pageSize = ref(5);
-
 const store = useClassEasyNoteStore();
 onMounted(async () => {
     // 今日无课，显示今天的小记
@@ -28,6 +27,18 @@ onMounted(async () => {
         current: current.value,
         pageSize: pageSize.value,
         courseName: props.currentCourseName || "",
+        tagName: "",
+        timespan: "今日内",
+    });
+})
+
+
+watch(() => props.currentCourseName, newVal => {
+    store.currentCourse = newVal;
+    store.fetchNotes({
+        current: current.value,
+        pageSize: pageSize.value,
+        courseName: newVal || "",
         tagName: "",
         timespan: "今日内",
     });

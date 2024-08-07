@@ -35,6 +35,8 @@ export const useEasyNoteStore = defineStore('easyNote', {
                     timespan: ""
                 });
             }
+
+            return isSuccess;
         }
     }
 })

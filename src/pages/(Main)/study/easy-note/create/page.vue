@@ -34,6 +34,16 @@ const easyNoteStore = useEasyNoteStore();
 const tags = ref<Tag[]>();
 const relatedCourses = useSchedule().getNamesOfLessons();
 onMounted(async () => {
+    // 读取创建行为是否来自当前课程
+    const pages = getCurrentPages();
+    const currentPage = pages[pages.length - 1];
+    // @ts-expect-error uniapp 没有标注 options 类型
+    const { courseName } = currentPage.options;
+    // 如果是从当前课程进入的，将 currentCourseIndex 设置为当前课程
+    if (courseName) {
+        currentCourseIndex.value = relatedCourses.indexOf(courseName);
+    }
+
     // 从后端拉取可选的标签数据
     const data = await getTags();
     if (data) {
@@ -95,8 +105,18 @@ async function createEasyNote() {
             tagIds: selectedTags.value,
         });
         
-        // 2. 创建小记
-        const isSuccess = await createNote(form);
+        // 2. 创建小记（easyNoteStore 会在创建成功后自动刷新）
+        const isSuccess = await easyNoteStore.createNote(form);
+        // 3. 如果 classEasyNote 的课程和创建课程相同，刷新 classEasyNoteStore (也就是 today 页面的课堂小记)
+        if (relatedCourses[currentCourseIndex.value] === classEasyNoteStore.currentCourse) {
+            await classEasyNoteStore.fetchNotes({
+                current: 1,
+                pageSize: 10,
+                courseName: classEasyNoteStore.currentCourse,
+                tagName: "",
+                timespan: "今日内",
+            });
+        }
 
         if (isSuccess) {
             uni.showToast({
@@ -107,9 +127,6 @@ async function createEasyNote() {
                 uni.navigateBack();
             }, 1500);
         }
-
-        // TODO - 3. 更新 notes
-
     } catch (err) {
         if (err instanceof z.ZodError) {
             err.errors.forEach(err => {

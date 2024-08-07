@@ -39,6 +39,8 @@ onMounted(async () => {
 
 
 watch(() => props.currentCourseName, newVal => {
+    current.value = 1;
+
     clasEasyNoteStore.currentCourse = newVal;
     clasEasyNoteStore.fetchNotes({
         current: current.value,
@@ -49,6 +51,8 @@ watch(() => props.currentCourseName, newVal => {
     });
 })
 watch(() => scheduleStore.lessons, () => {
+    current.value = 1;
+
     clasEasyNoteStore.fetchNotes({
         current: current.value,
         pageSize: pageSize.value,

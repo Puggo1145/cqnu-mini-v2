@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // constants
 import { baseConfigs } from '@/constants/baseConfig';
+// store
+import { useSchedule } from '@/stores/useSchedule';
 
 
 interface Lesson {
@@ -21,6 +23,9 @@ interface SmartClassProps {
 const props = defineProps<SmartClassProps>();
 
 
+const scheduleStore = useSchedule();
+
+
 function goToSchedule() {
     uni.navigateTo({
         url: '/pages/(Main)/study/schedule/page'
@@ -31,9 +36,26 @@ function goToSchedule() {
 <template>
     <!-- 最近一节课程 -->
     <view class="w-full">
-        <view class="w-full p-6 rounded-2xl text-white leading-none bg-[#5670FD] shadow-lg shadow-[#5670FD]/20"
-            @click="goToSchedule">
-            <view v-if="props.courseOfToday.length === 0" class="flex flex-col gap-y-2">
+        <view 
+            class="w-full p-6 rounded-2xl text-white leading-none bg-[#5670FD] shadow-lg shadow-[#5670FD]/20"
+            @click="goToSchedule"
+        >
+            <view
+                v-if="scheduleStore.lessons.length === 0"
+                class="flex flex-col gap-y-2"
+            >
+                <text class="text-white text-3xl font-bold">
+                    请同步课表
+                </text>
+                <text class="text-sm text-white">
+                    点击同步课表，让你的效率加倍！
+                </text>
+            </view>
+        
+            <view 
+                v-else-if="props.courseOfToday.length === 0" 
+                class="flex flex-col gap-y-2"
+            >
                 <text class="text-white text-3xl font-bold">
                     今日无课
                 </text>
@@ -74,7 +96,7 @@ function goToSchedule() {
         <view v-if="props.courseOfToday.length <= 1"
             class="w-full p-5 flex items-center justify-center bg-secondary rounded-2xl text-secondary-foreground">
             <text class="text-md font-bold whitespace-nowrap">
-                今日已无更多课程
+                已无更多课程
             </text>
         </view>
         <view v-else v-for="item in props.courseOfToday.slice(1)" :key="item.name"

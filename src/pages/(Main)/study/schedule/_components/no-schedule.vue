@@ -35,7 +35,7 @@ async function updateSchedule() {
     <view class="w-full h-full flex justify-center mt-[160px]">
         <no-data
 			title="暂无课程"
-			desc="点击右上角的同步按钮一键同步课程吧！"
+			desc="点击按钮一键同步课程吧！"
             action-text="同步"
             :action="updateSchedule"
 		/>

@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<NoNoteProps>(), {
 
 function goToCreateEasyNote() {
     uni.navigateTo({
-        url: `/pages/(Main)/study/easy-note/create/page?courseName=${props.currentCourseName}`
+        url: `/pages/(Main)/study/easy-note/create/page?courseName=${props.currentCourseName || ""}`
     });
 }   
 </script>

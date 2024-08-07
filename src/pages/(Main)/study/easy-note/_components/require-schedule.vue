@@ -16,7 +16,7 @@ function goToSyncSchedule() {
             请同步课表
         </text>
         <text class="text-sm text-secondary-foreground">
-            小记同步您的需要课程信息以保证正常使用
+            小记需要您的课程信息以正常使用
         </text>
         <cus-button
             variant="secondary"

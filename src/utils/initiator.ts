@@ -31,6 +31,9 @@ class Initiator {
         // 有 token 检查 token 是否有效
         const isTokenValid = await validateTokenAndSyncUserInfo();
         if (!isTokenValid) {
+            uni.showToast({
+                title: "获取用户信息失败，请尝试重新登录"
+            })
             // token 无效，跳转到首页登录
             // 可以考虑直接调用 signin 来自动登录
             const pages = getCurrentPages();

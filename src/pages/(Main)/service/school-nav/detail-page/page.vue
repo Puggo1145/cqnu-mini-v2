@@ -5,6 +5,9 @@ import cusPage from '@/components/cus-page.vue';
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from 'vue';
 
+// constants
+import { navs } from '@/constants/school-nav-locations';
+
 
 interface DataSource {
     title: string;
@@ -13,19 +16,20 @@ interface DataSource {
 
 interface SubData {
     subTitle: string;
-    arr: ArrItem[];
+    places: ArrItem[];
 }
 
 interface ArrItem {
     name: string;
-    span: string;
+    alias: string;
 }
 
 
 const dataSource = ref<DataSource | undefined >(undefined);
 
 onLoad((option) => {
-    dataSource.value = JSON.parse(option?.dataSource) as DataSource;
+    let tag = option?.dataSource;
+    dataSource.value = navs[tag];
 })
 </script>
 
@@ -55,7 +59,7 @@ onLoad((option) => {
                             </text>
                             <view class="mt-4 grid grid-cols-2 grid-rows-2 gap-4">
                                 <view
-                                    v-for="(item2) in item1.arr" 
+                                    v-for="(item2) in item1.places" 
                                     :key="item2.name"
                                     class="px-4 py-6 rounded-xl bg-[#E0E0E0] flex flex-col justify-center gap-y-1" 
                                 >
@@ -63,7 +67,7 @@ onLoad((option) => {
                                         {{ item2.name }}
                                     </text>
                                     <text class="text-sm text-[#899199]">
-                                        {{ item2.span }}
+                                        {{ item2.alias }}
                                     </text>
                                 </view>
                             </view>

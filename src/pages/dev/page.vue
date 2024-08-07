@@ -10,7 +10,7 @@ import { getNoteList, createNote } from '@/api/easy-note';
 // 爬虫测试
 import LinkOfficial from '@/utils/link-official';
 // linker 加密和解密测试
-import { encryptLinker, rsaDecrypt } from '@/utils/encrypter';
+// import { encryptLinker, rsaDecrypt } from '@/utils/encrypter';
 
 
 const captchaBase64 = ref<string>('');

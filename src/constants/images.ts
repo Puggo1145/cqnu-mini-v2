@@ -15,8 +15,10 @@ import serviceCard from "@/static/images/service-card.svg";
 import serviceFood from "@/static/images/service-food.png";
 import serviceLocation from "@/static/images/service-location.svg";
 import serviceWater from "@/static/images/service-water.svg";
-
-
+import serviceNavBuilding from "@/static/images/service-nav-building.png";
+import serviceNavExpress from "@/static/images/service-nav-express.png";
+import serviceNavShop from "@/static/images/service-nav-shop.png";
+import serviceNavScenery from "@/static/images/service-nav-scenery.png";
 
 
 const images = {
@@ -38,6 +40,12 @@ const images = {
         food: serviceFood,
         location: serviceLocation,
         water: serviceWater,
+        nav: {
+            building: serviceNavBuilding,
+            express: serviceNavExpress,
+            shop: serviceNavShop,
+            scenery: serviceNavScenery,
+        }
     },
 };
 

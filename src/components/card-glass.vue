@@ -19,10 +19,14 @@ const imgSize: Record<string, string> = {
     medium: "size-[148px] -right-2 -bottom-6",
     wide: "w-[120px] h-[120px]", // TODO - 适配 wide 下的图片大小
 }
+
+const emit = defineEmits(['click']);
+
 </script>
 
 <template>
     <view 
+        @click="$emit('click')"
         class="relative bg-white rounded-2xl" 
         :class="[
             cardSize[props.size],

@@ -59,13 +59,13 @@ const createEasyNote = async () => {
 };
 
 
-const testRSA = () => {
-    const data = "281733";
-    const encrypted = encryptLinker(data);
-    console.log("加密后：" + encrypted);
-    const decrypted = rsaDecrypt(encrypted);
-    console.log("解密后：" + decrypted);
-}
+// const testRSA = () => {
+//     const data = "281733";
+//     const encrypted = encryptLinker(data);
+//     console.log("加密后：" + encrypted);
+//     const decrypted = rsaDecrypt(encrypted);
+//     console.log("解密后：" + decrypted);
+// }
 
 
 const testWebSocket = () => {
@@ -120,11 +120,11 @@ const testWebSocket = () => {
                 </cus-button>
             </view>
         </view>
-        <view class="mt-4">
+        <!-- <view class="mt-4">
             <cus-button @click="testRSA">
                 测试RSA
             </cus-button>
-        </view>
+        </view> -->
         <view class="mt-4">
             <cus-button @click="testWebSocket">
                 测试 websocket

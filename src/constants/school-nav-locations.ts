@@ -6,7 +6,6 @@ interface Nav {
             name: string;
             alias: string;
             location: string;
-            desc: string;
         }[]
     }[]
 }
@@ -22,25 +21,21 @@ export const navs: Record<string, Nav> = {
                         name: '弘德楼', 
                         alias: '11/12/13/14/15',
                         location: '',
-                        desc: '',
                     },
                     { 
                         name: '特教楼', 
                         alias: 'T',
                         location: '',
-                        desc: ''
                     },
                     { 
                         name: '致用楼', 
                         alias: '' ,
                         location: '',
-                        desc: ''
                     },
                     { 
                         name: '图北楼', 
                         alias: '17',
                         location: '',
-                        desc: ''
                     },
                 ]
             }
@@ -56,19 +51,16 @@ export const navs: Record<string, Nav> = {
                         name: '南门菜鸟驿站', 
                         alias: '南门',
                         location: '',
-                        desc: ''
                     },
                     {
                         name: '东北门菜鸟驿站',
                         alias: '东北门',
                         location: '',
-                        desc: ''
                     },
                     {
                         name: '三食堂菜鸟驿站',
                         alias: '三食堂',
                         location: '',
-                        desc: ''
                     }
                 ]
             }
@@ -149,31 +141,26 @@ export const navs: Record<string, Nav> = {
                         name: '情人坡',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: '致用楼',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: '你的寝室',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: 'XXXX',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: 'XXXX',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     }
                 ]
             },
@@ -184,31 +171,26 @@ export const navs: Record<string, Nav> = {
                         name: '情人坡',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: '致用楼',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: '你的寝室',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: 'XXXX',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     },
                     {
                         name: 'XXXX',
                         alias: '',
                         location: '',
-                        desc: '所有重师人的共同回忆'
                     }
                 ]
             }

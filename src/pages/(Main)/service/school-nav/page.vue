@@ -39,7 +39,7 @@ const navCategories = [
 
 const handleToDetailPage = (dataSource: string) => {
     const targetPage = dataSource === 'scenery' ? 'school-scenery' : 'detail-page'
-    console.log(dataSource);
+    // console.log(dataSource);
 
     uni.navigateTo({
         url: `/pages/(Main)/service/school-nav/${targetPage}/page?dataSource=${dataSource}`

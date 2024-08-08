@@ -7,7 +7,6 @@ import images from '@/constants/images';
 
 
 const handleToNavPage = () => {
-    console.log("???")
     uni.navigateTo({
         url: '/pages/(Main)/service/school-nav/page'
     })
@@ -17,20 +16,6 @@ const handleToMiniprogram = () => {
     uni.navigateToMiniProgram({
         appId: 'wx600e85d92f102852',
         path: '',
-        extraData: {
-
-        },
-        success(res) {
-            console.log('跳转成功');
-            
-        },
-        fail(err) {
-            uni.showToast({
-                title: `跳转失败！`,
-                icon: 'none',
-                duration: 2000
-            })
-        }
     })
 }
 </script>

@@ -3,6 +3,8 @@ import { ref, watch, withDefaults, onMounted } from 'vue';
 // types
 import type { InputTypeHTMLAttribute } from 'vue';
 
+
+export type CusInputEvent = { value: string };
 interface Props {
     fieldName?: string;
     value?: string | undefined | null;
@@ -28,7 +30,7 @@ const onFocus = () => {
 const onInput = (e: Event) => {
     // @ts-expect-error uniapp 没有标注 Event 类型
     inputValue.value = e.detail.value;
-    emit('input', { value: inputValue.value });
+    emit('input', { value: inputValue.value } as CusInputEvent);
     // 用户输入时清空错误信息
     errorMessage.value = '';
 };

@@ -68,3 +68,25 @@ export const createNote = async (note: CreateEasyNote) => {
 
     return res.ok
 }
+
+
+// 支持小记
+enum supportStatus {
+    SUPPORT=1,
+    CANCEL=0
+}
+export const supportNote = async(
+    id: number,
+    status: supportStatus
+) => {
+    const res = await request.POST<boolean>({
+        route: "note/v1/clap",
+        data: {
+            noteId: id,
+            status
+        }
+    })
+        .send();
+
+    return res.ok
+}

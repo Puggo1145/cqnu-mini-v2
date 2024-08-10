@@ -5,6 +5,7 @@ import cusPage from '@/components/cus-page.vue';
 import spinner from '@/components/spinner.vue';
 import cusButton from '@/components/cus-button.vue';
 import cusInput from '@/components/cus-input.vue';
+import easyNoteCard from '../(Main)/study/easy-note/_components/easy-note-card.vue';
 // apis
 import { getNoteList, createNote } from '@/api/easy-note';
 // 爬虫测试
@@ -17,13 +18,13 @@ const captchaBase64 = ref<string>('');
 const authCode = ref<string>('');
 const dataObj = ref();
 
-onMounted(async () => {
-    const data = await LinkOfficial.getSignInSessionAndAuthCode();
-    if (data) {
-        captchaBase64.value = "data:image/png;base64," + data.authCodeImg;
-        dataObj.value = data.dataObj;
-    }
-})
+// onMounted(async () => {
+//     const data = await LinkOfficial.getSignInSessionAndAuthCode();
+//     if (data) {
+//         captchaBase64.value = "data:image/png;base64," + data.authCodeImg;
+//         dataObj.value = data.dataObj;
+//     }
+// })
 
 const signInToOfficial = async () => {
     await LinkOfficial.signInToOfficial(
@@ -90,15 +91,40 @@ const testWebSocket = () => {
             <spinner size="small" color="white" />
             测试
         </cus-button>
-        <view class="mt-4">
+
+        <easy-note-card 
+            :card="{
+                id: 1,
+                openid: '1',
+                title: '下节课要带的资料',
+                content: '资料',
+                imagesUrl: [],
+                deadline: '2024-7-15 00:04',
+                courseName: '文化人类学',
+                tagList: [{
+                    id: 1,
+                    tagName: '重要',
+                    noteId: 1,
+                    isDelete: 0,
+                    createdTime: '2024-7-15 00:04',
+                    updatedTime: '2024-7-15 00:04',
+                }],
+                username: 'Puggo',
+                seeNumber: 0,
+                supportNumber: 0,
+            }"
+        />
+        
+        <!-- <view class="mt-4">
             <text class="mb-2 text-xl font-bold">登录到校园门户</text>
             <view class="flex flex-col">
                 <image :src="captchaBase64" class="w-[100px] h-[30px] object-cover" />
                 <cus-input @input="event => authCode = event.value" />
                 <cus-button @click="signInToOfficial">提交登录</cus-button>
             </view>
-        </view>
-        <view class="mt-4">
+        </view> -->
+
+        <!-- <view class="mt-4">
             <text class="mb-2 text-xl font-bold">教务系统</text>
             <view class="flex flex-col">
                 <cus-button @click="getSchedules">
@@ -108,8 +134,9 @@ const testWebSocket = () => {
                     获取学生信息
                 </cus-button>
             </view>
-        </view>
-        <view class="mt-4">
+        </view> -->
+        
+        <!-- <view class="mt-4">
             <text class="mb-2 text-xl font-bold">小记</text>
             <view class="flex flex-col">
                 <cus-button @click="() => getNoteList({current: 1, pageSize: 10})">
@@ -119,16 +146,18 @@ const testWebSocket = () => {
                     创建小记
                 </cus-button>
             </view>
-        </view>
+        </view> -->
+
         <!-- <view class="mt-4">
             <cus-button @click="testRSA">
                 测试RSA
             </cus-button>
         </view> -->
-        <view class="mt-4">
+        
+        <!-- <view class="mt-4">
             <cus-button @click="testWebSocket">
                 测试 websocket
             </cus-button>
-        </view>
+        </view> -->
     </cus-page>
 </template>

@@ -137,17 +137,7 @@ watch(
                     v-for="note in easyNoteStore.notes"
                     :key="note.id"
                     
-                    :id="note.id"
-                    :title="note.title"
-                    :content="note.content"
-                    :images-url="note.imagesUrl"
-                    :deadline="note.deadline"
-                    :course-name="note.courseName"
-                    :tag-list="note.tagList"
-                    :openid="note.openid"
-                    :username="note.username"
-                    :seeNumber="note.seeNumber"
-                    :supportNumber="note.supportNumber"
+                    :card="note"
                 />
             </view>
             <!-- 占位 -->

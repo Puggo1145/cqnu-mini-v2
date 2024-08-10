@@ -31,9 +31,10 @@ import down from "@/static/icons/down.svg"
 import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
 import studyReview from "@/static/icons/study-review.svg"
+import add from '@/static/icons/add.svg'
 // easy-note
 import haveFive from "@/static/icons/have-five.svg"
-import add from '@/static/icons/add.svg'
+import deleteNote from '@/static/icons/delete.svg'
 // me
 import modifyUserInfo from '@/static/icons/modify-user-info.svg'
 import about from '@/static/icons/about.svg'
@@ -75,7 +76,8 @@ const icons = {
         add: add,
     },
     easyNote: {
-        haveFive
+        haveFive,
+        deleteNote
     },
     modifyUserInfo,
     about

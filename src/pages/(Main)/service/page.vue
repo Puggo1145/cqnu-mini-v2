@@ -9,23 +9,21 @@ import images from '@/constants/images';
 </script>
 
 <template>
-    <cus-page background-style="modern">
-        <scroll-view 
-            class="w-full flex-1 px-4"
+    <cus-page background-style="modern" padding-x="16">
+        <!-- <scroll-view 
+            class="w-full flex-1"
             scroll-y    
-        >
+        > -->
             <image :src="images.service.bg" class="z-0 fixed w-[255px] -right-4 top-2" />
             <view class="mt-9 w-full h-[80px]">
                 <text class="font-bold text-3xl text-modern">生活服务</text>
             </view>
-            <view class="flex-1 relative z-10 flex flex-col gap-y-[14px]">
-                <view class="w-full grid grid-cols-2 gap-x-[14px]">
-                    <utility-card />
-                    <consume-card />
-                </view>
+            <view class="grid grid-cols-2 gap-[14px]">
+                <utility-card />
+                <consume-card />
                 <!-- 瓷片入口 -->
-                <cards />
+                <cards class="col-span-2" />
             </view>
-        </scroll-view>
+        <!-- </scroll-view> -->
     </cus-page>
 </template>

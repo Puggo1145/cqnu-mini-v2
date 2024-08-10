@@ -1,13 +1,19 @@
 {
 	"pages": [
 		{
+			"path": "pages/dev/page"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{
-			"path": "pages/(Main)/study/schedule/page"
+			"path": "pages/(Main)/me/page"
 		},
 		{
-			"path": "pages/dev/page"
+			"path": "pages/(Main)/me/modify/page"
+		},
+		{
+			"path": "pages/(Main)/study/schedule/page"
 		},
 		{
 			"path": "pages/(Main)/me/feedback/page"
@@ -17,9 +23,6 @@
 		},
 		{
 			"path": "pages/(Main)/service/page"
-		},
-		{
-			"path": "pages/(Main)/me/page"
 		},
 		{
 			"path": "pages/(Main)/study/grades/page"

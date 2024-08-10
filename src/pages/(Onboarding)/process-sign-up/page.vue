@@ -1,24 +1,30 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import cusPage from '@/components/cus-page.vue';
 import spinner from '@/components/spinner.vue';
 // api
 import { validateTokenAndSyncUserInfo } from '@/api/user';
+import { getSchedules } from '@/utils/link-official';
+
+
+const process = ref<string[]>(["正在同步用户信息"]);
 
 onMounted(async () => {
-    const process = [];
-
     // 1. 同步用户信息
     const isSuccess = await validateTokenAndSyncUserInfo();
-    if (isSuccess) {
-        process.push("userInfo");
-    };
+    if (isSuccess) process.value = [...process.value, "正在同步课表"];
+
+    // 2. 同步课表
+    const schedule = await getSchedules();
+    if (schedule) process.value = [...process.value, "欢迎来到智慧重师"];
 
     // 检查流程是否完成
-    if (process.length === 1) {
-        uni.switchTab({
-            url: '/pages/(Main)/today/page'
-        });
+    if (process.value.length === 3) {
+        setTimeout(() => {
+            uni.switchTab({
+                url: '/pages/(Main)/today/page'
+            });
+        }, 1500);
     };
 });
 </script>

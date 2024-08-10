@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+// api
+import { supportNote } from '@/api/easy-note';
 // constants
 import {
     easyNoteTagColorMapper,
@@ -31,14 +33,15 @@ export interface EasyNoteCard {
     seeNumber: number; // 被多少人查看 
     supportNumber: number; // 有多少人击掌
 }
-const easyNoteCardProps = defineProps<EasyNoteCard>();
+const { card } = defineProps<{ card: EasyNoteCard }>();
+const supportNumber = ref(card.supportNumber);
 
 
 // 根据 tag 处理 note 的样式表现
 const isNoteImportant = computed(() => {
-    if (easyNoteCardProps.tagList.length === 0) {
+    if (card.tagList.length === 0) {
         return false
-    } else if (easyNoteCardProps.tagList.some(tag => tag.tagName === "重要")) {
+    } else if (card.tagList.some(tag => tag.tagName === "重要")) {
         return true;
     };
 });
@@ -51,8 +54,8 @@ const noteColor = computed(() => {
     } else {
         return {
             bg: easyNoteColorMapper.normal,
-            tag: easyNoteCardProps.tagList.length > 0 
-            ? easyNoteTagColorMapper[easyNoteCardProps.tagList[0].tagName]
+            tag: card.tagList.length > 0 
+            ? easyNoteTagColorMapper[card.tagList[0].tagName]
             : easyNoteTagColorMapper.default
         }
     }
@@ -64,37 +67,53 @@ const isCardOpen = ref(false);
 function onCardClick() {
     isCardOpen.value = !isCardOpen.value;
 }
+
+
+// 击掌点赞
+async function supportEasyNote() {
+    const isSuccess = await supportNote(card.id, card.supportNumber);
+    if (isSuccess) {
+        supportNumber.value += 1;
+    } else {
+        uni.showToast({
+            title: "击掌失败",
+            icon: "error"
+        });
+    }
+}
 </script>
 
 <template>
     <view
         class="w-full rounded-2xl flex flex-col justify-between p-4"
         :style="{ backgroundColor: noteColor.bg }"
-        @click="onCardClick"
     >
-        <view class="flex items-center justify-between">
+        <view 
+            class="flex items-center justify-between"
+            @click="onCardClick"
+        >
             <view class="flex flex-col">
                 <text class="text-md font-bold">
-                    {{ easyNoteCardProps.title }}
+                    {{ card.title }}
                 </text>
-                <view 
-                    class="text-sm flex flex-col text-black text-opacity-35"
+                <view
+                    class="mt-1 text-sm flex flex-col text-black text-opacity-35"
                 >
-                    <text>{{ easyNoteCardProps.deadline }}</text>
-                    <text>{{ easyNoteCardProps.courseName }}</text>
+                    <text>{{ card.courseName }}</text>
+                    <text>{{ card.deadline }}</text>
                 </view>
                 <text class="text-sm text-black text-opacity-35">
-                    来自 {{ easyNoteCardProps.username }}
+                    来自 {{ card.username }}
                 </text>
             </view>
             <view class="flex flex-col justify-between items-end gap-y-2">
                 <!-- 查看人数 -->
                 <text class="text-sm text-black text-opacity-35">
-                    有 {{ easyNoteCardProps.seeNumber }} 人查看
+                    有 {{ card.seeNumber }} 人查看
                 </text>
                 <!-- 外显 tag -->
                 <view 
-                    v-if="easyNoteCardProps.tagList.length !== 0" 
+                    v-if="card.tagList.length !== 0" 
                     class="flex-1"
                 >
                     <view
@@ -102,7 +121,7 @@ function onCardClick() {
                         :class="isCardOpen ? 'scale-0' : 'scale-100'"
                         :style="{ backgroundColor: noteColor.tag }"
                     >
-                        {{ isNoteImportant ? "重要" : tagList[0].tagName }}
+                        {{ isNoteImportant ? "重要" : card.tagList[0].tagName }}
                     </view>
                 </view>
             </view>
@@ -113,20 +132,21 @@ function onCardClick() {
         <scroll-view 
             scroll-y
             class="overflow-hidden transition-all duration-300" 
-            :class="isCardOpen ? 'h-[100px]' : 'h-0'
-        ">
+            :class="isCardOpen ? 'h-[100px]' : 'h-0'"
+            @click="onCardClick"
+        >
             <view class="pb-4">
-                {{ easyNoteCardProps.content }}
+                {{ card.content }}
             </view>
         </scroll-view>
         <!-- 展开卡片的 footer -->
         <view
             v-if="isCardOpen"
-            class="flex items-end justify-between"
+            class="flex items-center justify-between"
         >
             <view class="flex items-center gap-x-2">
                 <view
-                    v-for="tag in easyNoteCardProps.tagList"
+                    v-for="tag in card.tagList"
                     :key="tag.id"
                     class="px-3 py-1 rounded-full text-white font-bold text-sm"
                     :style="{ backgroundColor: easyNoteTagColorMapper[tag.tagName] }"
@@ -134,12 +154,23 @@ function onCardClick() {
                     {{ tag.tagName }}
                 </view>
             </view>
-            <!-- 击掌数量 -->
-            <view class="flex flex-col items-center">
-                <text class="text-sm text-fit-background-lighter">
-                    {{ easyNoteCardProps.supportNumber }}
-                </text>
-                <image :src="icons.easyNote.haveFive" class="size-9" />
+            <view class="flex items-center gap-x-2">
+                <view class="w-8 h-8 overflow-hidden">
+                    <image :src="icons.easyNote.deleteNote" class="size-full" />
+                </view>
+                <!-- 击掌数量 -->
+                <view 
+                    class="relative w-8 h-8"
+                    @click="supportEasyNote"
+                >
+                    <text class="absolute -top-6 left-1/2 -translate-x-1/2 text-sm text-fit-background-lighter">
+                        {{ supportNumber }}
+                    </text>
+                    <image 
+                        :src="icons.easyNote.haveFive" 
+                        class="size-full"
+                    />
+                </view>
             </view>
         </view>
     </view>

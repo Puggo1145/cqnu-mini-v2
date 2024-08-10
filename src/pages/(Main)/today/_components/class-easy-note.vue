@@ -126,17 +126,7 @@ function goToCreateEasyNote() {
                     v-for="note in clasEasyNoteStore.notes"
                     :key="note.id"
 
-                    :id="note.id"
-                    :title="note.title"
-                    :content="note.content"
-                    :images-url="note.imagesUrl"
-                    :deadline="note.deadline"
-                    :course-name="note.courseName"
-                    :tag-list="note.tagList"
-                    :openid="note.openid"
-                    :username="note.username"
-                    :seeNumber="note.seeNumber"
-                    :supportNumber="note.supportNumber"
+                    :card="note"
                 />
                 <view 
                     class="w-full h-[96px] bg-secondary rounded-2xl flex justify-center items-center"

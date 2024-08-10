@@ -138,7 +138,9 @@ watch(() => userInfo.dormitory, async () => {
         :round="16"
         @open="onOpen"
         @close="onClose"
+        class="z-50 fixed"
     >
         <bind-dormitory :onClose="onClose" />
+        <view class="h-[64px]" />
     </up-popup>
 </template>

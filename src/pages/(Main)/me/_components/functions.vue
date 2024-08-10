@@ -12,6 +12,12 @@ const funcs: Func[] = [
     { name: "修改个人信息", icon: icons.modifyUserInfo, page: "modify" },
     { name: "关于我们", icon: icons.about, page: "about" },
 ]
+
+function goPage(page: string) {
+    uni.navigateTo({
+        url: `/pages/(Main)/me/${page}/page`
+    })
+}
 </script>
 
 <template>
@@ -20,6 +26,7 @@ const funcs: Func[] = [
             v-for="func in funcs"
             :key="func.name"
             class="w-full flex items-center gap-x-2 p-4 bg-white rounded-2xl"
+            @click="() => goPage(func.page)"
         >
             <view class="w-6 h-6 flex items-center justify-center rounded-2xl">
                 <image :src="func.icon" class="size-full" />

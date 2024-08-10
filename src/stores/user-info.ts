@@ -78,6 +78,13 @@ const useUserInfo = defineStore("useUserInfo", {
                 showFlag: this.showFlag,
             }
         },
+        getModifiableInfo() {
+            return {
+                username: this.username,
+                dormitory: this.dormitory,
+                roomNumber: this.roomNumber,
+            }
+        },
         getUserPrivateInfo() {
             return this.$state;
         }

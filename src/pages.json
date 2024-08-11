@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/(Main)/study/academic-details/page"
+		},
+		{
 			"path": "pages/dev/page"
 		},
 		{

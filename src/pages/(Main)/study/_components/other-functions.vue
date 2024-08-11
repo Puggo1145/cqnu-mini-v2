@@ -15,7 +15,7 @@ const otherFunctions = [
         url: "/pages/(Main)/study/schedule/page"
     },
     {
-        name: "复习资料",
+        name: "学业情况",
         icon: icons.study.review,
         url: ""
     },

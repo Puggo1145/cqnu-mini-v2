@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue';
 // api
 import { supportNote } from '@/api/easy-note';
+// stores
+import useUserInfo from '@/stores/user-info';
 // constants
 import {
     easyNoteTagColorMapper,
@@ -35,6 +37,9 @@ export interface EasyNoteCard {
 }
 const { card } = defineProps<{ card: EasyNoteCard }>();
 const supportNumber = ref(card.supportNumber);
+
+
+const userInfoStore = useUserInfo();
 
 
 // 根据 tag 处理 note 的样式表现
@@ -81,6 +86,9 @@ async function supportEasyNote() {
         });
     }
 }
+
+
+// 删除小记
 </script>
 
 <template>
@@ -155,7 +163,11 @@ async function supportEasyNote() {
                 </view>
             </view>
             <view class="flex items-center gap-x-2">
-                <view class="w-8 h-8 overflow-hidden">
+                <!-- 删除小记 -->
+                <view
+                    v-if="card.openid === userInfoStore.openid"
+                    class="w-8 h-8 overflow-hidden"
+                >
                     <image :src="icons.easyNote.deleteNote" class="size-full" />
                 </view>
                 <!-- 击掌数量 -->

@@ -35,7 +35,9 @@ onMounted(async () => {
             <text class="text-[96px]">🥳</text>
             <view class="flex flex-col items-center gap-3">
                 <text class="text-4xl font-bold">大功告成！</text>
-                <text class="text-sm text-gray-500">正在为你营造个性化体验，请稍候</text>
+                <text class="text-sm text-gray-500">
+                    {{ process[process.length - 1] }}
+                </text>
             </view>
             <view class="mt-[100px]">
                 <spinner />

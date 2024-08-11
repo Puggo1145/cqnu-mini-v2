@@ -38,7 +38,7 @@ const Request = async <T>(
             url: targetURL + route,
             method: method || 'GET',
             header: header,
-            timeout: 8000,
+            timeout: 12000,
             data: data,
 
             success: (res) => {

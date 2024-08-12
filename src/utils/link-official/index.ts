@@ -7,6 +7,7 @@ import { getSchedules } from "./libs/jwxt/get-schedules"
 import { getStudentInfo } from "./libs/jwxt/get-student-info"
 import { getOverallGrade } from "./libs/jwxt/get-overall-grade"
 import { getTermGrade } from "./libs/jwxt/get-term-grade"
+import { getAcademicDetails } from "./libs/jwxt/get-academic-details"
 
 
 export {
@@ -18,7 +19,8 @@ export {
     getSchedules,
     getStudentInfo,
     getOverallGrade,
-    getTermGrade
+    getTermGrade,
+    getAcademicDetails
 }
 
 const LinkOfficial = {

@@ -17,7 +17,7 @@ const otherFunctions = [
     {
         name: "学业情况",
         icon: icons.study.review,
-        url: ""
+        url: "/pages/(Main)/study/academic-details/page"
     },
 ];
 

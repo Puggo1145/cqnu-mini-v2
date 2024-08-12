@@ -102,7 +102,7 @@ async function supportEasyNote() {
 }
 
 
-// 小记更多操作
+// 小记更多操作 - [ 1. 删除 ]
 const moreOption = reactive([
     {
         text: "删除",
@@ -129,6 +129,7 @@ async function deleteEasyNote() {
 
 <template>
     <up-swipe-action>
+        <!-- 添加更多功能后修改 click 的触发逻辑 -->
         <up-swipe-action-item
             :options="moreOption"
             @click="deleteEasyNote"

@@ -128,7 +128,7 @@ async function deleteEasyNote() {
 </script>
 
 <template>
-    <up-swipe-action autoClose>
+    <up-swipe-action>
         <up-swipe-action-item
             :options="moreOption"
             @click="deleteEasyNote"

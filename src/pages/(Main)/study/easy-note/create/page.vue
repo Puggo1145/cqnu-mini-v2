@@ -110,7 +110,7 @@ async function createEasyNote() {
         
         // 2. 创建小记（easyNoteStore 会在创建成功后自动刷新）
         const isSuccess = await easyNoteStore.createNote(form);
-        // 3. 如果 classEasyNote 的课程和创建课程相同，刷新 classEasyNoteStore (也就是 today 页面的课堂小记)
+        //  如果 classEasyNote 的课程和创建课程相同，刷新 classEasyNoteStore (也就是 today 页面的课堂小记)
         if (relatedCourses[currentCourseIndex.value] === classEasyNoteStore.currentCourse) {
             await classEasyNoteStore.fetchNotes({
                 current: 1,
@@ -120,6 +120,17 @@ async function createEasyNote() {
                 timespan: "今日内",
             });
         }
+        // 如果今日无课，classEasyNote 会显示今日的小记，需要单独刷新
+        else if (!classEasyNoteStore.currentCourse) {
+            await classEasyNoteStore.fetchNotes({
+                current: 1,
+                pageSize: 10,
+                courseName: "",
+                tagName: "",
+                timespan: "今日内",
+            });
+        }
+
 
         if (isSuccess) {
             uni.showToast({

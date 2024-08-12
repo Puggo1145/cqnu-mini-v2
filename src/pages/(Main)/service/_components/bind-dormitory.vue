@@ -44,7 +44,7 @@ async function bindDormitory() {
     isBinding.value = true;
 
     try {
-        const zod = bindDormitorySchema.parse({
+        bindDormitorySchema.parse({
             roomNumber: roomNumber.value
         });
 
@@ -52,11 +52,11 @@ async function bindDormitory() {
         const res = await updateUserInfo({
             openid: userInfo.openid,
             dormitory: dormitories[selectedDormitory.value],
-            roomNumber: zod.roomNumber
+            roomNumber: roomNumber.value
         });
         if (res.ok) {
             userInfo.dormitory = dormitories[selectedDormitory.value];
-            userInfo.roomNumber = zod.roomNumber;
+            userInfo.roomNumber = roomNumber.value;
 
             uni.showToast({
                 title: '绑定成功',

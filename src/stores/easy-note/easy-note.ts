@@ -26,6 +26,8 @@ export const useEasyNoteStore = defineStore('easyNote', {
         },
         async createNote(data: CreateEasyNote) {
             const isSuccess = await createNote(data);
+            console.log(isSuccess);
+            
             if (isSuccess) {
                 await this.fetchNotes({
                     current: 1,

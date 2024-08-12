@@ -6,7 +6,7 @@ import cusInput from '@/components/cus-input.vue';
 import cusSelect from '@/components/cus-select.vue';
 import cusButton from '@/components/cus-button.vue';
 // apis
-import { getTags, createNote } from '@/api/easy-note';
+import { getTags } from '@/api/easy-note';
 // zod
 import { z } from 'zod';
 // utils
@@ -80,6 +80,7 @@ function onTagClick(tagId: number) {
 const titleInputRef = ref();
 const title = ref('');
 const content = ref('');
+const isCreating = ref(false);
 
 const easyNoteSchema = z.object({
     title: z.string()
@@ -94,6 +95,8 @@ const easyNoteSchema = z.object({
     tagIds: z.array(z.number()),
 });
 async function createEasyNote() {
+    isCreating.value = true;
+
     try {
         // 1. 校验数据
         const form = easyNoteSchema.parse({
@@ -140,8 +143,9 @@ async function createEasyNote() {
                 }
             })
         }
+    } finally {
+        isCreating.value = false;
     }
-
 }
 </script>
 
@@ -237,9 +241,13 @@ async function createEasyNote() {
         </scroll-view>
         <view class="mb-5">
             <cus-button 
-                :variant="tags === undefined ? 'muted' : 'primary'"
+                :variant="
+                    tags === undefined && 'muted' 
+                    || isCreating && 'loading' 
+                    || 'primary'
+                "
                 @click="createEasyNote"
-                :disabled="tags === undefined"
+                :disabled="tags === undefined || isCreating"
             >
                 创建
             </cus-button>

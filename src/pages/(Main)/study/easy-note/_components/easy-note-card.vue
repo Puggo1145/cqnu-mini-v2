@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 // api
-import { supportNote } from '@/api/easy-note';
+import { supportNote, deleteNote } from '@/api/easy-note';
 // stores
 import useUserInfo from '@/stores/user-info';
+import { useEasyNoteStore } from '@/stores/easy-note/easy-note';
+import { useClassEasyNoteStore } from '@/stores/easy-note/class-easy-note';
 // constants
 import {
     easyNoteTagColorMapper,
@@ -29,22 +31,25 @@ export interface EasyNoteCard {
     imagesUrl: (string | null)[];
     deadline: string | Date;
     courseName: string;
-    tagList: EasyNoteTags[];
+    tagList: EasyNoteTags[] | null;
     openid: string; // 来自（创建者）id
     username: string; // 来自（创建者）昵称
     seeNumber: number; // 被多少人查看 
     supportNumber: number; // 有多少人击掌
 }
-const { card } = defineProps<{ card: EasyNoteCard }>();
+const { card } = defineProps<{ card: EasyNoteCard }>()
 const supportNumber = ref(card.supportNumber);
 
 
+// stores
 const userInfoStore = useUserInfo();
+const easyNoteStore = useEasyNoteStore();
+const classEasyNoteStore = useClassEasyNoteStore();
 
 
 // 根据 tag 处理 note 的样式表现
 const isNoteImportant = computed(() => {
-    if (card.tagList.length === 0) {
+    if (!card.tagList || card.tagList.length === 0) {
         return false
     } else if (card.tagList.some(tag => tag.tagName === "重要")) {
         return true;
@@ -59,7 +64,7 @@ const noteColor = computed(() => {
     } else {
         return {
             bg: easyNoteColorMapper.normal,
-            tag: card.tagList.length > 0 
+            tag: card.tagList && card.tagList.length > 0 
             ? easyNoteTagColorMapper[card.tagList[0].tagName]
             : easyNoteTagColorMapper.default
         }
@@ -75,10 +80,19 @@ function onCardClick() {
 
 
 // 击掌点赞
+const isNoteSupported = ref(false);
 async function supportEasyNote() {
-    const isSuccess = await supportNote(card.id, card.supportNumber);
+    console.log(isNoteSupported.value);
+
+    const isSuccess = await supportNote(
+        card.id,
+        userInfoStore.openid!,
+        isNoteSupported.value ? 0 : 1
+    );
+
     if (isSuccess) {
-        supportNumber.value += 1;
+        supportNumber.value = isNoteSupported.value ? supportNumber.value - 1 : supportNumber.value + 1;
+        isNoteSupported.value = !isNoteSupported.value;
     } else {
         uni.showToast({
             title: "击掌失败",
@@ -88,102 +102,133 @@ async function supportEasyNote() {
 }
 
 
-// 删除小记
+// 小记更多操作
+const moreOption = reactive([
+    {
+        text: "删除",
+        style: {
+            backgroundColor: '#df625e',
+        },
+        onClick: () => deleteEasyNote
+    }
+]);
+async function deleteEasyNote() {
+    const isSuccess = await deleteNote(card.id);
+    if (isSuccess) {
+        uni.showToast({
+            title: "删除成功",
+            icon: "success"
+        });
+
+        // 查找列表中该 id 的小记并删除
+        easyNoteStore.deleteNote(card.id);
+        classEasyNoteStore.deleteNote(card.id);
+    };
+}
 </script>
 
 <template>
-    <view
-        class="w-full rounded-2xl flex flex-col justify-between p-4"
-        :style="{ backgroundColor: noteColor.bg }"
-    >
-        <view 
-            class="flex items-center justify-between"
-            @click="onCardClick"
+    <up-swipe-action autoClose>
+        <up-swipe-action-item
+            :options="moreOption"
+            @click="deleteEasyNote"
         >
-            <view class="flex flex-col">
-                <text class="text-md font-bold">
-                    {{ card.title }}
-                </text>
-                <view
-                    class="mt-1 text-sm flex flex-col text-black text-opacity-35"
-                >
-                    <text>{{ card.courseName }}</text>
-                    <text>{{ card.deadline }}</text>
-                </view>
-                <text class="text-sm text-black text-opacity-35">
-                    来自 {{ card.username }}
-                </text>
-            </view>
-            <view class="flex flex-col justify-between items-end gap-y-2">
-                <!-- 查看人数 -->
-                <text class="text-sm text-black text-opacity-35">
-                    有 {{ card.seeNumber }} 人查看
-                </text>
-                <!-- 外显 tag -->
+            <view
+                class="w-full rounded-2xl flex flex-col justify-between p-4"
+                :style="{ backgroundColor: noteColor.bg }"
+            >
                 <view 
-                    v-if="card.tagList.length !== 0" 
-                    class="flex-1"
+                    class="flex items-center justify-between"
+                    @click="onCardClick"
                 >
-                    <view
-                        class="px-3 py-1 rounded-full text-white font-bold text-sm transition-all duration-300"
-                        :class="isCardOpen ? 'scale-0' : 'scale-100'"
-                        :style="{ backgroundColor: noteColor.tag }"
+                    <view class="flex flex-col">
+                        <text class="text-md font-bold">
+                            {{ card.title }}
+                        </text>
+                        <view
+                            class="mt-1 text-sm flex flex-col text-black text-opacity-35"
+                        >
+                            <text>{{ card.courseName }}</text>
+                            <text>{{ card.deadline }}</text>
+                        </view>
+                        <text class="text-sm text-black text-opacity-35">
+                            来自 {{ card.username }}
+                        </text>
+                    </view>
+                    <view class="flex flex-col justify-between items-end gap-y-2">
+                        <!-- 查看人数 -->
+                        <text class="text-sm text-black text-opacity-35">
+                            有 {{ card.seeNumber }} 人查看
+                        </text>
+                        <!-- 外显 tag -->
+                        <view 
+                            v-if="card.tagList && card.tagList.length !== 0" 
+                            class="flex-1"
+                        >
+                            <view
+                                class="px-3 py-1 rounded-full text-white font-bold text-sm transition-all duration-300"
+                                :class="isCardOpen ? 'scale-0' : 'scale-100'"
+                                :style="{ backgroundColor: noteColor.tag }"
+                            >
+                                {{ isNoteImportant ? "重要" : card.tagList[0].tagName }}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 分割线 -->
+                <view class="w-full bg-black/10 transition-all duration-300" :class="isCardOpen ? 'my-4 h-[1px]' : 'my-0 h-0'" />
+                
+                <!-- content -->
+                <scroll-view 
+                    scroll-y
+                    class="overflow-hidden transition-all duration-300" 
+                    :class="isCardOpen ? 'h-[100px]' : 'h-0'"
+                    @click="onCardClick"
+                >
+                    <view class="pb-4">
+                        {{ card.content }}
+                    </view>
+                </scroll-view>
+
+                <!-- 展开卡片的 footer -->
+                <view
+                    v-if="isCardOpen"
+                    class="flex items-center justify-between"
+                >
+                    <!-- tag -->
+                    <view class="flex items-center gap-x-2">
+                        <view
+                            v-for="tag in card.tagList"
+                            :key="tag.id"
+                            class="px-3 py-1 rounded-full text-white font-bold text-sm"
+                            :style="{ backgroundColor: easyNoteTagColorMapper[tag.tagName] }"
+                        >
+                            {{ tag.tagName }}
+                        </view>
+                    </view>
+                    <!-- 击掌 -->
+                    <view 
+                        class="relative w-8 h-8"
+                        @click="supportEasyNote"
                     >
-                        {{ isNoteImportant ? "重要" : card.tagList[0].tagName }}
+                        <text class="absolute -top-6 left-1/2 -translate-x-1/2 text-sm text-fit-background-lighter">
+                            {{ supportNumber }}
+                        </text>
+                        <image
+                            v-if="!isNoteSupported"
+                            :src="icons.easyNote.clap"
+                            class="size-full"
+                        />
+                        <image
+                            v-else
+                            :src="icons.easyNote.claped"
+                            class="size-full"
+                        />
                     </view>
                 </view>
             </view>
-        </view>
-        <!-- 分割线 -->
-        <view class="w-full bg-black/10 transition-all duration-300" :class="isCardOpen ? 'my-4 h-[1px]' : 'my-0 h-0'" />
-        <!-- content -->
-        <scroll-view 
-            scroll-y
-            class="overflow-hidden transition-all duration-300" 
-            :class="isCardOpen ? 'h-[100px]' : 'h-0'"
-            @click="onCardClick"
-        >
-            <view class="pb-4">
-                {{ card.content }}
-            </view>
-        </scroll-view>
-        <!-- 展开卡片的 footer -->
-        <view
-            v-if="isCardOpen"
-            class="flex items-center justify-between"
-        >
-            <view class="flex items-center gap-x-2">
-                <view
-                    v-for="tag in card.tagList"
-                    :key="tag.id"
-                    class="px-3 py-1 rounded-full text-white font-bold text-sm"
-                    :style="{ backgroundColor: easyNoteTagColorMapper[tag.tagName] }"
-                >
-                    {{ tag.tagName }}
-                </view>
-            </view>
-            <view class="flex items-center gap-x-2">
-                <!-- 删除小记 -->
-                <view
-                    v-if="card.openid === userInfoStore.openid"
-                    class="w-8 h-8 overflow-hidden"
-                >
-                    <image :src="icons.easyNote.deleteNote" class="size-full" />
-                </view>
-                <!-- 击掌数量 -->
-                <view 
-                    class="relative w-8 h-8"
-                    @click="supportEasyNote"
-                >
-                    <text class="absolute -top-6 left-1/2 -translate-x-1/2 text-sm text-fit-background-lighter">
-                        {{ supportNumber }}
-                    </text>
-                    <image 
-                        :src="icons.easyNote.haveFive" 
-                        class="size-full"
-                    />
-                </view>
-            </view>
-        </view>
-    </view>
+        </up-swipe-action-item>
+    </up-swipe-action>
+
 </template>

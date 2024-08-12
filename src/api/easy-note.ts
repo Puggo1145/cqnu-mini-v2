@@ -76,16 +76,29 @@ enum supportStatus {
     CANCEL=0
 }
 export const supportNote = async(
-    id: number,
+    noteId: number,
+    userId: string,
     status: supportStatus
 ) => {
     const res = await request.POST<boolean>({
-        route: "note/v1/clap",
+        route: "note/v1/like",
         data: {
-            noteId: id,
+            noteId,
+            userId,
             status
         }
     })
+        .send();
+
+    return res.ok
+}
+
+// 删除小记
+export const deleteNote = async (id: number) => {
+    const res = await request.POST<boolean>({
+        route: "note/v1/del",
+    })
+        .useParams({ id })
         .send();
 
     return res.ok

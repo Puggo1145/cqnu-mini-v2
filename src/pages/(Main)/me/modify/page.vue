@@ -71,11 +71,11 @@ function onClose() {
     >
         <modify-username
             v-if="currentModifyView === 'username'"
-            @close="onClose"
+            :on-close="onClose"
         />
         <bind-dormitory
             v-if="currentModifyView === 'dormitory'"
-            @close="onClose"
+            :on-close="onClose"
         />
         <!-- 占位 -->
         <view class="h-[64px]" />

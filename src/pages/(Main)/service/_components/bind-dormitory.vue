@@ -57,6 +57,11 @@ async function bindDormitory() {
         if (res.ok) {
             userInfo.dormitory = dormitories[selectedDormitory.value];
             userInfo.roomNumber = zod.roomNumber;
+
+            uni.showToast({
+                title: '绑定成功',
+                icon: 'success'
+            });
             
             // 关闭弹窗
             props.onClose();

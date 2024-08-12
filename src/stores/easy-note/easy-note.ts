@@ -24,7 +24,6 @@ export const useEasyNoteStore = defineStore('easyNote', {
                 this.error = true;
             }
         },
-        // TODO - 根据课程名称查询小记
         async createNote(data: CreateEasyNote) {
             const isSuccess = await createNote(data);
             if (isSuccess) {
@@ -37,6 +36,9 @@ export const useEasyNoteStore = defineStore('easyNote', {
             }
 
             return isSuccess;
+        },
+        async deleteNote(noteId: number) {
+            this.notes = this.notes?.filter(note => note.id !== noteId);
         }
     }
 })

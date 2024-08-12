@@ -35,6 +35,8 @@ import add from '@/static/icons/add.svg'
 // easy-note
 import haveFive from "@/static/icons/have-five.svg"
 import deleteNote from '@/static/icons/delete.svg'
+import claped from '@/static/icons/claped.svg'
+import clap from '@/static/icons/clap.svg'
 // me
 import modifyUserInfo from '@/static/icons/modify-user-info.svg'
 import about from '@/static/icons/about.svg'
@@ -77,7 +79,9 @@ const icons = {
     },
     easyNote: {
         haveFive,
-        deleteNote
+        deleteNote,
+        clap,
+        claped,
     },
     modifyUserInfo,
     about

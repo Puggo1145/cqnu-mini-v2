@@ -23,5 +23,8 @@ export const useClassEasyNoteStore = defineStore('classEasyNote', {
                 this.error = true;
             }
         },
+        async deleteNote(noteId: number) {
+            this.notes = this.notes?.filter(note => note.id !== noteId);
+        }
     }
 })

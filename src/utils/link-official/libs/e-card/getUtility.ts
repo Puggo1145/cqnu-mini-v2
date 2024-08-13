@@ -26,7 +26,10 @@ export const getUtilityBalance = async (data: UtilityBalanceQueryData) => {
     return request.POST<UtilityBalanceResponse>({
         where: "linkOfficial",
         route: "/getUtilityBalance",
-        data: data
+        data: {
+            ...data,
+            roomNumber: data.roomNumber.toString()
+        }
     })
         .send();
 }

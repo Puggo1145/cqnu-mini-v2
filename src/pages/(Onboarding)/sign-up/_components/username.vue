@@ -24,8 +24,8 @@ const emit = defineEmits(['update:current']);
 const validateValue = () => {
     const valueLength = inputValue.value.length;
 
-    if (valueLength < 2 || valueLength > 12) {
-        return inputRef.value.showError('用户名长度必须在 2-12 个字符之间');
+    if (valueLength < 2 || valueLength > 6) {
+        return inputRef.value.showError('用户名长度必须在 2-6 个字符之间');
     } else if (Number.isInteger(Number(inputValue.value[0]))) {
         return inputRef.value.showError('用户名必须以字母开头');
     }
@@ -43,7 +43,7 @@ const validateValue = () => {
         />
         <cus-input 
             ref="inputRef"
-            field-name="用户名（2-12 字符）"
+            field-name="用户名（2-6 字符）"
             @input="handleInput" 
         />
         <cus-button 

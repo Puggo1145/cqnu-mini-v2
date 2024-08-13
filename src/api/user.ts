@@ -19,14 +19,17 @@ export const validateTokenAndSyncUserInfo = async () => {
 }
 
 
-export const updateUserInfo = async (params: Partial<UserInfo>) => {
+type updateUserInfoParams = {
+    openid: string;
+} & Partial<UserInfo>
+export const updateUserInfo = async (params: updateUserInfoParams) => {
     const res = await request.POST({
         route: "user/v1/updateUser",
         data: params
     })
         .send();
 
-    return res
+    return res.ok
 }
 
 

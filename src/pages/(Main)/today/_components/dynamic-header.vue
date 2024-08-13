@@ -6,10 +6,10 @@ import icons from '@/constants/icons';
 
 
 const functionBtns = {
-    notification: {
-        icon: icons.notification,
-        url: "/notification"
-    },
+    // notification: {
+    //     icon: icons.notification,
+    //     url: "/notification"
+    // },
     me: {
         icon: icons.me,
         url: "/pages/(Main)/me/page"
@@ -42,7 +42,7 @@ const goto = (url: string) => uni.navigateTo({ url });
 </script>
 
 <template>
-    <view class="w-full h-[80px] flex items-center justify-between mt-12">
+    <view class="w-full h-[80px] flex items-center justify-between gap-x-4 mt-12">
         <!-- 动态提醒文本 -->
         <view class="font-bold text-3xl">
             {{ currentGreetingText }} {{ userInfo.username }}

@@ -43,8 +43,9 @@ const emit = defineEmits(['click']);
         :disabled="isButtonDisabled"
     >
         <spinner 
-            v-if="props.variant === 'loading'" 
+            v-if="props.variant === 'loading'"
             size="small"
+            class="mr-2"
         />
         <slot />
     </button>

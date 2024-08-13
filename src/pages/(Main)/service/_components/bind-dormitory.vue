@@ -49,12 +49,12 @@ async function bindDormitory() {
         });
 
         // 更新用户信息
-        const res = await updateUserInfo({
+        const isSuccess = await updateUserInfo({
             openid: userInfo.openid,
             dormitory: dormitories[selectedDormitory.value],
             roomNumber: roomNumber.value
         });
-        if (res.ok) {
+        if (isSuccess) {
             userInfo.dormitory = dormitories[selectedDormitory.value];
             userInfo.roomNumber = roomNumber.value;
 

@@ -1,5 +1,9 @@
 import { keyMap } from "../../constants/e-card-keymap";
 import urls from "../../constants/urls";
+import useUserInfo from "@/stores/user-info";
+
+
+const userInfoStore = useUserInfo();
 
 
 const transformToSecret = (
@@ -61,7 +65,8 @@ const getSafeKeyboard = async () => {
             return;
         }
 
-        const data = res.data as SafeKeyboardResponse;
+        // @ts-expect-error 煞笔 uniapp 乱 jb 标类型
+        const data = res.data.data as SafeKeyboardResponse;
         const randomEncryptedKeys = data.lowerLetterKeyboard + data.upperLetterKeyboard + data.numberKeyboard + data.symbolKeyboard;
         const imagesOfEncryptedKeys = [...data.lowerLetterKeyboardImage, ...data.upperLetterKeyboardImage, ...data.numberKeyboardImage, ...data.symbolKeyboardImage];
 
@@ -85,15 +90,28 @@ interface ECardSignInResponse {
     refresh_token: string;
     expires_in: number;
 }
-export const getECardToken = async (
-    studentId: string,
-    password: string,
-) => {
+export const getECardToken = async () => {
     try {
-        // 1. 获取安全键盘
+        // 0. 验证 token 是否已经存在有效 token
+        const token = await validateToken();
+        if (token) return token;
+
+        // 1. 获取用户信息
+        const studentId = userInfoStore.studentId;
+        const password = userInfoStore.getDecryptedLinker()
+        if (!studentId || !password) {
+            uni.showToast({
+                title: '请等待用户信息加载完毕',
+                icon: 'none',
+            })
+
+            return;
+        }
+
+        // 2. 获取安全键盘
         const safeKeyboard = await getSafeKeyboard();
 
-        // 2. 加密密码
+        // 3. 加密密码
         if (!safeKeyboard) return;
         const secret = transformToSecret(
             safeKeyboard.randomEncryptedKeys,
@@ -103,7 +121,7 @@ export const getECardToken = async (
 
         const encryptedPassword = secret + "$1$" + safeKeyboard.uuid;
 
-        // 3. 登录
+        // 4. 登录
         const res = await uni.request({
             url: urls.eCardSignIn,
             method: "POST",
@@ -130,11 +148,43 @@ export const getECardToken = async (
             return;
         }
 
-        return (res.data as ECardSignInResponse).access_token;
-    } catch {
+        const data = res.data as ECardSignInResponse;
+
+        // 存入缓存
+        uni.setStorageSync('eCardToken', data.access_token);
+
+        return data.access_token;
+    } catch (err) {
         uni.showToast({
             title: '获取一卡通信息失败',
             icon: 'none',
         });
+    }
+}
+
+
+const validateToken = async () => {
+    try {
+        // 1. 缓存中是否有 token
+        const token = uni.getStorageSync('eCardToken');
+        if (!token) return false;
+
+        // 2. 验证 token 是否有效
+        const res = await uni.request({
+            url: urls.consumeCount,
+            method: 'GET',
+            header: {
+                "Synjones-Auth": `bearer ${token}`
+            }
+        });
+
+        if (res.statusCode !== 200) {
+            uni.removeStorageSync('eCardToken');
+            return false;
+        }
+
+        return token;
+    } catch {
+        return false;
     }
 }

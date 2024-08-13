@@ -91,7 +91,7 @@ watch(() => userInfo.dormitory, async () => {
         @click="utilityOnClick"
     >
         <view class="w-full flex items-center justify-between">
-            <text class="text-white text-opacity-90 text-sm leading-none">
+            <text class="text-white text-opacity-90 text-sm">
                 {{ currentView === "electricity" ? "电" : "水" }}费余额
             </text>
 
@@ -101,7 +101,7 @@ watch(() => userInfo.dormitory, async () => {
                 class="flex items-center gap-x-1"
             >
                 <image :src="icons.switchWhite" class="size-4" />
-                <text class="text-white text-opacity-90 text-sm leading-none">切换</text>
+                <text class="text-white text-opacity-90 text-sm">切换</text>
             </view>
         </view>
 

@@ -92,10 +92,7 @@ const useUserInfo = defineStore("useUserInfo", {
         },
         getDecryptedLinker() {
             if (this.linker) {
-                const decryptedLinker = decryptLinker(this.linker);
-                console.log(this.linker, decryptedLinker);
-                
-                return decryptedLinker;
+                return decryptLinker(this.linker);;
             } else {
                 return undefined;
             }

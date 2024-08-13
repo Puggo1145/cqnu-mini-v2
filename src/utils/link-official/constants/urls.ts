@@ -11,6 +11,8 @@ const urls = {
     // 一卡通
     safeKeyboard: "https://yktapp.cqnu.edu.cn/berserker-secure/keyboard?type=Standard&order=1&synAccessSource=pc",
     eCardSignIn: "https://yktapp.cqnu.edu.cn/berserker-auth/oauth/token",
+    consumeCount: "https://yktapp.cqnu.edu.cn/berserker-search/statistics/turnover/count?synAccessSource=pc",
+    turnover: "https://yktapp.cqnu.edu.cn/berserker-search/search/personal/turnover?synAccessSource=pc"
 }
 
 export default urls;

@@ -32,7 +32,7 @@ const { title, courseDetails } = defineProps<{
             >
                 <!-- 基本信息 -->
                 <view class="flex flex-col flex-1 gap-x-6">
-                    <text class="font-bold line-clamp-1">
+                    <text class="text-sm line-clamp-1">
                         {{ course.name }}
                     </text>
                     <view class="flex items-center gap-x-2 text-sm text-secondary-foreground">

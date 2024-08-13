@@ -12,6 +12,8 @@ const electiveCourses = ref();
 const generalElectives = ref();
 const others = ref();
 onMounted(async () => {
+    uni.showLoading({ title: "加载中" });
+
     const obligatories = await getAcademicDetails("obligatories");
     obligatoryCourses.value = obligatories;
 
@@ -23,6 +25,8 @@ onMounted(async () => {
 
     const other = await getAcademicDetails("others");
     others.value = other;
+
+    uni.hideLoading();
 });
 
 </script>
@@ -35,25 +39,25 @@ onMounted(async () => {
         >
             <!-- 必修 -->
             <detailist
-                v-if="obligatoryCourses"
+                v-if="obligatoryCourses && obligatoryCourses.length > 0"
                 title="必修课程"
                 :courseDetails="obligatoryCourses"
             />
             <!-- 选修 -->
             <detailist
-                v-if="electiveCourses"
+                v-if="electiveCourses && electiveCourses.length > 0"
                 title="选修课程"
                 :courseDetails="electiveCourses"
             />
             <!-- 通识选修 -->
             <detailist
-                v-if="generalElectives"
+                v-if="generalElectives && generalElectives.length > 0"
                 title="通识选修"
                 :courseDetails="generalElectives"
             />
             <!-- 其他 -->
             <detailist
-                v-if="others"
+                v-if="others && others.length > 0"
                 title="其他"
                 :courseDetails="others"
             />

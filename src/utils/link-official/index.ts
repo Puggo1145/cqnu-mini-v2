@@ -11,6 +11,7 @@ import { getAcademicDetails } from "./libs/jwxt/get-academic-details"
 import { getCardInfo } from "./libs/e-card/getUtility"
 import { getUtilityBalance } from "./libs/e-card/getUtility"
 import { getECardToken } from "./libs/e-card/signin-to-e-card"
+import { getBalance } from "./libs/e-card/getBalance"
 
 
 export {
@@ -29,7 +30,9 @@ export {
 export {
     getCardInfo,
     getUtilityBalance,
-    getECardToken
+    
+    getECardToken,
+    getBalance
 }
 
 

@@ -4,13 +4,13 @@
 			"path": "pages/(Main)/today/page"
 		},
 		{
+			"path": "pages/(Main)/me/page"
+		},
+		{
 			"path": "pages/(Main)/study/academic-details/page"
 		},
 		{
 			"path": "pages/dev/page"
-		},
-		{
-			"path": "pages/(Main)/me/page"
 		},
 		{
 			"path": "pages/(Main)/me/modify/page"

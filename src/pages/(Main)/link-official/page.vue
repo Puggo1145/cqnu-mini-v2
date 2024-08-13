@@ -17,6 +17,7 @@ import {
 import { ZodError, z } from 'zod';
 
 
+const userInfoStore = useUserInfo();
 const backPage = ref<string>();
 
 
@@ -44,8 +45,8 @@ async function refreshAuthCode() {
 const studentIdInputRef = ref();
 const passwordInputRef = ref();
 const authCodeInputRef = ref();
-const studentId = ref();
-const password = ref();
+const studentId = ref(userInfoStore.studentId);
+const password = ref(userInfoStore.getDecryptedLinker());
 const isLinkingOfficial = ref(false);
 
 const linkOfficialSchema = z.object({
@@ -121,11 +122,6 @@ async function handleLinkOfficial() {
 
 onMounted(async () => {
     await refreshAuthCode();
-
-    // 读取学号和密码
-    const userInfoStore = useUserInfo();
-    studentId.value = userInfoStore.studentId!;
-    password.value = userInfoStore.password;
 
     // 登录成功后返回目标页面
     const pages = getCurrentPages();

@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { decryptLinker } from "@/utils/encrypter";
+
 
 export interface UserInfo extends Record<string, any> {
     id: number | undefined;
@@ -87,6 +89,16 @@ const useUserInfo = defineStore("useUserInfo", {
         },
         getUserPrivateInfo() {
             return this.$state;
+        },
+        getDecryptedLinker() {
+            if (this.linker) {
+                const decryptedLinker = decryptLinker(this.linker);
+                console.log(this.linker, decryptedLinker);
+                
+                return decryptedLinker;
+            } else {
+                return undefined;
+            }
         }
     }
 })

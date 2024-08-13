@@ -21,8 +21,15 @@ export const encryptLinker = (originalLinker: string): string => {
  * @param linker 校园官网登录密码密文
  */
 export const decryptLinker = (linker: string): string => {
-    const decrypted = CryptoJS.AES.decrypt(linker, AES_KEY);
-    return decrypted.toString(CryptoJS.enc.Utf8);
+    // 将 Base64 编码的密钥转换为字节数组
+    const keyBase64 = CryptoJS.enc.Base64.parse(AES_KEY);
+    
+    // 使用转换后的密钥进行解密
+    const bytes = CryptoJS.AES.decrypt(linker, keyBase64, {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+    });
+    return bytes.toString(CryptoJS.enc.Utf8);
 }
 
 // /**

@@ -6,8 +6,10 @@ import cusPage from '@/components/cus-page.vue';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
 import spinner from '@/components/spinner.vue';
+// stores
+import useUserInfo from '@/stores/user-info';
 // linkOfficial
-import { 
+import {
     signInToOfficial,
     getSignInSessionAndAuthCode
 } from '@/utils/link-official';
@@ -15,10 +17,11 @@ import {
 import { ZodError, z } from 'zod';
 
 
-
 const backPage = ref<string>();
-const isAuthCodeRefreshing = ref(false);
 
+
+// 初始 cookie 和验证码
+const isAuthCodeRefreshing = ref(false);
 const captchaBase64 = ref<string>('');
 const authCode = ref<string>('');
 const dataObj = ref();
@@ -35,22 +38,14 @@ async function refreshAuthCode() {
 
     isAuthCodeRefreshing.value = false;
 }
-onMounted(async () => {
-    await refreshAuthCode();
-
-    // 登录成功后返回目标页面
-    const pages = getCurrentPages();
-    const currentPage = pages[pages.length - 1];
-    // @ts-expect-error uniapp 没有标注 options 类型
-    backPage.value = currentPage.options.backPage;
-})
 
 
+// 登录表单
 const studentIdInputRef = ref();
 const passwordInputRef = ref();
 const authCodeInputRef = ref();
-const studentId = ref('');
-const password = ref('');
+const studentId = ref();
+const password = ref();
 const isLinkingOfficial = ref(false);
 
 const linkOfficialSchema = z.object({
@@ -122,6 +117,22 @@ async function handleLinkOfficial() {
         isLinkingOfficial.value = false;
     }
 }
+
+
+onMounted(async () => {
+    await refreshAuthCode();
+
+    // 读取学号和密码
+    const userInfoStore = useUserInfo();
+    studentId.value = userInfoStore.studentId!;
+    password.value = userInfoStore.password;
+
+    // 登录成功后返回目标页面
+    const pages = getCurrentPages();
+    const currentPage = pages[pages.length - 1];
+    // @ts-expect-error uniapp 没有标注 options 类型
+    backPage.value = currentPage.options.backPage;
+})
 </script>
 
 <template>

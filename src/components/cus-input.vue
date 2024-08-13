@@ -2,6 +2,8 @@
 import { ref, watch, withDefaults, onMounted } from 'vue';
 // types
 import type { InputTypeHTMLAttribute } from 'vue';
+// static
+import icons from '@/constants/icons';
 
 
 export type CusInputEvent = { value: string };
@@ -20,6 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const isInputFocused = ref(false);
 const inputValue = ref('');
+const isInputVisible = ref(!(props.type === 'password'));
 const errorMessage = ref('');
 
 
@@ -77,7 +80,7 @@ watch(() => props.value, (value) => {
             class="size-6 pl-4"
         />
         <view 
-            class="flex-1 h-full flex flex-col relative" 
+            class="flex-1 h-full flex flex-col relative"
         >
             <text
                 v-if="props.fieldName"
@@ -91,12 +94,30 @@ watch(() => props.value, (value) => {
             <input 
                 class="box-border w-full h-full absolute leading-[58px] px-4"
                 :class="props.fieldName && 'mt-2'"
-                :type="props.type ?? 'text'" 
+                :type="isInputVisible ? 'text' : 'password'"
                 :value="props.value"
                 :disabled="props.disabled"
                 :placeholder="props.placeholder"
                 @blur="onBlur"
                 @input="onInput"
+            />
+        </view>
+
+        <!-- 密码可见性 -->
+        <view
+            v-if="props.type === 'password'"
+            class="h-full aspect-square flex items-center justify-center"
+            @click="isInputVisible = !isInputVisible"
+        >
+            <image
+                v-if="isInputVisible"
+                :src="icons.visible" 
+                class="w-6 h-6" 
+            />
+            <image
+                v-else
+                :src="icons.invisible" 
+                class="w-6 h-6"
             />
         </view>
     </view>

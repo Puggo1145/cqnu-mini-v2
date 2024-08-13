@@ -8,6 +8,9 @@ const urls = {
     overallGrade: "https://jwglxt.cqnu.edu.cn/jwglxt/xsxy/xsxyqk_cxXsxyqkIndex.html?gnmkdm=N105515",
     termGrade: "https://jwglxt.cqnu.edu.cn/jwglxt/cjcx/cjcx_cxXsgrcj.html?doType=query&gnmkdm=N305005",
     courseDetails: "https://jwglxt.cqnu.edu.cn/jwglxt/xsxy/xsxyqk_cxJxzxjhxfyqKcxx.html?gnmkdm=N105515",
+    // 一卡通
+    safeKeyboard: "https://yktapp.cqnu.edu.cn/berserker-secure/keyboard?type=Standard&order=1&synAccessSource=pc",
+    eCardSignIn: "https://yktapp.cqnu.edu.cn/berserker-auth/oauth/token",
 }
 
 export default urls;

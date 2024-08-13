@@ -5,7 +5,7 @@ export interface UserInfo extends Record<string, any> {
     openid: string | undefined;
     username: string | undefined;
     studentId: string | undefined;
-    linker?: string; // 门户密码，预留字段
+    linker: string | undefined; // 门户密码
 
     faculty: string | undefined;
     major: string | undefined;

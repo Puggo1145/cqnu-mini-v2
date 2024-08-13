@@ -8,7 +8,7 @@ import { signup } from '@/api/auth';
 // stores
 import { useSignupInfo } from '@/stores/signup-info';
 // utils
-// import { encryptLinker } from '@/utils/encrypter';
+import { encryptLinker } from '@/utils/encrypter';
 
 
 const stores = useSignupInfo();
@@ -19,13 +19,12 @@ const isSigningUp = ref(false);
 async function goToSignUpProcess() {
     isSigningUp.value = true;
 
-    // 预留服务端保存门户密码的业务逻辑
-    // const encryptedLinker = encryptLinker(stores.linker);
+    const encryptedLinker = encryptLinker(stores.linker);
 
     const res = await signup({
         username: stores.username,
         studentId: stores.studentId,
-        // linker: encryptedLinker,
+        linker: encryptedLinker,
         identity: stores.identity!,
         grade: Number(stores.studentId!.toString().slice(0, 4)),
         faculty: stores.faculty!,

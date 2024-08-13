@@ -6,7 +6,7 @@ import spinner from '@/components/spinner.vue';
 // stores
 import useUserInfo from '@/stores/user-info';
 // linkOfficial
-import { getCardInfo, getUtilityBalance } from '@/utils/link-official/libs/e-card/getUtility';
+import { getCardInfo, getUtilityBalance } from '@/utils/link-official';
 // static
 import icons from '@/constants/icons';
 import images from '@/constants/images';

@@ -82,7 +82,7 @@ async function bindDormitory() {
     <view class="w-full flex flex-col px-4 gap-y-4 mt-4">
         <title-desc
             title="绑定宿舍信息"
-            desc="绑定您的宿舍信息，体验最好用的宿舍水电查询系统。请确保您选择了正确的宿舍并输入了正确的四位宿舍号"
+            desc="绑定您的宿舍信息，体验最好用的宿舍水电查询功能。请确保您选择了正确的宿舍楼并输入了正确的四位宿舍号"
             title-size="medium"
         />
         <view class="w-full flex flex-col gap-y-3">

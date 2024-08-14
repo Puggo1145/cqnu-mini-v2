@@ -9,7 +9,7 @@ import icons from '@/constants/icons';
 import images from '@/constants/images';
 
 
-const expenses = ref();
+const expenses = ref("--");
 
 const isQuerying = ref(false);
 onMounted(async () => {
@@ -21,7 +21,7 @@ onMounted(async () => {
 
     const data = await getBalance({ timeFrom, timeTo });
     if (data) {
-        expenses.value = data.expenses / 100;
+        expenses.value = (data.expenses / 100).toString();
     }
 
     isQuerying.value = false;

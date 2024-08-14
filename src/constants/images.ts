@@ -3,6 +3,7 @@ import welcome from "@/static/images/welcome.svg";
 import board from "@/static/images/board.svg";
 import NoEasyNote from "@/static/images/no-easy-note.svg";
 import networkError from "@/static/images/network-error.svg";
+import welcomeOnboard from "@/static/images/welcome-onboard.svg"
 // study
 import studyBg from "@/static/images/study-bg.svg";
 import studyTodo from "@/static/images/study-todo.svg";
@@ -27,6 +28,7 @@ const images = {
     board,
     NoEasyNote,
     networkError,
+    welcomeOnboard,
     study: {
         bg: studyBg,
         todo: studyTodo,

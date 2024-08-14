@@ -6,6 +6,7 @@ import dynamicHeader from './_components/dynamic-header.vue';
 // import tabs from './_components/tabs.vue';
 import smartClass from './_components/smart-class.vue';
 import classEasyNote from './_components/class-easy-note.vue';
+import initialPopup from './_components/initial-popup.vue';
 // store
 import { useSchedule } from '@/stores/useSchedule';
 // constants
@@ -83,4 +84,6 @@ const remainingTimeOfLatestCourse = computed(() => {
             </view>
         </scroll-view>
     </cus-page>
+    
+    <initial-popup />
 </template>

@@ -57,63 +57,73 @@ export const resolveSchedule = (originalSchedule: OriginalSchedule[]) => {
     });
 }
 
-
-function analyst(zcd:string): number[]{
+// /(\d+)-(\d+)周/是一个正则表达式，(\d+)表示匹配一个或多个数字，并使用括号将匹配的部分分组 -表示连字符 
+// 当调用match()方法时，返回一个数组，其中包含所有满足正则表达式的匹配项，第一项是完全匹配的子串，后面的项是括号分组对应的子串匹配结果
+// 例如1-16周(单) 得到的就是["1-16周", "1", "16"]
+function analyst(zcd: string): number[] {
     const sections: number[] = [];
 
     if (zcd.includes("(")) {
-        // /(\d+)-(\d+)周/是一个正则表达式，(\d+)表示匹配一个或多个数字，并使用括号将匹配的部分分组 -表示连字符 
-        // 当调用match()方法时，返回一个数组，其中包含所有满足正则表达式的匹配项，第一项是完全匹配的子串，后面的项是括号分组对应的子串匹配结果
-        // 例如1-16周(单) 得到的就是["1-16周", "1", "16"]
-        const range = zcd.match(/(\d+)-(\d+)周/);
-        if (range !== null) {
-        const start = Number(range[1]);
-        const end = Number(range[2]);
-        if (!isNaN(start) && !isNaN(end)) {
-            for (let i = start; i <= end; i++) {
-            if (zcd.includes('单') && i % 2 === 0) {
-                continue;
-            }
-            if (zcd.includes('双') && i % 2 !== 0) {
-                continue;
-            }
-
-            sections.push(i);
-            }
-        }
-        }
-    }else if (zcd.includes(",")){
-        const subParts = zcd.split(",");
-
-        for (const subPart of subParts){
-            const range = subPart.match(/(\d+)-(\d+)周/);
-            if (range !== null) {
-                const start = Number(range[1]);
-                const end = Number(range[2]);
-
-                if (!isNaN(start) && !isNaN(end)){
-                    for (let i = start; i<= end; i++){
-                        sections.push(i);
-                    }
-                }
-            }
-        }
-    }else {
         const range = zcd.match(/(\d+)-(\d+)周/);
         if (range !== null) {
             const start = Number(range[1]);
             const end = Number(range[2]);
-
-            if (!isNaN(start) && !isNaN(end)){
-                for (let i = start; i<= end; i++){
+            if (!isNaN(start) && !isNaN(end)) {
+                for (let i = start; i <= end; i++) {
+                    if (zcd.includes('单') && i % 2 === 0) {
+                        continue;
+                    }
+                    if (zcd.includes('双') && i % 2 !== 0) {
+                        continue;
+                    }
                     sections.push(i);
+                }
+            }
+        }
+    } else if (zcd.includes(",")) {
+        const subParts = zcd.split(",");
+        for (const subPart of subParts) {
+            const range = subPart.match(/(\d+)-(\d+)周/);
+            if (range !== null) {
+                const start = Number(range[1]);
+                const end = Number(range[2]);
+                if (!isNaN(start) && !isNaN(end)) {
+                    for (let i = start; i <= end; i++) {
+                        sections.push(i);
+                    }
+                }
+            } else {
+                const singleWeek = subPart.match(/(\d+)周/);
+                if (singleWeek !== null) {
+                    const week = Number(singleWeek[1]);
+                    if (!isNaN(week)) {
+                        sections.push(week);
+                    }
+                }
+            }
+        }
+    } else {
+        const range = zcd.match(/(\d+)-(\d+)周/);
+        if (range !== null) {
+            const start = Number(range[1]);
+            const end = Number(range[2]);
+            if (!isNaN(start) && !isNaN(end)) {
+                for (let i = start; i <= end; i++) {
+                    sections.push(i);
+                }
+            }
+        } else {
+            const singleWeek = zcd.match(/(\d+)周/);
+            if (singleWeek !== null) {
+                const week = Number(singleWeek[1]);
+                if (!isNaN(week)) {
+                    sections.push(week);
                 }
             }
         }
     }
 
-
-  return sections;
+    return sections;
 }
 
 

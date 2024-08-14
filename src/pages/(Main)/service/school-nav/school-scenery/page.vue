@@ -9,11 +9,41 @@ import { ref } from 'vue';
 // constants
 import { navs } from '@/constants/school-nav-locations';
 
-const dataSource = ref<Object | undefined >(undefined);
+// interface
+interface DataSource {
+    title: string;
+    data: SubData[];
+}
+
+interface SubData {
+    subTitle: string;
+    places: ArrItem[];
+}
+
+interface ArrItem {
+    name: string;
+    alias: string;
+    location: string;
+    desc?: string;
+}
+
+const dataSource = ref<DataSource | undefined >(undefined);
 onLoad((option) => {
     let tag = option?.dataSource;
     dataSource.value = navs[tag];
+    console.log(dataSource.value);
 })
+
+const handleGoMap = (nav: ArrItem) => {
+    const [longitude, latitude] = nav.location.split(",");
+    uni.openLocation({
+        latitude: Number(latitude),
+        longitude: Number(longitude),
+        scale: 18,
+        name: nav.name,
+        address: nav.alias,
+    })
+}
 </script>
 
 <template>
@@ -36,10 +66,12 @@ onLoad((option) => {
                             <block 
                                 v-for="(item, index) in dataSource.data[0].places"
                                 :key="index">
-                                <view class=" text-white inline-flex mr-[10px] w-[172px] h-[216px] bg-[#D9D9D9] rounded-[16px] overflow-hidden text-ellipsis flex-col justify-end">
+                                <view 
+                                    @click="handleGoMap(item)"
+                                    class=" text-white inline-flex mr-[10px] w-[172px] h-[216px] bg-[#D9D9D9] rounded-[16px] overflow-hidden text-ellipsis flex-col justify-end">
                                     <view class=" flex flex-col gap-1" style="padding-bottom: 20px; padding-left: 10px; padding-right: 10px;">
                                         <text class=" text-lg font-bold">{{ item.name }}</text>
-                                        <text class=" text-sm font-light mt-auto">{{ item.desc }}</text>
+                                        <text class=" text-sm font-light mt-auto text-wrap">{{ item.desc }}</text>
                                     </view>
                                 </view>
                             </block>
@@ -53,9 +85,11 @@ onLoad((option) => {
                                 :class="index <= 1 ? '' : ' mt-[16px]' " 
                                 class=" p-3 item w-[48%] h-[92px] rounded-xl bg-[#E0E0E0] flex flex-col justify-center gap-2" 
                                 v-for="(item, index) in dataSource.data[1].places" 
-                                :key="index">
+                                :key="index"
+                                @click="handleGoMap(item)"
+                                >
                                 <text class=" text-[16px] font-bold">{{ item.name }}</text>
-                                <text class=" text-[14px] text-[#899199]">{{ item.alias }}</text>
+                                <text class=" text-[14px] text-[#387abc]">{{ item.alias }}</text>
                             </view>
                         </view>
                     </view>

@@ -62,7 +62,7 @@ async function submitModification() {
 </script>
 
 <template>
-    <view class="w-full px-4 flex flex-col gap-y-4">
+    <view class="w-full px-4 flex flex-col gap-y-4 mt-4">
         <title-desc 
             title="修改用户名"
             desc="用户名长度为 2-6 个字符"

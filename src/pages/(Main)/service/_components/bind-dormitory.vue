@@ -50,7 +50,7 @@ async function bindDormitory() {
 
         // 更新用户信息
         const isSuccess = await updateUserInfo({
-            openid: userInfo.openid,
+            openid: userInfo.openid!,
             dormitory: dormitories[selectedDormitory.value],
             roomNumber: roomNumber.value
         });
@@ -79,7 +79,7 @@ async function bindDormitory() {
 </script>
 
 <template>
-    <view class="w-full flex flex-col px-4 gap-y-4">
+    <view class="w-full flex flex-col px-4 gap-y-4 mt-4">
         <title-desc
             title="绑定宿舍信息"
             desc="绑定您的宿舍信息，体验最好用的宿舍水电查询系统。请确保您选择了正确的宿舍并输入了正确的四位宿舍号"

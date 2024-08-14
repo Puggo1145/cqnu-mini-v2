@@ -51,8 +51,6 @@ const Request = async <T>(
                 }
 
                 if (!isFetchSuccess) {
-                    console.log(responseBody);
-
                     uni.showToast({
                         title: responseBody.message || '请求错误',
                         icon: 'error'

@@ -42,6 +42,11 @@ function utilityOnClick() {
         return;
     }
 
+    // 是否存在水费
+    if (!balance.value.water) {
+        return;
+    }
+
     currentView.value = currentView.value === "electricity" ? "water" : "electricity";
 }
 

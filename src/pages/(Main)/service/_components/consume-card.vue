@@ -26,6 +26,14 @@ onMounted(async () => {
 
     isQuerying.value = false;
 })
+
+// TODO - 内测期间标记没有开放的功能，后续开放后删除
+function unavailable() {
+    uni.showToast({
+        title: '账单功能未开放',
+        icon: 'none',
+    });
+}
 </script>
 
 <template>
@@ -34,7 +42,10 @@ onMounted(async () => {
             <text class="text-white text-opacity-90 text-sm leading-none">
                 本月消费
             </text>
-            <view class="flex items-center">
+            <view 
+                class="flex items-center"
+                @click="unavailable"
+            >
                 <text class="text-white text-opacity-90 text-sm leading-none">
                     账单
                 </text>

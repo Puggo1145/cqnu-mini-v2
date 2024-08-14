@@ -18,6 +18,14 @@ const handleToMiniprogram = () => {
         path: '',
     })
 }
+
+// TODO - 内测期间标记没有开放的功能，后续开放后删除
+function unavailable() {
+    uni.showToast({
+        title: '功能未开放',
+        icon: 'none',
+    });
+}
 </script>
 
 <template>
@@ -27,6 +35,7 @@ const handleToMiniprogram = () => {
             title="美食点评" 
             desc="好吃不好吃 大家来点评" 
             :img="images.service.food"
+            @click="unavailable"
         />
         <view class="flex flex-col gap-y-[14px]">
             <card-glass 

@@ -3,6 +3,8 @@ import { ref, onMounted, watch } from 'vue';
 import spinner from '@/components/spinner.vue';
 // components
 import cusSelect from '@/components/cus-select.vue';
+// stores
+import useUserInfo from '@/stores/user-info';
 // link official
 import { getTermGrade } from '@/utils/link-official';
 // static
@@ -12,8 +14,8 @@ import type { CusSelectEvent } from '@/components/cus-select.vue';
 import type { OriginalTermGrade } from '@/utils/link-official/libs/jwxt/get-term-grade';
 
 
-// TODO - 从缓存获取学号以计算年级对应的学年码
-const studentId = "2021050919079";
+const userInfoStore = useUserInfo();
+
 
 const gradeOptions = ["大一", "大二", "大三", "大四"]
 const gradeIndex = ref(0);
@@ -53,7 +55,7 @@ async function getTranscript() {
     transcriptSearchInput.value = "";
 
     // 将年级转换为学年码
-    const firstYear = Number(studentId.slice(0, 4));
+    const firstYear = Number(userInfoStore.studentId!.slice(0, 4));
     const gradesInNums = Array.from(gradeOptions).map((_, i) => {
         return firstYear + i;
     })
@@ -84,7 +86,7 @@ onMounted(() => {
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth();
 
-    const firstYear = Number(studentId.slice(0, 4));
+    const firstYear = Number(userInfoStore.studentId!.slice(0, 4));
     const currentGradeIndex = currentYear - firstYear - 1;
     const currentSemesterIndex = currentMonth > 8 ? 0 : 1;
 

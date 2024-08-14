@@ -22,7 +22,6 @@ import icons from '@/constants/icons';
 import type { Tag } from '@/api/easy-note';
 
 
-// TODO - 初始化 小记 stores
 // 要根据当前课程和小记创建时选择的课程来选择对应的小记 store
 // 如果创建时选择的课程与当前课程相同，同时刷新两个 store 的内容
 // 如果不同，只刷新 easyNoteStore

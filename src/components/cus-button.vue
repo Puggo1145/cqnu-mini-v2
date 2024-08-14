@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue';
 // components
-import spinner from './spinner.vue'; // TODO 完成 spinner variant
+import spinner from './spinner.vue';
 
 interface Props {
     variant?: "primary" | "secondary" | "muted" | "outline" | "ghost" | 'loading';

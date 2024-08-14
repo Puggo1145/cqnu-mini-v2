@@ -82,8 +82,6 @@ function onCardClick() {
 // 击掌点赞
 const isNoteSupported = ref(false);
 async function supportEasyNote() {
-    console.log(isNoteSupported.value);
-
     const isSuccess = await supportNote(
         card.id,
         userInfoStore.openid!,

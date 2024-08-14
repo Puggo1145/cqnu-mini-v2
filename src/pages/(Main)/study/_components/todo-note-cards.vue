@@ -10,6 +10,7 @@ const cards = [
         image: images.study.todo,
         backgroundColor: "#598af6",
         url: "/pages/(Main)/study/share-todo/initialization/page",
+        available: false,
     },
     {
         name: "班级小记",
@@ -17,11 +18,19 @@ const cards = [
         image: images.study.easyNote,
         backgroundColor: "#649ef3",
         url: '/pages/(Main)/study/easy-note/page',
+        available: true,
     },
 ]
 
 
-function goTo(url: string) {
+function goTo(available: boolean, url: string) {
+    if (!available) {
+        return uni.showToast({
+            title: '功能未开放',
+            icon: 'none',
+        });
+    }
+
     uni.navigateTo({ url });
 }
 </script>
@@ -33,7 +42,7 @@ function goTo(url: string) {
             :key="card.name"
             class="overflow-hidden relative w-full h-[108px] px-4 py-5 rounded-2xl"
             :style="{ backgroundColor: card.backgroundColor }"
-            @click="goTo(card.url)"
+            @click="goTo(card.available, card.url)"
         >
             <view class="flex flex-col relative z-10">
                 <text class="text-2xl font-bold text-white">{{ card.name }}</text>

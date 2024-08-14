@@ -22,6 +22,7 @@ interface SubData {
 interface ArrItem {
     name: string;
     alias: string;
+    location: string;
 }
 
 
@@ -31,6 +32,17 @@ onLoad((option) => {
     let tag = option?.dataSource;
     dataSource.value = navs[tag];
 })
+
+const handleGoMap = (nav: ArrItem) => {
+    const [longitude, latitude] = nav.location.split(",");
+    uni.openLocation({
+        latitude: Number(latitude),
+        longitude: Number(longitude),
+        scale: 18,
+        name: nav.name,
+        address: nav.alias,
+    })
+}
 </script>
 
 <template>
@@ -53,6 +65,7 @@ onLoad((option) => {
                             v-for="(item1, index) in dataSource.data" 
                             :key="index" 
                             class="data mt-[24px]"
+
                         >
                             <text class="font-bold">
                                 {{ item1.subTitle }}
@@ -62,6 +75,7 @@ onLoad((option) => {
                                     v-for="(item2) in item1.places" 
                                     :key="item2.name"
                                     class="px-4 py-6 rounded-xl bg-[#E0E0E0] flex flex-col justify-center gap-y-1" 
+                                    @click="handleGoMap(item2)"
                                 >
                                     <text class="font-bold">
                                         {{ item2.name }}

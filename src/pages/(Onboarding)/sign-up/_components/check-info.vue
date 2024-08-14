@@ -8,7 +8,7 @@ import { signup } from '@/api/auth';
 // stores
 import { useSignupInfo } from '@/stores/signup-info';
 // utils
-// import { encryptLinker } from '@/utils/encrypter';
+import { encryptLinker } from '@/utils/encrypter';
 
 
 const stores = useSignupInfo();

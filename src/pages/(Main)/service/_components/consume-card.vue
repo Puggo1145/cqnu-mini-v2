@@ -10,15 +10,21 @@ import images from '@/constants/images';
 
 
 const expenses = ref();
+
+const isQuerying = ref(false);
 onMounted(async () => {
     // 查询范围 - 本月（本月 1 日 至今, YYYY-MM-DD）
     const timeFrom = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
     const timeTo = new Date().toISOString().split('T')[0];
 
+    isQuerying.value = true;
+
     const data = await getBalance({ timeFrom, timeTo });
     if (data) {
         expenses.value = data.expenses / 100;
     }
+
+    isQuerying.value = false;
 })
 </script>
 
@@ -37,8 +43,9 @@ onMounted(async () => {
         </view>
         <view class="mt-3">
             <spinner 
-                v-if="expenses === undefined" 
+                v-if="isQuerying"
                 size="medium"
+                color="white"
             />
             <view v-else>
                 <text class="text-white font-bold text-4xl">

@@ -42,6 +42,7 @@ import clap from '@/static/icons/clap.svg'
 // me
 import modifyUserInfo from '@/static/icons/modify-user-info.svg'
 import about from '@/static/icons/about.svg'
+import feedback from '@/static/icons/feedback.svg'
 
 
 const icons = {
@@ -88,7 +89,8 @@ const icons = {
         claped,
     },
     modifyUserInfo,
-    about
+    about,
+    feedback,
 };
 
 export default icons;

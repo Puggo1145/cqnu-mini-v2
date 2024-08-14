@@ -178,7 +178,7 @@ const validateToken = async () => {
             }
         });
 
-        if (res.statusCode !== 200) {
+        if (!res || res.statusCode !== 200) {
             uni.removeStorageSync('eCardToken');
             return false;
         }

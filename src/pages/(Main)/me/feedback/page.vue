@@ -81,8 +81,12 @@ const submitFeedback = async () => {
 onMounted(() => {
     const pages = getCurrentPages();
     const currentPage = pages[pages.length - 1];
+
     // @ts-expect-error uniapp 没有标注 options 类型
-    currentFeedbackType.value = currentPage.options.type;
+    if (currentPage.options.type) {
+        // @ts-expect-error uniapp 没有标注 options 类型
+        currentFeedbackType.value = currentPage.options.type;
+    }
 })
 </script>
 

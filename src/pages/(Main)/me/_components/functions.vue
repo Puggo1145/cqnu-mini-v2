@@ -10,6 +10,7 @@ interface Func {
 }
 const funcs: Func[] = [
     { name: "修改个人信息", icon: icons.modifyUserInfo, page: "modify" },
+    { name: "意见反馈", icon: icons.feedback, page: "feedback" },
     { name: "关于我们", icon: icons.about, page: "about" },
 ]
 
@@ -29,7 +30,10 @@ function goPage(page: string) {
             @click="() => goPage(func.page)"
         >
             <view class="w-6 h-6 flex items-center justify-center rounded-2xl">
-                <image :src="func.icon" class="size-full" />
+                <image
+                    :src="func.icon"
+                    class="size-full"
+                />
             </view>
             <text class="text-sm font-bold">
                 {{ func.name }}

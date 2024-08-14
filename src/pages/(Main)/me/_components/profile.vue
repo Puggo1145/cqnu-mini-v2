@@ -18,10 +18,12 @@ function changeImage(e: any) {
 }
 
 
-onMounted(() => {
+onMounted(async () => {
     // 从缓存读取 Image
-    const cachedImageIndex = uni.getStorageSync("currentImageIndex");
-    if (cachedImageIndex) currentImageIndex.value = cachedImageIndex;
+    const cachedImageIndex = await uni.getStorage({ key: "currentImageIndex" });
+    if (cachedImageIndex.data) {
+        currentImageIndex.value = cachedImageIndex.data
+    };
 })
 </script>
 
@@ -60,7 +62,7 @@ onMounted(() => {
                 </text>
             </view>
             <text
-                v-if="currentImageIndex === undefined"
+                v-if="!currentImageIndex"
                 class="text-sm text-secondary-foreground"
             >
                 向左滑动更换我的形象

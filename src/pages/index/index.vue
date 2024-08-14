@@ -8,6 +8,8 @@ import flowTexts from "./_components/flow-texts.vue";
 import images from "@/constants/images";
 // api
 import { signin } from "@/api/auth";
+import { validateTokenAndSyncUserInfo } from "@/api/user";
+
 
 const isSigningIn = ref(false);
 const handleSignIn = async () => {
@@ -22,6 +24,7 @@ const handleSignIn = async () => {
         uni.navigateTo({ url: "/pages/(Onboarding)/sign-up/page" });
     } else if (res?.action === "signin") {
         // 登录成功后跳转主页
+        await validateTokenAndSyncUserInfo();
         uni.switchTab({ url: "/pages/(Main)/today/page" });
     }
 };
@@ -63,6 +66,7 @@ function gotoHome() {
             <cus-button @click="handleSignIn" :variant="isSigningIn ? 'loading' : 'primary'" class-name="mt-4 ">
                 {{ isSigningIn ? "" : "登录" }}
             </cus-button>
+
             <!-- dev buttons -->
             <view class="w-full flex gap-x-2 mt-2">
                 <cus-button variant="outline" @click="gotoHome" class-name="w-full">
@@ -72,6 +76,7 @@ function gotoHome() {
                     dev page
                 </cus-button>
             </view>
+            
         </view>
         <!-- 背景圆 -->
         <view class="z-0 overflow-hidden w-full h-[330px] absolute bottom-0 left-0">

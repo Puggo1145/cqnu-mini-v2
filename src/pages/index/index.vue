@@ -40,7 +40,7 @@ function gotoHome() {
 
 <template>
     <cus-page header-type="none">
-        <image :src="images.landing" mode="aspectFill" class="w-full h-[300px]" />
+        <image :src="images.landing" mode="aspectFill" class="w-full h-[320px]" />
         <view class="overflow-hidden w-screen mt-8 mb-4">
             <flowTexts />
         </view>
@@ -68,14 +68,14 @@ function gotoHome() {
             </cus-button>
 
             <!-- dev buttons -->
-            <view class="w-full flex gap-x-2 mt-2">
+            <!-- <view class="w-full flex gap-x-2 mt-2">
                 <cus-button variant="outline" @click="gotoHome" class-name="w-full">
                     去主页
                 </cus-button>
                 <cus-button variant="outline" @click="gotoDevPage" class-name="w-full">
                     dev page
                 </cus-button>
-            </view>
+            </view> -->
             
         </view>
         <!-- 背景圆 -->

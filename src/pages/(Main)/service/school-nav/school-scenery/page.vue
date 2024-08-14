@@ -31,7 +31,6 @@ const dataSource = ref<DataSource | undefined >(undefined);
 onLoad((option) => {
     let tag = option?.dataSource;
     dataSource.value = navs[tag];
-    console.log(dataSource.value);
 })
 
 const handleGoMap = (nav: ArrItem) => {

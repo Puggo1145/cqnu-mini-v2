@@ -1,14 +1,14 @@
-import landing from "@/static/images/landing-page-img.svg";
+import landing from "@/static/images/landing-page-img.png";
 import welcome from "@/static/images/welcome.svg";
 import board from "@/static/images/board.svg";
 import NoEasyNote from "@/static/images/no-easy-note.svg";
 import networkError from "@/static/images/network-error.svg";
-import welcomeOnboard from "@/static/images/welcome-onboard.svg"
+import welcomeOnboard from "@/static/images/welcome-onboard.png";
 // study
 import studyBg from "@/static/images/study-bg.svg";
 import studyTodo from "@/static/images/study-todo.svg";
 import studyEasyNote from "@/static/images/study-easy-note.svg";
-import shareTodoAvatars from '@/static/images/share-todo-avatars.svg'
+import shareTodoAvatars from '@/static/images/share-todo-avatars.png'
 // service
 import serviceBg from "@/static/images/service-bg.svg";
 import serviceUtility from "@/static/images/service-utility.svg";

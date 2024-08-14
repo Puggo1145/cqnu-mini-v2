@@ -40,7 +40,7 @@ function goToCreateShareTodo() {
             </cus-button>
         </view>
 
-        <image 
+        <image
             :src="images.study.shareTodoAvatars" 
             class="z-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
             size-full object-cover pointer-events-none"

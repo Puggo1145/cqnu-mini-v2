@@ -8,9 +8,9 @@ import { ref } from 'vue';
 
 const scheduleStore = useSchedule();
 
+
 // 小记数量
 let noteNum = ref<number>(0);
-
 
 function gotoCreateEasyNote() {
     uni.navigateTo({

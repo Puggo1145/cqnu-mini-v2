@@ -7,6 +7,16 @@ import easyNoteStatistic from './_components/easy-note-statistic.vue';
 import easyNoteFilter from './_components/easy-note-filter.vue';
 // static
 import icons from '@/constants/icons';
+import { onPullDownRefresh } from '@dcloudio/uni-app';
+
+onPullDownRefresh(() => {
+    console.log("刷新了！")
+    // 调用接口或者其他处理
+    // ....
+    setTimeout(function () {
+        uni.stopPullDownRefresh();
+    }, 3000);
+})
 
 </script>
 

@@ -64,9 +64,6 @@ function onDateChange(e: any) {
     if (selectedDate >= today) {
         startTime.value = '00:00';
     }
-    console.log("currentDate: ", currentDate.value);
-    console.log("currentTime: ", currentTime.value);
-    console.log("startTime: ", startTime.value);
 }
 function onTimeChange(e: any) {
     currentTime.value = e.value;

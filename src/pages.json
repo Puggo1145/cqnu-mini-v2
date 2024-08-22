@@ -46,7 +46,10 @@
 			"path": "pages/(Main)/study/page"
 		},
 		{
-			"path": "pages/(Main)/study/easy-note/page"
+			"path": "pages/(Main)/study/easy-note/page",
+			"style": {
+				"enablePullDownRefresh": true
+			}
 		},
 		{
 			"path": "pages/(Main)/study/easy-note/create/page"

@@ -18,9 +18,33 @@ interface GetLessonsParams {
   day?: number;
 }
 
+const list: Lesson[] = [
+    {
+      lesson_id: 1,
+      name: "高等数学",
+      place: "特教楼",
+      teacher: "吕美英",
+      start_time: 8,
+      end_time: 10,
+      day: 1,
+      include_week: [1, 2, 3, 4, 5, 6],
+      color: "#ffa500",
+    },{
+      lesson_id: 2,
+      name: "前端Web框架",
+      place: "特教楼",
+      teacher: "汪平",
+      start_time: 8,
+      end_time: 10,
+      day: 2,
+      include_week: [1, 2, 3, 4, 5, 6],
+      color: "#ffa500",
+    }
+]
+
 export const useSchedule = defineStore("useSchedule", {
   state: () => ({
-    lessons: [] as Lesson[],
+    lessons: list as Lesson[],
   }),
   actions: {
     getLessons({ week, day }: GetLessonsParams) {

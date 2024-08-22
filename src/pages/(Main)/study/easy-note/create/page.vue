@@ -54,10 +54,19 @@ onMounted(async () => {
 
 const currentDate = ref(getDate());
 const currentTime = ref<string>(getCurrentTime());
+const startTime = ref<string>(getCurrentTime());
 const currentCourseIndex = ref<number>(0);
 
 function onDateChange(e: any) {
     currentDate.value = e.value;
+    const selectedDate = new Date(e.value);
+    const today = new Date();
+    if (selectedDate >= today) {
+        startTime.value = '00:00';
+    }
+    console.log("currentDate: ", currentDate.value);
+    console.log("currentTime: ", currentTime.value);
+    console.log("startTime: ", startTime.value);
 }
 function onTimeChange(e: any) {
     currentTime.value = e.value;
@@ -208,7 +217,7 @@ async function createEasyNote() {
                     mode="time" 
                     :icon="icons.clock" 
                     :value="currentTime" 
-                    :start="currentTime"
+                    :start="startTime"
                     @change="onTimeChange" 
                 />
             </view>

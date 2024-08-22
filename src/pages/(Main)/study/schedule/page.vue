@@ -12,6 +12,7 @@ import { baseConfigs } from '@/constants/baseConfig';
 
 
 const schedule = useSchedule();
+console.log(schedule.$state);
 
 
 const startDate = new Date(baseConfigs.termStartDate);  // 开学日期
@@ -20,7 +21,9 @@ const isTermStarted = ref(true);  // 是否开学
 const currentWeek = ref(1);  // 当前周次
 
 const lessonsOfAllWeeks = computed(() => {
-	if (schedule.lessons.length === 0) return null;
+	if (schedule.lessons.length === 0) {
+		return null;
+	}
 
 	return Array.from(
 		{ length: totalWeeks }, 

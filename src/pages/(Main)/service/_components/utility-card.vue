@@ -35,13 +35,14 @@ function onOpen() {
     isBindDormitoryPopupShow.value = true;
 }
 
-function utilityOnClick() {
+async function utilityOnClick() {
     // 判断是否绑定宿舍信息
     if (!userInfo.dormitory || !userInfo.roomNumber) {
         isBindDormitoryPopupShow.value = true;
         return;
     }
-
+    
+    await queryUtility();
     currentView.value = currentView.value === "electricity" ? "water" : "electricity";
 }
 

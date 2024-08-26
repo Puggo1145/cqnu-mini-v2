@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/(Main)/service/bill/page"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{

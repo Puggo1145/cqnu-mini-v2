@@ -39,7 +39,7 @@ interface UpdateLinkerParams {
 }
 export const updateLinker = async (params: UpdateLinkerParams) => {
     const res = await request.POST<boolean>({
-        route: "user/v1/updateLinker",
+        route: "user/v1/update-pwd",
         data: params
     })
         .send();

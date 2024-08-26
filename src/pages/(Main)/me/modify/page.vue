@@ -64,15 +64,12 @@ function onClose() {
                 </cus-button>
             </view>
 
-            <view class="mt-4 w-full p-4 py-6 bg-white rounded-2xl flex items-center justify-between">
+            <view 
+                class="mt-4 w-full p-4 py-6 bg-white rounded-2xl flex items-center justify-between"
+                @click="() => chooseModifyView('linker')"
+            >
                 <modify-text>校园门户密码</modify-text>
-                <view 
-                    class="flex items-center"
-                    @click="() => chooseModifyView('linker')"
-                >
-                    <text>{{ userInfoStore.getDecryptedLinker() }}</text>
-                    <image :src="icons.rightSecondary" class="size-6" />
-                </view>
+                <image :src="icons.rightSecondary" class="size-6" />
             </view>
 
         </scroll-view>

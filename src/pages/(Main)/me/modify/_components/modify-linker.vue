@@ -47,9 +47,10 @@ async function submitModification() {
 
         // 加密
         const encryptedLinker = encryptLinker(checkedLinker);
+        const encryptedOldLinker = encryptLinker(userInfoStore.getDecryptedLinker()!);
         
         const isSuccess = await updateLinker({ 
-            oldLinker: userInfoStore.linker,
+            oldLinker: encryptedOldLinker,
             newLinker: encryptedLinker,
             confirmLinker: encryptedLinker
         });

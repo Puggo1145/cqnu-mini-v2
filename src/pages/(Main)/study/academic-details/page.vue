@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
-import detailist from './_components/detail-list.vue';
+import detailList from './_components/detail-list.vue';
 // linkOfficial
 import { getAcademicDetails } from '@/utils/link-official';
 
@@ -38,29 +38,31 @@ onMounted(async () => {
             class="overflow-hidden px-4 flex-1"
         >
             <!-- 必修 -->
-            <detailist
+            <detail-list
                 v-if="obligatoryCourses && obligatoryCourses.length > 0"
                 title="必修课程"
                 :courseDetails="obligatoryCourses"
             />
             <!-- 选修 -->
-            <detailist
+            <detail-list
                 v-if="electiveCourses && electiveCourses.length > 0"
                 title="选修课程"
                 :courseDetails="electiveCourses"
             />
             <!-- 通识选修 -->
-            <detailist
+            <detail-list
                 v-if="generalElectives && generalElectives.length > 0"
                 title="通识选修"
                 :courseDetails="generalElectives"
             />
             <!-- 其他 -->
-            <detailist
+            <detail-list
                 v-if="others && others.length > 0"
                 title="其他"
                 :courseDetails="others"
             />
         </scroll-view>
+        <!-- 占位 -->
+        <view class="h-4" />
     </cus-page>
 </template>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 interface CourseDetails {
     name: string; // 课程名称
     nature: string; // 课程性质
@@ -12,14 +14,34 @@ const { title, courseDetails } = defineProps<{
     title: string;
     courseDetails: CourseDetails[]
 }>();
+
+
+const totalCredit = computed(() => {
+    return courseDetails.reduce((acc, cur) => {
+        return acc + Number(cur.credit);
+    }, 0);
+});
+const passedCredit = computed(() => {
+    return courseDetails.reduce((acc, cur) => {
+        return cur.status === "已修" ? acc + Number(cur.credit) : acc;
+    }, 0);
+});
 </script>
 
 <template>
     <view class="w-full rounded-2xl flex flex-col mb-6">
-        <view class="ml-2 w-full">
+        <view class="ml-2 w-full flex items-end justify-between">
             <text class="font-bold text-2xl">
                 {{ title }}
             </text>
+            <view class="mr-4">
+                <text class="text-sm text-secondary-foreground mr-3">
+                    已修学分: {{ passedCredit }}
+                </text>
+                <text class="text-sm text-secondary-foreground">
+                    总学分: {{ totalCredit }}
+                </text>
+            </view>
         </view>
         <scroll-view
             scroll-y
@@ -35,7 +57,7 @@ const { title, courseDetails } = defineProps<{
                     <text class="text-sm line-clamp-1">
                         {{ course.name }}
                     </text>
-                    <view class="flex items-center gap-x-2 text-sm text-secondary-foreground">
+                    <view class="flex items-center gap-x-2 text-xs text-secondary-foreground">
                         <text>
                             {{ course.nature }}
                         </text>

@@ -183,9 +183,9 @@ async function createEasyNote() {
                         content = e.detail.value
                     }"
                 />
-                <view class="size-6">
+                <!-- <view class="size-6">
                     <image :src="icons.image" class="size-full" />
-                </view>
+                </view> -->
             </view>
             <view class="mt-3 flex flex-col gap-1">
                 <text class="text-sm font-semibold text-secondary-foreground pl-2">

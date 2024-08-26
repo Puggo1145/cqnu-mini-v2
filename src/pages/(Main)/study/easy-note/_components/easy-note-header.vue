@@ -20,7 +20,6 @@ function gotoCreateEasyNote() {
     <view class="flex items-center justify-between mt-8">
         <view class="flex flex-col">
             <text class="text-3xl font-bold leading-none">班级小记</text>
-            <text class="text-sm text-secondary-foreground">有 2 条新小记</text>
         </view>
         <cus-button
             v-if="scheduleStore.lessons.length !== 0"

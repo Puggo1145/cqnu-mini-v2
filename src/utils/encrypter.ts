@@ -20,7 +20,7 @@ export const encryptLinker = (originalLinker: string): string => {
 /**
  * @param linker 校园官网登录密码密文
  */
-export const decryptLinker = (linker: string): string => {
+export const decryptPwd = (linker: string): string => {
     // 将 Base64 编码的密钥转换为字节数组
     const keyBase64 = CryptoJS.enc.Base64.parse(AES_KEY);
     

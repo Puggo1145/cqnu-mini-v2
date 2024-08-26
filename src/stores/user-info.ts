@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { decryptLinker } from "@/utils/encrypter";
+import { decryptPwd } from "@/utils/encrypter";
 
 
 export interface UserInfo extends Record<string, any> {
@@ -17,7 +17,8 @@ export interface UserInfo extends Record<string, any> {
 
     dormitory?: string;
     roomNumber?: string;
-    eCardId?: string;
+    ecardId?: string;
+    cardPwd?: string;
 
     showFlag: number | undefined;
 }
@@ -39,7 +40,8 @@ const useUserInfo = defineStore("useUserInfo", {
 
         dormitory: undefined,
         roomNumber: undefined,
-        eCardId: "125630",
+        ecardId: undefined,
+        cardPwd: undefined,
 
         showFlag: undefined,
         // id: 1,
@@ -92,7 +94,14 @@ const useUserInfo = defineStore("useUserInfo", {
         },
         getDecryptedLinker() {
             if (this.linker) {
-                return decryptLinker(this.linker);;
+                return decryptPwd(this.linker);
+            } else {
+                return undefined;
+            }
+        },
+        getDecryptedCardPwd() {
+            if (this.cardPwd) {
+                return decryptPwd(this.cardPwd);
             } else {
                 return undefined;
             }

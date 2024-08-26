@@ -1,11 +1,10 @@
 import request from "@/utils/request";
 
-
 interface CardInfoResponse {
     account: string
 }
 export const getCardInfo = async (studentId: string) => {
-    return request.POST<CardInfoResponse>({
+    return request.POST<CardInfoResponse[]>({
         where: "linkOfficial",
         route: "/getCardInfo",
         data: { studentId }

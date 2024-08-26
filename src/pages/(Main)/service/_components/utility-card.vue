@@ -7,6 +7,8 @@ import spinner from '@/components/spinner.vue';
 import useUserInfo from '@/stores/user-info';
 // linkOfficial
 import { getCardInfo, getUtilityBalance } from '@/utils/link-official';
+// api
+import { updateUserInfo } from '@/api/user';
 // static
 import icons from '@/constants/icons';
 import images from '@/constants/images';
@@ -52,7 +54,6 @@ function utilityOnClick() {
 
 
 const isFetchingBalance = ref(false);
-
 async function queryUtility() {
     isFetchingBalance.value = true;
 
@@ -61,16 +62,10 @@ async function queryUtility() {
         return
     };
 
-    const eCardId = userInfo.eCardId
-    if (!eCardId) {
-        const res = await getCardInfo(userInfo.studentId);
-        if (res.ok) {
-            userInfo.eCardId = res.data.data.account;
-        }
-    }
+    const eCardId = await getCardId();
 
     const res = await getUtilityBalance({
-        eCardId: userInfo.eCardId!,
+        eCardId: eCardId,
         dormitoryName: userInfo.dormitory, 
         roomNumber: userInfo.roomNumber
     });
@@ -79,6 +74,28 @@ async function queryUtility() {
     }
 
     isFetchingBalance.value = false;
+}
+
+
+async function getCardId() {
+    if (!userInfo.ecardId) {
+        const res = await getCardInfo(userInfo.studentId!);
+
+        if (res.ok) {
+            const ecardId = res.data.data[0].account;
+
+            // 将 ecardId update 到 user info
+            await updateUserInfo({
+                openid: userInfo.openid!,
+                ecardId: ecardId
+            });
+
+            return ecardId;
+        }
+
+    }
+
+    return userInfo.ecardId!;
 }
 
 

@@ -47,6 +47,19 @@ export const updateLinker = async (params: UpdateLinkerParams) => {
     return res.ok;
 }
 
+interface UpdateECardPwdParams {
+    cardPwd: string; // rsa 加密
+}
+export const updateECardPwd = async (params: UpdateECardPwdParams) => {
+    const res = await request.POST<boolean>({
+        route: "user/v1/update-ecard-pwd",
+        data: params
+    })
+        .send();
+
+    return res.ok;
+}
+
 
 interface FeedbackParams {
     openid: string;

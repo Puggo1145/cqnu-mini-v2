@@ -32,6 +32,21 @@ export const updateUserInfo = async (params: updateUserInfoParams) => {
     return res.ok
 }
 
+interface UpdateLinkerParams {
+    oldLinker: string;
+    newLinker: string;
+    confirmLinker: string;
+}
+export const updateLinker = async (params: UpdateLinkerParams) => {
+    const res = await request.POST<boolean>({
+        route: "user/v1/updateLinker",
+        data: params
+    })
+        .send();
+
+    return res.ok;
+}
+
 
 interface FeedbackParams {
     openid: string;

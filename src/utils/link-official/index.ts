@@ -8,10 +8,10 @@ import { getOverallGrade } from "./libs/jwxt/get-overall-grade"
 import { getTermGrade } from "./libs/jwxt/get-term-grade"
 import { getAcademicDetails } from "./libs/jwxt/get-academic-details"
 
-import { getCardInfo } from "./libs/e-card/getUtility"
-import { getUtilityBalance } from "./libs/e-card/getUtility"
+import { getCardInfo } from "./libs/e-card/get-utility"
+import { getUtilityBalance } from "./libs/e-card/get-utility"
 import { getECardToken } from "./libs/e-card/signin-to-e-card"
-import { getBalance } from "./libs/e-card/getBalance"
+import { getConsume } from "./libs/e-card/get-consume"
 
 
 export {
@@ -32,7 +32,7 @@ export {
     getUtilityBalance,
     
     getECardToken,
-    getBalance
+    getConsume
 }
 
 

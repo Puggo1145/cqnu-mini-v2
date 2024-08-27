@@ -10,7 +10,7 @@ interface BalanceResponse {
     income: number;
     expenses: number;
 }
-export const getBalance = async (params: BalanceParams) => {
+export const getConsume = async (params: BalanceParams) => {
     try {
         const token = await getECardToken();
 

@@ -4,7 +4,7 @@ import { ref, onMounted, watch } from 'vue';
 import spinner from '@/components/spinner.vue';
 import modifyEcardPwd from '../../me/modify/_components/modify-ecard-pwd.vue';
 // link official
-import { getBalance } from '@/utils/link-official';
+import { getConsume } from '@/utils/link-official';
 // stores
 import useUserInfo from '@/stores/user-info';
 // static
@@ -28,7 +28,7 @@ async function fetchConsume() {
 
     isQuerying.value = true;
 
-    const data = await getBalance({ timeFrom, timeTo });
+    const data = await getConsume({ timeFrom, timeTo });
     if (data) {
         expenses.value = (data.expenses / 100).toString();
     }

@@ -3,9 +3,13 @@
 import cusButton from '@/components/cus-button.vue';
 // stores
 import { useSchedule } from '@/stores/useSchedule';
+import { useEasyNoteStore } from '@/stores/easy-note/easy-note'
+import { computed } from 'vue';
 
 
 const scheduleStore = useSchedule();
+const easyNoteStore = useEasyNoteStore();
+const notesLength = computed(() => easyNoteStore.notes?.length ? easyNoteStore.notes?.length : 0) 
 
 
 function gotoCreateEasyNote() {
@@ -20,7 +24,7 @@ function gotoCreateEasyNote() {
     <view class="flex items-center justify-between mt-8">
         <view class="flex flex-col">
             <text class="text-3xl font-bold leading-none">班级小记</text>
-            <text class="text-sm text-secondary-foreground">有 2 条新小记</text>
+            <text class="text-sm text-secondary-foreground">有 {{ notesLength }} 条新小记</text>
         </view>
         <cus-button
             v-if="scheduleStore.lessons.length !== 0"

@@ -72,7 +72,6 @@ function onTagChange(e: any) {
 
 onMounted(async () => {
     if (scheduleStore.lessons.length === 0) return;
-
     await fetchNotes();
 });
 watch(
@@ -84,6 +83,31 @@ watch(
     ], 
     async () => await fetchNotes()
 );
+
+// 刷新相关
+let triggered = ref<boolean>(false);
+// 下拉刷新
+const handleScrollRefresh = async () => {
+    current.value = 1;
+    triggered.value = true;
+    await fetchNotes();
+    setTimeout(function(){
+        triggered.value = false;
+    },2000);
+}
+// 底部加载更多(节流) 只触发第一次
+let timerId: ReturnType<typeof setTimeout> | null = null;
+const handleScrollToLower = () => {
+    if (timerId) {
+        return;
+    }
+    timerId = setTimeout(async () => {
+        current.value += 1;
+        await fetchNotes();
+        timerId = null;
+    }, 2000);
+}
+
 </script>
 
 <template>
@@ -113,6 +137,14 @@ watch(
         <scroll-view
             class="mt-4 overflow-hidden flex-1"
             scroll-y
+            style="height:100%;" 
+            refresher-enabled
+            refresher-threshold="100" 
+            refresher-default-style="black" 
+            refresher-background="#FBF9F8" 
+            :refresher-triggered="triggered"
+            @refresherrefresh="handleScrollRefresh"
+            @scrolltolower="handleScrollToLower"
         >
             <view class="flex flex-col gap-y-3">
                 <require-schedule 
@@ -136,7 +168,6 @@ watch(
                     v-else
                     v-for="note in easyNoteStore.notes"
                     :key="note.id"
-                    
                     :card="note"
                 />
             </view>

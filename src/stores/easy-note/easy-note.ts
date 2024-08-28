@@ -11,15 +11,32 @@ import type { CreateEasyNote } from "@/api/easy-note";
 export const useEasyNoteStore = defineStore('easyNote', {
     state: () => ({
         notes: undefined as EasyNoteCard[] | undefined,
+        total: 0,
         error: false
     }),
     actions: {
         async fetchNotes(params: GetNoteListParams) {
-            this.notes = undefined;
+            this.notes = [];
+
+            if (this.total === this.notes.length) {
+                uni.showToast({
+                    title: '没有更多了',
+                    icon: 'none'
+                })
+                return ;
+            }
 
             const res = await getNoteList(params);
+            const { data: { data } } = res;
+            this.total = data.total;
+
             if (res.ok) {
-                this.notes = res.data.data.records;
+                if (params.current === 1) {
+                    this.notes = data.records;
+                }else{
+                    this.notes = [...this.notes, data.records];
+                }
+                
             } else {
                 this.error = true;
             }

@@ -20,13 +20,18 @@ export const navs: Record<string, Nav> = {
                 places: [
                     { 
                         name: '弘德楼', 
-                        alias: '11/12/13/14/15',
+                        alias: '11-15',
                         location: '106.305178,29.614059',
                     },
                     { 
-                        name: '特教楼', 
+                        name: '特教楼（励志楼）', 
                         alias: 'T',
                         location: '106.299806,29.611043',
+                    },
+                    {
+                        name: '田家炳书院',
+                        alias: '16',
+                        location: '106.299911,29.611142'
                     },
                     { 
                         name: '图北楼', 
@@ -34,19 +39,14 @@ export const navs: Record<string, Nav> = {
                         location: '106.301295,29.613503',
                     },
                     { 
+                        name: '知行楼', 
+                        alias: '19',
+                        location: '106.30233,29.611058',
+                    },
+                    { 
                         name: '致用楼', 
                         alias: '' ,
-                        location: '106.299806,29.611043',
-                    },
-                    { 
-                        name: '求是楼', 
-                        alias: '' ,
-                        location: '106.297619,29.612498',
-                    },
-                    { 
-                        name: '知行楼', 
-                        alias: '' ,
-                        location: '106.302555,29.611076',
+                        location: '106.300463,29.61083',
                     },
                 ]
             }
@@ -118,16 +118,6 @@ export const navs: Record<string, Nav> = {
                         alias: '南门商业街',
                         location: '106.302571,29.607951'
                     },
-                    {
-                        name: 'XXXX',
-                        alias: 'XXX',
-                        location: ''
-                    },
-                    {
-                        name: 'XXXX',
-                        alias: '三食堂XXX',
-                        location: ''
-                    }
                 ]
             },
             {
@@ -143,11 +133,6 @@ export const navs: Record<string, Nav> = {
                         alias: '熙街',
                         location: '106.304384,29.606997'
                     },
-                    {
-                        name: 'XXXX',
-                        alias: '三食堂XXX',
-                        location: ''
-                    }
                 ]
             }
         ]

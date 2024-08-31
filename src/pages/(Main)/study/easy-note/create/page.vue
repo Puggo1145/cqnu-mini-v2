@@ -66,7 +66,6 @@ function onDateChange(e: any) {
 }
 function onTimeChange(e: any) {
     currentTime.value = e.value;
-    console.log(currentTime.value);
 }
 function onCourseChange(e: any) {
     currentCourseIndex.value = e.value;

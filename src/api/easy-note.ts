@@ -6,10 +6,10 @@ import type { EasyNoteCard } from "@/pages/(Main)/study/easy-note/_components/ea
 
 // 获取分页小记
 export interface GetNoteListParams {
-    current: number;
-    pageSize: number;
     timespan?: string; // 截止时间范围
     courseName?: string | any[]; // 课程名称
+    current: number;
+    pageSize: number;
     tagName?: string | any[]; // 小记标签名
 }
 export const getNoteList = async (params: GetNoteListParams) => {

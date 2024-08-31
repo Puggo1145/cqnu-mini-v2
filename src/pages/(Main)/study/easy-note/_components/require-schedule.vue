@@ -2,7 +2,6 @@
 // components
 import cusButton from '@/components/cus-button.vue';
 
-
 function goToSyncSchedule() {
     uni.navigateTo({
         url: '/pages/(Main)/study/schedule/page',

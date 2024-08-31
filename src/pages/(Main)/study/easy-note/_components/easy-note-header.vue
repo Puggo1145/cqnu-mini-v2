@@ -3,9 +3,13 @@
 import cusButton from '@/components/cus-button.vue';
 // stores
 import { useSchedule } from '@/stores/useSchedule';
+import { useEasyNoteStore } from '@/stores/easy-note/easy-note'
+import { computed } from 'vue';
 
 
 const scheduleStore = useSchedule();
+const easyNoteStore = useEasyNoteStore();
+const notesLength = computed(() => easyNoteStore.notes?.length ? easyNoteStore.notes?.length : 0) 
 
 
 function gotoCreateEasyNote() {

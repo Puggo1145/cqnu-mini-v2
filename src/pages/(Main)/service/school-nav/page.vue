@@ -27,13 +27,13 @@ const navCategories = [
         img: images.service.nav.shop,
         dataSource: "shop",
     },
-    { 
-        name: '校园美景',
-        desc: "最美的风景就在眼前",
-        color: "#daa39e",
-        img: images.service.nav.scenery,
-        dataSource: "scenery",
-    },
+    // { 
+    //     name: '校园美景',
+    //     desc: "最美的风景就在眼前",
+    //     color: "#daa39e",
+    //     img: images.service.nav.scenery,
+    //     dataSource: "scenery",
+    // },
 ]
 
 

@@ -85,7 +85,7 @@ watch(
 );
 
 // 刷新相关
-let triggered = ref<boolean>(false);
+const triggered = ref<boolean>(false);
 // 下拉刷新
 const handleScrollRefresh = async () => {
     current.value = 1;

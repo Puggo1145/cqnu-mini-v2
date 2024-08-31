@@ -12,12 +12,6 @@ const props = withDefaults(defineProps<NoNoteProps>(), {
     currentCourseName: null,
 });
 
-
-function handleRefresherpulling() {
-    console.log("刷新了")
-}
-
-
 function goToCreateEasyNote() {
     uni.navigateTo({
         url: `/pages/(Main)/study/easy-note/create/page?courseName=${props.currentCourseName || ""}`

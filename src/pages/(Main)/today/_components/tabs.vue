@@ -13,7 +13,7 @@ const tabs = reactive([
 <template>
     <up-sticky>
         <view class="flex items-center justify-between">
-            <up-tabs 
+            <up-tabs
                 class="flex-1"
                 :list="tabs"
                 :scrollable="false"
@@ -34,7 +34,10 @@ const tabs = reactive([
                 item-style="height: 30px"
             />
             <view class="size-6 overflow-hidden flex items-center justify-center mr-3">
-                <image :src="icons.plus" class="size-full" />
+                <image
+                    :src="icons.plus"
+                    class="size-full"
+                />
             </view>
         </view>
     </up-sticky>

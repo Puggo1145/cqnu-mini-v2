@@ -1,42 +1,29 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref } from 'vue';
 // components
 import bindDormitory from './bind-dormitory.vue';
 import spinner from '@/components/spinner.vue';
 // stores
 import useUserInfo from '@/stores/user-info';
-// linkOfficial
-import { getCardInfo, getUtilityBalance } from '@/utils/link-official';
-// api
-import { updateUserInfo } from '@/api/user';
+// hooks
+import useUtility from '@/hooks/useUtility';
 // static
 import icons from '@/constants/icons';
 import images from '@/constants/images';
 
 
+
 const userInfo = useUserInfo();
-
-
-interface UtilityBalance {
-    electricity: number;
-    water: number | null;
-}
-const balance = ref<UtilityBalance>({
-    electricity: 0,
-    water: 0
-});
-
-const currentView = ref<"electricity" | "water">("electricity");
 
 
 const isBindDormitoryPopupShow = ref(false);
 function onClose() {
     isBindDormitoryPopupShow.value = false;
 }
-function onOpen() {
-    isBindDormitoryPopupShow.value = true;
-}
 
+
+const { balance, isFetchingBalance } = useUtility();
+const currentView = ref<"electricity" | "water">("electricity");
 function utilityOnClick() {
     // 判断是否绑定宿舍信息
     if (!userInfo.dormitory || !userInfo.roomNumber) {
@@ -51,60 +38,6 @@ function utilityOnClick() {
 
     currentView.value = currentView.value === "electricity" ? "water" : "electricity";
 }
-
-
-const isFetchingBalance = ref(false);
-async function queryUtility() {
-    isFetchingBalance.value = true;
-
-    if (!userInfo.studentId || !userInfo.dormitory || !userInfo.roomNumber) {
-        isFetchingBalance.value = false;
-        return
-    };
-
-    const eCardId = await getCardId();
-
-    const res = await getUtilityBalance({
-        eCardId: eCardId,
-        dormitoryName: userInfo.dormitory, 
-        roomNumber: userInfo.roomNumber
-    });
-    if (res.ok) {
-        balance.value = res.data.data
-    }
-
-    isFetchingBalance.value = false;
-}
-
-
-async function getCardId() {
-    if (!userInfo.ecardId) {
-        const res = await getCardInfo(userInfo.studentId!);
-
-        if (res.ok) {
-            const ecardId = res.data.data[0].account;
-
-            // 将 ecardId update 到 user info
-            await updateUserInfo({
-                openid: userInfo.openid!,
-                ecardId: ecardId
-            });
-
-            return ecardId;
-        }
-
-    }
-
-    return userInfo.ecardId!;
-}
-
-
-onMounted(async () => {
-    await queryUtility();
-})
-watch(() => userInfo.dormitory, async () => {
-    await queryUtility();
-})
 </script>
 
 <template>
@@ -158,7 +91,6 @@ watch(() => userInfo.dormitory, async () => {
         :show="isBindDormitoryPopupShow"
         mode="bottom"
         :round="16"
-        @open="onOpen"
         @close="onClose"
         class="z-50 fixed"
     >

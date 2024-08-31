@@ -3,19 +3,10 @@
 import { baseConfigs } from '@/constants/baseConfig';
 // store
 import { useSchedule } from '@/stores/useSchedule';
+// types
+import type { Lesson } from '@/stores/useSchedule';
 
 
-interface Lesson {
-    lesson_id: number;
-    name: string;
-    place: string;
-    teacher: string;
-    start_time: number;
-    end_time: number;
-    day: number;
-    include_week: number[];
-    color: string;
-}
 interface SmartClassProps {
     courseOfToday: Lesson[];
     remainingTimeOfLatestCourse: number;

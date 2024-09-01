@@ -12,7 +12,7 @@ export default function useFetchClassEasyNote() {
     const scheduleStore = useSchedule();
     const classEasyNoteStore = useClassEasyNoteStore();
     const notes = computed(() => classEasyNoteStore.notes);
-    
+
     const { currentCourseName } = useCourses();
 
     const current = ref(1);
@@ -23,6 +23,8 @@ export default function useFetchClassEasyNote() {
 
 
     const fetchNotes = async () => {
+        // 今日无课，显示今天的小记
+        if (scheduleStore.lessons.length === 0) return;
         if (isLoadComplete.value || isLoading.value) return;
 
         isLoading.value = true;
@@ -54,23 +56,19 @@ export default function useFetchClassEasyNote() {
         isLoading.value = false;
     }
 
-
-    onMounted(async () => {
-        // 今日无课，显示今天的小记
-        if (scheduleStore.lessons.length === 0) return;
-    
-        await fetchNotes();
-    })
-
     watch(() => currentCourseName.value, async () => {
         current.value = 1;
-    
+        isLoadComplete.value = false;
+        classEasyNoteStore.notes = [];
+
         await fetchNotes();
     })
 
     watch(() => scheduleStore.lessons, async () => {
         current.value = 1;
-    
+        isLoadComplete.value = false;
+        classEasyNoteStore.notes = [];
+
         await fetchNotes();
     })
 

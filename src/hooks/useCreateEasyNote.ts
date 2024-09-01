@@ -53,7 +53,7 @@ export default function useCreateEasyNote() {
                 await refreshClassEasyNote();
             } else {
                 // 创建的消极的课程不是正在进行的课程，只需要重新获取班级小记的内容
-                await refreshClassEasyNote();
+                await refreshEasyNote();
             }
 
             uni.showToast({

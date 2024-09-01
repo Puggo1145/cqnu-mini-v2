@@ -34,7 +34,7 @@ export const useEasyNoteFilters = defineStore('easyNoteFilters', {
             "作业",
             "考试"
         ],
-        timeRange: 0,
+        timeRange: 1, // 默认从本周开始
         courseName: 0,
         tag: 0,
     }) as EasyNoteFilters,

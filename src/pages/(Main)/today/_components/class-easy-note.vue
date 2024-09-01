@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 // components
 import classEasyNoteHeader from './class-easy-note-header.vue';
 import notes from '../../study/easy-note/_components/notes.vue';
@@ -19,6 +20,10 @@ const {
     isLoadComplete,
     refresh,
 } = useFetchClassEasyNote();
+
+onMounted(async () => {
+    await refresh();
+});
 </script>
 
 <template>

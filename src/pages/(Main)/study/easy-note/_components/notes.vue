@@ -5,7 +5,7 @@ import loading from '@/components/loading.vue';
 import noNote from '@/pages/(Main)/today/_components/no-note.vue';
 import cusError from '@/components/cus-error.vue';
 import easyNoteCard from './easy-note-card.vue';
-import addEasyNoteBlock from '@/pages/(Main)/today/_components/add-easy-note-block.vue';
+// import addEasyNoteBlock from '@/pages/(Main)/today/_components/add-easy-note-block.vue';
 // store
 import { useSchedule } from '@/stores/useSchedule';
 // types
@@ -45,13 +45,10 @@ const scheduleStore = useSchedule();
 
     <scroll-view
         v-else
-        class="mt-4 overflow-hidden h-full"
+        class="overflow-hidden h-full"
         scroll-y
-        refresher-enabled
-        refresher-threshold="100"
-        refresher-default-style="black"
-        refresher-background="#FBF9F8"
-        @scrolltolower="refresh"
+        lower-threshold="50"
+        @scrolltolower="props.refresh"
     >
         <view class="flex flex-col gap-3">
             <easy-note-card
@@ -59,11 +56,11 @@ const scheduleStore = useSchedule();
                 :key="note.id"
                 :card="note"
             />
-            <add-easy-note-block v-if="isLoadComplete" />
+            <!-- <add-easy-note-block v-if="isLoadComplete" /> -->
         </view>
-        <view class="h-4 text-sm text-center text-secondary-foreground">
-            {{ isLoading && '加载小记中' }}
-            {{ isLoadComplete && '已经到底了！' }}
+        <view class="h-12 flex items-center justify-center text-sm text-secondary-foreground">
+            {{ isLoading ? '加载小记中' : '' }}
+            {{ isLoadComplete ? '已经到底了！' : '' }}
         </view>
     </scroll-view>
 </template>

@@ -21,7 +21,7 @@ function gotoCreateEasyNote() {
 
 <template>
     <!-- header -->
-    <view class="flex items-center justify-between mt-8">
+    <view class="flex items-center justify-between mt-4">
         <view class="flex flex-col">
             <text class="text-3xl font-bold leading-none">班级小记</text>
         </view>

@@ -129,11 +129,12 @@ async function deleteEasyNote() {
     <up-swipe-action>
         <!-- 添加更多功能后修改 click 的触发逻辑 -->
         <up-swipe-action-item
+            class="rounded-2xl"
             :options="moreOption"
             @click="deleteEasyNote"
         >
             <view
-                class="w-full rounded-2xl flex flex-col justify-between p-4"
+                class="w-full flex flex-col justify-between p-4"
                 :style="{ backgroundColor: noteColor.bg }"
             >
                 <view 

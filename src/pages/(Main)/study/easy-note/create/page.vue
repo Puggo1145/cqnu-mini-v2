@@ -91,7 +91,7 @@ async function createEasyNote() {
             创建小记
         </text>
         <scroll-view
-            class="mt-3 overflow-hidden flex-1"
+            class="mt-3 overflow-hidden flex-1 pb-4"
             scroll-y
         >
             <cus-input

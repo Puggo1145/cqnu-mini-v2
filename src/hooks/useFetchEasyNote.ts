@@ -1,10 +1,11 @@
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, watch } from "vue";
 // store
 import { useSchedule } from "@/stores/useSchedule";
 import { useEasyNoteStore } from "@/stores/easy-note/easy-note";
 import { useEasyNoteFilters } from "@/stores/easy-note/easy-note-filters";
 // api
 import { getNoteList } from "@/api/easy-note";
+
 
 
 export default function useFetchEasyNote() {
@@ -14,6 +15,7 @@ export default function useFetchEasyNote() {
     const easyNoteStore = useEasyNoteStore();
     const notes = computed(() => easyNoteStore.notes);
 
+
     const current = ref(1);
     const pageSize = ref(5);
     const isLoading = ref(false);
@@ -21,7 +23,11 @@ export default function useFetchEasyNote() {
     const isLoadComplete = ref(false);
 
     async function fetchNotes() {
+        console.log(isLoadComplete.value, isLoading.value);
+        
+
         if (isLoadComplete.value || isLoading.value) return;
+        if (scheduleStore.lessons.length === 0) return;
 
         isLoading.value = true;
         error.value = false;
@@ -33,10 +39,14 @@ export default function useFetchEasyNote() {
         });
 
         if (res.ok) {
-            easyNoteStore.notes = [
-                ...easyNoteStore.notes,
-                ...res.data.data.records
-            ]
+            if (current.value === 1) {
+                easyNoteStore.notes = res.data.data.records;
+            } else {
+                easyNoteStore.notes = [
+                    ...notes.value,
+                    ...res.data.data.records
+                ]
+            }
 
             if (res.data.data.total === notes.value.length) {
                 isLoadComplete.value = true;
@@ -50,18 +60,18 @@ export default function useFetchEasyNote() {
         isLoading.value = false;
     }
 
-    onMounted(async () => {
-        if (scheduleStore.lessons.length === 0) return;
-        await fetchNotes();
-    });
-
-    watch([
-        () => easyNoteFiltersStore.timeRange,
-        () => easyNoteFiltersStore.courseName,
-        () => easyNoteFiltersStore.tag,
-        () => scheduleStore.lessons
-    ],
-        async () => await fetchNotes()
+    watch(
+        [
+            () => easyNoteFiltersStore.timeRange,
+            () => easyNoteFiltersStore.courseName,
+            () => easyNoteFiltersStore.tag,
+            () => scheduleStore.lessons
+        ],
+        async () => {
+            isLoadComplete.value = false;
+            easyNoteStore.notes = [];
+            await fetchNotes();
+        }
     );
 
     return {

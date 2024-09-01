@@ -2,7 +2,7 @@ import urls from "../../constants/urls";
 import { getECardToken } from "./signin-to-e-card";
 
 
-interface BalanceParams {
+export interface BalanceParams {
     timeFrom?: string;
     timeTo?: string;
 }

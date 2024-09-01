@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref } from 'vue';
 // components
 import spinner from '@/components/spinner.vue';
 import modifyEcardPwd from '../../me/modify/_components/modify-ecard-pwd.vue';
-// link official
-import { getConsume } from '@/utils/link-official';
+// hooks
+import useFetchConsume from '@/hooks/useFetchConsume';
 // stores
 import useUserInfo from '@/stores/user-info';
 // static
@@ -13,36 +13,7 @@ import images from '@/constants/images';
 
 
 const userInfoStore = useUserInfo();
-
-
-const expenses = ref("--");
-const isQuerying = ref(false);
-async function fetchConsume() {
-    if (!userInfoStore.cardPwd) {
-        return;
-    }
-
-    // 查询范围 - 本月（本月 1 日 至今, YYYY-MM-DD）
-    const timeFrom = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
-    const timeTo = new Date().toISOString().split('T')[0];
-
-    isQuerying.value = true;
-
-    const data = await getConsume({ timeFrom, timeTo });
-    if (data) {
-        expenses.value = (data.expenses / 100).toString();
-    }
-
-    isQuerying.value = false;
-}
-
-onMounted(() => {
-    fetchConsume();
-});
-watch(() => userInfoStore.cardPwd, () => {
-    fetchConsume();
-});
-
+const { consume, isFetching, error, fetchConsume } = useFetchConsume();
 
 
 const isModifyEcardPwdPopupShow = ref(false);
@@ -51,10 +22,12 @@ function onClose() {
 }
 
 
-function consumeCardOnClick() {
+async function consumeCardOnClick() {
     // 判断是否绑定一卡通密码
     if (!userInfoStore.cardPwd) {
         isModifyEcardPwdPopupShow.value = true;
+    } else if (error) {
+        await fetchConsume();
     }
 }
 
@@ -68,9 +41,9 @@ function goToBill() {
 </script>
 
 <template>
-    <view 
+    <view
         class="relative w-full h-[172px] bg-[#18B453] rounded-2xl shadow-md shadow-[#18B453] px-4 py-5"
-        @click="consumeCardOnClick"    
+        @click="consumeCardOnClick"
     >
         <view class="w-full flex items-center justify-between">
             <text class="text-white text-opacity-90 text-sm leading-none">
@@ -84,35 +57,51 @@ function goToBill() {
                 <text class="text-white text-opacity-90 text-sm leading-none">
                     账单
                 </text>
-                <image :src="icons.rightWhite" class="size-4" />
+                <image
+                    :src="icons.rightWhite"
+                    class="size-4"
+                />
             </view>
         </view>
-        
+
         <view class="mt-3">
             <!-- 绑定一卡通密码 -->
-            <view 
+            <view
                 v-if="!userInfoStore.cardPwd"
                 class="flex items-center"
             >
                 <view class="text-white font-bold">去绑定一卡通</view>
-                <image class="size-4" :src="icons.rightWhite" />
+                <image
+                    class="size-4"
+                    :src="icons.rightWhite"
+                />
             </view>
 
             <spinner
-                v-else-if="isQuerying"
+                v-else-if="isFetching"
                 size="medium"
                 color="white"
             />
 
+            <text
+                v-else-if="error"
+                class="text-white font-bold"
+            >
+                数据获取失败
+            </text>
+
             <view v-else>
                 <text class="text-white font-bold text-4xl">
-                    {{ expenses }}
+                    {{ consume }}
                 </text>
                 <text class="text-white text-sm ml-2">元</text>
             </view>
         </view>
-        
-        <image :src="images.service.card" class="absolute size-[110px] right-0 -bottom-[14px]" />
+
+        <image
+            :src="images.service.card"
+            class="absolute size-[110px] right-0 -bottom-[14px]"
+        />
     </view>
 
     <up-popup

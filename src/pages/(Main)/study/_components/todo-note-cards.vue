@@ -10,7 +10,7 @@ const cards = [
         image: images.study.todo,
         backgroundColor: "#598af6",
         url: "/pages/(Main)/study/share-todo/initialization/page",
-        available: false,
+        available: true,
     },
     {
         name: "班级小记",

@@ -35,15 +35,17 @@ function goToCreateShareTodo() {
             <cus-button
                 class="my-8" 
                 @click="goToCreateShareTodo"
+                disabled
+                variant="muted"
             >
-                加入学搭todo
+                功能未开放
             </cus-button>
         </view>
 
         <image
             :src="images.study.shareTodoAvatars" 
             class="z-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-            size-full object-cover pointer-events-none"
+            w-full h-[480px] object-cover pointer-events-none"
         />
     </cus-page>
 </template>

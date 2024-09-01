@@ -69,6 +69,6 @@ export default function useFetchEasyNote() {
         isLoading,
         error,
         isLoadComplete,
-        fetchNotes,
+        refresh: fetchNotes,
     }
 }

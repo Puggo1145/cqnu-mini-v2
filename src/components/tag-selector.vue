@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue';
+// types
+import type { Tag } from '@/api/easy-note';
 
-export type Tag =  {
-    name: string;
-    color: string;
-}
+
 interface TagSelectorProps {
     tags: Tag[];
     selectedTags?: Tag[];
-    onTagChange?: () => Tag[];
+    isFetching?: boolean | null;
+    error?: boolean | null;
 }
 const props = withDefaults(defineProps<TagSelectorProps>(), {
     selectedTags: () => [],
+    isFetching: null,
+    error: null,
 });
 
 
@@ -20,38 +22,41 @@ const selectedTags = computed(() => props.selectedTags);
 
 const emit = defineEmits(['change']);
 function selectTag(tag: Tag) {
-    const updatedTags = props.selectedTags.some(stag => stag.name === tag.name)
-        ? props.selectedTags.filter(stag => stag.name !== tag.name)
+    const updatedTags = props.selectedTags.some(stag => stag.id === tag.id)
+        ? props.selectedTags.filter(stag => stag.id !== tag.id)
         : [...props.selectedTags, tag];
-    
+
     emit('change', updatedTags);
 }
 </script>
 
 <template>
     <view class="w-full flex items-center gap-x-2">
+        <text
+            v-if="props.isFetching !== null && props.isFetching"
+            class="ml-2 text-secondary-foreground text-sm"
+        >
+            正在加载标签
+        </text>
+
+        <text
+            v-else-if="props.error !== null && props.error"
+            class="ml-2 text-destructive text-sm"
+        >
+            标签获取失败
+        </text>
+
         <view
+            v-else
             v-for="tag in props.tags"
-            :key="tag.name"
-            class="flex items-center justify-center rounded-full px-4 py-2"
-            :style="{
-                backgroundColor:
-                selectedTags.some(stag => stag.name === tag.name)
-                ? tag.color
-                : '#e0e0e0',
-            }"
+            :key="tag.id"
+            :class="['flex items-center justify-center rounded-full px-4 py-2',
+                selectedTags.some(stag => stag.id === tag.id) ? 'bg-primary text-white' : 'bg-secondary text-secondary-foreground'
+            ]"
             @click="selectTag(tag)"
         >
-            <text
-                class="font-bold text-sm"
-                :style="{
-                    color:
-                    selectedTags.some(stag => stag.name === tag.name)
-                    ? '#ffffff'
-                    : '#899199'
-                }"
-            >
-                {{ tag.name }}
+            <text class="font-bold text-sm">
+                {{ tag.tagName }}
             </text>
         </view>
     </view>

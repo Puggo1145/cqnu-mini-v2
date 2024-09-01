@@ -31,7 +31,7 @@ export default function useFetchClassEasyNote() {
         const res = await getNoteList({
             current: current.value,
             pageSize: pageSize.value,
-            courseName: currentCourseName.value!,
+            courseName: currentCourseName.value || "",
             tagName: "",
             timespan: "今日内",
         });

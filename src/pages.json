@@ -1,10 +1,13 @@
 {
 	"pages": [
 		{
-			"path": "pages/(Main)/service/bill/page"
+			"path": "pages/(Main)/today/page"
 		},
 		{
-			"path": "pages/(Main)/today/page"
+			"path": "pages/(Main)/study/easy-note/create/page"
+		},
+		{
+			"path": "pages/(Main)/service/bill/page"
 		},
 		{
 			"path": "pages/(Main)/me/about/page"
@@ -50,9 +53,6 @@
 		},
 		{
 			"path": "pages/(Main)/study/easy-note/page"
-		},
-		{
-			"path": "pages/(Main)/study/easy-note/create/page"
 		},
 		{
 			"path": "pages/(Main)/study/share-todo/page"

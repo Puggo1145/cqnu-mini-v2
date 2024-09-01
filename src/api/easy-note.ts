@@ -51,9 +51,7 @@ export const getTags = async () => {
     })
         .send();
 
-    if (res.ok) {
-        return res.data.data
-    }
+    return res
 }
 
 // 创建小记
@@ -72,10 +70,10 @@ export const createNote = async (note: CreateEasyNote) => {
 
 // 支持小记
 enum supportStatus {
-    SUPPORT=1,
-    CANCEL=0
+    SUPPORT = 1,
+    CANCEL = 0
 }
-export const supportNote = async(
+export const supportNote = async (
     noteId: number,
     userId: string,
     status: supportStatus

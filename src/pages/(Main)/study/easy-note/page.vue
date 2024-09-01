@@ -17,7 +17,7 @@ const {
     isLoading,
     error,
     isLoadComplete,
-    fetchNotes,
+    refresh,
 } = useFetchEasyNote();
 </script>
 
@@ -40,7 +40,7 @@ const {
                     :isLoading="isLoading"
                     :error="error"
                     :isLoadComplete="isLoadComplete"
-                    :refresh="fetchNotes"
+                    :refresh="refresh"
                 />
             </view>
         </view>

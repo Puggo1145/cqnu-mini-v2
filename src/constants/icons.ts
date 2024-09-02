@@ -43,6 +43,9 @@ import clap from '@/static/icons/clap.svg'
 import modifyUserInfo from '@/static/icons/modify-user-info.svg'
 import about from '@/static/icons/about.svg'
 import feedback from '@/static/icons/feedback.svg'
+// bill
+import alipay from '@/static/icons/alipay.svg'
+import wxpay from '@/static/icons/wxpay.svg'
 
 
 const icons = {
@@ -91,6 +94,10 @@ const icons = {
     modifyUserInfo,
     about,
     feedback,
+    bill: {
+        alipay,
+        wxpay,
+    }
 };
 
 export default icons;

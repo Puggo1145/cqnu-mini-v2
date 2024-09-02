@@ -32,7 +32,6 @@ async function consumeCardOnClick() {
 }
 
 
-
 function goToBill() {
     uni.navigateTo({
         url: '/pages/(Main)/service/bill/page'
@@ -52,7 +51,7 @@ function goToBill() {
             <view
                 v-if="userInfoStore.cardPwd"
                 class="flex items-center"
-                @click="goToBill"
+                @click.stop="goToBill"
             >
                 <text class="text-white text-opacity-90 text-sm leading-none">
                     账单

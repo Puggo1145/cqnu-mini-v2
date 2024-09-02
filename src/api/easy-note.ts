@@ -1,6 +1,6 @@
 import request from "@/utils/request";
 // types
-import type { PageResponse } from "@/types/response";
+import type { EasyNotePageResponse } from "@/types/response";
 import type { EasyNoteCard } from "@/pages/(Main)/study/easy-note/_components/easy-note-card.vue";
 
 
@@ -13,7 +13,7 @@ export interface GetNoteListParams {
     tagName?: string | any[]; // 小记标签名
 }
 export const getNoteList = async (params: GetNoteListParams) => {
-    const res = await request.POST<PageResponse<EasyNoteCard>>({
+    const res = await request.POST<EasyNotePageResponse<EasyNoteCard>>({
         route: "note/v1/page/note",
         data: params
     })

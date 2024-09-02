@@ -23,7 +23,7 @@ function goToCreateEasyNote() {
     <view class="w-full flex flex-col items-center ">
             <view class="flex flex-col items-center mt-4 gap-y-1">
                 <text class="font-bold text-2xl text-secondary-foreground">暂无小记</text>
-                <text class="text-sm text-secondary-foreground">快和同学分享这节课的重要事项吧！</text>
+                <text class="text-sm text-secondary-foreground">快和同学分享课堂中的重要事项吧！</text>
             </view>
             <cusButton 
                 class="z-50 mt-4" 

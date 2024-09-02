@@ -23,9 +23,6 @@ export default function useFetchEasyNote() {
     const isLoadComplete = ref(false);
 
     async function fetchNotes() {
-        console.log(isLoadComplete.value, isLoading.value);
-        
-
         if (isLoadComplete.value || isLoading.value) return;
         if (scheduleStore.lessons.length === 0) return;
 
@@ -40,15 +37,15 @@ export default function useFetchEasyNote() {
 
         if (res.ok) {
             if (current.value === 1) {
-                easyNoteStore.notes = res.data.data.records;
+                easyNoteStore.notes = res.data.data.noteRespIPage.records;
             } else {
                 easyNoteStore.notes = [
                     ...notes.value,
-                    ...res.data.data.records
+                    ...res.data.data.noteRespIPage.records
                 ]
             }
 
-            if (res.data.data.total === notes.value.length) {
+            if (res.data.data.totalCount === notes.value.length) {
                 isLoadComplete.value = true;
             } else {
                 current.value++;

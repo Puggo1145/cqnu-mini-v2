@@ -12,3 +12,8 @@ export type PageResponse<T> = {
     current: number
     pages: number
 }
+
+export type EasyNotePageResponse<T> = {
+    noteRespIPage: PageResponse<T>
+    totalCount: number
+}

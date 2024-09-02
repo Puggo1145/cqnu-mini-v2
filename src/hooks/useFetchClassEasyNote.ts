@@ -39,12 +39,16 @@ export default function useFetchClassEasyNote() {
         });
 
         if (res.ok) {
-            classEasyNoteStore.notes = [
-                ...classEasyNoteStore.notes,
-                ...res.data.data.records
-            ];
+            if (current.value === 1) {
+                classEasyNoteStore.notes = res.data.data.noteRespIPage.records;
+            } else {
+                classEasyNoteStore.notes = [
+                    ...notes.value,
+                    ...res.data.data.noteRespIPage.records
+                ]
+            }
 
-            if (res.data.data.total === notes.value.length) {
+            if (res.data.data.totalCount === notes.value.length) {
                 isLoadComplete.value = true;
             } else {
                 current.value++;

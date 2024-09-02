@@ -66,6 +66,8 @@ async function createEasyNote() {
             tagIds: selectedTags.value.map(tag => tag.id),
         })
     } catch (err) {
+        isCreating.value = false;
+
         if (err instanceof ZodError) {
             err.errors.forEach(err => {
                 if (err.path[0] === 'title') {

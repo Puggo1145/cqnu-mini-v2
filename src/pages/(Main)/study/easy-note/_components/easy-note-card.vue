@@ -151,14 +151,11 @@ async function deleteEasyNote() {
                             <text>{{ card.courseName }}</text>
                             <text>{{ card.deadline }}</text>
                         </view>
-                        <text class="text-sm text-black text-opacity-35">
-                            来自 {{ card.username }}
-                        </text>
                     </view>
                     <view class="flex flex-col justify-between items-end gap-y-2">
                         <!-- 查看人数 -->
                         <text class="text-sm text-black text-opacity-35">
-                            有 {{ card.seeNumber }} 人查看
+                            来自 {{ card.username }}
                         </text>
                         <!-- 外显 tag -->
                         <view 

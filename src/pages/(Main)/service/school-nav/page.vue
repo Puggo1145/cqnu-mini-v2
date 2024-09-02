@@ -27,19 +27,25 @@ const navCategories = [
         img: images.service.nav.shop,
         dataSource: "shop",
     },
-    // { 
-    //     name: '校园美景',
-    //     desc: "最美的风景就在眼前",
-    //     color: "#daa39e",
-    //     img: images.service.nav.scenery,
-    //     dataSource: "scenery",
-    // },
+    { 
+        name: '校园美景',
+        desc: "最美的风景就在眼前",
+        color: "#daa39e",
+        img: images.service.nav.scenery,
+        dataSource: "scenery",
+    },
 ]
 
 
 const handleToDetailPage = (dataSource: string) => {
     const targetPage = dataSource === 'scenery' ? 'school-scenery' : 'detail-page'
-    // console.log(dataSource);
+    if (dataSource === 'scenery') {
+        uni.showToast({
+            title: '该功能暂未开放',
+            icon: 'error'
+        })
+        return ;
+    }
 
     uni.navigateTo({
         url: `/pages/(Main)/service/school-nav/${targetPage}/page?dataSource=${dataSource}`
@@ -60,7 +66,10 @@ const handleToDetailPage = (dataSource: string) => {
                 v-for="(item, index) in navCategories" 
                 :key="index"
                 class="relative overflow-hidden h-[216px] px-5 py-6 flex flex-col gap-y-1 rounded-2xl"
-                :style="{ backgroundColor: item.color }"
+                :style="{
+                    backgroundColor: item.color,
+                    filter: index === 3 ? 'grayscale(100%)' : 'none'
+                }"
                 @click="handleToDetailPage(item.dataSource)"
             >
                 <text class="text-xl font-bold text-white">
@@ -77,13 +86,6 @@ const handleToDetailPage = (dataSource: string) => {
                 </view>
             </view>
         </view>
-
-        <!-- <view>
-            <image 
-                class="w-full h-[124px]" 
-                :src="images.service.serviceNeedFunction" 
-            />
-        </view> -->
     </cus-page>
 </template>
 

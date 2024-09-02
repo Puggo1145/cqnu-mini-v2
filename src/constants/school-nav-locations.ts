@@ -31,7 +31,7 @@ export const navs: Record<string, Nav> = {
                     {
                         name: '田家炳书院',
                         alias: '16',
-                        location: '106.299911,29.611142'
+                        location: '106.304692,29.611504'
                     },
                     { 
                         name: '图北楼', 
@@ -41,12 +41,12 @@ export const navs: Record<string, Nav> = {
                     { 
                         name: '知行楼', 
                         alias: '19',
-                        location: '106.30233,29.611058',
+                        location: '106.302343,29.611056',
                     },
                     { 
                         name: '致用楼', 
                         alias: '' ,
-                        location: '106.300463,29.61083',
+                        location: '106.300609,29.610916',
                     },
                 ]
             }
@@ -61,17 +61,17 @@ export const navs: Record<string, Nav> = {
                     { 
                         name: '南门菜鸟驿站', 
                         alias: '南门',
-                        location: '106.302472,29.607842',
+                        location: '106.302476,29.607837',
+                    },
+                    {
+                        name: '三食堂菜鸟驿站',
+                        alias: '三食堂',
+                        location: '106.304366,29.606979',
                     },
                     {
                         name: '东北门菜鸟驿站',
                         alias: '东北门',
                         location: '106.306581,29.616857',
-                    },
-                    {
-                        name: '三食堂菜鸟驿站',
-                        alias: '三食堂',
-                        location: '106.302341,29.609367',
                     }
                 ]
             }
@@ -86,28 +86,23 @@ export const navs: Record<string, Nav> = {
                     { 
                         name: '茶百道', 
                         alias: '南门商业街',
-                        location: '106.302591,29.608013'
+                        location: '106.302591,29.608015'
                     },
                     {
                         name: '蜜雪冰城',
                         alias: '二食堂二楼',
-                        location: '106.302571,29.607951'
+                        location: '106.304366,29.606979'
                     },
                     {
                         name: '古茗',
                         alias: '南门商业街',
-                        location: '106.304384,29.606997'
+                        location: '106.302551,29.607692'
                     },
                     {
                         name: 'Luckin Coffee',
                         alias: '南门商业街',
-                        location: '106.304384,29.606997'
+                        location: '106.302504,29.607727'
                     },
-                    {
-                        name: 'XXXX',
-                        alias: '三食堂XXX',
-                        location: ''
-                    }
                 ]
             },
             {
@@ -116,7 +111,7 @@ export const navs: Record<string, Nav> = {
                     { 
                         name: '琳琅铺子', 
                         alias: '南门商业街',
-                        location: '106.302571,29.607951'
+                        location: '106.302569,29.607952'
                     },
                 ]
             },
@@ -131,8 +126,33 @@ export const navs: Record<string, Nav> = {
                     {
                         name: '麦当劳',
                         alias: '熙街',
-                        location: '106.304384,29.606997'
+                        location: '106.304366,29.606979'
                     },
+                ]
+            },
+            {
+                subTitle: '打印店',
+                places: [
+                    {
+                        name: '一食堂打印店',
+                        alias: '一食堂',
+                        location: '106.301891,29.615075'
+                    },
+                    {
+                        name: '三食堂打印店1',
+                        alias: '三食堂',
+                        location: '106.302467,29.609592'
+                    },
+                    {
+                        name: '东诚图文广告',
+                        alias: '三食堂',
+                        location: '106.301651,29.609539'
+                    },
+                    {
+                        name: '马院打印店',
+                        alias: '马克思主义学院',
+                        location: '106.301651,29.609539'
+                    }
                 ]
             }
         ]

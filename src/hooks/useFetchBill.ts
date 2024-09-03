@@ -1,11 +1,17 @@
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 // link official
 import { getBill } from "@/utils/link-official/libs/e-card/get-consume";
 // types
 import type { BillRecord } from "@/utils/link-official/libs/e-card/get-consume";
+import type { Ref } from "vue";
 
 
-export default function useFetchBill() {
+interface IUseFetchBill {
+    timeFrom: string;
+    timeTo: string;
+}
+
+export default function useFetchBill(timeRange: Ref<IUseFetchBill>) {
     const bill = ref<BillRecord[]>([]);
     const page = ref(1);
     const error = ref(false);
@@ -21,6 +27,7 @@ export default function useFetchBill() {
         const data = await getBill({
             current: page.value,
             size: 10,
+            ...timeRange?.value
         });
 
         if (data) {
@@ -46,11 +53,20 @@ export default function useFetchBill() {
         await fetchBill();
     })
 
+    watch(timeRange, async () => {
+        console.log("change");
+
+        page.value = 1;
+        isLoadComplete.value = false;
+
+        await fetchBill()
+    })
+
     return {
         bill,
         isFetching,
         error,
         isLoadComplete,
-        refresh: fetchBill
+        fetchBill
     }
 }

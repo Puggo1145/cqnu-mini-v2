@@ -25,28 +25,11 @@ const color = {
 </script>
 
 <template>
-    <view 
-        class="overflow-hidden flex items-center justify-center" 
-        :class="size[props.size]"
-    >
-        <image 
+    <view class="overflow-hidden flex flex-col items-center justify-center size-fit">
+        <image
             :src="color[props.color]"
-            class="spin size-full" 
+            :class="[size[props.size], 'animate-spin']"
         />
+        <slot />
     </view>
 </template>
-
-<style scoped>
-.spin {
-    animation: rotate 1s linear infinite;
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-</style>

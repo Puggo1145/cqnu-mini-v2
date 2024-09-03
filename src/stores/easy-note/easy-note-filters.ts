@@ -40,11 +40,20 @@ export const useEasyNoteFilters = defineStore('easyNoteFilters', {
     }) as EasyNoteFilters,
     actions: {
         getFilterValues() {
+            const formattedCourseName = this.courseNameOptions[this.courseName] === "全部课程"
+                ? ""
+                : this.courseNameOptions[this.courseName];
+
+            const formattedTag = this.tagsOptions[this.tag] === "全部标签"
+                ? ""
+                : this.tagsOptions[this.tag];
+
+
             return {
                 timeRange: this.timeRangeOptions[this.timeRange],
-                courseName: this.courseNameOptions[this.courseName],
-                tag: this.tagsOptions[this.tag],
-            }       
+                courseName: formattedCourseName,
+                tag: formattedTag,
+            }
         }
     }
 });

@@ -61,6 +61,7 @@
     "@types/tough-cookie": "^4.0.5",
     "cheerio": "1.0.0-rc.5",
     "crypto-js": "3.3.0",
+    "date-fns": "^3.6.0",
     "jsencrypt": "^3.3.2",
     "pinia": "2.0.36",
     "sass": "^1.77.7",

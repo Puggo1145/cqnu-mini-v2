@@ -29,7 +29,8 @@ const {
             class="overflow-hidden w-full flex-1"
         >
             <bill-item
-                v-for="item in bill"
+                v-for="item, index in bill"
+                :key="index"
                 :bill="item"
             />
             <!-- 占位 -->

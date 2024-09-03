@@ -9,15 +9,9 @@ const { bill } = defineProps<{ bill: BillRecord }>();
 </script>
 
 <template>
-    <view 
-        :class="[
-            'box-border flex w-full mt-2 rounded-2xl',
-            bill.payIcon === 'alipay' && 'bg-primary',
-            bill.payIcon === 'weixin' && 'bg-green-500',
-        ]"
-    >
+    <view class="box-border flex w-full mt-2 rounded-2xl overflow-hidden">
         <!-- 消费账单基础信息 -->
-        <view class="flex-1 p-4 pl-3 bg-white rounded-2xl flex items-center justify-between">
+        <view class="flex-1 p-4 pl-3 bg-white flex items-center justify-between">
             <view>
                 <text class="text-sm line-clamp-1">{{ bill.resume.split('-')[0] }}</text>
                 <text class="mt-1 text-xs text-secondary-foreground">{{ bill.effectdateStr }}</text>
@@ -25,7 +19,11 @@ const { bill } = defineProps<{ bill: BillRecord }>();
             <text class="text-xl font-bold">¥{{ bill.tranamt / 100 }}</text>
         </view>
         <!-- 支付方式 -->
-        <view class="w-[56px] flex items-center justify-center rounded-2xl">
+        <view :class="[
+            'w-[64px] flex items-center justify-center border-l border-dashed border-white',
+            bill.payIcon === 'alipay' && 'bg-primary',
+            bill.payIcon === 'weixin' && 'bg-green-500',
+        ]">
             <image
                 v-if="bill.payIcon === 'alipay'"
                 class="w-6 h-6"

@@ -3,7 +3,7 @@
 import cusPage from '@/components/cus-page.vue';
 import titleDesc from '@/components/title-desc.vue';
 // static
-import logo from "@/static/icons/logo.jpeg"
+import logo from "@/static/icons/logo.png";
 // constants
 import { developers } from '@/constants/about';
 </script>

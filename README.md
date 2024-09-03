@@ -1,6 +1,6 @@
 <p align="center">
     <picture>
-      <img src="./src/static/icons/logo.jpeg" height="128">
+      <img src="./src/static/icons/logo.png" height="128">
     </picture>
     <h1 align="center">智慧重师</h1>
 </p>

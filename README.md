@@ -16,7 +16,7 @@
 - TailwindCSS
 
 ## 参与贡献 - Contributing
-我们非常欢迎各位同学同我们一起构建智慧重师！在这一的过程中，您不仅能使小程序更好地服务于同学，其本身也是一次绝佳的机会接触现代前端开发技术。在决定参与之前，我们希望你能够阅读我们的[代码规范](https://tinted-galette-9e6.notion.site/29ec3dd330fc4f4faa149283f2c97091?pvs=74)，以确保您能够更好地融入项目的开发中。参与贡献请联系：1375075411@qq.com
+我们非常欢迎各位同学同我们一起构建智慧重师！在这一的过程中，您不仅能参与小程序的用户体验提升，参与贡献本身也是一次接触现代前端开发技术的绝佳机会。在决定参与之前，我们希望你能够阅读我们的[代码规范](https://tinted-galette-9e6.notion.site/29ec3dd330fc4f4faa149283f2c97091?pvs=74)，以确保您能够更好地融入项目的开发中。参与贡献请联系：1375075411@qq.com
 Contributions to CQNUmini are welcomed! By contributing to this project, you will not only help to improve the user experience of this mini-program, but also have a great opportunity to learn modern frontend development. Before you jump right into it, we would like you to read our [code standard](https://tinted-galette-9e6.notion.site/29ec3dd330fc4f4faa149283f2c97091?pvs=74) to ensure a better involvement into the project. To contribute, please contact: 1375075411@qq.com
 
 

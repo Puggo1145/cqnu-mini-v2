@@ -78,9 +78,9 @@ function utilityOnClick() {
                 <text class="text-white font-bold text-4xl">
                     {{ currentView === "electricity" ? balance.electricity : balance.water }}
                 </text>
-                <text class="text-white text-sm">
+                <!-- <text class="text-white text-sm">
                     元
-                </text>
+                </text> -->
             </view>
         </view>
         <image :src="images.service.utility" class="absolute size-[110px] right-0 -bottom-[14px]" />

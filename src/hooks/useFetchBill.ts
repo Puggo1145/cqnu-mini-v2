@@ -54,8 +54,6 @@ export default function useFetchBill(timeRange: Ref<IUseFetchBill>) {
     })
 
     watch(timeRange, async () => {
-        console.log("change");
-
         page.value = 1;
         isLoadComplete.value = false;
 

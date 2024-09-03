@@ -1,5 +1,5 @@
 export const baseConfigs = {
-    termStartDate: "2024-08-12",
+    termStartDate: "2024-09-09",
     totalWeeks: 20,
     courseStartTime: [
         "8 : 30",

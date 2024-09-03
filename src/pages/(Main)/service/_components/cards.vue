@@ -6,52 +6,50 @@ import cardNeedNewFunction from '@/components/card-need-new-function.vue';
 import images from '@/constants/images';
 
 
-const handleToNavPage = () => {
+
+function navigateToNavPage() {
     uni.navigateTo({
         url: '/pages/(Main)/service/school-nav/page'
     })
 }
+function navigateToRating() {
+    uni.navigateTo({
+        url: '/pages/(Main)/service/rating/page'
+    })
+}
 // 跳转到送水微信小程序
-const handleToMiniprogram = () => {
+function navigateToWater() {
     uni.navigateToMiniProgram({
         appId: 'wx600e85d92f102852',
         path: '',
     })
 }
-
-// TODO - 内测期间标记没有开放的功能，后续开放后删除
-function unavailable() {
-    uni.showToast({
-        title: '功能未开放',
-        icon: 'none',
-    });
-}
 </script>
 
 <template>
     <view class="grid gap-[14px] grid-cols-2">
-        <card-glass 
-            size="medium" 
-            title="美食点评" 
-            desc="好吃不好吃 大家来点评" 
+        <card-glass
+            size="medium"
+            title="美食点评"
+            desc="好吃不好吃 大家来点评"
             :img="images.service.food"
-            @click="unavailable"
+            @click="navigateToRating"
         />
         <view class="flex flex-col gap-y-[14px]">
-            <card-glass 
-                size="small" 
-                title="校园导航" 
-                desc="教学楼/快递/商铺" 
+            <card-glass
+                size="small"
+                title="校园导航"
+                desc="教学楼/快递/商铺"
                 :img="images.service.location"
-                @click="handleToNavPage"
+                @click="navigateToNavPage"
                 clip-content
             />
-            <card-glass 
-                size="small" 
-                title="送水服务" 
+            <card-glass
+                size="small"
+                title="送水服务"
                 desc="跳转购水小程序"
                 :img="images.service.water"
-                @click="handleToMiniprogram"
+                @click="navigateToWater"
                 clip-content
             />
         </view>

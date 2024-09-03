@@ -14,7 +14,7 @@ const cards = [
     },
     {
         name: "班级小记",
-        description: "整理学业重要事项",
+        description: "整理你的学业",
         image: images.study.easyNote,
         backgroundColor: "#649ef3",
         url: '/pages/(Main)/study/easy-note/page',

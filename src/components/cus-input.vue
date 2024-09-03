@@ -66,7 +66,7 @@ watch(() => props.value, (value) => {
 
 <template>
     <view 
-        class="flex items-center w-full h-[60px] border border-solid rounded-2xl bg-white"
+        class="box-border flex items-center w-full h-[52px] border border-solid rounded-2xl bg-white"
         :class="[
             isInputFocused ? 'border-secondary-foreground' : 'border-[#E0E0E0]',
             errorMessage && '!border-destructive',
@@ -92,7 +92,7 @@ watch(() => props.value, (value) => {
                 {{ props.fieldName }}
             </text>
             <input 
-                class="box-border w-full h-full absolute leading-[58px] px-4"
+                class="box-border w-full h-full absolute leading-[58px] px-4 text-sm"
                 :class="props.fieldName && 'mt-2'"
                 :type="isInputVisible ? 'text' : 'password'"
                 :value="props.value"

@@ -27,12 +27,12 @@ onMounted(async () => {
 </script>
 
 <template>
-    <view class="mt-8">
+    <view class="mt-8 h-full flex flex-col">
         <class-easy-note-header 
             :noCourseOfToday="!currentCourseName && scheduleStore.lessons.length !== 0" 
         />
 
-        <view class="pt-3">
+        <view class="pt-3 overflow-hidden flex-1">
             <notes
                 :notes="easyNotes"
                 :isLoading="isLoading"

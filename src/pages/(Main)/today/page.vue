@@ -11,7 +11,7 @@ import initialPopup from './_components/initial-popup.vue';
 import { useCourses } from '@/hooks/useCourses';
 
 
-const { 
+const {
     courseOfToday,
     remainingTimeOfLatestCourse,
 } = useCourses();
@@ -23,20 +23,15 @@ const {
             <dynamic-header />
             <!-- <tabs /> -->
         </view>
-        <scroll-view
-            class="mt-4 flex-1 overflow-hidden"
-            scroll-y
-            enable-back-to-top
-            :show-scrollbar="false"
-        >
-            <view class="px-4 pb-4">
-                <smart-class
-                    :course-of-today="courseOfToday"
-                    :remaining-time-of-latest-course="remainingTimeOfLatestCourse"
-                />
+        <view class="overflow-hidden px-4 flex-1 flex flex-col">
+            <smart-class
+                :course-of-today="courseOfToday"
+                :remaining-time-of-latest-course="remainingTimeOfLatestCourse"
+            />
+            <view class="overflow-hidden flex-1">
                 <class-easy-note />
             </view>
-        </scroll-view>
+        </view>
     </cus-page>
 
     <initial-popup />

@@ -66,7 +66,7 @@ watch(() => props.value, (value) => {
 
 <template>
     <view 
-        class="box-border flex items-center w-full h-[52px] border border-solid rounded-2xl bg-white"
+        class="box-border flex items-center w-full h-[60px] border border-solid rounded-2xl bg-white"
         :class="[
             isInputFocused ? 'border-secondary-foreground' : 'border-[#E0E0E0]',
             errorMessage && '!border-destructive',

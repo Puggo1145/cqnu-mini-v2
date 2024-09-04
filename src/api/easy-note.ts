@@ -2,6 +2,7 @@ import request from "@/utils/request";
 // types
 import type { EasyNotePageResponse } from "@/types/response";
 import type { EasyNoteCard } from "@/pages/(Main)/study/easy-note/_components/easy-note-card.vue";
+import type { Tag } from "@/components/tag-selector.vue";
 
 
 // 获取分页小记
@@ -41,10 +42,6 @@ export const getNoteStatistics = async () => {
 
 
 // 获取小记标签
-export interface Tag {
-    id: number;
-    tagName: string;
-}
 export const getTags = async () => {
     const res = await request.POST<Tag[]>({
         route: "note/tag/v1/listTag"
@@ -53,6 +50,7 @@ export const getTags = async () => {
 
     return res
 }
+
 
 // 创建小记
 type OmitParams = "id" | "tagList" | "openid" | "seeNumber" | "supportNumber" | "username"

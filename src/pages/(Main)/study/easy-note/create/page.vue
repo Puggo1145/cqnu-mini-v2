@@ -19,7 +19,7 @@ import { useSchedule } from '@/stores/useSchedule';
 import icons from '@/constants/icons';
 // types
 import { ZodError } from 'zod';
-import type { Tag } from '@/api/easy-note';
+import type { Tag } from '@/components/tag-selector.vue';
 
 
 // 标题与内容

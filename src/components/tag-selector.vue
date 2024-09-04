@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue';
-// types
-import type { Tag } from '@/api/easy-note';
 
+
+export type Tag = {
+    id: number;
+    tagName: string;
+    tagType?: number;
+}
 
 interface TagSelectorProps {
     tags: Tag[];

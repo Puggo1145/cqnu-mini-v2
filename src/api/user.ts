@@ -77,3 +77,13 @@ export const submitUserFeedback = async (params: FeedbackParams) => {
         return true;
     }
 }
+
+
+export const getAnnouncement = async () => {
+    const res = await request.GET<{ content: string }>({
+        route: "user/v1/announcement/least"
+    })
+        .send();
+
+    return res;
+}

@@ -23,9 +23,6 @@ export default function useFetchClassEasyNote() {
 
 
     const fetchNotes = async (type: 'load' | 'refresh' = 'load') => {
-        console.log('fetchNotes', type);
-
-
         if (type === 'refresh') {
             current.value = 1;
             isLoadComplete.value = false;

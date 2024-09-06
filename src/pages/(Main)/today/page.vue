@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
 import dynamicHeader from './_components/dynamic-header.vue';
+import announcement from './_components/announcement.vue';
 // import tabs from './_components/tabs.vue';
 import smartClass from './_components/smart-class.vue';
 import classEasyNote from './_components/class-easy-note.vue';
@@ -21,6 +21,7 @@ const {
     <cus-page>
         <view class="px-4">
             <dynamic-header />
+            <announcement />
             <!-- <tabs /> -->
         </view>
         <view class="overflow-hidden px-4 flex-1 flex flex-col">

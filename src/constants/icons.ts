@@ -23,6 +23,7 @@ import syncPrimary from "@/static/icons/sync-primary.svg"
 import switchWhite from "@/static/icons/switch-white.svg"
 import visible from "@/static/icons/visible.svg"
 import invisible from "@/static/icons/invisible.svg"
+import announcement from "@/static/icons/announcement.svg"
 
 import back from "@/static/icons/back.svg"
 import rightSecondary from "@/static/icons/right-secondary.svg"
@@ -79,6 +80,7 @@ const icons = {
     switchWhite,
     visible,
     invisible,
+    announcement,
     study: {
         transcript: studyTranscript,
         schedule: studySchedule,

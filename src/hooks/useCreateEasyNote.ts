@@ -4,7 +4,6 @@ import { z } from "zod";
 // apis
 import { createNote } from "@/api/easy-note";
 // hooks
-import { useCourses } from "./useCourses";
 import useFetchClassEasyNote from "./useFetchClassEasyNote";
 import useFetchEasyNote from "./useFetchEasyNote";
 // types
@@ -25,7 +24,6 @@ const easyNoteSchema = z.object({
 });
 
 export default function useCreateEasyNote() {
-    const { currentCourseName } = useCourses();
     const { refresh: refreshEasyNote } = useFetchEasyNote();
     const { refresh: refreshClassEasyNote } = useFetchClassEasyNote();
 
@@ -47,14 +45,8 @@ export default function useCreateEasyNote() {
 
         const isSuccess = await createNote(checkedForm);
         if (isSuccess) {
-            if (currentCourseName.value === form.courseName) {
-                // 创建的小记的目标课程是当前正在进行的课程，同时重新获取课堂小记和班级小记的内容
-                await refreshEasyNote();
-                await refreshClassEasyNote();
-            } else {
-                // 创建的消极的课程不是正在进行的课程，只需要重新获取班级小记的内容
-                await refreshEasyNote();
-            }
+            await refreshEasyNote();
+            await refreshClassEasyNote();
 
             uni.showToast({
                 title: "创建成功",

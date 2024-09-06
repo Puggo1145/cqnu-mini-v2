@@ -23,7 +23,6 @@ export default function useFetchClassEasyNote() {
 
 
     const fetchNotes = async () => {
-        // 今日无课，显示今天的小记
         if (scheduleStore.lessons.length === 0) return;
         if (isLoadComplete.value || isLoading.value) return;
 

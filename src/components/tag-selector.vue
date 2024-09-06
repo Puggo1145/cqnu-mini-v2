@@ -74,7 +74,7 @@ watch(() => selectedTags, (newValue) => {
             @click="selectTag(tag)"
         >
             <text class="font-bold text-sm">
-                {{ tag.tagName }} - {{ tag.id }}
+                {{ tag.tagName }}
             </text>
         </view>
     </view>

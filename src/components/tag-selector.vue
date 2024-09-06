@@ -8,14 +8,24 @@ export type Tag = {
     tagType?: number;
 }
 
+type TagSelectionMode = {
+    mode: 'single';
+    selectedTags: Tag;
+} | {
+    mode: 'multiple';
+    selectedTags: Tag[];
+}
+
 interface TagSelectorProps {
     tags: Tag[];
+    mode: 'single' | 'multiple';
     selectedTags?: Tag[];
     isFetching?: boolean | null;
     error?: boolean | null;
 }
 const props = withDefaults(defineProps<TagSelectorProps>(), {
     selectedTags: () => [],
+    mode: 'multiple',
     isFetching: null,
     error: null,
 });
@@ -26,11 +36,16 @@ const selectedTags = computed(() => props.selectedTags);
 
 const emit = defineEmits(['change']);
 function selectTag(tag: Tag) {
-    const updatedTags = props.selectedTags.some(stag => stag.id === tag.id)
-        ? props.selectedTags.filter(stag => stag.id !== tag.id)
-        : [...props.selectedTags, tag];
+    if (props.mode === 'single') {
+        emit('change', tag);
+        return;
+    } else {
+        const updatedTags = props.selectedTags.some(stag => stag.id === tag.id)
+            ? props.selectedTags.filter(stag => stag.id !== tag.id)
+            : [...props.selectedTags, tag];
 
-    emit('change', updatedTags);
+        emit('change', updatedTags);
+    }
 }
 </script>
 

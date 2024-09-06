@@ -3,17 +3,25 @@
 import icons from '@/constants/icons';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
+
+
+function gotoCreateItem() {
+    uni.navigateTo({
+        url: '/pages/(Main)/service/rating/create-item/page'
+    });
+}
 </script>
 
 <template>
     <view class="flex items-center gap-x-3 mt-4">
         <cus-input
             :icon="icons.search"
-            class="flex-1"
+            class="flex-1 h-[52px]"
             placeholder="推荐食物名称"
         />
         <cus-button
             variant="secondary"
+            @click="gotoCreateItem"
         >
             <text class="text-primary">
                 创建评分

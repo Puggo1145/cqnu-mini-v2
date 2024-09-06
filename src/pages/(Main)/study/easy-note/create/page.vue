@@ -89,9 +89,6 @@ async function createEasyNote() {
         header-type="nav"
         padding-x="16"
     >
-        <text class="mt-3 text-3xl">
-            创建小记
-        </text>
         <scroll-view
             class="mt-3 overflow-hidden flex-1 pb-4"
             scroll-y

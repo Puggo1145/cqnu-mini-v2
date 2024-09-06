@@ -1,19 +1,11 @@
 <script setup lang="ts">
-import { computed, withDefaults } from 'vue';
+import { computed, withDefaults, watch } from 'vue';
 
 
 export type Tag = {
     id: number;
     tagName: string;
     tagType?: number;
-}
-
-type TagSelectionMode = {
-    mode: 'single';
-    selectedTags: Tag;
-} | {
-    mode: 'multiple';
-    selectedTags: Tag[];
 }
 
 interface TagSelectorProps {
@@ -33,20 +25,27 @@ const props = withDefaults(defineProps<TagSelectorProps>(), {
 
 const selectedTags = computed(() => props.selectedTags);
 
-
 const emit = defineEmits(['change']);
 function selectTag(tag: Tag) {
     if (props.mode === 'single') {
-        emit('change', tag);
-        return;
+        const newTag = selectedTags.value.some(stag => stag.id === tag.id)
+            ? []
+            : [tag];
+
+        emit('change', newTag);
     } else {
-        const updatedTags = props.selectedTags.some(stag => stag.id === tag.id)
-            ? props.selectedTags.filter(stag => stag.id !== tag.id)
+        const updatedTags = selectedTags.value.some(stag => stag.id === tag.id)
+            ? selectedTags.value.filter(stag => stag.id !== tag.id)
             : [...props.selectedTags, tag];
 
         emit('change', updatedTags);
     }
 }
+
+watch(() => selectedTags, (newValue) => {
+    console.log(newValue);
+
+}); 
 </script>
 
 <template>
@@ -75,7 +74,7 @@ function selectTag(tag: Tag) {
             @click="selectTag(tag)"
         >
             <text class="font-bold text-sm">
-                {{ tag.tagName }}
+                {{ tag.tagName }} - {{ tag.id }}
             </text>
         </view>
     </view>

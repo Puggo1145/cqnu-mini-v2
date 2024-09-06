@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
 import titleDesc from '@/components/title-desc.vue';
@@ -42,7 +42,7 @@ const selectedTag = ref<Tag[]>([]);
 
 // form
 function handleSubmitFoos() {
-    
+
 }
 </script>
 
@@ -66,12 +66,14 @@ function handleSubmitFoos() {
                     @select="e => selectedFoodImage = (e as string)"
                     class="mt-3"
                 >
-                    <view class="relative overflow-hidden w-full h-[180px] bg-secondary flex items-center justify-center rounded-2xl">
+                    <view
+                        class="relative overflow-hidden w-full h-[180px] bg-secondary flex items-center justify-center rounded-2xl"
+                    >
                         <image
                             :src="icons.image"
                             class="size-8"
                         />
-                        <image 
+                        <image
                             v-if="selectedFoodImage"
                             :src="selectedFoodImage"
                             class="w-full h-full absolute"
@@ -108,10 +110,12 @@ function handleSubmitFoos() {
                         类型（可选）
                     </text>
                     <tag-selector
+                        mode="single"
                         :tags="tags"
                         :selected-tags="selectedTag"
                         :is-fetching="isFetching"
                         :error="error"
+                        @change="tag => selectedTag = tag"
                     />
                 </view>
             </view>

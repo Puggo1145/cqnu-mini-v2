@@ -4,7 +4,7 @@ import { ref } from 'vue';
 
 interface ImageUploaderProps {
     maxCount: number;
-}   
+}
 const props = defineProps<ImageUploaderProps>();
 
 const selectedImages = ref<string[] | string>();
@@ -30,9 +30,7 @@ function onClick() {
 </script>
 
 <template>
-    <view
-        @click="onClick"
-    >
+    <view @click="onClick">
         <slot />
     </view>
 </template>

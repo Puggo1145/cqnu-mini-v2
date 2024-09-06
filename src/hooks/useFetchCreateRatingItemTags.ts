@@ -17,7 +17,7 @@ const useFetchCreateRatingItemTags = () => {
         const res = await getCreateRatingItemTags();
 
         if (res.ok) {
-            tags.value = res.data.data;
+            tags.value = res.data.data[1];
         } else {
             error.value = true;
         }

@@ -16,7 +16,8 @@ function gotoCreateItem() {
     <view class="flex items-center gap-x-3 mt-4">
         <cus-input
             :icon="icons.search"
-            class="flex-1 h-[52px]"
+            input-style="!h-[52px]"
+            class="flex-1"
             placeholder="推荐食物名称"
         />
         <cus-button

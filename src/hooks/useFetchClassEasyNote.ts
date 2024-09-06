@@ -22,7 +22,17 @@ export default function useFetchClassEasyNote() {
     const isLoadComplete = ref(false);
 
 
-    const fetchNotes = async () => {
+    const fetchNotes = async (type: 'load' | 'refresh' = 'load') => {
+        console.log('fetchNotes', type);
+
+
+        if (type === 'refresh') {
+            current.value = 1;
+            isLoadComplete.value = false;
+            classEasyNoteStore.notes = [];
+        }
+
+
         if (scheduleStore.lessons.length === 0) return;
         if (isLoadComplete.value || isLoading.value) return;
 
@@ -59,21 +69,9 @@ export default function useFetchClassEasyNote() {
         isLoading.value = false;
     }
 
-    watch(() => currentCourseName.value, async () => {
-        current.value = 1;
-        isLoadComplete.value = false;
-        classEasyNoteStore.notes = [];
+    watch(() => currentCourseName.value, async () => await fetchNotes('refresh'));
 
-        await fetchNotes();
-    })
-
-    watch(() => scheduleStore.lessons, async () => {
-        current.value = 1;
-        isLoadComplete.value = false;
-        classEasyNoteStore.notes = [];
-
-        await fetchNotes();
-    })
+    watch(() => scheduleStore.lessons, async () => await fetchNotes('refresh'));
 
 
     return {
@@ -81,6 +79,6 @@ export default function useFetchClassEasyNote() {
         isLoading,
         error,
         isLoadComplete,
-        refresh: fetchNotes
+        fetchNotes,
     }
 }

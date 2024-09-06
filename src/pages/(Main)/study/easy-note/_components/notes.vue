@@ -17,7 +17,7 @@ interface IEasyNoteProps {
     isLoading: boolean;
     error: boolean;
     isLoadComplete: boolean;
-    refresh: () => Promise<void>;
+    refresh: (type: 'load' | 'refresh') => Promise<void>;
 }
 const props = defineProps<IEasyNoteProps>();
 const scheduleStore = useSchedule();
@@ -49,6 +49,9 @@ const scheduleStore = useSchedule();
         scroll-y
         lower-threshold="50"
         @scrolltolower="props.refresh"
+        :refresher-enabled="true"
+        refresh-threshold="70"
+        @refresherrefresh="() => props.refresh('refresh')"
     >
         <view class="flex flex-col gap-3">
             <easy-note-card

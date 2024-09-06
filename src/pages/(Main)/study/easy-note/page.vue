@@ -18,14 +18,14 @@ const {
     isLoading,
     error,
     isLoadComplete,
-    refresh,
+    fetchNotes,
 } = useFetchEasyNote();
 
 // uniapp 的页面会在 mount 后缓存，mount 在页面存在的整个生命周期内只会触发一次
 // 但 composables 会在每次页面显示时 mount，会带来不必要的数据请求
 // 所以将数据请求提取到页面层级进行初始化
 onMounted(async () => {
-    await refresh();
+    await fetchNotes();
 });
 </script>
 
@@ -48,7 +48,7 @@ onMounted(async () => {
                     :isLoading="isLoading"
                     :error="error"
                     :isLoadComplete="isLoadComplete"
-                    :refresh="refresh"
+                    :refresh="fetchNotes"
                 />
             </view>
         </view>

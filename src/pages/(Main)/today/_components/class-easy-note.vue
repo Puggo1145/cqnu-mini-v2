@@ -13,24 +13,22 @@ import { useSchedule } from '@/stores/useSchedule';
 const { currentCourseName } = useCourses();
 const scheduleStore = useSchedule();
 
-const { 
-    easyNotes, 
-    isLoading, 
+const {
+    easyNotes,
+    isLoading,
     error,
     isLoadComplete,
-    refresh,
+    fetchNotes,
 } = useFetchClassEasyNote();
 
 onMounted(async () => {
-    await refresh();
+    await fetchNotes();
 });
 </script>
 
 <template>
     <view class="mt-8 h-full flex flex-col">
-        <class-easy-note-header 
-            :noCourseOfToday="!currentCourseName && scheduleStore.lessons.length !== 0" 
-        />
+        <class-easy-note-header :noCourseOfToday="!currentCourseName && scheduleStore.lessons.length !== 0" />
 
         <view class="pt-3 overflow-hidden flex-1">
             <notes
@@ -38,7 +36,7 @@ onMounted(async () => {
                 :isLoading="isLoading"
                 :error="error"
                 :isLoadComplete="isLoadComplete"
-                :refresh="refresh"
+                :refresh="fetchNotes"
             />
         </view>
     </view>

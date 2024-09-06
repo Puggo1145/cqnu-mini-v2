@@ -22,7 +22,13 @@ export default function useFetchEasyNote() {
     const error = ref(false);
     const isLoadComplete = ref(false);
 
-    async function fetchNotes() {
+    async function fetchNotes(type: 'load' | 'refresh' = 'load') {
+        if (type === 'refresh') {
+            current.value = 1;
+            isLoadComplete.value = false;
+            easyNoteStore.notes = [];
+        }
+
         if (isLoadComplete.value || isLoading.value) return;
         if (scheduleStore.lessons.length === 0) return;
 
@@ -64,11 +70,7 @@ export default function useFetchEasyNote() {
             () => easyNoteFiltersStore.tag,
             () => scheduleStore.lessons
         ],
-        async () => {
-            isLoadComplete.value = false;
-            easyNoteStore.notes = [];
-            await fetchNotes();
-        }
+        async () => await fetchNotes('refresh')
     );
 
     return {
@@ -76,6 +78,6 @@ export default function useFetchEasyNote() {
         isLoading,
         error,
         isLoadComplete,
-        refresh: fetchNotes,
+        fetchNotes,
     }
 }

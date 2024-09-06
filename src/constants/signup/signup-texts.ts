@@ -9,8 +9,8 @@ const campusInfoTexts = {
 }
 
 const linkOfficialTexts = {
-    title: "关联校园官网账号",
-    desc: "小程序需要绑定学校官网账号以帮助你更好地管理学业与生活信息"
+    title: "使用校园官网账号登陆",
+    desc: "绑定校园官网账号，把信息整理交给我们！"
 }
 
 export {

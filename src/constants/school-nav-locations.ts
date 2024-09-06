@@ -13,18 +13,18 @@ interface Nav {
 
 export const navs: Record<string, Nav> = {
     building: {
-        title: '教学楼', 
+        title: '教学楼',
         data: [
-            { 
-                subTitle: '', 
+            {
+                subTitle: '',
                 places: [
-                    { 
-                        name: '弘德楼', 
+                    {
+                        name: '弘德楼',
                         alias: '11-15',
                         location: '106.305178,29.614059',
                     },
-                    { 
-                        name: '特教楼（励志楼）', 
+                    {
+                        name: '特教楼（励志楼）',
                         alias: 'T',
                         location: '106.299806,29.611043',
                     },
@@ -33,19 +33,19 @@ export const navs: Record<string, Nav> = {
                         alias: '16',
                         location: '106.299911,29.611142'
                     },
-                    { 
-                        name: '图北楼', 
+                    {
+                        name: '图北楼',
                         alias: '17',
                         location: '106.301295,29.613503',
                     },
-                    { 
-                        name: '知行楼', 
+                    {
+                        name: '知行楼',
                         alias: '19',
                         location: '106.30233,29.611058',
                     },
-                    { 
-                        name: '致用楼', 
-                        alias: '' ,
+                    {
+                        name: '致用楼',
+                        alias: '',
                         location: '106.300463,29.61083',
                     },
                 ]
@@ -53,13 +53,13 @@ export const navs: Record<string, Nav> = {
         ]
     },
     express: {
-        title: '快递', 
+        title: '快递',
         data: [
-            { 
-                subTitle: '', 
+            {
+                subTitle: '',
                 places: [
-                    { 
-                        name: '南门菜鸟驿站', 
+                    {
+                        name: '南门菜鸟驿站',
                         alias: '南门',
                         location: '106.302472,29.607842',
                     },
@@ -81,10 +81,10 @@ export const navs: Record<string, Nav> = {
         title: '商铺',
         data: [
             {
-                subTitle: '奶茶', 
+                subTitle: '奶茶',
                 places: [
-                    { 
-                        name: '茶百道', 
+                    {
+                        name: '茶百道',
                         alias: '南门商业街',
                         location: '106.302591,29.608013'
                     },
@@ -103,18 +103,13 @@ export const navs: Record<string, Nav> = {
                         alias: '南门商业街',
                         location: '106.304384,29.606997'
                     },
-                    {
-                        name: 'XXXX',
-                        alias: '三食堂XXX',
-                        location: ''
-                    }
                 ]
             },
             {
                 subTitle: '超市',
                 places: [
-                    { 
-                        name: '琳琅铺子', 
+                    {
+                        name: '琳琅铺子',
                         alias: '南门商业街',
                         location: '106.302571,29.607951'
                     },
@@ -123,8 +118,8 @@ export const navs: Record<string, Nav> = {
             {
                 subTitle: '美食小吃',
                 places: [
-                    { 
-                        name: '重师四食堂', 
+                    {
+                        name: '重师四食堂',
                         alias: '北门（5号门）',
                         location: '106.302571,29.607951'
                     },

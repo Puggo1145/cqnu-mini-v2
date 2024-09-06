@@ -103,7 +103,7 @@ async function createEasyNote() {
                 rounded-2xl bg-white flex flex-col">
                 <textarea
                     name="easyNoteContent"
-                    class="w-full flex-1"
+                    class="w-full flex-1 leading-normal"
                     placeholder="记录本节课值得注意的事情(1-200 字)"
                     :value="content"
                     @input="e => {

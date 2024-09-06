@@ -24,8 +24,8 @@ const easyNoteSchema = z.object({
 });
 
 export default function useCreateEasyNote() {
-    const { refresh: refreshEasyNote } = useFetchEasyNote();
-    const { refresh: refreshClassEasyNote } = useFetchClassEasyNote();
+    const { fetchNotes: refreshEasyNote } = useFetchEasyNote();
+    const { fetchNotes: refreshClassEasyNote } = useFetchClassEasyNote();
 
     const isCreating = ref(false);
 
@@ -45,8 +45,8 @@ export default function useCreateEasyNote() {
 
         const isSuccess = await createNote(checkedForm);
         if (isSuccess) {
-            await refreshEasyNote();
-            await refreshClassEasyNote();
+            await refreshEasyNote('refresh');
+            await refreshClassEasyNote('refresh');
 
             uni.showToast({
                 title: "创建成功",

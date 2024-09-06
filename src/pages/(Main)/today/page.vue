@@ -21,7 +21,7 @@ const {
     <cus-page>
         <view class="px-4">
             <dynamic-header />
-            <announcement />
+            <!-- <announcement /> -->
             <!-- <tabs /> -->
         </view>
         <view class="overflow-hidden px-4 flex-1 flex flex-col">

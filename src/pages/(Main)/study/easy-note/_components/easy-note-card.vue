@@ -6,6 +6,9 @@ import { supportNote, deleteNote } from '@/api/easy-note';
 import useUserInfo from '@/stores/user-info';
 import { useEasyNoteStore } from '@/stores/easy-note/easy-note';
 import { useClassEasyNoteStore } from '@/stores/easy-note/class-easy-note';
+// hooks
+import useFetchEasyNote from '@/hooks/useFetchEasyNote';
+import useFetchClassEasyNote from '@/hooks/useFetchClassEasyNote';
 // constants
 import {
     easyNoteTagColorMapper,
@@ -16,7 +19,7 @@ import icons from '@/constants/icons';
 
 
 type EasyNoteTagsName = "重要" | "作业" | "考试"
-type EasyNoteTags =  {
+type EasyNoteTags = {
     id: number;
     tagName: EasyNoteTagsName;
     noteId: number;
@@ -64,9 +67,9 @@ const noteColor = computed(() => {
     } else {
         return {
             bg: easyNoteColorMapper.normal,
-            tag: card.tagList && card.tagList.length > 0 
-            ? easyNoteTagColorMapper[card.tagList[0].tagName]
-            : easyNoteTagColorMapper.default
+            tag: card.tagList && card.tagList.length > 0
+                ? easyNoteTagColorMapper[card.tagList[0].tagName]
+                : easyNoteTagColorMapper.default
         }
     }
 });
@@ -110,6 +113,10 @@ const moreOption = reactive([
         onClick: () => deleteEasyNote
     }
 ]);
+
+
+const { fetchNotes } = useFetchEasyNote();
+const { fetchNotes: fetchClassNotes } = useFetchClassEasyNote();
 async function deleteEasyNote() {
     const isSuccess = await deleteNote(card.id);
     if (isSuccess) {
@@ -120,7 +127,9 @@ async function deleteEasyNote() {
 
         // 查找列表中该 id 的小记并删除
         easyNoteStore.deleteNote(card.id);
+        await fetchNotes('refresh');
         classEasyNoteStore.deleteNote(card.id);
+        await fetchClassNotes('refresh');
     };
 }
 </script>
@@ -137,7 +146,7 @@ async function deleteEasyNote() {
                 class="w-full flex flex-col justify-between p-4"
                 :style="{ backgroundColor: noteColor.bg }"
             >
-                <view 
+                <view
                     class="flex items-center justify-between"
                     @click="onCardClick"
                 >
@@ -145,9 +154,7 @@ async function deleteEasyNote() {
                         <text class="text-md font-bold">
                             {{ card.title }}
                         </text>
-                        <view
-                            class="mt-1 text-sm flex flex-col text-black text-opacity-35"
-                        >
+                        <view class="mt-1 text-sm flex flex-col text-black text-opacity-35">
                             <text>{{ card.courseName }}</text>
                             <text>{{ card.deadline }}</text>
                         </view>
@@ -158,8 +165,8 @@ async function deleteEasyNote() {
                             来自 {{ card.username }}
                         </text>
                         <!-- 外显 tag -->
-                        <view 
-                            v-if="card.tagList && card.tagList.length !== 0" 
+                        <view
+                            v-if="card.tagList && card.tagList.length !== 0"
                             class="flex-1"
                         >
                             <view
@@ -174,12 +181,15 @@ async function deleteEasyNote() {
                 </view>
 
                 <!-- 分割线 -->
-                <view class="w-full bg-black/10 transition-all duration-300" :class="isCardOpen ? 'my-4 h-[1px]' : 'my-0 h-0'" />
-                
+                <view
+                    class="w-full bg-black/10 transition-all duration-300"
+                    :class="isCardOpen ? 'my-4 h-[1px]' : 'my-0 h-0'"
+                />
+
                 <!-- content -->
-                <scroll-view 
+                <scroll-view
                     scroll-y
-                    class="overflow-hidden transition-all duration-300" 
+                    class="overflow-hidden transition-all duration-300"
                     :class="isCardOpen ? 'h-[100px]' : 'h-0'"
                     @click="onCardClick"
                 >
@@ -205,7 +215,7 @@ async function deleteEasyNote() {
                         </view>
                     </view>
                     <!-- 击掌 -->
-                    <view 
+                    <view
                         class="relative w-8 h-8"
                         @click="supportEasyNote"
                     >

@@ -41,11 +41,6 @@ function selectTag(tag: Tag) {
         emit('change', updatedTags);
     }
 }
-
-watch(() => selectedTags, (newValue) => {
-    console.log(newValue);
-
-}); 
 </script>
 
 <template>

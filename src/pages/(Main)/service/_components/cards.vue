@@ -13,9 +13,13 @@ function navigateToNavPage() {
     })
 }
 function navigateToRating() {
-    uni.navigateTo({
-        url: '/pages/(Main)/service/rating/page'
+    uni.showToast({
+        title: '功能将于 9.17 日开放',
+        icon: 'none'
     })
+    // uni.navigateTo({
+    // url: '/pages/(Main)/service/rating/page'
+    // })
 }
 // 跳转到送水微信小程序
 function navigateToWater() {
@@ -24,6 +28,7 @@ function navigateToWater() {
         path: '',
     })
 }
+
 </script>
 
 <template>

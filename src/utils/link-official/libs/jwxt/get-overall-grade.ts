@@ -6,6 +6,7 @@ import urls from "../../constants/urls";
 export const getOverallGrade = async () => {
     try {
         const jwxtCookie = await getJwxtCookie();
+        if (!jwxtCookie) return null;
 
         // 返回的是 html 文档
         const res = await uni.request({

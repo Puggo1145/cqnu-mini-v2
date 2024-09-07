@@ -6,6 +6,7 @@ import { resolveSchedule } from "../../utils/scheduleHandlers";
 export const getSchedules = async () => {
     try {
         const jwxtCookie = await getJwxtCookie();
+        if (!jwxtCookie) return false;
 
         // 获取当前学年和学期
         const scheduleFormData = getYearAndTerm();
@@ -26,7 +27,7 @@ export const getSchedules = async () => {
                 icon: "error",
             })
 
-            return null;
+            return false;
         }
 
         const resolvedSchedule = resolveSchedule((res.data as any).kbList);
@@ -40,6 +41,6 @@ export const getSchedules = async () => {
             icon: "error",
         })
 
-        return null;
+        return false;
     }
 }

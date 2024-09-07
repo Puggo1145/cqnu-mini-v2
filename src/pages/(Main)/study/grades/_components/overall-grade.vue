@@ -16,11 +16,13 @@ const studyDetails = ref<StudyDetail[]>([
     { name: "通过", count: "-" },
 ])
 
-onMounted(async() => {
+onMounted(async () => {
     const res = await getOverallGrade();
     if (res) {
         gpa.value = res.gpa;
         studyDetails.value = res.studyDetail;
+    } else {
+        gpa.value = "--";
     }
 })
 </script>

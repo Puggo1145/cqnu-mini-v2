@@ -11,7 +11,7 @@ export interface OriginalTermGrade {
         kcxzmc: string // 课程性质
         ksxz: string // 成绩性质
         xf: string // 学分
-    } []
+    }[]
 }
 export const getTermGrade = async (
     xnm: number, // 学年
@@ -19,6 +19,7 @@ export const getTermGrade = async (
 ) => {
     try {
         const jwxtCookie = await getJwxtCookie();
+        if (!jwxtCookie) return null
 
         // 返回的是 html 文档
         const res = await uni.request({

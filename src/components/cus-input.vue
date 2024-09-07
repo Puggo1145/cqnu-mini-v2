@@ -24,7 +24,6 @@ const props = withDefaults(defineProps<Props>(), {
 // input refs
 const isInputFocused = ref(false);
 const inputValue = ref('');
-const isInputVisible = ref(!(props.type === 'password'));
 const errorMessage = ref('');
 
 
@@ -97,30 +96,12 @@ watch(() => props.value, (value) => {
             <input
                 class="box-border w-full h-full absolute leading-[58px] px-4 text-sm"
                 :class="props.fieldName && 'mt-2'"
-                :type="isInputVisible ? 'text' : 'password'"
+                :type="props.type"
                 :value="props.value"
                 :disabled="props.disabled"
                 :placeholder="props.placeholder"
                 @blur="onBlur"
                 @input="onInput"
-            />
-        </view>
-
-        <!-- 密码可见性 -->
-        <view
-            v-if="props.type === 'password'"
-            class="h-full aspect-square flex items-center justify-center"
-            @click="isInputVisible = !isInputVisible"
-        >
-            <image
-                v-if="isInputVisible"
-                :src="icons.visible"
-                class="w-6 h-6"
-            />
-            <image
-                v-else
-                :src="icons.invisible"
-                class="w-6 h-6"
             />
         </view>
     </view>

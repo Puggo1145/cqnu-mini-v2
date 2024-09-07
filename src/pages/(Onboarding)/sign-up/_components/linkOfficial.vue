@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, getCurrentInstance } from 'vue';
+import { ref, onMounted } from 'vue';
 // components
 import titleDesc from '@/components/title-desc.vue';
 import cusInput from '@/components/cus-input.vue';
@@ -61,7 +61,7 @@ async function handleLinkOfficial() {
             password: stores.linker,
             authCode: authCode.value,
         });
-        
+
         // 2. 登录官网
         const signInRes = await LinkOfficial.signInToOfficial(
             form.studentId,
@@ -84,14 +84,11 @@ async function handleLinkOfficial() {
             stores.setFaculty(userInfoRes.faculty);
             stores.setMajor(userInfoRes.major);
             stores.setStuClass(userInfoRes.stuClass);
+
+            // 4. 进入下一页
+            emit('update:current', 1);
         }
-
-        // 4. 进入下一页
-        emit('update:current', 1);
-        isLinkingOfficial.value = false;
     } catch (err) {
-        isLinkingOfficial.value = false;
-
         if (err instanceof ZodError) {
             // 显示错误消息
             err.errors.forEach((error) => {
@@ -104,9 +101,10 @@ async function handleLinkOfficial() {
                 }
             });
         }
+    } finally {
+        isLinkingOfficial.value = false;
     }
 }
-
 </script>
 
 <template>
@@ -115,14 +113,13 @@ async function handleLinkOfficial() {
             :title="linkOfficialTexts.title"
             :desc="linkOfficialTexts.desc"
         />
-        <cusInput 
-            field-name="学号" 
+        <cusInput
+            field-name="学号"
             ref="studentIdInputRef"
             :value="stores.studentId"
             @input="e => stores.setStudentId(e.value)"
-        
         />
-        <cusInput 
+        <cusInput
             field-name="官网密码"
             type="password"
             ref="passwordInputRef"
@@ -137,7 +134,7 @@ async function handleLinkOfficial() {
                 :value="authCode"
                 @input="e => authCode = e.value"
             />
-            <view 
+            <view
                 class="overflow-hidden w-[160px] h-[56px] bg-secondary rounded-md border 
                 flex items-center justify-center"
                 @click="refreshAuthCode"
@@ -155,7 +152,7 @@ async function handleLinkOfficial() {
                 />
             </view>
         </view>
-        <cusButton 
+        <cusButton
             class="w-full"
             :variant="isLinkingOfficial ? 'loading' : 'primary'"
             @click="handleLinkOfficial"

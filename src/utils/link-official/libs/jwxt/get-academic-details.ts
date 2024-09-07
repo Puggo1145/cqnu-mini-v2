@@ -11,6 +11,7 @@ const queryTarget = {
 export const getAcademicDetails = async (target: keyof typeof queryTarget) => {
     try {
         const jwxtCookie = await getJwxtCookie();
+        if (!jwxtCookie) return null;
 
         const res = await uni.request({
             url: urls.courseDetails,
@@ -59,7 +60,7 @@ const resolveAcademicDetails = (data: OriginalAcademicDetails[]): resolvedAcadem
         "3": "未修",
         "4": "已修",
     }
-    
+
     return data.map(detail => ({
         name: detail.KCMC,
         nature: detail.KCXZMC,

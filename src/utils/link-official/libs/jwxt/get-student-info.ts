@@ -13,6 +13,7 @@ export interface OriginalStudentInfo {
 export const getStudentInfo = async () => {
     try {
         const jwxtCookie = await getJwxtCookie();
+        if (!jwxtCookie) return null
 
         const res = await uni.request({
             method: "GET",

@@ -14,7 +14,7 @@ const {
 <template>
     <view
         v-if="content"
-        class="w-full h-[60px] bg-primary/15 rounded-2xl mb-3 flex items-center gap-x-3 px-4 py-[18px]"
+        class="w-full bg-primary/15 rounded-2xl mb-3 flex items-center gap-x-3 p-4"
     >
         <image
             :src="icons.announcement"

@@ -26,8 +26,7 @@ export const getJwxtCookie = async () => {
         }
     } catch (err) {
         uni.showToast({
-            title: "网络错误",
-            icon: "error",
+            title: "校园门户无响应，请重试",
         });
 
         return null;

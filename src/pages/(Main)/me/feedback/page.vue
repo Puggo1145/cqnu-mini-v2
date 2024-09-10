@@ -11,8 +11,6 @@ import useUserInfo from '@/stores/user-info';
 import { submitUserFeedback } from '@/api/user';
 // zod
 import { z } from 'zod';
-// types
-import type { CusSelectEvent } from '@/components/cus-select.vue';
 
 
 const { openid } = useUserInfo();
@@ -24,9 +22,18 @@ const feedbackTypes = [
     "问题反馈",
     "其他"
 ];
-function onFeedbackTypeChange(e: CusSelectEvent) {
-    currentFeedbackType.value = e.value;
+
+
+function previewImg() {
+    uni.previewImage({
+        urls: ["https://cqminiv2-imgs.oss-cn-chengdu.aliyuncs.com/official/user%20group%20qr.png"],
+        current: 0,
+        longPressActions: {
+            itemList: ["保存图片"]
+        }
+    })
 }
+
 
 
 const content = ref('');
@@ -91,45 +98,63 @@ onMounted(() => {
 </script>
 
 <template>
-    <cus-page header-type="nav" padding-x="16">
-        <title-desc
-            class="mt-8"
-            title="意见反馈"
-            desc="向开发者团队反馈小程序使用期间的问题或功能建议"
-        />
-        <view class="mt-4 w-full flex flex-col gap-y-3">
-            <cus-select 
-                :value="currentFeedbackType"
-                :range="feedbackTypes"
-                @change="onFeedbackTypeChange"
+    <cus-page
+        header-type="nav"
+        padding-x="16"
+    >
+        <scroll-view
+            class="mt-4 overflow-hidden flex-1"
+            scroll-y
+        >
+            <title-desc
+                class="mt-8"
+                title="意见反馈"
+                desc="向开发者团队反馈小程序使用期间的问题或功能建议"
             />
-
-            <view>
-                <textarea 
-                    name="easyNoteContent" 
-                    class="w-full h-[160px] p-4 border border-solid border-[#E0E0E0]
-                    rounded-2xl bg-white flex flex-col"
-                    placeholder="请输入您的建议或反馈（1-200 字）, 说明您在什么场景下遇到了什么问题，或希望添加什么功能"
-                    :value="content"
-                    @input="onContentChange"
+            <view class="w-full flex flex-col gap-y-3">
+                <cus-select
+                    :value="currentFeedbackType"
+                    :range="feedbackTypes"
+                    @change="e => currentFeedbackType = e.value"
                 />
-                <view class="mt-1 px-4 w-full flex items-center justify-between">
-                    <text class="text-sm text-red-500">
-                        {{ contentErrorMsg }}
-                    </text>
+                <view>
+                    <textarea
+                        name="easyNoteContent"
+                        class="w-full h-[160px] p-4 border border-solid border-[#E0E0E0]
+                    rounded-2xl bg-white flex flex-col"
+                        placeholder="请输入您的建议或反馈（1-200 字）, 说明您在什么场景下遇到了什么问题，或希望添加什么功能"
+                        :value="content"
+                        @input="onContentChange"
+                    />
+                    <view class="mt-1 px-4 w-full flex items-center justify-between">
+                        <text class="text-sm text-red-500">
+                            {{ contentErrorMsg }}
+                        </text>
+                        <text class="text-sm text-secondary-foreground">
+                            {{ content.length }}/200
+                        </text>
+                    </view>
+                </view>
+
+                <view class="flex flex-col gap-y-3 items-center">
+                    <image
+                        src="https://cqminiv2-imgs.oss-cn-chengdu.aliyuncs.com/official/user%20group%20qr.png"
+                        class="w-[220px] rounded-2xl"
+                        @click="previewImg"
+                    />
                     <text class="text-sm text-secondary-foreground">
-                        {{content.length}}/200
+                        加入用户反馈群，获得更及时的开发者回复
                     </text>
                 </view>
             </view>
+        </scroll-view>
 
-            <cus-button
-                class="mt-4"
-                :variant="isSubmitting ? 'loading' : 'primary'"
-                @click="submitFeedback"
-            >
-                提交反馈
-            </cus-button>
-        </view>
+        <cus-button
+            class="my-4"
+            :variant="isSubmitting ? 'loading' : 'primary'"
+            @click="submitFeedback"
+        >
+            提交反馈
+        </cus-button>
     </cus-page>
 </template>

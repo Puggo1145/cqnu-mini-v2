@@ -28,7 +28,7 @@ export const getAcademicDetails = async (target: keyof typeof queryTarget) => {
         return resolveAcademicDetails(res.data as OriginalAcademicDetails[]);
     } catch {
         uni.showToast({
-            title: "网络错误",
+            title: "校园门户错误，请重试",
             icon: "error",
         })
 

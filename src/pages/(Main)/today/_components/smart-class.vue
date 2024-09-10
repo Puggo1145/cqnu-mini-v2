@@ -81,7 +81,11 @@ function goToSchedule() {
                     </text>
                 </view>
                 <view class="w-full flex items-center justify-between">
-                    <text class="text-3xl font-bold leading-none flex-1 line-clamp-1">
+                    <text :class="[
+                        'font-bold leading-none flex-1 line-clamp-1 text-3xl',
+                        props.courseOfToday[0].name.length > 6 && 'text-2xl',
+                        props.courseOfToday[0].name.length > 8 && 'text-xl',
+                    ]">
                         {{ props.courseOfToday[0].name }}
                     </text>
                     <text class="text-2xl font-bold leading-none w-[96px] text-right">
@@ -109,7 +113,7 @@ function goToSchedule() {
                 {{ item.name }}
             </text>
             <text class="text-sm">
-                {{ baseConfigs.courseStartTime[item.start_time] }}
+                {{ baseConfigs.courseStartTime[item.start_time - 1] }}
             </text>
         </view>
     </scroll-view>

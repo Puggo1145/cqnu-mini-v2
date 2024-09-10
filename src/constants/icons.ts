@@ -7,7 +7,8 @@ import nameSecondary from "@/static/icons/name-secondary.svg"
 import loadingBlack from "@/static/icons/loading-black.svg"
 import loadingWhite from "@/static/icons/loading-white.svg"
 import notification from "@/static/icons/notification.svg"
-import me from "@/static/icons/me.svg"
+// import me from "@/static/icons/me.svg"
+import setting from "@/static/icons/setting.svg"
 import plus from "@/static/icons/plus.svg"
 import search from "@/static/icons/search.svg"
 import calendar from "@/static/icons/calendar.svg"
@@ -24,6 +25,7 @@ import switchWhite from "@/static/icons/switch-white.svg"
 import visible from "@/static/icons/visible.svg"
 import invisible from "@/static/icons/invisible.svg"
 import announcement from "@/static/icons/announcement.svg"
+import code from "@/static/icons/code.svg"
 
 import back from "@/static/icons/back.svg"
 import rightSecondary from "@/static/icons/right-secondary.svg"
@@ -61,7 +63,8 @@ const icons = {
     loadingBlack,
     loadingWhite,
     notification,
-    me,
+    // me,
+    setting,
     search,
     plus,
     rightSecondary,
@@ -81,6 +84,7 @@ const icons = {
     visible,
     invisible,
     announcement,
+    code,
     study: {
         transcript: studyTranscript,
         schedule: studySchedule,

@@ -13,7 +13,7 @@ const functionBtns = {
     //     url: "/notification"
     // },
     me: {
-        icon: icons.me,
+        icon: icons.setting,
         url: "/pages/(Main)/me/page"
     }
 }

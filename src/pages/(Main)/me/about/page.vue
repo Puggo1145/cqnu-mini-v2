@@ -24,7 +24,7 @@ import { developers, contributors } from '@/constants/about';
                 />
                 <view class="flex flex-col">
                     <text class="font-bold">智慧重师</text>
-                    <text class="text-sm text-secondary-foreground">v2.0.0 Alpha</text>
+                    <text class="text-sm text-secondary-foreground">v2.0.6 Beta</text>
                 </view>
             </view>
             <view class="mt-9">
@@ -57,7 +57,7 @@ import { developers, contributors } from '@/constants/about';
                 <view
                     v-for="contributor in contributors"
                     :key="contributor"
-                    class="w-full rounded-xl bg-secondary flex flex-col p-4"
+                    class="w-full rounded-xl bg-secondary flex flex-col p-4 mt-3"
                 >
                     <text class="text-sm font-bold">
                         {{ contributor }}

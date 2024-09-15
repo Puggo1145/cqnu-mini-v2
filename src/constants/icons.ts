@@ -26,7 +26,7 @@ import visible from "@/static/icons/visible.svg"
 import invisible from "@/static/icons/invisible.svg"
 import announcement from "@/static/icons/announcement.svg"
 import code from "@/static/icons/code.svg"
-
+import more from "@/static/icons/more.svg"
 import back from "@/static/icons/back.svg"
 import rightSecondary from "@/static/icons/right-secondary.svg"
 import rightWhite from "@/static/icons/right-white.svg"
@@ -85,6 +85,7 @@ const icons = {
     invisible,
     announcement,
     code,
+    more,
     study: {
         transcript: studyTranscript,
         schedule: studySchedule,

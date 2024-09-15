@@ -13,6 +13,7 @@ interface Props {
     mode?: "selector" | "time" | "date" | "multiSelector" | "region"
     value: number | string | Date;
     range?: any[];
+    rangeKey?: string;
     start?: any;
     end?: any;
     fieldName?: string;
@@ -81,6 +82,7 @@ defineExpose({ showError, hasSelected });
                 :mode="props.mode"
                 :value="props.value"
                 :range="props.range"
+                :range-key="props.rangeKey"
                 :start="props.start"
                 :end="props.end"
                 @change="emitChange"
@@ -100,20 +102,28 @@ defineExpose({ showError, hasSelected });
                         {{ placeholder }}
                     </text>
                 </view>
-                <!-- 直接显示 -->
+                <!-- 携带 rangeKey -->
                 <view
-                    v-else
+                    v-if="props.range && props.rangeKey"
                     class="size-full"
                 >
                     <text :class="[
                         props.variant === 'primary' && 'leading-[58px]',
                         props.variant === 'mini' && 'leading-[36px] mr-8 line-clamp-1'
                     ]">
-                        {{
-                            props.range
-                                ? props.range[props.value as number]
-                                : props.value
-                        }}
+                        {{ props.range[props.value as number][props.rangeKey] }}
+                    </text>
+                </view>
+                <!-- 直接显示 -->
+                <view
+                    v-else-if="props.range"
+                    class="size-full"
+                >
+                    <text :class="[
+                        props.variant === 'primary' && 'leading-[58px]',
+                        props.variant === 'mini' && 'leading-[36px] mr-8 line-clamp-1'
+                    ]">
+                        {{ props.range[props.value as number] }}
                     </text>
                 </view>
             </picker>

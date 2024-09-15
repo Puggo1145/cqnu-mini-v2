@@ -15,7 +15,7 @@ import { uploadImages } from "@/api/oss";
 import { createRatingItem } from '@/api/rating';
 // hooks
 import useCreateRatingItem from '@/hooks/useCreateRatingItem';
-import useFetchCreateRatingItemTags from '@/hooks/useFetchCreateRatingItemTags';
+import useFetchRatingItemTags from '@/hooks/useFetchRatingItemTags';
 // constants
 import { baseConfigs } from '@/constants/baseConfig';
 // static
@@ -25,7 +25,7 @@ import type { Tag } from '@/components/tag-selector.vue';
 
 
 // 选择标签
-const { tags, isFetching, error } = useFetchCreateRatingItemTags();
+const { tags, isFetching, error } = useFetchRatingItemTags();
 const selectedTag = ref<Tag[]>([]);
 
 // 创建评分对象

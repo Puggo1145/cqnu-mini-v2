@@ -5,7 +5,7 @@ import { getCreateRatingItemTags } from "@/api/rating";
 import type { Tag } from "@/components/tag-selector.vue";
 
 
-const useFetchCreateRatingItemTags = () => {
+const useFetchRatingItemTags = () => {
     const tags = ref<Tag[]>([]);
     const isFetching = ref(false);
     const error = ref(false);
@@ -36,4 +36,4 @@ const useFetchCreateRatingItemTags = () => {
     }
 }
 
-export default useFetchCreateRatingItemTags;
+export default useFetchRatingItemTags;

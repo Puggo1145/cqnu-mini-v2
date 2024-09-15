@@ -37,16 +37,16 @@ const hasSelected = ref(false); // picker 是否被选择过，控制 placeholde
 const emit = defineEmits(['change']);
 function emitChange(e: Event) {
     // 非普通 selector 模式下，直接返回 value
-    if (props.mode !== 'selector' ) {
+    if (props.mode !== 'selector') {
         // @ts-expect-error uniapp 没有标注 Event 类型
-        return emit('change', {value: e.detail.value});
+        return emit('change', { value: e.detail.value });
     }
-    
+
     emit('change', hasSelected.value
         // @ts-expect-error uniapp 没有标注 Event 类型
-        ? {value: Number(e.detail.value)} 
+        ? { value: Number(e.detail.value) }
         // @ts-expect-error uniapp 没有标注 Event 类型
-        : {value: Number(e.detail.value), hasSelected: props.fieldName}
+        : { value: Number(e.detail.value), hasSelected: props.fieldName }
     );
     hasSelected.value = true; // 如果 picker 被选择过，placeholder 就不再显示
 }
@@ -71,7 +71,11 @@ defineExpose({ showError, hasSelected });
         ]"
     >
         <view class="flex-1 h-full flex items-center gap-3">
-            <image v-if="props.icon" :src="props.icon" class="size-6" />
+            <image
+                v-if="props.icon"
+                :src="props.icon"
+                class="size-6"
+            />
             <picker
                 class="flex-1 h-full"
                 :mode="props.mode"
@@ -82,8 +86,8 @@ defineExpose({ showError, hasSelected });
                 @change="emitChange"
             >
                 <!-- 有模拟 placeholder -->
-                <view 
-                    v-if="placeholder && !hasSelected" 
+                <view
+                    v-if="placeholder && !hasSelected"
                     class="size-full"
                 >
                     <text
@@ -97,32 +101,41 @@ defineExpose({ showError, hasSelected });
                     </text>
                 </view>
                 <!-- 直接显示 -->
-                <view v-else class="size-full">
+                <view
+                    v-else
+                    class="size-full"
+                >
                     <text :class="[
                         props.variant === 'primary' && 'leading-[58px]',
                         props.variant === 'mini' && 'leading-[36px] mr-8 line-clamp-1'
                     ]">
-                        {{ 
-                            props.range 
-                            ? props.range[props.value as number] 
-                            : props.value
+                        {{
+                            props.range
+                                ? props.range[props.value as number]
+                                : props.value
                         }}
                     </text>
                 </view>
             </picker>
         </view>
 
-        <view 
+        <view
             class="pointer-events-none absolute overflow-hidden top-1/2 -translate-y-1/2 right-3"
             :class="[
                 props.variant === 'primary' && 'size-6',
                 props.variant === 'mini' && 'size-4'
             ]"
         >
-            <image :src="icons.down" class="size-full" />
+            <image
+                :src="icons.down"
+                class="size-full"
+            />
         </view>
     </view>
-    <text v-if="errorMessage" class="text-destructive text-xs mt-2">
+    <text
+        v-if="errorMessage"
+        class="text-destructive text-xs mt-2"
+    >
         {{ errorMessage }}
     </text>
 </template>

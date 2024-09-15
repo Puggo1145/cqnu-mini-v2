@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
 import titleDesc from '@/components/title-desc.vue';
@@ -8,7 +8,13 @@ import cusSelect from '@/components/cus-select.vue';
 import cusInput from '@/components/cus-input.vue';
 import tagSelector from '@/components/tag-selector.vue';
 import cusButton from '@/components/cus-button.vue';
+// zod
+import { ZodError, z } from "zod";
+// api
+import { uploadImages } from "@/api/oss";
+import { createRatingItem } from '@/api/rating';
 // hooks
+import useCreateRatingItem from '@/hooks/useCreateRatingItem';
 import useFetchCreateRatingItemTags from '@/hooks/useFetchCreateRatingItemTags';
 // constants
 import { baseConfigs } from '@/constants/baseConfig';
@@ -18,31 +24,97 @@ import icons from '@/constants/icons';
 import type { Tag } from '@/components/tag-selector.vue';
 
 
-// 选中的图片
-const selectedFoodImage = ref<string>();
-
-// 选择食堂或商业街
-const selectedCanteenIndex = ref(0);
-
-// 填写商家名
-const merchantName = ref('');
-const merchantNameRef = ref();
-
-// 填写美食名
-const foodName = ref('');
-const foodNameRef = ref();
-
-// 填写价格
-const price = ref('');
-const priceRef = ref();
-
 // 选择标签
 const { tags, isFetching, error } = useFetchCreateRatingItemTags();
 const selectedTag = ref<Tag[]>([]);
 
-// form
-function handleSubmitFoos() {
+// 创建评分对象
+const {
+    selectedFoodImage,
+    selectedCanteenIndex,
+    merchantName,
+    merchantNameRef,
+    foodName,
+    foodNameRef,
+    price,
+    priceRef,
+} = useCreateRatingItem();
 
+const isUploading = ref(false);
+
+const createRatingItemSchema = z.object({
+    selectedFoodImage: z.string(),
+    selectedCanteenIndex: z.number(),
+    merchantName: z.string().min(1).max(16),
+    foodName: z.string().min(1).max(16),
+    price: z.number().min(1).max(1000),
+    tagId: z.number()
+});
+const handleSubmitRatingItem = async () => {
+    isUploading.value = true;
+
+    try {
+        // 检查表单数据是否完整
+        const checkedForm = createRatingItemSchema.parse({
+            selectedFoodImage: selectedFoodImage.value,
+            selectedCanteenIndex: selectedCanteenIndex.value,
+            merchantName: merchantName.value,
+            foodName: foodName.value,
+            price: Number(price.value),
+            tagId: selectedTag.value[0]?.id,
+        });
+
+
+        // 上传图片
+        const imgUrl = await uploadImages({
+            uploadFile: checkedForm.selectedFoodImage,
+            bucket: "cqnu-v2-img",
+            objectName: "rating-item",
+        });
+        if (!imgUrl) return;
+
+
+        // 创建评分对象
+        const createRatingItemRes = await createRatingItem({
+            name: checkedForm.foodName,
+            price: checkedForm.price,
+            canteenName: baseConfigs.canteens[checkedForm.selectedCanteenIndex],
+            diningRoom: checkedForm.merchantName,
+            imageUrl: imgUrl,
+            tagId: selectedTag.value[0]?.id,
+        });
+
+        if (createRatingItemRes.ok) {
+            uni.showToast({
+                title: "创建成功",
+                icon: "success"
+            })
+
+            setTimeout(() => {
+                uni.navigateBack();
+            }, 1500);
+        };
+    } catch (err) {
+        if (err instanceof ZodError) {
+            err.errors.forEach(error => {
+                const errorTarget = error.path[0];
+
+                if (errorTarget === 'selectedFoodImage') {
+                    uni.showToast({ title: "请上传美食图片", icon: 'none' })
+                } else if (errorTarget === 'merchantName') {
+                    merchantNameRef.value.showError("商家名长度应为 1-16 个字符");
+                } else if (errorTarget === 'foodName') {
+                    foodNameRef.value.showError("美食名长度应为 1-16 个字符");
+                } else if (errorTarget === 'price') {
+                    priceRef.value.showError("价格应在 1-1000 之间");
+                } else if (errorTarget === 'tagId') {
+                    uni.showToast({ title: "请选择标签", icon: 'none' })
+                }
+            })
+        }
+    } finally {
+        isUploading.value = false;
+    }
 }
 </script>
 
@@ -81,10 +153,10 @@ function handleSubmitFoos() {
                     </view>
                 </image-uploader>
                 <cus-select
+                    ref="selectedCanteenIndexRef"
                     field-name="食堂"
                     :value="selectedCanteenIndex"
                     :range="baseConfigs.canteens"
-                    placeholder="请选择食堂或商业街"
                     @change="e => selectedCanteenIndex = e.value"
                 />
                 <cus-input
@@ -120,7 +192,12 @@ function handleSubmitFoos() {
                 </view>
             </view>
         </scroll-view>
-        <cus-button class="mb-6">
+        <cus-button
+            class="mb-6"
+            @click="handleSubmitRatingItem"
+            :variant="isUploading ? 'loading' : 'primary'"
+            :disabled="isUploading"
+        >
             创建
         </cus-button>
     </cus-page>

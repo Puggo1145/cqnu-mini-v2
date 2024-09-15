@@ -22,5 +22,6 @@ export const baseConfigs = {
         "二食堂",
         "三食堂",
         "南门商业街",
+        "北门小吃街",
     ]
 }

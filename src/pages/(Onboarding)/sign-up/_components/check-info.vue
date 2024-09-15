@@ -18,6 +18,7 @@ const isSigningUp = ref(false);
 
 async function goToSignUpProcess() {
     isSigningUp.value = true;
+    
 
     const encryptedLinker = encryptLinker(stores.linker);
 

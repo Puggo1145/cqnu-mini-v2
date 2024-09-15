@@ -3,6 +3,8 @@ import urls from "../../constants/urls"
 import { resolveStudentInfo } from "../../utils/studentInfoHandler"
 
 
+// 研究生和本科生教务系统是独立的，默认使用本科生系统进行尝试
+
 export interface OriginalStudentInfo {
     xh: string // 学号
     pyccdm: string // 学生身份（本科 ｜ 研究生）
@@ -26,9 +28,9 @@ export const getStudentInfo = async () => {
         const resolvedStudentInfo = resolveStudentInfo((res.data as OriginalStudentInfo));
 
         return resolvedStudentInfo;
-    } catch {
+    } catch (err) {
         uni.showToast({
-            title: "校园门户错误，请重试",
+            title: (err as Error).message || "校园门户错误，请重试",
         })
 
         return null;

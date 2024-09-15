@@ -18,7 +18,7 @@ const {
 </script>
 
 <template>
-    <view class="w-full bg-primary/15 rounded-2xl mb-3 flex items-center gap-x-3 p-4">
+    <view v-if="content" class="w-full bg-primary/15 rounded-2xl mb-3 flex items-center gap-x-3 p-4">
         <image
             :src="icons.announcement"
             class="size-6"

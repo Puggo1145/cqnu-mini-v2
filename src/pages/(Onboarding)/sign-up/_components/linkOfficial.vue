@@ -17,7 +17,7 @@ import { useSignupInfo } from '@/stores/signup-info';
 import { linkOfficialTexts } from '@/constants/signup/signup-texts';
 
 
-// 校园官网验证码和登陆数据对象
+// 校园官网验证码和登陆数据对象 //////////////////////////////////////////
 const {
     authCode,
     dataObj,
@@ -34,7 +34,7 @@ const isSignInAllowed = computed(() =>
 );
 
 
-// 登陆官网逻辑
+// 登陆官网逻辑 //////////////////////////////////////////
 const stores = useSignupInfo();
 
 // 登录成功后的回调

@@ -29,7 +29,6 @@ export const getStudentInfo = async () => {
     } catch {
         uni.showToast({
             title: "校园门户错误，请重试",
-            icon: "error",
         })
 
         return null;

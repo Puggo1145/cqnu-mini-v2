@@ -1,110 +1,73 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { computed } from 'vue';
 // components
 import titleDesc from '@/components/title-desc.vue';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
-// linkOfficial
-import LinkOfficial from '@/utils/link-official';
-import { linkOfficialTexts } from '@/constants/signup/signup-texts';
+// api
+import { getStudentInfo } from '@/utils/link-official';
+// constants
 import { identityMapper } from '@/constants/signup/campus-info';
-// stores
+// hooks
+import useFetchOfficialAuthCode from '@/hooks/useFetchOfficialAuthCode';
+import useLinkOfficial from '@/hooks/useLinkOfficial';
+// store
 import { useSignupInfo } from '@/stores/signup-info';
-// zod
-import { ZodError, z } from "zod";
+// linkOfficial
+import { linkOfficialTexts } from '@/constants/signup/signup-texts';
 
 
-const captchaBase64 = ref<string>('');
-const authCode = ref<string>('');
-const dataObj = ref();
+// 校园官网验证码和登陆数据对象
+const {
+    authCode,
+    dataObj,
+    captchaBase64,
+    refreshAuthCode,
+} = useFetchOfficialAuthCode();
 
-async function refreshAuthCode() {
-    authCode.value = '';
-    const data = await LinkOfficial.getSignInSessionAndAuthCode();
-    if (data) {
-        captchaBase64.value = "data:image/png;base64," + data.authCodeImg;
-        dataObj.value = data.dataObj;
-    }
-}
-onMounted(async () => {
-    // 清除教务系统 cookie 缓存
-    await refreshAuthCode();
-})
+// 登陆按钮是否 disabled
+const isSignInAllowed = computed(() =>
+    captchaBase64.value
+    && stores.studentId.length > 0
+    && stores.linker.length > 0
+    && authCode.value.length > 0
+);
 
 
+// 登陆官网逻辑
 const stores = useSignupInfo();
-const studentIdInputRef = ref();
-const passwordInputRef = ref();
-const authCodeInputRef = ref();
-const isLinkingOfficial = ref(false);
+
+// 登录成功后的回调
 const emit = defineEmits(['update:current']);
+async function syncStudentInfo() {
+    const userInfoRes = await getStudentInfo();
 
-const linkOfficialSchema = z.object({
-    studentId: z.string()
-        .trim()
-        .length(13, "请输入 13 位学号"),
-    password: z.string()
-        .trim()
-        .min(1, "密码不能为空"),
-    authCode: z.string()
-        .trim()
-        .min(1, "验证码不能为空"),
-});
+    if (userInfoRes) {
+        // 设定用户身份
+        stores.setIdentity(identityMapper[userInfoRes.identity]);
+        stores.setFaculty(userInfoRes.faculty);
+        stores.setMajor(userInfoRes.major);
+        stores.setStuClass(userInfoRes.stuClass);
 
-async function handleLinkOfficial() {
-    isLinkingOfficial.value = true;
-
-    try {
-        // 1. 验证表单
-        const form = linkOfficialSchema.parse({
-            studentId: stores.studentId,
-            password: stores.linker,
-            authCode: authCode.value,
-        });
-
-        // 2. 登录官网
-        const signInRes = await LinkOfficial.signInToOfficial(
-            form.studentId,
-            form.password,
-            form.authCode,
-            dataObj.value,
-        )
-        if (!signInRes.ok) {
-            await refreshAuthCode();
-            isLinkingOfficial.value = false;
-
-            return;
-        }
-
-        // 3. 获取学生信息
-        const userInfoRes = await LinkOfficial.getStudentInfo();
-        if (userInfoRes) {
-            // 设定用户身份
-            stores.setIdentity(identityMapper[userInfoRes.identity]);
-            stores.setFaculty(userInfoRes.faculty);
-            stores.setMajor(userInfoRes.major);
-            stores.setStuClass(userInfoRes.stuClass);
-
-            // 4. 进入下一页
-            emit('update:current', 1);
-        }
-    } catch (err) {
-        if (err instanceof ZodError) {
-            // 显示错误消息
-            err.errors.forEach((error) => {
-                if (error.path[0] === 'studentId') {
-                    studentIdInputRef.value.showError(error.message);
-                } else if (error.path[0] === 'password') {
-                    passwordInputRef.value.showError(error.message);
-                } else if (error.path[0] === 'authCode') {
-                    authCodeInputRef.value.showError(error.message);
-                }
-            });
-        }
-    } finally {
-        isLinkingOfficial.value = false;
+        // 进入下一页
+        emit('update:current', 1);
+    } else {
+        await refreshAuthCode();
     }
 }
+
+const {
+    studentIdInputRef,
+    passwordInputRef,
+    authCodeInputRef,
+    isLinkingOfficial,
+    submitLinkOfficialSignIn,
+} = useLinkOfficial({
+    dataObj: dataObj,
+    authCode: authCode,
+    onSuccess: syncStudentInfo,
+    onFail: refreshAuthCode,
+});
 </script>
 
 <template>
@@ -141,9 +104,9 @@ async function handleLinkOfficial() {
             >
                 <text
                     class="font-bold"
-                    v-if="captchaBase64 === ''"
+                    v-if="captchaBase64.length === 0"
                 >
-                    手动刷新验证码
+                    点击刷新验证码
                 </text>
                 <image
                     v-else
@@ -154,16 +117,14 @@ async function handleLinkOfficial() {
         </view>
         <cusButton
             class="w-full"
-            :variant="isLinkingOfficial ? 'loading' : 'primary'"
-            @click="handleLinkOfficial"
+            :variant="isLinkingOfficial
+                ? 'loading'
+                : isSignInAllowed ? 'primary' : 'muted'
+                "
+            :disabled="!isSignInAllowed"
+            @click="submitLinkOfficialSignIn"
         >
             {{ isLinkingOfficial ? "" : "绑定" }}
-        </cusButton>
-        <cusButton
-            v-if="stores.faculty"
-            variant="ghost"
-        >
-            继续
         </cusButton>
     </view>
 </template>

@@ -9,8 +9,8 @@ const campusInfoTexts = {
 }
 
 const linkOfficialTexts = {
-    title: "使用校园官网账号登陆",
-    desc: "绑定校园官网账号，把信息整理交给我们！"
+    title: "使用校园官网账号注册",
+    desc: "绑定校园官网账号，把信息整理交给我们！\n 近期校园官网要求修改密码，您需要先在官网完成密码修改以正常注册小程序"
 }
 
 export {

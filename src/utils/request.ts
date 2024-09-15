@@ -17,7 +17,8 @@ const Request = async <T>(
     route: string,
     method: Methods,
     data: any,
-    showLoading?: boolean // 该请求是否显示 loading
+    showLoading?: boolean, // 该请求是否显示 loading
+    customFailMessage?: string
 ): Promise<ResponseSuccess<T> | ResponseError> => {
     // 检查是否存在相同请求
     const existingRequest = requestManager.checkExistingRequest(method, route, data);
@@ -68,7 +69,7 @@ const Request = async <T>(
             },
             fail: (res) => {
                 uni.showToast({
-                    title: "网络错误",
+                    title: customFailMessage || "网络错误",
                     icon: "error"
                 });
 
@@ -103,6 +104,7 @@ class RequestBuilder<T> {
     private method: Methods;
     private data: any;
     private showLoading: boolean
+    private customFailMessage: string | undefined;
     private queryParams: Record<string, any>;
 
     constructor(
@@ -110,13 +112,15 @@ class RequestBuilder<T> {
         route: string,
         method: Methods,
         data: any,
-        showLoading: boolean = false
+        showLoading: boolean = false,
+        customFailMessage: string | undefined = undefined
     ) {
         this.where = where;
         this.method = method;
         this.route = route;
         this.data = data;
         this.showLoading = showLoading;
+        this.customFailMessage = customFailMessage;
         this.queryParams = {};
     }
 
@@ -154,7 +158,14 @@ class RequestBuilder<T> {
             import.meta.env.VITE_BASE_URL :
             import.meta.env.VITE_LINKOFFICIAL_URL
 
-        return Request<T>(targetURL, this.route + queryString, this.method, this.data, this.showLoading);
+        return Request<T>(
+            targetURL, 
+            this.route + queryString, 
+            this.method, 
+            this.data, 
+            this.showLoading,
+            this.customFailMessage
+        );
     }
 }
 
@@ -165,6 +176,7 @@ interface RequestOptions {
     route: string;
     showLoading?: boolean;
     data?: any;
+    customFailMessage?: string;
 }
 const request:
     Record<Methods, <T>({ where, route, showLoading, data }: RequestOptions) => RequestBuilder<T>>
@@ -172,33 +184,37 @@ const request:
     GET: ({
         where = "base",
         route,
-        showLoading
+        showLoading,
+        customFailMessage
     }) => {
-        return new RequestBuilder(where, route, 'GET', {}, showLoading)
+        return new RequestBuilder(where, route, 'GET', {}, showLoading, customFailMessage)
     },
     POST: ({
         where = "base",
         route,
         data,
-        showLoading
+        showLoading,
+        customFailMessage
     }) => {
-        return new RequestBuilder(where, route, 'POST', data, showLoading)
+        return new RequestBuilder(where, route, 'POST', data, showLoading, customFailMessage)
     },
     PUT: ({
         where = "base",
         route,
         data,
-        showLoading
+        showLoading,
+        customFailMessage
     }) => {
-        return new RequestBuilder(where, route, 'PUT', data, showLoading)
+        return new RequestBuilder(where, route, 'PUT', data, showLoading, customFailMessage)
     },
     DELETE: ({
         where = "base",
         route,
         data,
-        showLoading
+        showLoading,
+        customFailMessage
     }) => {
-        return new RequestBuilder(where, route, 'DELETE', data, showLoading)
+        return new RequestBuilder(where, route, 'DELETE', data, showLoading, customFailMessage)
     },
 };
 

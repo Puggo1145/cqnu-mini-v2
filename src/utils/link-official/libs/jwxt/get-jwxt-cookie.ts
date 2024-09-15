@@ -9,26 +9,23 @@ export const getJwxtCookie = async () => {
         return jwxtCookie
     };
 
-    try {
-        const cookie = linkOfficialAuth.mainCookie;
-        const res = await request.POST({
-            where: "linkOfficial",
-            route: "/getJwxtCookie",
-            data: {
-                cookie
-            }
-        })
-            .send();
+    const cookie = linkOfficialAuth.mainCookie;
 
-        if (res.ok) {
-            linkOfficialAuth.setJwxtCookie(res.data.data as string);
-            return res.data.data;
-        }
-    } catch (err) {
-        uni.showToast({
-            title: "校园门户无响应，请重试",
-        });
+    const res = await request.POST({
+        where: "linkOfficial",
+        route: "/getJwxtCookie",
+        data: {
+            cookie
+        },
+        customFailMessage: "校园门户错误"
+    })
+        .send();
 
-        return null;
+    if (res.ok) {
+        linkOfficialAuth.setJwxtCookie(res.data.data as string);
+
+        return res.data.data as string;
+    } else {
+        return false;
     }
 }

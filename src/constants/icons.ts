@@ -49,6 +49,8 @@ import feedback from '@/static/icons/feedback.svg'
 // bill
 import alipay from '@/static/icons/alipay.svg'
 import wxpay from '@/static/icons/wxpay.svg'
+// rating
+import ratingStar from '@/static/icons/rating-star.svg'
 
 
 const icons = {
@@ -104,6 +106,9 @@ const icons = {
     bill: {
         alipay,
         wxpay,
+    },
+    rating: {
+        star: ratingStar,
     }
 };
 

@@ -10,22 +10,22 @@ const props = defineProps<ImageUploaderProps>();
 const selectedImages = ref<string[] | string>();
 const emit = defineEmits(['select']);
 
-function onClick() {
-    uni.chooseImage({
+async function onClick() {
+    // 选图
+    const res = await uni.chooseImage({
         count: props.maxCount,
         sizeType: ['compressed'],
         sourceType: ['album', 'camera'],
-        success(res) {
-            if (props.maxCount === 1) {
-                selectedImages.value = res.tempFilePaths[0];
-                emit('select', selectedImages.value);
-                return;
-            } else {
-                selectedImages.value = res.tempFilePaths;
-                emit('select', selectedImages.value);
-            }
-        }
     });
+
+    if (props.maxCount === 1) {
+        selectedImages.value = res.tempFilePaths[0];
+        emit('select', selectedImages.value);
+        return;
+    } else {
+        selectedImages.value = res.tempFilePaths;
+        emit('select', selectedImages.value);
+    }
 }
 </script>
 

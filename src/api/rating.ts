@@ -1,7 +1,10 @@
 import request from "@/utils/request";
 // types
 import type { Tag } from "@/components/tag-selector.vue";
-import type { MyResponse } from "@/types/response";
+import type { PageResponse } from "@/types/response";
+import type { StarRatio } from "@/pages/(Main)/service/rating/item/_components/item-info.vue";
+import type { TagRespDto } from "@/pages/(Main)/service/rating/item/_components/item-info.vue";
+import type { IRatingItemDetailInfo } from "@/pages/(Main)/service/rating/item/_components/item-info.vue";
 
 
 type GetCreateRatingItemTagsResponse = {
@@ -28,7 +31,7 @@ interface CreateRatingItemParams {
     tagId: number;
 }
 export const createRatingItem = async (params: CreateRatingItemParams) => {
-    const res = await request.POST<MyResponse<boolean>>({
+    const res = await request.POST<boolean>({
         route: "business/review/v1/add-dish",
         data: params
     })
@@ -55,4 +58,65 @@ export const getHotRatingItems = async () => {
         .send();
 
     return res;
+}
+
+
+// 获取为你推荐菜品对象
+interface GetRecommendRatingItemsParams {
+    tagName: string;
+    canteenName: string;
+    rating: number;
+    priceSort: "" | "asc" | "desc";
+    current: number;
+    pageSize: number;
+}
+export type FoodItem = {
+    id: number;
+    name: string;
+    userId: string;
+    price: number;
+    description: string;
+    canteenName: string;
+    diningRoom: string;
+    imageUrl: string;
+    createdTime: string;
+    updatedTime: string;
+    tagList: Tag[];
+    ratingCount: number;
+    avgRating: number;
+    recentRatingCount: number;
+    weightRating: number;
+};
+export const getRecommendRatingItems = async (params: GetRecommendRatingItemsParams) => {
+    const res = await request.POST<PageResponse<FoodItem>>({
+        route: "business/review/v1/recommend",
+        data: params
+    })
+        .send();
+
+    return res;
+}
+
+
+export type RatingItemDetail = {
+    id: number;
+    name: string;
+    username: string;
+    price: number;
+    description: string;
+    canteenName: string;
+    diningRoom: string;
+    imageUrl: string;
+    starRatio: StarRatio;
+    ratingCount: number;
+    avgRating: number;
+    tagRespDtoList: TagRespDto[];
+}
+export const getRatingItemDetail = async (dishid: number) => {
+    const res = await request.GET<RatingItemDetail>({
+        route: `business/review/v1/dish/dishid=${dishid}`
+    })
+        .send();
+
+    return res; 
 }

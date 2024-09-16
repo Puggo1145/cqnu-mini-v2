@@ -4,7 +4,8 @@ import cusPage from '@/components/cus-page.vue';
 import ratingHeader from './_components/rating-header.vue';
 import ratingSubtitle from './_components/rating-subtitle.vue';
 import ratingHot from './_components/rating-hot.vue';
-import ratingRecommendation from './_components/rating-recommendation.vue';
+import ratingRecommendFilters from './_components/rating-recommend-filters.vue';
+import recommendItems from './_components/recommend-items.vue';
 </script>
 
 <template>
@@ -13,9 +14,15 @@ import ratingRecommendation from './_components/rating-recommendation.vue';
         padding-x="16"
     >
         <rating-header />
-        <rating-subtitle>当下热门</rating-subtitle>
-        <rating-hot />
-        <rating-subtitle>为你推荐</rating-subtitle>
-        <rating-recommendation />
+        <scroll-view
+            class="overflow-hidden flex-1"
+            scroll-y
+        >
+            <rating-subtitle>当下热门</rating-subtitle>
+            <rating-hot />
+            <rating-subtitle>为你推荐</rating-subtitle>
+            <rating-recommend-filters />
+            <recommend-items />
+        </scroll-view>
     </cus-page>
 </template>

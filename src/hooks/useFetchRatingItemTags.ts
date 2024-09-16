@@ -1,4 +1,6 @@
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
+// store
+import { useRatingRecommendationFilters } from "@/stores/rating/recommendation-filters";
 // api
 import { getCreateRatingItemTags } from "@/api/rating";
 // types
@@ -6,6 +8,8 @@ import type { Tag } from "@/components/tag-selector.vue";
 
 
 const useFetchRatingItemTags = () => {
+    const ratingRecommendationFilterStore = useRatingRecommendationFilters();
+
     const tags = ref<Tag[]>([]);
     const isFetching = ref(false);
     const error = ref(false);
@@ -18,6 +22,7 @@ const useFetchRatingItemTags = () => {
 
         if (res.ok) {
             tags.value = res.data.data[1];
+            ratingRecommendationFilterStore.selectedTag = [tags.value[0]];
         } else {
             error.value = true;
         }
@@ -27,12 +32,13 @@ const useFetchRatingItemTags = () => {
 
     onMounted(async () => {
         await handleFetchCreateRatingItemTags();
-    })
+    });
 
     return {
         tags,
         isFetching,
         error,
+        handleFetchCreateRatingItemTags
     }
 }
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 // components
 import tagSelector from '@/components/tag-selector.vue';
 import cusSelect from '@/components/cus-select.vue';
@@ -7,33 +7,20 @@ import cusSelect from '@/components/cus-select.vue';
 import icons from '@/constants/icons';
 // hooks
 import useFetchRatingItemTags from '@/hooks/useFetchRatingItemTags';
-// constants
-import { baseConfigs } from '@/constants/baseConfig';
-// types
-import type { Tag } from '@/components/tag-selector.vue';
+// store
+import { useRatingRecommendationFilters } from '@/stores/rating/recommendation-filters';
 
+
+// 筛选条件
+const ratingRecommendationFilterStore = useRatingRecommendationFilters();
 
 // 美食种类标签
 const {
     tags,
     isFetching,
-    error
+    error,
 } = useFetchRatingItemTags();
-const selectedTag = ref<Tag[]>([]);
 const isTagExpanded = ref(false);
-
-
-// 筛选条件
-const canteenOptions = ["所有食堂", ...baseConfigs.canteens]
-const priceSortOptions = [
-    { label: '全部', value: "" },
-    { label: '价格从高到低', value: "desc" },
-    { label: '价格从低到高', value: "asc" },
-];
-const ratingOptions = [
-    { label: '4分高分', value: 4 },
-    { label: '5分好评', value: 5 },
-]
 </script>
 
 <template>
@@ -45,10 +32,10 @@ const ratingOptions = [
             class="flex-1"
             mode="single"
             :tags="tags"
-            :selected-tags="selectedTag"
+            :selected-tags="ratingRecommendationFilterStore.selectedTag"
             :is-fetching="isFetching"
             :error="error"
-            @change="tag => selectedTag = tag"
+            @change="tag => ratingRecommendationFilterStore.selectedTag = tag"
         />
         <image
             :src="icons.more"
@@ -58,20 +45,23 @@ const ratingOptions = [
     <view class="mt-3 flex items-center gap-x-4">
         <cus-select
             variant="mini"
-            :value="0"
-            :range="canteenOptions"
+            :value="ratingRecommendationFilterStore.selectedCanteenIndex"
+            :range="ratingRecommendationFilterStore.canteenOptions"
+            @change="e => ratingRecommendationFilterStore.selectedCanteenIndex = e.value"
         />
         <cus-select
             variant="mini"
-            :value="0"
-            :range="priceSortOptions"
+            :value="ratingRecommendationFilterStore.selectedPriceSortIndex"
+            :range="ratingRecommendationFilterStore.priceSortOptions"
             rangeKey="label"
+            @change="e => ratingRecommendationFilterStore.selectedPriceSortIndex = e.value"
         />
         <cus-select
             variant="mini"
-            :value="0"
-            :range="ratingOptions"
+            :value="ratingRecommendationFilterStore.selectedRateIndex"
+            :range="ratingRecommendationFilterStore.ratingOptions"
             rangeKey="label"
+            @change="e => ratingRecommendationFilterStore.selectedRateIndex = e.value"
         />
     </view>
 </template>

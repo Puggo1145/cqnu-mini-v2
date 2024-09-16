@@ -13,7 +13,7 @@ function gotoCreateItem() {
 </script>
 
 <template>
-    <view class="flex items-center gap-x-3 mt-4">
+    <view class="flex items-center gap-x-3 mt-4 pb-3">
         <cus-input
             :icon="icons.search"
             input-style="!h-[52px]"

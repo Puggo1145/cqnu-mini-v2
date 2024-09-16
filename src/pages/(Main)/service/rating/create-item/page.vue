@@ -18,6 +18,8 @@ import useCreateRatingItem from '@/hooks/useCreateRatingItem';
 import useFetchRatingItemTags from '@/hooks/useFetchRatingItemTags';
 // constants
 import { baseConfigs } from '@/constants/baseConfig';
+// utils
+import compressImages from '@/utils/imageCompressor';
 // static
 import icons from '@/constants/icons';
 // types
@@ -25,7 +27,11 @@ import type { Tag } from '@/components/tag-selector.vue';
 
 
 // 选择标签
-const { tags, isFetching, error } = useFetchRatingItemTags();
+const { 
+    tags, 
+    isFetching, 
+    error,
+} = useFetchRatingItemTags();
 const selectedTag = ref<Tag[]>([]);
 
 // 创建评分对象
@@ -65,9 +71,11 @@ const handleSubmitRatingItem = async () => {
         });
 
 
+        const compressedImage = await compressImages(checkedForm.selectedFoodImage);
+
         // 上传图片
         const imgUrl = await uploadImages({
-            uploadFile: checkedForm.selectedFoodImage,
+            uploadFile: compressedImage,
             bucket: "cqnu-v2-img",
             objectName: "rating-item",
         });

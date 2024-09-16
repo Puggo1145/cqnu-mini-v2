@@ -25,7 +25,7 @@ onMounted(async () => await fetchHotRatingItem());
 
 <template>
     <scroll-view
-        class="w-full h-[221px] overflow-x-auto"
+        class="w-full h-[200px] overflow-x-auto"
         style="
             display: flex;
         "
@@ -33,7 +33,7 @@ onMounted(async () => await fetchHotRatingItem());
         enable-flex
     >
         <hot-status-box v-if="isFething">
-            <spinner />
+            <spinner size="medium" />
         </hot-status-box>
         <hot-status-box v-else-if="error">
             <text class="text-sm text-destructive">

@@ -65,8 +65,8 @@ const {
 } = useLinkOfficial({
     dataObj: dataObj,
     authCode: authCode,
-    studentId: studentId.value,
-    linker: linker.value,
+    studentId: studentId,
+    linker: linker,
     onSuccess: gotoBackPage,
     onFail: refreshAuthCode,
 });

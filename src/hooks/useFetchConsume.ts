@@ -38,10 +38,10 @@ export default function useFetchConsume() {
         isFetching.value = false;
     }
 
-    // onMounted(() => {
-    //     fetchConsume();
-    // });
-
+    onMounted(async () => {
+        await fetchConsume();
+    });
+    
     watch(() => userInfoStore.cardPwd, () => {
         fetchConsume();
     });

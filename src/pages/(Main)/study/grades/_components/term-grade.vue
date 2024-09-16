@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue';
 import spinner from '@/components/spinner.vue';
 // components
 import cusSelect from '@/components/cus-select.vue';
+import noData from '@/components/no-data.vue';
 // stores
 import useUserInfo from '@/stores/user-info';
 // link official
@@ -135,6 +136,16 @@ watch([gradeIndex, semesterIndex], getTranscript)
                 <spinner size="medium" />
                 <text class="text-sm text-gray-400">加载中</text>
             </view>
+
+            <no-data
+                v-else-if="!isTranscriptLoading && !transcript"
+                title="网络错误"
+                desc="请检查网络连接"
+                :action="getTranscript"
+                action-text="重试"
+                class-name="mt-[92px]"
+            />
+
             <view
                 v-else
                 v-for="(item, index) in transcriptSearchResult"

@@ -13,13 +13,10 @@ function gotoCreateItem() {
 </script>
 
 <template>
-    <view class="flex items-center gap-x-3 mt-4 pb-3">
-        <cus-input
-            :icon="icons.search"
-            input-style="!h-[52px]"
-            class="flex-1"
-            placeholder="推荐食物名称"
-        />
+    <view class="flex justify-between items-center gap-x-3 mt-4 pb-3">
+        <text class="text-3xl font-bold">
+            美食点评
+        </text>
         <cus-button
             variant="secondary"
             @click="gotoCreateItem"

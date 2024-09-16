@@ -1,18 +1,17 @@
 import { ref, onMounted } from "vue";
 // api
 import { getAnnouncement } from "@/api/user";
+// types
+import type { AnnoucementResponse } from "@/api/user";
 
 
 const useFetchAnnouncement = () => {
-    const content = ref<string | null>(null);
-    const error = ref(false);
+    const announcement = ref<AnnoucementResponse>();
 
     const handleFetchAnnouncement = async () => {
         const res = await getAnnouncement();
         if (res.ok) {
-            content.value = res.data.data.content;
-        } else {
-            error.value = true;
+            announcement.value = res.data.data;
         }
     }
 
@@ -21,8 +20,7 @@ const useFetchAnnouncement = () => {
     })
 
     return {
-        content,
-        error,
+        announcement,
     }
 };
 

@@ -16,6 +16,7 @@ interface Props {
     // 页面两侧边距 => 为了保证页面高度一致使用了 overflow-hidden，因此会裁切掉部分内容，需要酌情使用
     paddingX?: number | string; 
     className?: string;
+    backPage?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
     headerType: "default",
@@ -42,7 +43,15 @@ const backgroundStyle: Record<string, string> = {
 }
 
 
-const goBack = () => uni.navigateBack()
+const goBack = () => {
+    if (props.backPage) {
+        uni.navigateTo({
+            url: props.backPage
+        })
+    } else {
+        uni.navigateBack()
+    }
+}
 </script>
 
 <template>

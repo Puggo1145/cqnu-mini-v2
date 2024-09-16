@@ -24,16 +24,16 @@ const linkOfficialSchema = z.object({
 interface ILinkOfficial {
     dataObj: Ref<DataObj>,
     authCode: Ref<string>,
-    studentId?: string,
-    linker?: string,
+    studentId: Ref<string | undefined>,
+    linker: Ref<string | undefined>,
     onSuccess: () => Promise<void> | void,
     onFail: () => Promise<void>,
 }
 export default function useLinkOfficial({
     dataObj,
     authCode,
-    studentId = '',
-    linker = '',
+    studentId,
+    linker,
     onSuccess,
     onFail,
     
@@ -50,8 +50,8 @@ export default function useLinkOfficial({
         try {
             // 1. 验证表单
             const form = linkOfficialSchema.parse({
-                studentId: studentId,
-                password: linker,
+                studentId: studentId?.value,
+                password: linker?.value,
                 authCode: authCode.value,
             });
 

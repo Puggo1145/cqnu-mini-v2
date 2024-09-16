@@ -79,8 +79,14 @@ export const submitUserFeedback = async (params: FeedbackParams) => {
 }
 
 
+export type AnnoucementResponse = {
+    title: string;
+    content: string;
+    snippet: string;
+    severity: string;
+}
 export const getAnnouncement = async () => {
-    const res = await request.GET<{ content: string }>({
+    const res = await request.GET<AnnoucementResponse>({
         route: "user/v1/announcement/least"
     })
         .send();

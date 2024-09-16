@@ -61,28 +61,8 @@ const handleSubmitRatingItem = async () => {
     isUploading.value = true;
 
     try {
-        // 1. 检查菜品是否已经存在
-        const res = await checkRatingItem({
-            name: foodName.value,
-            canteenName: baseConfigs.canteens[selectedCanteenIndex.value],
-            diningRoom: merchantName.value,
-        });
-        if (res.ok) {
-            if (res.data.data) {
-                uni.showToast({
-                    title: "美食已存在",
-                    icon: "none"
-                });
-
-                uni.redirectTo({
-                    url: `/pages/(Main)/service/rating/item/page?id=${res.data.data}`
-                });
-
-                return;
-            }
-        }
-
-
+        
+        
         // 检查表单数据是否完整
         const checkedForm = createRatingItemSchema.parse({
             selectedFoodImage: selectedFoodImage.value,
@@ -93,10 +73,33 @@ const handleSubmitRatingItem = async () => {
             tagId: selectedTag.value[0]?.id,
         });
 
+        // 1. 检查菜品是否已经存在
+        const res = await checkRatingItem({
+            name: foodName.value,
+            canteenName: baseConfigs.canteens[selectedCanteenIndex.value],
+            diningRoom: merchantName.value,
+        });
+        if (res.ok) {
+            if (res.data.data) {
+                uni.showToast({
+                    title: "美食已存在，跳转到此美食",
+                    icon: "none"
+                });
 
+                setTimeout(() => {
+                    uni.redirectTo({
+                        url: `/pages/(Main)/service/rating/item/page?id=${res.data.data}`
+                    });
+                }, 1200);
+
+                return;
+            }
+        }
+
+        // 2. 压缩图片
         const compressedImage = await compressImages(checkedForm.selectedFoodImage);
 
-        // 上传图片
+        // 3. 上传图片
         const imgUrl = await uploadImages({
             uploadFile: compressedImage,
             bucket: "cqnu-v2-img",
@@ -105,7 +108,7 @@ const handleSubmitRatingItem = async () => {
         if (!imgUrl) return;
 
 
-        // 创建评分对象
+        // 4. 创建评分对象
         const createRatingItemRes = await createRatingItem({
             name: checkedForm.foodName,
             price: checkedForm.price,
@@ -115,7 +118,7 @@ const handleSubmitRatingItem = async () => {
             tagId: selectedTag.value[0]?.id,
         });
 
-        // 创建成功，跳转到创建的评分对象详情页
+        // 5. 创建成功，跳转到创建的评分对象详情页
         if (createRatingItemRes.ok) {
             uni.showToast({
                 title: "创建成功",

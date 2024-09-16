@@ -11,18 +11,19 @@ import recommendItemRating from './recommend-item-card/recommend-item-rating.vue
 import statusBox from './status-box.vue';
 import spinner from '@/components/spinner.vue';
 import cusButton from '@/components/cus-button.vue';
-// hooks
-import useFetchRecommendRating from '@/hooks/useFetchRecommendRating';
+// types
+import type { FoodItem } from '@/api/rating';
 
 
-const {
-    isFetching,
-    error,
-    isLoadComplete,
-    recommendItems,
-    fetchRecommendItems,
-    refresh
-} = useFetchRecommendRating();
+interface IRecommendRatingItemsProps {
+    isFetching: boolean;
+    error: boolean;
+    isLoadComplete: boolean;
+    recommendItems: FoodItem[];
+    refresh: () => void;
+}
+
+const props = defineProps<IRecommendRatingItemsProps>();
 
 
 function goToRatingItemDetail(id: number) {
@@ -34,26 +35,26 @@ function goToRatingItemDetail(id: number) {
 
 <template>
     <view class="mt-3">
-        <status-box v-if="isFetching">
+        <status-box v-if="props.isFetching">
             <spinner
                 class="mt-3"
                 size="medium"
             />
         </status-box>
 
-        <status-box v-if="!isFetching && recommendItems.length === 0">
+        <status-box v-if="!props.isFetching && props.recommendItems.length === 0">
             <text class="mt-3 text-sm text-secondary-foreground">
                 暂无相关推荐，快去创建一个吧！
             </text>
         </status-box>
 
-        <status-box v-if="error">
+        <status-box v-else-if="props.error">
             <text class="mt-3 text-sm text-secondary-foreground">
                 加载失败，请重试
             </text>
             <cus-button
                 variant="secondary"
-                @click="refresh"
+                @click="props.refresh"
             >
                 重试
             </cus-button>
@@ -62,7 +63,7 @@ function goToRatingItemDetail(id: number) {
 
         <recommend-item-card
             v-else
-            v-for="item in recommendItems"
+            v-for="item in props.recommendItems"
             :key="item.id"
             @click="goToRatingItemDetail(item.id)"
         >
@@ -94,10 +95,10 @@ function goToRatingItemDetail(id: number) {
             </recommend-item-body>
         </recommend-item-card>
         <view
-            v-if="recommendItems.length > 0"
+            v-if="props.recommendItems.length > 0"
             class="h-8 flex items-center justify-center text-sm text-secondary-foreground"
         >
-            {{ isLoadComplete ? "已经到底了" : "加载中" }}
+            {{ props.isLoadComplete ? "已经到底了" : "加载中" }}
         </view>
     </view>
 </template>

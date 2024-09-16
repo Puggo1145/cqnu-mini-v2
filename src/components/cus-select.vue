@@ -116,14 +116,18 @@ defineExpose({ showError, hasSelected });
                 </view>
                 <!-- 直接显示 -->
                 <view
-                    v-else-if="props.range"
+                    v-else
                     class="size-full"
                 >
                     <text :class="[
                         props.variant === 'primary' && 'leading-[58px]',
                         props.variant === 'mini' && 'leading-[36px] mr-8 line-clamp-1'
                     ]">
-                        {{ props.range[props.value as number] }}
+                        {{
+                            props.range
+                                ? props.range[props.value as number]
+                                : props.value
+                        }}
                     </text>
                 </view>
             </picker>

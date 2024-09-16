@@ -42,6 +42,17 @@ const emit = defineEmits(['update:current']);
 async function syncStudentInfo() {
     const userInfoRes = await getStudentInfo();
 
+    if (!userInfoRes) return;
+
+    if (!userInfoRes.faculty || !userInfoRes.major || !userInfoRes.stuClass) {
+        uni.showToast({
+            title: '暂未支持研究生系统，敬请期待',
+            icon: 'none',
+        });
+
+        return;
+    }
+
     if (userInfoRes) {
         // 设定用户身份
         stores.setIdentity(identityMapper[userInfoRes.identity]);
@@ -56,6 +67,9 @@ async function syncStudentInfo() {
     }
 }
 
+
+const studentId = computed(() => stores.studentId);
+const linker = computed(() => stores.linker);
 const { 
     studentIdInputRef,
     passwordInputRef,
@@ -65,8 +79,8 @@ const {
 } = useLinkOfficial({
     dataObj: dataObj,
     authCode: authCode,
-    studentId: stores.studentId,
-    linker: stores.linker,
+    studentId: studentId,
+    linker: linker,
     onSuccess: syncStudentInfo,
     onFail: refreshAuthCode,
 });

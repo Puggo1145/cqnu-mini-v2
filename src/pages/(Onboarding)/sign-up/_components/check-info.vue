@@ -16,9 +16,9 @@ const stores = useSignupInfo();
 
 const isSigningUp = ref(false);
 
+
 async function goToSignUpProcess() {
     isSigningUp.value = true;
-    
 
     const encryptedLinker = encryptLinker(stores.linker);
 
@@ -32,7 +32,7 @@ async function goToSignUpProcess() {
         major: stores.major!,
         stuClass: stores.stuClass!,
     });
-    
+
     if (res?.success) {
         uni.redirectTo({
             url: '/pages/(Onboarding)/process-sign-up/page'
@@ -45,11 +45,11 @@ async function goToSignUpProcess() {
 
 <template>
     <view class="flex flex-col gap-6">
-        <title-desc 
+        <title-desc
             title="请核对信息"
             desc="请核对您填写的信息，您当前依然可以返回修改。提交后，您将无法再修改这些信息"
         />
-        <cusButton 
+        <cusButton
             :variant="isSigningUp ? 'loading' : 'primary'"
             @click="goToSignUpProcess"
         >

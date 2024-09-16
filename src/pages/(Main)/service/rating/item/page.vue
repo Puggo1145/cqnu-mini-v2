@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import { onShow } from '@dcloudio/uni-app';
 // components
 import cusPage from '@/components/cus-page.vue';
 import itemContent from './_components/item-content.vue';
@@ -30,6 +31,9 @@ async function fetchData() {
 }
 
 onMounted(async () => {
+    await fetchData();
+})
+onShow(async () => {
     await fetchData();
 })
 </script>

@@ -25,7 +25,7 @@ onMounted(async () => await fetchHotRatingItem());
 
 <template>
     <scroll-view
-        class="w-full h-[200px] overflow-x-auto"
+        class="w-full h-[220px] overflow-x-auto"
         style="
             display: flex;
         "
@@ -58,7 +58,7 @@ onMounted(async () => await fetchHotRatingItem());
                 <hot-card-desc>{{ item.canteernName }} {{ item.diningRoom }}</hot-card-desc>
                 <text
                     v-if="item.ratingWeight === 0"
-                    class="text-xs text-secondary-foreground"
+                    class="text-xs text-secondary-foreground h-8"
                 >
                     暂无评分，快去评分吧！
                 </text>

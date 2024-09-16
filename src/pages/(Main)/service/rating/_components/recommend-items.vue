@@ -58,7 +58,7 @@ const {
             v-for="item in recommendItems"
             :key="item.id"
         >
-            <recommend-item-img img="" />
+            <recommend-item-img :img="item.imageUrl" />
             <recommend-item-body class="flex-1">
                 <recommend-item-info>
                     <recommend-item-title>{{ item.name }}</recommend-item-title>

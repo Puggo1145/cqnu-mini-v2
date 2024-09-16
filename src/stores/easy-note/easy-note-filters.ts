@@ -5,9 +5,9 @@ import { useSchedule } from "../useSchedule";
 
 type EasyNoteFilters = {
     courseNameOptions: string[];
-    timeRangeOptions: string[];
+    timespanOptions: string[];
     tagsOptions: string[];
-    timeRange: number;
+    timespan: number;
     courseName: number;
     tag: number;
 }
@@ -19,7 +19,7 @@ export const useEasyNoteFilters = defineStore('easyNoteFilters', {
             "全部课程",
             ...useSchedule().getNamesOfLessons()
         ],
-        timeRangeOptions: [
+        timespanOptions: [
             "今日内",
             "本周内",
             "两周内",
@@ -34,7 +34,7 @@ export const useEasyNoteFilters = defineStore('easyNoteFilters', {
             "作业",
             "考试"
         ],
-        timeRange: 1, // 默认从本周开始
+        timespan: 1, // 默认从本周开始
         courseName: 0,
         tag: 0,
     }) as EasyNoteFilters,
@@ -50,7 +50,7 @@ export const useEasyNoteFilters = defineStore('easyNoteFilters', {
 
 
             return {
-                timeRange: this.timeRangeOptions[this.timeRange],
+                timespan: this.timespanOptions[this.timespan],
                 courseName: formattedCourseName,
                 tag: formattedTag,
             }

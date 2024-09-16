@@ -41,7 +41,7 @@ export default function useFetchClassEasyNote() {
             pageSize: pageSize.value,
             courseName: currentCourseName.value || "",
             tagName: "",
-            timespan: "今日内",
+            timespan: "本周内",
         });
 
         if (res.ok) {

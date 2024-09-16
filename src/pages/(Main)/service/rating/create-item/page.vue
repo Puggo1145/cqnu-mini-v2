@@ -61,6 +61,28 @@ const handleSubmitRatingItem = async () => {
     isUploading.value = true;
 
     try {
+        // 1. 检查菜品是否已经存在
+        const res = await checkRatingItem({
+            name: foodName.value,
+            canteenName: baseConfigs.canteens[selectedCanteenIndex.value],
+            diningRoom: merchantName.value,
+        });
+        if (res.ok) {
+            if (res.data.data) {
+                uni.showToast({
+                    title: "美食已存在",
+                    icon: "none"
+                });
+
+                uni.redirectTo({
+                    url: `/pages/(Main)/service/rating/item/page?id=${res.data.data}`
+                });
+
+                return;
+            }
+        }
+
+
         // 检查表单数据是否完整
         const checkedForm = createRatingItemSchema.parse({
             selectedFoodImage: selectedFoodImage.value,

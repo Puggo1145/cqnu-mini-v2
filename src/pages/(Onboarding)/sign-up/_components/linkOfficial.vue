@@ -26,6 +26,7 @@ const {
 } = useFetchOfficialAuthCode();
 
 // 登陆按钮是否 disabled
+const stores = useSignupInfo();
 const isSignInAllowed = computed(() =>
     captchaBase64.value
     && stores.studentId.length > 0
@@ -35,7 +36,6 @@ const isSignInAllowed = computed(() =>
 
 
 // 登陆官网逻辑 //////////////////////////////////////////
-const stores = useSignupInfo();
 
 // 登录成功后的回调
 const emit = defineEmits(['update:current']);
@@ -56,7 +56,7 @@ async function syncStudentInfo() {
     }
 }
 
-const {
+const { 
     studentIdInputRef,
     passwordInputRef,
     authCodeInputRef,
@@ -65,6 +65,8 @@ const {
 } = useLinkOfficial({
     dataObj: dataObj,
     authCode: authCode,
+    studentId: stores.studentId,
+    linker: stores.linker,
     onSuccess: syncStudentInfo,
     onFail: refreshAuthCode,
 });

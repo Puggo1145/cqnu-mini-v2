@@ -1,8 +1,6 @@
 import { ref } from "vue";
 // zod
 import { z, ZodError } from "zod";
-// store
-import { useSignupInfo } from "@/stores/signup-info";
 // api
 import { signInToOfficial } from "@/utils/link-official";
 // types
@@ -26,17 +24,20 @@ const linkOfficialSchema = z.object({
 interface ILinkOfficial {
     dataObj: Ref<DataObj>,
     authCode: Ref<string>,
+    studentId?: string,
+    linker?: string,
     onSuccess: () => Promise<void> | void,
     onFail: () => Promise<void>,
 }
 export default function useLinkOfficial({
     dataObj,
     authCode,
+    studentId = '',
+    linker = '',
     onSuccess,
     onFail,
+    
 }: ILinkOfficial) {
-    const stores = useSignupInfo();
-
     const studentIdInputRef = ref();
     const passwordInputRef = ref();
     const authCodeInputRef = ref();
@@ -49,8 +50,8 @@ export default function useLinkOfficial({
         try {
             // 1. 验证表单
             const form = linkOfficialSchema.parse({
-                studentId: stores.studentId,
-                password: stores.linker,
+                studentId: studentId,
+                password: linker,
                 authCode: authCode.value,
             });
 

@@ -4,11 +4,15 @@ import { getSignInSessionAndAuthCode } from "@/utils/link-official";
 
 
 export default function useFetchOfficialAuthCode() {
+    const isFetching = ref(false);
+
     const captchaBase64 = ref<string>('');
     const authCode = ref<string>('');
     const dataObj = ref();
 
     async function refreshAuthCode() {
+        isFetching.value = true;
+
         authCode.value = '';
 
         const data = await getSignInSessionAndAuthCode();
@@ -16,6 +20,8 @@ export default function useFetchOfficialAuthCode() {
             captchaBase64.value = "data:image/png;base64," + data.authCodeImg;
             dataObj.value = data.dataObj;
         }
+
+        isFetching.value = false;
     }
 
     onMounted(async () => {
@@ -25,6 +31,7 @@ export default function useFetchOfficialAuthCode() {
 
 
     return {
+        isFetching,
         captchaBase64,
         authCode,
         dataObj,

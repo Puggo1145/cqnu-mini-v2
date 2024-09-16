@@ -31,15 +31,6 @@ function modifyLinker(e: CusInputEvent) {
 const isSubmitting = ref(false);
 const linkerSchema = z.string().min(1)
 async function submitModification() {
-    if (!userInfoStore.linker) {
-        uni.showToast({
-            title: "请等待用户信息加载完毕",
-            icon: "none"
-        });
-        
-        return;
-    }
-
     isSubmitting.value = true;
 
     try {
@@ -49,7 +40,7 @@ async function submitModification() {
         const encryptedLinker = encryptLinker(checkedLinker);
         const encryptedOldLinker = encryptLinker(userInfoStore.getDecryptedLinker()!);
         
-        const isSuccess = await updateLinker({ 
+        const isSuccess = await updateLinker({
             oldLinker: encryptedOldLinker,
             newLinker: encryptedLinker,
             confirmLinker: encryptedLinker

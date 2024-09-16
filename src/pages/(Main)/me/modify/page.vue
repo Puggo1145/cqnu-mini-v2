@@ -27,7 +27,6 @@ function chooseModifyView(view: ModifyView) {
 const doesModifyPopupShow = ref(false);
 function onClose() {
     doesModifyPopupShow.value = false;
-    currentModifyView.value = undefined;
 }
 </script>
 

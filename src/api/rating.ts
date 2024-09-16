@@ -48,7 +48,7 @@ interface CheckRatingItemParams {
     diningRoom: string;
 }
 export const checkRatingItem = async (params: CheckRatingItemParams) => {
-    const res = await request.GET({
+    const res = await request.GET<boolean>({
         route: `business/review/v1/check?name=${params.name}&canteenName=${params.canteenName}&diningRoom=${params.diningRoom}`,
     })
         .send();

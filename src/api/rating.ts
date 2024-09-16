@@ -4,11 +4,11 @@ import type { Tag } from "@/components/tag-selector.vue";
 import type { PageResponse } from "@/types/response";
 import type { StarRatio } from "@/pages/(Main)/service/rating/item/_components/item-info.vue";
 import type { TagRespDto } from "@/pages/(Main)/service/rating/item/_components/item-info.vue";
-import type { IRatingItemDetailInfo } from "@/pages/(Main)/service/rating/item/_components/item-info.vue";
+import type { RatingTag } from "@/hooks/useFetchRatingTags";
 
 
 type GetCreateRatingItemTagsResponse = {
-    0: Tag[]
+    0: RatingTag[]
     1: Tag[]
 }
 export const getCreateRatingItemTags = async () => {
@@ -31,7 +31,7 @@ interface CreateRatingItemParams {
     tagId: number;
 }
 export const createRatingItem = async (params: CreateRatingItemParams) => {
-    const res = await request.POST<boolean>({
+    const res = await request.POST<number>({
         route: "business/review/v1/add-dish",
         data: params
     })
@@ -39,6 +39,23 @@ export const createRatingItem = async (params: CreateRatingItemParams) => {
 
     return res;
 }
+
+
+// 检查评分对象是否重复
+interface CheckRatingItemParams {
+    name: string;
+    canteenName: string;
+    diningRoom: string;
+}
+export const checkRatingItem = async (params: CheckRatingItemParams) => {
+    const res = await request.GET({
+        route: `business/review/v1/check?name=${params.name}&canteenName=${params.canteenName}&diningRoom=${params.diningRoom}`,
+    })
+        .send();
+
+    return res;
+}
+
 
 
 // 获取热门菜品对象
@@ -98,6 +115,7 @@ export const getRecommendRatingItems = async (params: GetRecommendRatingItemsPar
 }
 
 
+// 获取评分对象详情
 export type RatingItemDetail = {
     id: number;
     name: string;
@@ -111,6 +129,7 @@ export type RatingItemDetail = {
     ratingCount: number;
     avgRating: number;
     tagRespDtoList: TagRespDto[];
+    typeTag: TagRespDto[];
 }
 export const getRatingItemDetail = async (dishId: number) => {
     const res = await request.GET<RatingItemDetail>({
@@ -119,4 +138,21 @@ export const getRatingItemDetail = async (dishId: number) => {
         .send();
 
     return res; 
+}
+
+
+// 提交评分
+interface ISubmitRatingParams {
+    dishId: number;
+    score: number;
+    dishTags: RatingTag[];
+}
+export const submitRating = async (params: ISubmitRatingParams) => {
+    const res = await request.POST({
+        route: "business/review/v1/rating",
+        data: params
+    })
+        .send();
+
+    return res;
 }

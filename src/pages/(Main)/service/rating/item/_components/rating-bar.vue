@@ -23,11 +23,11 @@ const props = defineProps<IStarBarProps>();
         <view class="flex-1 bg-[#f3e5d2] h-1 rounded-full">
             <view
                 class="bg-[#f09036] h-full"
-                :style="{ width: props.rating + '%' }"
+                :style="{ width: props.rating * 100 + '%' }"
             />
         </view>
         <text class="w-7 text-[8px] text-secondary-foreground">
-            {{ props.rating }} %
+            {{ props.rating * 100 }} %
         </text>
     </view>
 </template>

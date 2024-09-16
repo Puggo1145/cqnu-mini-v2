@@ -51,6 +51,8 @@ import alipay from '@/static/icons/alipay.svg'
 import wxpay from '@/static/icons/wxpay.svg'
 // rating
 import ratingStar from '@/static/icons/rating-star.svg'
+import ratingStarSolid from '@/static/icons/rating-star-solid.svg'
+import ratingStarHollow from '@/static/icons/rating-star-hollow.svg'
 
 
 const icons = {
@@ -109,6 +111,8 @@ const icons = {
     },
     rating: {
         star: ratingStar,
+        starSolid: ratingStarSolid,
+        starHollow: ratingStarHollow
     }
 };
 

@@ -13,6 +13,7 @@ import { ZodError, z } from "zod";
 // api
 import { uploadImages } from "@/api/oss";
 import { createRatingItem } from '@/api/rating';
+import { checkRatingItem } from '@/api/rating';
 // hooks
 import useCreateRatingItem from '@/hooks/useCreateRatingItem';
 import useFetchRatingItemTags from '@/hooks/useFetchRatingItemTags';
@@ -92,6 +93,7 @@ const handleSubmitRatingItem = async () => {
             tagId: selectedTag.value[0]?.id,
         });
 
+        // 创建成功，跳转到创建的评分对象详情页
         if (createRatingItemRes.ok) {
             uni.showToast({
                 title: "创建成功",
@@ -99,7 +101,9 @@ const handleSubmitRatingItem = async () => {
             })
 
             setTimeout(() => {
-                uni.navigateBack();
+                uni.redirectTo({
+                    url: `/pages/(Main)/service/rating/item/page?id=${createRatingItemRes.data.data}`
+                });
             }, 1500);
         };
     } catch (err) {

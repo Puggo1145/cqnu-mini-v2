@@ -9,7 +9,7 @@ import hotCardContent from './hot-card/hot-card-content.vue';
 import hotCardTitle from './hot-card/hot-card-title.vue';
 import hotCardDesc from './hot-card/hot-card-desc.vue';
 import hotCardRate from './hot-card/hot-card-rate.vue';
-import hotStatusBox from './hot-card/hot-status-box.vue';
+import statusBox from './status-box.vue';
 import spinner from '@/components/spinner.vue';
 
 
@@ -39,19 +39,28 @@ function goToRatingItemDetail(id: number) {
         scroll-x
         enable-flex
     >
-        <hot-status-box v-if="isFething">
+        <status-box
+            v-if="isFething"
+            class="w-full"
+        >
             <spinner size="medium" />
-        </hot-status-box>
-        <hot-status-box v-else-if="error">
+        </status-box>
+        <status-box
+            v-else-if="error"
+            class="w-full"
+        >
             <text class="text-sm text-destructive">
                 获取热门菜品出错
             </text>
-        </hot-status-box>
-        <hot-status-box v-else-if="!isFething && hotRatingItem.length === 0">
+        </status-box>
+        <status-box
+            v-else-if="!isFething && hotRatingItem.length === 0"
+            class="w-full"
+        >
             <text class="text-sm text-secondary-foreground">
                 暂无热门菜品
             </text>
-        </hot-status-box>
+        </status-box>
 
         <hot-card
             v-else

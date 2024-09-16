@@ -4,6 +4,9 @@
 			"path": "pages/(Main)/today/page"
 		},
 		{
+			"path": "pages/(Main)/service/rating/item/create-rating/page"
+		},
+		{
 			"path": "pages/(Main)/service/rating/item/page"
 		},
 		{

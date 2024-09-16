@@ -44,7 +44,7 @@ function selectTag(tag: Tag) {
 </script>
 
 <template>
-    <view class="w-full flex items-center gap-x-2">
+    <view class="w-full flex items-center gap-2 flex-wrap">
         <text
             v-if="props.isFetching !== null && props.isFetching"
             class="ml-2 text-secondary-foreground text-sm"
@@ -68,7 +68,7 @@ function selectTag(tag: Tag) {
             ]"
             @click="selectTag(tag)"
         >
-            <text class="font-bold text-sm">
+            <text class="font-bold text-sm whitespace-nowrap">
                 {{ tag.tagName }}
             </text>
         </view>

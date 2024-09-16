@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 // components
 import tagSelector from '@/components/tag-selector.vue';
 import cusSelect from '@/components/cus-select.vue';
@@ -25,7 +25,7 @@ const isTagExpanded = ref(false);
 
 <template>
     <view :class="[
-        'overflow-hidden w-full flex justify-between items-center gap-x-2',
+        'overflow-hidden w-full flex justify-between gap-x-2',
         isTagExpanded ? 'h-fit' : 'h-9'
     ]">
         <tag-selector
@@ -40,6 +40,7 @@ const isTagExpanded = ref(false);
         <image
             :src="icons.more"
             class="size-6"
+            @click="isTagExpanded = !isTagExpanded"
         />
     </view>
     <view class="mt-3 flex items-center gap-x-4">

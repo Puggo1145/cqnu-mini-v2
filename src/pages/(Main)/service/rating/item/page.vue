@@ -55,17 +55,7 @@ onMounted(async () => {
                 class="w-full h-[300px] bg-secondary"
             />
             <item-content v-if="ratingItemDetail">
-                <item-info
-                    :name="ratingItemDetail.name"
-                    :price="ratingItemDetail.price"
-                    :username="ratingItemDetail.username"
-                    :canteenName="ratingItemDetail.canteenName"
-                    :diningRoom="ratingItemDetail.diningRoom"
-                    :tagRespDtoList="ratingItemDetail.tagRespDtoList"
-                    :star-ratio="ratingItemDetail.starRatio"
-                    :avg-rating="ratingItemDetail.avgRating"
-                    :rating-count="ratingItemDetail.ratingCount"
-                />
+                <item-info :item-detail="ratingItemDetail" />
                 <item-separator />
                 <item-report />
             </item-content>

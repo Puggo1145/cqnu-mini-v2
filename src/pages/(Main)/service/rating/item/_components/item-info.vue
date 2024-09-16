@@ -19,6 +19,7 @@ export type TagRespDto = {
     category: string;
 }
 export interface IRatingItemDetailInfo {
+    id: number;
     name: string;
     username: string;
     price: number;
@@ -28,10 +29,18 @@ export interface IRatingItemDetailInfo {
     ratingCount: number;
     avgRating: number;
     tagRespDtoList: TagRespDto[];
+    typeTag: TagRespDto[];
 }
 
 
-const props = defineProps<IRatingItemDetailInfo>();
+const { itemDetail } = defineProps<{ itemDetail: IRatingItemDetailInfo }>();
+
+
+function goToRating() {
+    uni.navigateTo({
+        url: `/pages/(Main)/service/rating/item/create-rating/page?id=${itemDetail.id}`
+    })
+}
 </script>
 
 <template>
@@ -39,15 +48,16 @@ const props = defineProps<IRatingItemDetailInfo>();
         <view class="flex items-center justify-between">
             <view class="flex flex-col gap-y-1">
                 <text class="text-2xl font-bold">
-                    {{ props.name }} {{ props.price }}元
+                    {{ itemDetail.name }} {{ itemDetail.price }}元
                 </text>
                 <text class="text-xs text-secondary-foreground">
-                    由 {{ props.username }} 创建
+                    由 {{ itemDetail.username }} 创建
                 </text>
             </view>
             <cus-button
                 variant="secondary"
                 class-name="!text-primary"
+                @click="goToRating"
             >
                 评分
             </cus-button>
@@ -55,24 +65,24 @@ const props = defineProps<IRatingItemDetailInfo>();
         <view class="flex gap-x-2">
             <item-badge>
                 <text class="text-xs text-secondary-foreground">
-                    {{ props.canteenName }}
+                    {{ itemDetail.canteenName }}
                 </text>
             </item-badge>
             <item-badge>
                 <text class="text-xs text-secondary-foreground">
-                    {{ props.diningRoom }}
+                    {{ itemDetail.diningRoom }}
                 </text>
             </item-badge>
             <item-badge>
                 <text class="text-xs text-secondary-foreground">
-                    {{ props.tagRespDtoList[0].tagName }}
+                    {{ itemDetail.typeTag[0].tagName }}
                 </text>
             </item-badge>
         </view>
         <item-rating
-            :star-ratio="props.starRatio"
-            :avg-rating="props.avgRating"
-            :rating-count="props.ratingCount"
+            :star-ratio="itemDetail.starRatio"
+            :avg-rating="itemDetail.avgRating"
+            :rating-count="itemDetail.ratingCount"
         />
     </view>
 </template>

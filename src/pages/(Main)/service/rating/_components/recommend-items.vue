@@ -23,6 +23,13 @@ const {
     fetchRecommendItems,
     refresh
 } = useFetchRecommendRating();
+
+
+function goToRatingItemDetail(id: number) {
+    uni.navigateTo({
+        url: `/pages/(Main)/service/rating/item/page?id=${id}`
+    });
+}
 </script>
 
 <template>
@@ -57,6 +64,7 @@ const {
             v-else
             v-for="item in recommendItems"
             :key="item.id"
+            @click="goToRatingItemDetail(item.id)"
         >
             <recommend-item-img :img="item.imageUrl" />
             <recommend-item-body class="flex-1">

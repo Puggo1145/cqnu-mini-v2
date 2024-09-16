@@ -21,6 +21,13 @@ const {
 } = useFetchRatingHot();
 
 onMounted(async () => await fetchHotRatingItem());
+
+
+function goToRatingItemDetail(id: number) {
+    uni.navigateTo({
+        url: `/pages/(Main)/service/rating/item/page?id=${id}`
+    });
+}
 </script>
 
 <template>
@@ -51,6 +58,7 @@ onMounted(async () => await fetchHotRatingItem());
             v-for="item in hotRatingItem"
             :key="item.id"
             class="mr-3 h-fit"
+            @click="goToRatingItemDetail(item.id)"
         >
             <hot-card-img :img="item.imageUrl" />
             <hot-card-content>

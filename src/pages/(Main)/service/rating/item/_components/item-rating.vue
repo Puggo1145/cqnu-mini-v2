@@ -21,9 +21,15 @@ const props = defineProps<ItemRatingProps>();
 </script>
 
 <template>
-    <view class="mt-3 px-4 flex items-center justify-between gap-x-3">
+    <view class="mt-3 px-3 flex items-center justify-between gap-x-3">
         <view class="flex flex-col">
-            <text class="text-2xl text-[#f09036] font-bold">
+            <text
+                v-if="props.avgRating === 0"
+                class="text-sm text-secondary-foreground"
+            >
+                暂无评分
+            </text>
+            <text v-else class="text-2xl text-[#f09036] font-bold">
                 {{ props.avgRating }}
             </text>
             <text class="text-xs text-secondary-foreground">
@@ -31,11 +37,26 @@ const props = defineProps<ItemRatingProps>();
             </text>
         </view>
         <view class="flex-1 flex flex-col">
-            <rating-bar :stars="5" :rating="props.starRatio['5.0']" />
-            <rating-bar :stars="4" :rating="props.starRatio['4.0']" />
-            <rating-bar :stars="3" :rating="props.starRatio['3.0']" />
-            <rating-bar :stars="2" :rating="props.starRatio['2.0']" />
-            <rating-bar :stars="1" :rating="props.starRatio['1.0']" />
+            <rating-bar
+                :stars="5"
+                :rating="props.starRatio['5.0']"
+            />
+            <rating-bar
+                :stars="4"
+                :rating="props.starRatio['4.0']"
+            />
+            <rating-bar
+                :stars="3"
+                :rating="props.starRatio['3.0']"
+            />
+            <rating-bar
+                :stars="2"
+                :rating="props.starRatio['2.0']"
+            />
+            <rating-bar
+                :stars="1"
+                :rating="props.starRatio['1.0']"
+            />
         </view>
     </view>
 </template>

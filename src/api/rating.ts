@@ -112,9 +112,9 @@ export type RatingItemDetail = {
     avgRating: number;
     tagRespDtoList: TagRespDto[];
 }
-export const getRatingItemDetail = async (dishid: number) => {
+export const getRatingItemDetail = async (dishId: number) => {
     const res = await request.GET<RatingItemDetail>({
-        route: `business/review/v1/dish/dishid=${dishid}`
+        route: `business/review/v1/dish-details?dishId=${dishId}`
     })
         .send();
 

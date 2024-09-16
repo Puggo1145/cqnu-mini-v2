@@ -9,12 +9,13 @@ interface NoDataProps {
     desc: string;
     action?: () => void;
     actionText?: string;
+    className?: string;
 }
 const props = defineProps<NoDataProps>();
 </script>
 
 <template>
-    <view class="w-full flex flex-col items-center">
+    <view class="w-full flex flex-col items-center justify-center" :class="className">
         <view class="flex flex-col items-center mt-4 gap-y-1">
             <text class="font-bold text-2xl text-secondary-foreground">
                 {{ props.title }}
@@ -31,9 +32,9 @@ const props = defineProps<NoDataProps>();
         >
             {{ props.actionText }}
         </cusButton>
-        <image 
-            :src="images.NoEasyNote" 
-            class="z-0 fixed right-0 -bottom-[30px] w-[220px] h-[180px]" 
-        />
     </view>
+    <image 
+        :src="images.NoEasyNote" 
+        class="z-0 fixed right-0 -bottom-[30px] w-[220px] h-[180px]" 
+    />
 </template>

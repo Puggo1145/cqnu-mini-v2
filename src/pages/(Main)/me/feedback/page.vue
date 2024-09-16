@@ -11,6 +11,8 @@ import useUserInfo from '@/stores/user-info';
 import { submitUserFeedback } from '@/api/user';
 // zod
 import { z } from 'zod';
+// constants
+import { baseConfigs } from '@/constants/baseConfig';
 
 
 const { openid } = useUserInfo();
@@ -26,7 +28,7 @@ const feedbackTypes = [
 
 function previewImg() {
     uni.previewImage({
-        urls: ["https://cqminiv2-imgs.oss-cn-chengdu.aliyuncs.com/official/user%20group%20qr.png"],
+        urls: [baseConfigs.userGroupQrCode],
         current: 0,
         longPressActions: {
             itemList: ["保存图片"]
@@ -138,7 +140,7 @@ onMounted(() => {
 
                 <view class="flex flex-col gap-y-3 items-center">
                     <image
-                        src="https://cqminiv2-imgs.oss-cn-chengdu.aliyuncs.com/official/user%20group%20qr.png"
+                        :src="baseConfigs.userGroupQrCode"
                         class="w-[220px] rounded-2xl"
                         @click="previewImg"
                     />

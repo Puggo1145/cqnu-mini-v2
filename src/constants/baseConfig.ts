@@ -23,5 +23,6 @@ export const baseConfigs = {
         "三食堂",
         "南门商业街",
         "北门小吃街",
-    ]
+    ],
+    userGroupQrCode: "https://cqnu-v2-img.oss-cn-chengdu.aliyuncs.com/official/user_group.pic.jpg"
 }

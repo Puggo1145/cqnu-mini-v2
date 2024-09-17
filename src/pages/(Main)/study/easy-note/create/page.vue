@@ -12,7 +12,7 @@ import imageUploader from '@/components/image-uploader.vue';
 // utils
 import { getDate, getCurrentTime } from '@/utils/timeHandler';
 // api
-import { getWeixinAccessToken, msgSecCheck } from '@/api/wx'
+// import { getWeixinAccessToken, msgSecCheck } from '@/api/wx'
 // hooks
 import { useCourses } from '@/hooks/useCourses';
 import useCreateEasyNote from '@/hooks/useCreateEasyNote';
@@ -62,34 +62,34 @@ const selectedTags = ref<Tag[]>([]);
 const { isCreating, handleCreateEasyNote } = useCreateEasyNote();
 
 // 创建小记前的文本安全检查
-const handleSecurityCheck = async (content: string, scene: number) => {
-    await getWeixinAccessToken();
+// const handleSecurityCheck = async (content: string, scene: number) => {
+//     await getWeixinAccessToken();
 
-    const openid = uni.getStorageSync('openid');
-    const body = {
-        content,
-        scene,
-        openid,
-        version: 2,
-    }
+//     const openid = uni.getStorageSync('openid');
+//     const body = {
+//         content,
+//         scene,
+//         openid,
+//         version: 2,
+//     }
 
-    const isPass = await msgSecCheck(body);
-    return isPass;
-};
+//     const isPass = await msgSecCheck(body);
+//     return isPass;
+// };
 
 async function createEasyNote() {
     isCreating.value = true;
 
     try {
-        const isPass = await handleSecurityCheck(content.value, 2);
-        if (!isPass) {
-            uni.showToast({
-                icon: 'error',
-                title: '内容违规',
-                duration: 1500,
-            })
-            return;
-        }
+        // const isPass = await handleSecurityCheck(content.value, 2);
+        // if (!isPass) {
+        //     uni.showToast({
+        //         icon: 'error',
+        //         title: '内容违规',
+        //         duration: 1500,
+        //     })
+        //     return;
+        // }
 
         await handleCreateEasyNote({
             title: title.value,

@@ -65,7 +65,7 @@ export default function useFetchEasyNote() {
 
     watch(
         [
-            () => easyNoteFiltersStore.timeRange,
+            () => easyNoteFiltersStore.timespan,
             () => easyNoteFiltersStore.courseName,
             () => easyNoteFiltersStore.tag,
             () => scheduleStore.lessons

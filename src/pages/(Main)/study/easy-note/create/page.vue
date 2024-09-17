@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
 import cusInput from '@/components/cus-input.vue';
@@ -8,9 +8,11 @@ import cusButton from '@/components/cus-button.vue';
 import tagSelector from '@/components/tag-selector.vue';
 import formItem from '@/components/form/form-item.vue';
 import formItemText from '@/components/form/form-item-text.vue';
+import imageUploader from '@/components/image-uploader.vue';
 // utils
 import { getDate, getCurrentTime } from '@/utils/timeHandler';
 // hooks
+import { useCourses } from '@/hooks/useCourses';
 import useCreateEasyNote from '@/hooks/useCreateEasyNote';
 import useFetchEasyNoteTags from '@/hooks/useFetchEasyNoteTags';
 // store
@@ -45,8 +47,10 @@ function onDateChange(e: any) {
 
 
 // 可选课程
+
 const relatedCourses = useSchedule().getNamesOfLessons();
-const currentCourseIndex = ref<number>(0);
+const { indexOfCurrentCourse } = useCourses();
+
 
 
 // tags
@@ -56,32 +60,58 @@ const selectedTags = ref<Tag[]>([]);
 
 // 创建小记
 const { isCreating, handleCreateEasyNote } = useCreateEasyNote();
-async function createEasyNote() {
-    try {
-        await handleCreateEasyNote({
-            title: title.value,
-            content: content.value,
-            imagesUrl: [],
-            deadline: `${currentDate.value} ${currentTime.value}:00`,
-            courseName: relatedCourses[currentCourseIndex.value],
-            tagIds: selectedTags.value.map(tag => tag.id),
-        })
-    } catch (err) {
-        if (err instanceof ZodError) {
-            err.errors.forEach(err => {
-                if (err.path[0] === 'title') {
-                    titleInputRef.value.showError(err.message);
-                } else if (err.path[0] === 'content') {
-                    uni.showToast({
-                        title: err.message,
-                        icon: 'none',
-                    });
-                }
-            })
-        }
-    } finally {
-        isCreating.value = false;
+import { getWeixinAccessToken, msgSecCheck } from '@/api/wx'
+
+const handleSecurityCheck = async (content: string, scene: number) => {
+    await getWeixinAccessToken();
+    const openid = uni.getStorageSync('openid');
+    const body = {
+        content,
+        scene,
+        openid,
+        version: 2,
     }
+    const isPass = await msgSecCheck(body);
+    return isPass;
+};
+async function createEasyNote() {
+    const isPass = await handleSecurityCheck(content.value, 2);
+    if (!isPass) {
+        uni.showToast({
+            icon: 'error',
+            title: '内容有敏感信息！',
+            duration: 3000,
+        })
+        return ;
+    }else{
+        console.log(isPass);
+        try {
+            await handleCreateEasyNote({
+                title: title.value,
+                content: content.value,
+                imagesUrl: [],
+                deadline: `${currentDate.value} ${currentTime.value}:00`,
+                courseName: relatedCourses[indexOfCurrentCourse.value],
+                tagIds: selectedTags.value.map(tag => tag.id),
+            })
+        } catch (err) {
+            if (err instanceof ZodError) {
+                err.errors.forEach(err => {
+                    if (err.path[0] === 'title') {
+                        titleInputRef.value.showError(err.message);
+                    } else if (err.path[0] === 'content') {
+                        uni.showToast({
+                            title: err.message,
+                            icon: 'none',
+                        });
+                    }
+                })
+            }
+        } finally {
+            isCreating.value = false;
+        }
+    }
+   
 }
 </script>
 
@@ -112,9 +142,13 @@ async function createEasyNote() {
                         content = e.detail.value
                     }"
                 />
-                <!-- <view class="size-6">
-                    <image :src="icons.image" class="size-full" />
-                </view> -->
+                <image-uploader 
+                    :max-count="1" 
+                    >
+                    <view class="size-6">
+                        <image :src="icons.image" class="size-full" />
+                    </view>
+                </image-uploader>
             </view>
             <form-item>
                 <form-item-text>
@@ -147,9 +181,9 @@ async function createEasyNote() {
                 <cus-select
                     mode="selector"
                     :icon="icons.academy"
-                    :value="currentCourseIndex"
+                    :value="indexOfCurrentCourse"
                     :range="relatedCourses"
-                    @change="e => currentCourseIndex = e.value"
+                    @change="e => indexOfCurrentCourse = e.value"
                 />
             </form-item>
             <form-item>

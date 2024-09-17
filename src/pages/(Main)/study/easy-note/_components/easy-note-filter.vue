@@ -9,7 +9,7 @@ import { useEasyNoteFilters } from '@/stores/easy-note/easy-note-filters';
 const easyNoteFiltersStore = useEasyNoteFilters();
 
 function onTimeRangeChange(e: any) {
-    easyNoteFiltersStore.timeRange = e.value;
+    easyNoteFiltersStore.timespan = e.value;
 }
 function onRelatedCourseChange(e: any) {
     easyNoteFiltersStore.courseName = e.value;
@@ -22,8 +22,8 @@ function onTagChange(e: any) {
 <template>
     <view class="flex items-center gap-x-3">
         <cus-select
-            :value="easyNoteFiltersStore.timeRange"
-            :range="easyNoteFiltersStore.timeRangeOptions"
+            :value="easyNoteFiltersStore.timespan"
+            :range="easyNoteFiltersStore.timespanOptions"
             @change="onTimeRangeChange"
             variant="mini"
         />

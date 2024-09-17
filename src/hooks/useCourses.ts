@@ -58,18 +58,17 @@ export const useCourses = () => {
         })
 
         const remainingCourses = allCoursesOfToday.filter(course => {
-            const startTime = baseConfigs.courseStartTime[course.start_time - 1].split(':');
-            const courseTime = new Date(currentTime.value.getFullYear(), currentTime.value.getMonth(), currentTime.value.getDate(), Number(startTime[0]), Number(startTime[1]));
-
+            const endTime = baseConfigs.courseStartTime[course.end_time - 1].split(':');
+            const courseTime = new Date(currentTime.value.getFullYear(), currentTime.value.getMonth(), currentTime.value.getDate(), Number(endTime[0]), Number(endTime[1]));
             return courseTime > currentTime.value;
         })
-
+        // console.log("remainingCourses", remainingCourses);
         return remainingCourses;
     });
 
     const currentCourseName = computed(() => {
         if (courseOfToday.value.length === 0) return null;
-
+        // console.log("currentCourseName", courseOfToday.value[0].name);
         return courseOfToday.value[0].name;
     });
 
@@ -82,11 +81,16 @@ export const useCourses = () => {
         return Math.floor((courseTime.getTime() - currentTime.value.getTime()) / 1000 / 60);
     });
 
+    const indexOfCurrentCourse = computed(() => {
+        return schedule.lessons.findIndex(course => course.name === currentCourseName.value);
+    });
+
 
     return {
         currentTime,
         courseOfToday,
         currentCourseName,
-        remainingTimeOfLatestCourse
+        remainingTimeOfLatestCourse,
+        indexOfCurrentCourse
     };
 }

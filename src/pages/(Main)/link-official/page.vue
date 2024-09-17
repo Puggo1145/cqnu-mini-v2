@@ -49,6 +49,8 @@ function gotoBackPage() {
             uni.redirectTo({
                 url: backPage.value
             });
+        } else {
+            uni.navigateBack();
         }
     }, 1500);
 }

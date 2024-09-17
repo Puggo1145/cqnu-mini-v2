@@ -82,7 +82,7 @@ export const getHotRatingItems = async () => {
 interface GetRecommendRatingItemsParams {
     tagName: string;
     canteenName: string;
-    rating: number;
+    rating: number | "";
     priceSort: "" | "asc" | "desc";
     current: number;
     pageSize: number;

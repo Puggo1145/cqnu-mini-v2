@@ -24,7 +24,7 @@ import { developers, contributors } from '@/constants/about';
                 />
                 <view class="flex flex-col">
                     <text class="font-bold">智慧重师</text>
-                    <text class="text-sm text-secondary-foreground">v2.0.6 Beta</text>
+                    <text class="text-sm text-secondary-foreground">v2.1.1</text>
                 </view>
             </view>
             <view class="mt-9">

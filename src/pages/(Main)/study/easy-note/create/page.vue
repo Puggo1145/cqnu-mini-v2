@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 // components
 import cusPage from '@/components/cus-page.vue';
 import cusInput from '@/components/cus-input.vue';
@@ -11,6 +11,8 @@ import formItemText from '@/components/form/form-item-text.vue';
 import imageUploader from '@/components/image-uploader.vue';
 // utils
 import { getDate, getCurrentTime } from '@/utils/timeHandler';
+// api
+import { getWeixinAccessToken, msgSecCheck } from '@/api/wx'
 // hooks
 import { useCourses } from '@/hooks/useCourses';
 import useCreateEasyNote from '@/hooks/useCreateEasyNote';
@@ -47,10 +49,8 @@ function onDateChange(e: any) {
 
 
 // 可选课程
-
 const relatedCourses = useSchedule().getNamesOfLessons();
 const { indexOfCurrentCourse } = useCourses();
-
 
 
 // tags
@@ -60,10 +60,11 @@ const selectedTags = ref<Tag[]>([]);
 
 // 创建小记
 const { isCreating, handleCreateEasyNote } = useCreateEasyNote();
-import { getWeixinAccessToken, msgSecCheck } from '@/api/wx'
 
+// 创建小记前的文本安全检查
 const handleSecurityCheck = async (content: string, scene: number) => {
     await getWeixinAccessToken();
+
     const openid = uni.getStorageSync('openid');
     const body = {
         content,
@@ -71,47 +72,49 @@ const handleSecurityCheck = async (content: string, scene: number) => {
         openid,
         version: 2,
     }
+
     const isPass = await msgSecCheck(body);
     return isPass;
 };
+
 async function createEasyNote() {
-    const isPass = await handleSecurityCheck(content.value, 2);
-    if (!isPass) {
-        uni.showToast({
-            icon: 'error',
-            title: '内容有敏感信息！',
-            duration: 3000,
-        })
-        return ;
-    }else{
-        console.log(isPass);
-        try {
-            await handleCreateEasyNote({
-                title: title.value,
-                content: content.value,
-                imagesUrl: [],
-                deadline: `${currentDate.value} ${currentTime.value}:00`,
-                courseName: relatedCourses[indexOfCurrentCourse.value],
-                tagIds: selectedTags.value.map(tag => tag.id),
+    isCreating.value = true;
+
+    try {
+        const isPass = await handleSecurityCheck(content.value, 2);
+        if (!isPass) {
+            uni.showToast({
+                icon: 'error',
+                title: '内容违规',
+                duration: 1500,
             })
-        } catch (err) {
-            if (err instanceof ZodError) {
-                err.errors.forEach(err => {
-                    if (err.path[0] === 'title') {
-                        titleInputRef.value.showError(err.message);
-                    } else if (err.path[0] === 'content') {
-                        uni.showToast({
-                            title: err.message,
-                            icon: 'none',
-                        });
-                    }
-                })
-            }
-        } finally {
-            isCreating.value = false;
+            return;
         }
+
+        await handleCreateEasyNote({
+            title: title.value,
+            content: content.value,
+            imagesUrl: [],
+            deadline: `${currentDate.value} ${currentTime.value}:00`,
+            courseName: relatedCourses[indexOfCurrentCourse.value],
+            tagIds: selectedTags.value.map(tag => tag.id),
+        })
+    } catch (err) {
+        if (err instanceof ZodError) {
+            err.errors.forEach(err => {
+                if (err.path[0] === 'title') {
+                    titleInputRef.value.showError(err.message);
+                } else if (err.path[0] === 'content') {
+                    uni.showToast({
+                        title: err.message,
+                        icon: 'none',
+                    });
+                }
+            })
+        }
+    } finally {
+        isCreating.value = false;
     }
-   
 }
 </script>
 
@@ -142,13 +145,13 @@ async function createEasyNote() {
                         content = e.detail.value
                     }"
                 />
-                <image-uploader 
+                <!-- <image-uploader 
                     :max-count="1" 
                     >
                     <view class="size-6">
                         <image :src="icons.image" class="size-full" />
                     </view>
-                </image-uploader>
+                </image-uploader> -->
             </view>
             <form-item>
                 <form-item-text>

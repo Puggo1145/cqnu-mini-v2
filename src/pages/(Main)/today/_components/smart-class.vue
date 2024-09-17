@@ -77,7 +77,7 @@ function goToSchedule() {
                         class="text-sm"
                         :class="'font-bold text-primary'"
                     >
-                        距离上课还有不到 1 分钟
+                        上课中
                     </text>
                 </view>
                 <view class="w-full flex items-center justify-between">

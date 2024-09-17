@@ -1,6 +1,5 @@
 <!-- src/components/rater.vue -->
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
 // static
 import icons from '@/constants/icons';
 

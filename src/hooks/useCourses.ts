@@ -59,8 +59,9 @@ export const useCourses = () => {
 
         const remainingCourses = allCoursesOfToday.filter(course => {
             const endTime = baseConfigs.courseStartTime[course.end_time - 1].split(':');
-            const courseTime = new Date(currentTime.value.getFullYear(), currentTime.value.getMonth(), currentTime.value.getDate(), Number(endTime[0]), Number(endTime[1]));
-            return courseTime > currentTime.value;
+            const courseEndTime = new Date(currentTime.value.getFullYear(), currentTime.value.getMonth(), currentTime.value.getDate(), Number(endTime[0]), Number(endTime[1]));
+            
+            return courseEndTime > currentTime.value;
         })
         // console.log("remainingCourses", remainingCourses);
         return remainingCourses;
@@ -82,7 +83,13 @@ export const useCourses = () => {
     });
 
     const indexOfCurrentCourse = computed(() => {
-        return schedule.lessons.findIndex(course => course.name === currentCourseName.value);
+        const currentCourseIndex = schedule.lessons.findIndex(course => course.name === currentCourseName.value);
+        // 当前无课则返回列表中的第一个课程
+        if (currentCourseIndex === -1) { 
+            return 0;
+        } else {
+            return currentCourseIndex;
+        }
     });
 
 

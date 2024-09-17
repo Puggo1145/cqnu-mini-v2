@@ -40,6 +40,6 @@ export const useSchedule = defineStore("useSchedule", {
     getNamesOfLessons() {
       return this.lessons?.map(lesson => lesson.name);
     },
-    
+
   }
 });

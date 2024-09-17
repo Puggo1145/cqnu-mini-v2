@@ -31,8 +31,6 @@ export default function useCreateEasyNote() {
 
 
     const handleCreateEasyNote = async (form: CreateEasyNote) => {
-        isCreating.value = true;
-
         // 1. 校验数据
         const checkedForm = easyNoteSchema.parse({
             title: form.title,
@@ -56,8 +54,6 @@ export default function useCreateEasyNote() {
                 uni.navigateBack();
             }, 1500);
         }
-
-        isCreating.value = false;
     }
 
     return {

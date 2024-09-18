@@ -17,6 +17,8 @@ import { getDate, getCurrentTime } from '@/utils/timeHandler';
 import { useCourses } from '@/hooks/useCourses';
 import useCreateEasyNote from '@/hooks/useCreateEasyNote';
 import useFetchEasyNoteTags from '@/hooks/useFetchEasyNoteTags';
+// utils
+import { addMinutes, format } from 'date-fns';
 // store
 import { useSchedule } from '@/stores/useSchedule';
 // static
@@ -33,11 +35,11 @@ const content = ref('');
 
 
 // 时间选择
+const now = new Date();
+const startTime = ref<string>(format(now , 'HH:mm')); // 允许选择的最早时间：当前时间
+const selectedTime = ref<string>(format(addMinutes(now , 60), 'HH:mm')); // 默认选择的时间：当前时间的 30 分钟后
+
 const currentDate = ref(getDate());
-const currentTime = ref<string>(getCurrentTime());
-const startTime = ref<string>(getCurrentTime());
-
-
 function onDateChange(e: any) {
     currentDate.value = e.value;
     const current = new Date(currentDate.value)
@@ -51,6 +53,7 @@ function onDateChange(e: any) {
 // 可选课程
 const relatedCourses = useSchedule().getNamesOfLessons();
 const { indexOfCurrentCourse } = useCourses();
+const selectedCourseIndex = ref(indexOfCurrentCourse.value);
 
 
 // tags
@@ -95,8 +98,8 @@ async function createEasyNote() {
             title: title.value,
             content: content.value,
             imagesUrl: [],
-            deadline: `${currentDate.value} ${currentTime.value}:00`,
-            courseName: relatedCourses[indexOfCurrentCourse.value],
+            deadline: `${currentDate.value} ${selectedTime.value}:00`,
+            courseName: relatedCourses[selectedCourseIndex.value],
             tagIds: selectedTags.value.map(tag => tag.id),
         })
     } catch (err) {
@@ -167,14 +170,14 @@ async function createEasyNote() {
             </form-item>
             <form-item>
                 <form-item-text>
-                    截止时间
+                    截止时间（默认为当前时间的 1 小时后）
                 </form-item-text>
                 <cus-select
                     mode="time"
                     :icon="icons.clock"
-                    :value="currentTime"
+                    :value="selectedTime"
                     :start="startTime"
-                    @change="e => currentTime = e.value"
+                    @change="e => selectedTime = e.value"
                 />
             </form-item>
             <form-item>
@@ -184,9 +187,9 @@ async function createEasyNote() {
                 <cus-select
                     mode="selector"
                     :icon="icons.academy"
-                    :value="indexOfCurrentCourse"
+                    :value="selectedCourseIndex"
                     :range="relatedCourses"
-                    @change="e => indexOfCurrentCourse = e.value"
+                    @change="e => selectedCourseIndex = e.value"
                 />
             </form-item>
             <form-item>

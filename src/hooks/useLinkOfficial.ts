@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { z, ZodError } from "zod";
 // api
 import { signInToOfficial } from "@/utils/link-official";
+import { signInToOfficialLocal } from "@/utils/link-official/libs/sign-in/signin-to-official";
 // types
 import type { DataObj } from "@/utils/link-official/libs/sign-in/getDynamicData";
 import type { Ref } from "vue";
@@ -36,7 +37,7 @@ export default function useLinkOfficial({
     linker,
     onSuccess,
     onFail,
-    
+
 }: ILinkOfficial) {
     const studentIdInputRef = ref();
     const passwordInputRef = ref();
@@ -55,21 +56,34 @@ export default function useLinkOfficial({
                 authCode: authCode.value,
             });
 
-            // 2. 登录官网
-            const signInRes = await signInToOfficial(
+            // 2. 登录官网 - Legacy
+            // const signInRes = await signInToOfficial(
+            //     form.studentId,
+            //     form.password,
+            //     form.authCode,
+            //     dataObj.value,
+            // )
+
+            // if (!signInRes.ok) {
+            //     await onFail();
+
+            //     return;
+            // }
+
+            // await onSuccess();
+
+            const signInSuccess = await signInToOfficialLocal(
                 form.studentId,
                 form.password,
                 form.authCode,
-                dataObj.value,
-            )
+                dataObj.value
+            );
 
-            if (!signInRes.ok) {
+            if (signInSuccess) {
+                await onSuccess();
+            } else {
                 await onFail();
-
-                return;
             }
-
-            await onSuccess();
         } catch (err) {
             if (err instanceof ZodError) {
                 // 显示错误消息

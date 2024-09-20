@@ -24,5 +24,29 @@ export const baseConfigs = {
         "南门商业街",
         "北门小吃街",
     ],
+    // 可选宿舍楼
+    dormitories: [
+        "嘉风A",
+        "嘉风B",
+        "和风B",
+        "和风C",
+        "和风D",
+        "和风E",
+        "惠风A",
+        "惠风B",
+        "惠风C",
+        "雅风A",
+        "雅风B",
+        "雅风C",
+        "清风A",
+        "清风B",
+        "清风C",
+        "朗风",
+        "畅风",
+        "留学生",
+        "硕博",
+        "培训楼"
+    ],
+    // 个人反馈页面的用户群二维码
     userGroupQrCode: "https://cqnu-v2-img.oss-cn-chengdu.aliyuncs.com/official/user_group.pic.jpg"
 }

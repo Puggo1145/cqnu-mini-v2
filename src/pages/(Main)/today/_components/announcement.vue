@@ -17,7 +17,9 @@ function gotoReport() {
 <template>
     <view
         v-if="announcement"
-        class="w-full bg-primary/15 rounded-2xl mb-3 flex items-center gap-x-3 p-4"
+        :class="[
+            'w-full rounded-2xl mb-3 flex items-center gap-x-3 p-4 bg-primary/15',
+        ]"
         @click="gotoReport"
     >
         <image

@@ -29,8 +29,6 @@ const userInfoStore = useUserInfo();
 const backPage = ref<string>();
 
 onMounted(async () => {
-    await refreshAuthCode();
-
     // 登录成功后返回目标页面
     const pages = getCurrentPages();
     const currentPage = pages[pages.length - 1];
@@ -42,6 +40,7 @@ function gotoBackPage() {
     uni.showToast({
         title: '登录成功',
         icon: 'success',
+        duration: 500
     });
 
     setTimeout(() => {
@@ -52,7 +51,7 @@ function gotoBackPage() {
         } else {
             uni.navigateBack();
         }
-    }, 1500);
+    }, 500);
 }
 
 const studentId = ref(userInfoStore.studentId);

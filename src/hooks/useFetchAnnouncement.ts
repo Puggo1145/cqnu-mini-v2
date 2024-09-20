@@ -7,12 +7,17 @@ import type { AnnoucementResponse } from "@/api/user";
 
 const useFetchAnnouncement = () => {
     const announcement = ref<AnnoucementResponse>();
+    const isFetching = ref(false);
 
     const handleFetchAnnouncement = async () => {
+        isFetching.value = true;
+
         const res = await getAnnouncement();
         if (res.ok) {
             announcement.value = res.data.data;
         }
+
+        isFetching.value = false;
     }
 
     onMounted(async () => {
@@ -20,6 +25,7 @@ const useFetchAnnouncement = () => {
     })
 
     return {
+        isFetching,
         announcement,
     }
 };

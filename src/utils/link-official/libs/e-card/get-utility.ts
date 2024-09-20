@@ -6,7 +6,7 @@ interface CardInfoResponse {
 export const getCardInfo = async (studentId: string) => {
     return request.POST<CardInfoResponse[]>({
         where: "linkOfficial",
-        route: "/getCardInfo",
+        route: "/utility/getCardInfo",
         data: { studentId }
     })
         .send();
@@ -24,7 +24,7 @@ interface UtilityBalanceResponse {
 export const getUtilityBalance = async (data: UtilityBalanceQueryData) => {
     return request.POST<UtilityBalanceResponse>({
         where: "linkOfficial",
-        route: "/getUtilityBalance",
+        route: "/utility/getUtilityBalance",
         data: {
             ...data,
             roomNumber: data.roomNumber.toString()

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onShareAppMessage } from '@dcloudio/uni-app';
 // components
 import cusPage from '@/components/cus-page.vue';
 import dynamicHeader from './_components/dynamic-header.vue';
@@ -9,6 +10,12 @@ import classEasyNote from './_components/class-easy-note.vue';
 import initialPopup from './_components/initial-popup.vue';
 // hooks
 import { useCourses } from '@/hooks/useCourses';
+
+
+onShareAppMessage(() => ({
+    title: "智慧重师",
+    path: "/pages/(Main)/today/page",
+}))
 
 
 const {

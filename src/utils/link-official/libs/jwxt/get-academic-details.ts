@@ -1,5 +1,4 @@
 import { getJwxtCookie } from "./get-jwxt-cookie";
-import { getJwxtCookieLocal } from "./get-jwxt-cookie";
 import urls from "../../constants/urls";
 
 
@@ -11,7 +10,7 @@ const queryTarget = {
 }
 export const getAcademicDetails = async (target: keyof typeof queryTarget) => {
     try {
-        const jwxtCookie = await getJwxtCookieLocal();
+        const jwxtCookie = await getJwxtCookie();
         if (!jwxtCookie) return null;
 
         const res = await uni.request({

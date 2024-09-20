@@ -53,7 +53,7 @@ const Request = async <T>(
                 if (!isFetchSuccess) {
                     uni.showToast({
                         title: responseBody.message || '请求错误',
-                        icon: 'error'
+                        icon: responseBody.message!.length < 8 ? 'error' : 'none'
                     });
 
                     resolve({

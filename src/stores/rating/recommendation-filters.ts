@@ -29,6 +29,7 @@ export const useRatingRecommendationFilters = defineStore('ratingRecommendationF
             { label: '价格从低到高', value: "asc" },
         ],
         ratingOptions: [
+            { label: '全部好评', value: 1 },
             { label: '4分高分', value: 4 },
             { label: '5分好评', value: 5 },
         ],

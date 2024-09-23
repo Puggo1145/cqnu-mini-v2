@@ -74,13 +74,13 @@ function goToRatingItemDetail(id: number) {
                 <hot-card-title>{{ item.name }}</hot-card-title>
                 <hot-card-desc>{{ item.canteernName }} {{ item.diningRoom }}</hot-card-desc>
                 <text
-                    v-if="item.ratingWeight === 0"
+                    v-if="item.averageScore === 0"
                     class="text-xs text-secondary-foreground h-8"
                 >
                     暂无评分，快去评分吧！
                 </text>
                 <hot-card-rate v-else>
-                    {{ item.ratingWeight }}
+                    {{ item.averageScore }}
                 </hot-card-rate>
             </hot-card-content>
         </hot-card>

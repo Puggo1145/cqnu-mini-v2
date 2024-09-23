@@ -66,6 +66,7 @@ export interface RatingItem {
     diningRoom: string;
     imageUrl: string;
     ratingWeight: number;
+    averageScore: number;
 }
 
 export const getHotRatingItems = async () => {

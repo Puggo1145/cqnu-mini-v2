@@ -7,7 +7,7 @@ import { resolveStudentInfo } from "../../utils/studentInfoHandler"
 
 export interface OriginalStudentInfo {
     xh: string // 学号
-    pyccdm: string // 学生身份（本科 ｜ 研究生）
+    pyccdm: string // 学生身份（本科 | 专升本 ｜ 研究生）
     jg_id: string // 学院
     bh_id: string // 专业班级
     zyh_id: string // 专业
@@ -31,6 +31,7 @@ export const getStudentInfo = async () => {
     } catch (err) {
         uni.showToast({
             title: (err as Error).message || "校园门户错误，请重试",
+            icon: "error"
         })
 
         return null;

@@ -12,6 +12,7 @@ const StudentInfoSchema = z.object({
     major: z.string()
 });
 
+
 export const resolveStudentInfo = (originalData: OriginalStudentInfo) => {
     try {
         const resolvedStudentInfo = {
@@ -20,6 +21,11 @@ export const resolveStudentInfo = (originalData: OriginalStudentInfo) => {
             faculty: originalData.jg_id,
             stuClass: originalData.bh_id,
             major: originalData.zyh_id
+        }
+
+        // 将“专升本”转为“本科”
+        if (resolvedStudentInfo.identity === "专升本") {
+            resolvedStudentInfo.identity = "本科";
         }
         
         return StudentInfoSchema.parse(resolvedStudentInfo);

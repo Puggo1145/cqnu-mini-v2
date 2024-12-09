@@ -37,7 +37,8 @@ export default async function compressImages(imagePath: string | string[], quali
             } catch (err) {
                 uni.showToast({
                     title: '图片压缩失败',
-                    icon: 'none'
+                    icon: 'none',
+                    duration: 1200
                 });
                 return path; // 如果压缩失败,返回原路径
             }
@@ -48,7 +49,8 @@ export default async function compressImages(imagePath: string | string[], quali
     } catch (err) {
         uni.showToast({
             title: '图片压缩失败',
-            icon: 'none'
+            icon: 'none',
+            duration: 1200
         });
 
         throw err;

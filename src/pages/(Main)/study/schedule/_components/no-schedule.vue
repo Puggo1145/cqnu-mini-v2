@@ -25,9 +25,12 @@ async function updateSchedule() {
     const res = await getSchedules();
     if (res) {
         schedule.lessons = res;
+        uni.showToast({
+            title: "同步成功",
+            icon: "success",
+            duration: 750
+        })
     }
-
-    uni.hideLoading();
 }
 </script>
 

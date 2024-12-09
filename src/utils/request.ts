@@ -53,7 +53,8 @@ const Request = async <T>(
                 if (!isFetchSuccess) {
                     uni.showToast({
                         title: responseBody.message || '请求错误',
-                        icon: responseBody.message!.length < 8 ? 'error' : 'none'
+                        icon: responseBody.message!.length < 8 ? 'error' : 'none',
+                        duration: 1200
                     });
 
                     resolve({
@@ -70,7 +71,8 @@ const Request = async <T>(
             fail: (res) => {
                 uni.showToast({
                     title: customFailMessage || "网络错误",
-                    icon: "error"
+                    icon: "error",
+                    duration: 1200
                 });
 
                 resolve({ ok: false, message: res.errMsg });

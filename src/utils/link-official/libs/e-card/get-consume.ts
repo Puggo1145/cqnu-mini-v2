@@ -28,6 +28,7 @@ export const getConsume = async (params: BalanceParams) => {
         uni.showToast({
             title: '获取账单失败',
             icon: 'error',
+            duration: 1200
         });
 
         return false;
@@ -74,6 +75,7 @@ export const getBill = async (params: BillParams) => {
         uni.showToast({
             title: '获取账单失败',
             icon: 'error',
+            duration: 1200
         });
 
         return false;

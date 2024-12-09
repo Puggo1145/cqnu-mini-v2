@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { startOfWeek, addDays, format } from 'date-fns';
 // components
 import scheduleDetail from './schedule-detail.vue';
 
@@ -15,7 +16,10 @@ interface Lesson {
 	include_week: number[];
 	color: string;
 }
-const props = defineProps<{lessons: Lesson[] | undefined}>();
+const props = defineProps<{
+	lessons: Lesson[] | undefined,
+	currentDate?: Date
+}>();
 
 
 const weekList = [
@@ -27,6 +31,28 @@ const weekList = [
 	"六",
 	"日",
 ];
+
+// 计算当前是周几
+const currentDay = computed(() => {
+	const today = new Date();
+	// 获取今天是周几 (0-6, 0 代表周日)
+	const day = today.getDay();
+	// 转换为我们的格式 (1-7)
+	return day === 0 ? 7 : day;
+});
+
+
+// Calculate dates for the week
+const weekDates = computed(() => {
+	const date = props.currentDate || new Date();
+	const monday = startOfWeek(date, { weekStartsOn: 1 }); // Start from Monday
+	
+	return weekList.map((_, index) => {
+		const currentDate = addDays(monday, index);
+		return format(currentDate, 'd'); // Get day of month as number
+	});
+});
+
 const courseTimeList = [
 	["8:30", "9:15"],
 	["9:25", "10:10"],
@@ -45,9 +71,9 @@ const isDetailShow = ref(false);
 function onOpen() {
 	isDetailShow.value = true;
 }
-function onClose() {
-	isDetailShow.value = false;
-}
+// function onClose() {
+// 	isDetailShow.value = false;
+// }
 
 const selectedLesson = ref<Lesson>();
 function selectLesosn(lesson: Lesson) {
@@ -60,17 +86,32 @@ function selectLesosn(lesson: Lesson) {
 	<view class="w-full h-full flex flex-col gap-3">
 		<!-- 周列 -->
 		<view class="grid grid-cols-8 grid-rows-1 gap-1">
-			<text class="col-span-1 p-2 flex justify-center items-center font-bold text-sm">
+			<text class="col-span-1 p-2 flex justify-center items-center font-bold text-xs">
 				{{ new Date().getMonth() + 1 }}月
 			</text>
 			<view
 				v-for="(day, index) in weekList"
 				:key="index"
-				:class="`col-start-${index + 2} p-2 flex justify-center items-center font-bold`"
+				:class="[
+					`col-start-${index + 2} p-2 flex justify-center items-center font-bold`,
+					// 当前日期列添加特殊样式
+					index + 1 === currentDay && 'bg-primary/10 rounded-lg'
+				]"
 			>
-				<text class="text-sm text-modern">
-					{{ day }}
-				</text>
+				<view class="flex flex-col items-center gap-y-1">
+					<text 
+						class="text-sm"
+						:class="index + 1 === currentDay ? 'text-primary' : 'text-modern'"
+					>
+						{{ day }}
+					</text>
+					<text 
+						class="text-xs"
+						:class="index + 1 === currentDay ? 'text-primary' : 'text-secondary-foreground'"
+					>
+						{{ weekDates[index] }}
+					</text>
+				</view>
 			</view>
 		</view>
 
@@ -107,6 +148,8 @@ function selectLesosn(lesson: Lesson) {
 					:class="[
 						'text-xs text-modern py-2 p-1 rounded-md bg-secondary text-center',
 						'flex flex-col gap-y-1',
+						// 当前日期的课程添加特殊样式
+						lesson.day === currentDay && '!bg-primary/10'
 					]"
 					@click="() => selectLesosn(lesson)"
 				>

@@ -11,6 +11,13 @@ import useUserInfo from '@/stores/user-info';
 import icons from '@/constants/icons';
 import images from '@/constants/images';
 
+interface ConsumeCardProps {
+    variant?: 'primary' | 'secondary';
+}
+
+const props = withDefaults(defineProps<ConsumeCardProps>(), {
+    variant: 'primary'
+});
 
 const userInfoStore = useUserInfo();
 const { consume, isFetching, error, fetchConsume } = useFetchConsume();
@@ -41,11 +48,23 @@ function goToBill() {
 
 <template>
     <view
-        class="relative w-full h-[172px] bg-[#18B453] rounded-2xl shadow-md shadow-[#18B453] px-4 py-5"
+        class="relative w-full h-[172px] rounded-2xl shadow-md px-4 py-5"
+        :class="[
+            props.variant === 'primary' ? [
+                'bg-[#18B453]',
+                'shadow-[#18B453]'
+            ] : [
+                'bg-[#18B453]/90',
+                'shadow-[#18B453]/60'
+            ]
+        ]"
         @click="consumeCardOnClick"
     >
         <view class="w-full flex items-center justify-between">
-            <text class="text-white text-opacity-90 text-sm leading-none">
+            <text 
+                class="text-white leading-none"
+                :class="props.variant === 'primary' ? 'text-sm text-opacity-90' : 'text-xs text-opacity-80'"
+            >
                 本月消费
             </text>
             <view
@@ -53,12 +72,15 @@ function goToBill() {
                 class="flex items-center"
                 @click.stop="goToBill"
             >
-                <text class="text-white text-opacity-90 text-sm leading-none">
+                <text 
+                    class="text-white leading-none"
+                    :class="props.variant === 'primary' ? 'text-sm text-opacity-90' : 'text-xs text-opacity-80'"
+                >
                     账单
                 </text>
                 <image
                     :src="icons.rightWhite"
-                    class="size-4"
+                    :class="props.variant === 'primary' ? 'size-4' : 'size-3'"
                 />
             </view>
         </view>

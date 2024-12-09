@@ -32,6 +32,16 @@ const weekList = [
 	"日",
 ];
 
+// 计算当前是周几
+const currentDay = computed(() => {
+	const today = new Date();
+	// 获取今天是周几 (0-6, 0 代表周日)
+	const day = today.getDay();
+	// 转换为我们的格式 (1-7)
+	return day === 0 ? 7 : day;
+});
+
+
 // Calculate dates for the week
 const weekDates = computed(() => {
 	const date = props.currentDate || new Date();
@@ -82,13 +92,23 @@ function selectLesosn(lesson: Lesson) {
 			<view
 				v-for="(day, index) in weekList"
 				:key="index"
-				:class="`col-start-${index + 2} p-2 flex justify-center items-center font-bold`"
+				:class="[
+					`col-start-${index + 2} p-2 flex justify-center items-center font-bold`,
+					// 当前日期列添加特殊样式
+					index + 1 === currentDay && 'bg-primary/10 rounded-lg'
+				]"
 			>
 				<view class="flex flex-col items-center gap-y-1">
-					<text class="text-sm text-modern">
+					<text 
+						class="text-sm"
+						:class="index + 1 === currentDay ? 'text-primary' : 'text-modern'"
+					>
 						{{ day }}
 					</text>
-					<text class="text-xs text-secondary-foreground">
+					<text 
+						class="text-xs"
+						:class="index + 1 === currentDay ? 'text-primary' : 'text-secondary-foreground'"
+					>
 						{{ weekDates[index] }}
 					</text>
 				</view>
@@ -128,6 +148,8 @@ function selectLesosn(lesson: Lesson) {
 					:class="[
 						'text-xs text-modern py-2 p-1 rounded-md bg-secondary text-center',
 						'flex flex-col gap-y-1',
+						// 当前日期的课程添加特殊样式
+						lesson.day === currentDay && '!bg-primary/10'
 					]"
 					@click="() => selectLesosn(lesson)"
 				>

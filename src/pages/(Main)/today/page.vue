@@ -4,9 +4,8 @@ import { onShareAppMessage } from '@dcloudio/uni-app';
 import cusPage from '@/components/cus-page.vue';
 import dynamicHeader from './_components/dynamic-header.vue';
 import announcement from './_components/announcement.vue';
-// import tabs from './_components/tabs.vue';
 import smartClass from './_components/smart-class.vue';
-import classEasyNote from './_components/class-easy-note.vue';
+import todayTabs from './_components/today-tabs.vue';
 import initialPopup from './_components/initial-popup.vue';
 // hooks
 import { useCourses } from '@/hooks/useCourses';
@@ -29,17 +28,23 @@ const {
         <view class="px-4">
             <dynamic-header />
             <announcement />
-            <!-- <tabs /> -->
         </view>
-        <view class="overflow-hidden px-4 flex-1 flex flex-col">
-            <smart-class
-                :course-of-today="courseOfToday"
-                :remaining-time-of-latest-course="remainingTimeOfLatestCourse"
-            />
-            <view class="overflow-hidden flex-1">
-                <class-easy-note />
+
+        <scroll-view
+            class="overflow-hidden flex-1 flex flex-col"
+            scroll-y
+        >
+            <!-- 课程信息 -->
+            <view class="px-4">
+                <smart-class
+                    :course-of-today="courseOfToday"
+                    :remaining-time-of-latest-course="remainingTimeOfLatestCourse"
+                />
             </view>
-        </view>
+
+            <!-- Tab 区域 -->
+            <today-tabs class="flex-1"/>
+        </scroll-view>
     </cus-page>
 
     <initial-popup />

@@ -48,6 +48,7 @@ async function syncStudentInfo() {
         uni.showToast({
             title: '暂未支持研究生系统，敬请期待',
             icon: 'none',
+            duration: 1200
         });
 
         return;

@@ -19,6 +19,7 @@ export const getSignInSessionAndAuthCode = async () => {
         uni.showToast({
             title: "网络错误，请重试",
             icon: "error",
+            duration: 1200
         })
     }
 }

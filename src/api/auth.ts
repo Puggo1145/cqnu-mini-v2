@@ -42,7 +42,8 @@ export const signin = async () => {
     } catch (err) {
         uni.showToast({
             title: "微信登录失败",
-            icon: 'error'
+            icon: 'error',
+            duration: 1500
         });
     }
 }
@@ -79,7 +80,8 @@ export const signup = async (signupData: SignUpData) => {
     } catch (err) {
         uni.showToast({
             title: "注册失败",
-            icon: 'error'
+            icon: 'error',
+            duration: 1500
         });
     }
 }

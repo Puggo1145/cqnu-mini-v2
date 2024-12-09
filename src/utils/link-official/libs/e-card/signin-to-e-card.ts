@@ -60,6 +60,7 @@ const getSafeKeyboard = async () => {
             uni.showToast({
                 title: '获取一卡通信息失败',
                 icon: 'none',
+                duration: 1200
             })
 
             return;
@@ -79,6 +80,7 @@ const getSafeKeyboard = async () => {
         uni.showToast({
             title: '获取一卡通信息失败',
             icon: 'none',
+            duration: 1200
         })
     }
 }
@@ -103,6 +105,7 @@ export const getECardToken = async () => {
             uni.showToast({
                 title: '请等待用户信息加载完毕',
                 icon: 'none',
+                duration: 1200
             })
 
             return;
@@ -143,6 +146,7 @@ export const getECardToken = async () => {
             uni.showToast({
                 title: (res.data as { message: string }).message || '获取一卡通信息失败',
                 icon: 'none',
+                duration: 1200
             });
 
             return;
@@ -158,6 +162,7 @@ export const getECardToken = async () => {
         uni.showToast({
             title: '获取一卡通信息失败',
             icon: 'none',
+            duration: 1200
         });
     }
 }

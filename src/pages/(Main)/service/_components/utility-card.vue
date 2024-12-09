@@ -11,16 +11,20 @@ import useUtility from '@/hooks/useUtility';
 import icons from '@/constants/icons';
 import images from '@/constants/images';
 
+interface UtilityCardProps {
+    variant?: 'primary' | 'secondary';
+}
 
+const props = withDefaults(defineProps<UtilityCardProps>(), {
+    variant: 'primary'
+});
 
 const userInfo = useUserInfo();
-
 
 const isBindDormitoryPopupShow = ref(false);
 function onClose() {
     isBindDormitoryPopupShow.value = false;
 }
-
 
 const { balance, isFetchingBalance } = useUtility();
 const currentView = ref<"electricity" | "water">("electricity");
@@ -42,21 +46,40 @@ function utilityOnClick() {
 
 <template>
     <view 
-        class="relative w-full h-[172px] bg-primary rounded-2xl shadow-md shadow-primary px-4 py-5"
+        class="relative w-full h-[172px] rounded-2xl shadow-md px-4 py-5"
+        :class="[
+            props.variant === 'primary' ? [
+                'bg-primary',
+                'shadow-primary'
+            ] : [
+                'bg-primary/90',
+                'shadow-primary/60'
+            ]
+        ]"
         @click="utilityOnClick"
     >
         <view class="w-full flex items-center justify-between">
-            <text class="text-white text-opacity-90 text-sm">
+            <text 
+                class="text-white"
+                :class="props.variant === 'primary' ? 'text-sm text-opacity-90' : 'text-xs text-opacity-80'"
+            >
                 {{ currentView === "electricity" ? "电" : "水" }}费余额
             </text>
 
-            <!-- 切换水电费余额显示 -->
             <view
                 v-if="balance.water"
                 class="flex items-center gap-x-1"
             >
-                <image :src="icons.switchWhite" class="size-4" />
-                <text class="text-white text-opacity-90 text-sm">切换</text>
+                <image 
+                    :src="icons.switchWhite" 
+                    :class="props.variant === 'primary' ? 'size-4' : 'size-3'"
+                />
+                <text 
+                    class="text-white"
+                    :class="props.variant === 'primary' ? 'text-sm text-opacity-90' : 'text-xs text-opacity-80'"
+                >
+                    切换
+                </text>
             </view>
         </view>
 

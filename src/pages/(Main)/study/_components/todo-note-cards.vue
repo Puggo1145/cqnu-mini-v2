@@ -28,6 +28,7 @@ function goTo(available: boolean, url: string) {
         return uni.showToast({
             title: '功能未开放',
             icon: 'none',
+            duration: 800
         });
     }
 

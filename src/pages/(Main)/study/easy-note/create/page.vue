@@ -111,6 +111,7 @@ async function createEasyNote() {
                     uni.showToast({
                         title: err.message,
                         icon: 'none',
+                        duration: 1200
                     });
                 }
             })

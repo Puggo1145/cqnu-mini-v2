@@ -19,6 +19,7 @@ export const uploadImages = async (params: ImageUploadParams) => {
             uni.showToast({
                 title: "请先登录",
                 icon: "error",
+                duration: 1500
             });
 
             return null;
@@ -45,6 +46,7 @@ export const uploadImages = async (params: ImageUploadParams) => {
             uni.showToast({
                 title: "上传图片失败",
                 icon: "error",
+                duration: 1500
             });
 
             return null;
@@ -53,6 +55,7 @@ export const uploadImages = async (params: ImageUploadParams) => {
         uni.showToast({
             title: "网络错误",
             icon: "error",
+            duration: 1500
         });
 
         return null;

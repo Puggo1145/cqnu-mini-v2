@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// components
+import CusButton from '@/components/cus-button.vue';
 // utils
 import { getDate } from '@/utils/timeHandler';
 // api
@@ -35,9 +37,12 @@ async function updateSchedule() {
     const res = await getSchedules();
     if (res) {
         schedule.lessons = res;
+        uni.showToast({
+            title: "同步成功",
+            icon: "success",
+            duration: 800
+        })
     }
-
-    uni.hideLoading();
 }
 </script>
 
@@ -61,12 +66,16 @@ async function updateSchedule() {
         </view>
         <!-- 课表相关功能 -->
         <view class="flex items-center gap-x-3">
-            <button 
-                class="size-8 flex items-center justify-center"
+            <cus-button 
+                class="flex items-center justify-center"
+                variant="secondary"
                 @click="updateSchedule"
             >
-                <image :src="icons.syncBlack" class="size-6" />
-            </button>
+                <image :src="icons.syncBlack" class="size-4 mr-2" />
+                <text class="text-sm">
+                    同步
+                </text>
+            </cus-button>
         </view>
     </view>
 </template>

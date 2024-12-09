@@ -9,6 +9,7 @@ import noSchedule from './_components/no-schedule.vue';
 import { useSchedule } from '@/stores/useSchedule';
 // constants
 import { baseConfigs } from '@/constants/baseConfig';
+import { addDays } from 'date-fns';
 
 
 const schedule = useSchedule();
@@ -57,6 +58,11 @@ onMounted(() => {
 
 	currentSwiperIndex.value = currentWeek.value - 1;
 })
+
+function getDateForWeek(weekNumber: number) {
+	const startDate = new Date(baseConfigs.termStartDate);
+	return addDays(startDate, (weekNumber - 1) * 7 + 7);
+}
 </script>
 
 <template>
@@ -83,11 +89,13 @@ onMounted(() => {
 		>
 			<swiper-item 
 				v-for="(lessons, index) in lessonsOfAllWeeks" 
-				:key="index" class="h-full overflow-hidden"
+				:key="index" 
+				class="h-full overflow-hidden"
 			>
 				<schedule-table 
 					v-if="index >= visibleRange.start && index <= visibleRange.end" 
 					:lessons="lessons"
+					:current-date="getDateForWeek(index + 1)"
 				/>
 			</swiper-item>
 		</swiper>

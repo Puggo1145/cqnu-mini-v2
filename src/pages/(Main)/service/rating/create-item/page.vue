@@ -83,7 +83,8 @@ const handleSubmitRatingItem = async () => {
             if (res.data.data) {
                 uni.showToast({
                     title: "美食已存在，跳转到此美食",
-                    icon: "none"
+                    icon: "none",
+                    duration: 1500
                 });
 
                 setTimeout(() => {
@@ -122,7 +123,8 @@ const handleSubmitRatingItem = async () => {
         if (createRatingItemRes.ok) {
             uni.showToast({
                 title: "创建成功",
-                icon: "success"
+                icon: "success",
+                duration: 1500
             })
 
             setTimeout(() => {
@@ -137,7 +139,7 @@ const handleSubmitRatingItem = async () => {
                 const errorTarget = error.path[0];
 
                 if (errorTarget === 'selectedFoodImage') {
-                    uni.showToast({ title: "请上传美食图片", icon: 'none' })
+                    uni.showToast({ title: "请上传美食图片", icon: 'none', duration: 1200 })
                 } else if (errorTarget === 'merchantName') {
                     merchantNameRef.value.showError("商家名长度应为 1-16 个字符");
                 } else if (errorTarget === 'foodName') {
@@ -145,7 +147,7 @@ const handleSubmitRatingItem = async () => {
                 } else if (errorTarget === 'price') {
                     priceRef.value.showError("价格应在 1-1000 之间");
                 } else if (errorTarget === 'tagId') {
-                    uni.showToast({ title: "请选择标签", icon: 'none' })
+                    uni.showToast({ title: "请选择标签", icon: 'none', duration: 1200 })
                 }
             })
         }

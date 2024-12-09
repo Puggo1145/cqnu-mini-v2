@@ -60,7 +60,8 @@ async function bindDormitory() {
 
             uni.showToast({
                 title: '绑定成功',
-                icon: 'success'
+                icon: 'success',
+                duration: 1500
             });
 
             // 关闭弹窗

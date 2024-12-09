@@ -1,87 +1,129 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 interface CourseDetails {
-    name: string; // 课程名称
-    nature: string; // 课程性质
-    type: string; // 课程类别
-    status: string; // 课程状态
-    credit: string; // 学分
-    score?: string; // 成绩
-    GPA?: string; // 绩点
+    name: string;
+    nature: string;
+    type: string;
+    status: string;
+    credit: string;
+    score?: string;
+    GPA?: string;
 }
-const { title, courseDetails } = defineProps<{
-    title: string;
+
+const props = defineProps<{
     courseDetails: CourseDetails[]
 }>();
 
+// 添加筛选开关状态
+const showOnlyUnfinished = ref(false);
+
+// 根据筛选条件过滤课程
+const filteredCourses = computed(() => {
+    if (!showOnlyUnfinished.value) return props.courseDetails;
+    return props.courseDetails.filter(course => course.status !== "已修");
+});
 
 const totalCredit = computed(() => {
-    return courseDetails.reduce((acc, cur) => {
+    return filteredCourses.value.reduce((acc, cur) => {
         return acc + Number(cur.credit);
     }, 0);
 });
+
 const passedCredit = computed(() => {
-    return courseDetails.reduce((acc, cur) => {
+    return filteredCourses.value.reduce((acc, cur) => {
         return cur.status === "已修" ? acc + Number(cur.credit) : acc;
     }, 0);
 });
 </script>
 
 <template>
-    <view class="w-full rounded-2xl flex flex-col mb-6">
-        <view class="ml-2 w-full flex items-end justify-between">
-            <text class="font-bold text-2xl">
-                {{ title }}
-            </text>
-            <view class="mr-4">
-                <text class="text-sm text-secondary-foreground mr-3">
-                    已修学分: {{ passedCredit }}
-                </text>
+    <view class="w-full flex flex-col py-4">
+        <!-- 学分统计和筛选器 -->
+        <view class="flex items-center justify-between mb-4 px-2">
+            <!-- 学分统计 -->
+            <view class="flex items-center gap-x-4">
+                <view class="flex items-center">
+                    <view class="size-2 rounded-full bg-primary mr-2" />
+                    <text class="text-sm">
+                        已修 {{ passedCredit }}
+                    </text>
+                </view>
+                <view class="flex items-center">
+                    <view class="size-2 rounded-full bg-secondary-foreground mr-2" />
+                    <text class="text-sm text-secondary-foreground">
+                        总学分 {{ totalCredit }}
+                    </text>
+                </view>
+            </view>
+
+            <!-- 筛选开关 -->
+            <view class="flex items-center gap-x-2">
                 <text class="text-sm text-secondary-foreground">
-                    总学分: {{ totalCredit }}
+                    仅看未修
                 </text>
+                <up-switch
+                    v-model="showOnlyUnfinished"
+                    size="22"
+                    activeColor="#5670FD"
+                />
             </view>
         </view>
-        <scroll-view
-            scroll-y
-            class="mt-2 py-4 overflow-hidden w-full h-[400px] bg-secondary rounded-2xl"
-        >
+
+        <!-- 课程列表 -->
+        <view class="flex flex-col gap-y-3 px-2">
             <view
-                v-for="course in courseDetails"
+                v-for="course in filteredCourses"
                 :key="course.name"
-                class="flex justify-between items-center px-4 pb-4 last:pb-0"
+                class="w-full p-4 bg-secondary rounded-xl flex justify-between items-center"
             >
-                <!-- 基本信息 -->
-                <view class="flex flex-col flex-1 gap-x-6">
-                    <text class="text-sm line-clamp-1">
+                <!-- 左侧信息 -->
+                <view class="flex-1 flex flex-col gap-y-2">
+                    <text class="text-base font-bold line-clamp-1">
                         {{ course.name }}
                     </text>
-                    <view class="flex items-center gap-x-2 text-xs text-secondary-foreground">
-                        <text>
-                            {{ course.nature }}
+                    <view class="flex flex-wrap gap-2">
+                        <view 
+                            v-for="tag in [course.nature, course.type]" 
+                            :key="tag"
+                            class="px-2 py-0.5 bg-white/50 rounded-full"
+                        >
+                            <text class="text-xs text-secondary-foreground">
+                                {{ tag }}
+                            </text>
+                        </view>
+                        <view class="px-2 py-0.5 bg-primary/10 rounded-full">
+                            <text class="text-xs text-primary">
+                                {{ course.credit }} 学分
+                            </text>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 右侧状态 -->
+                <view class="flex flex-col items-end gap-y-1 ml-4">
+                    <text 
+                        v-if="course.score && course.GPA"
+                        class="text-lg font-bold"
+                    >
+                        {{ course.score }}
+                        <text class="text-sm text-secondary-foreground ml-1">
+                            / {{ course.GPA }}
                         </text>
-                        <text>
-                            {{ course.type }}
-                        </text>
-                        <text>
-                            {{ course.credit }} 学分
+                    </text>
+                    <view 
+                        class="px-2 py-0.5 rounded-full"
+                        :class="course.status === '已修' ? 'bg-primary/10' : 'bg-secondary/80'"
+                    >
+                        <text 
+                            class="text-xs"
+                            :class="course.status === '已修' ? 'text-primary' : 'text-secondary-foreground'"
+                        >
+                            {{ course.status }}
                         </text>
                     </view>
                 </view>
-                <!-- 成绩与状态 -->
-                <view class="flex items-center gap-x-4">
-                    <text 
-                        v-if="course.score && course.GPA"
-                        class="font-bold"
-                    >
-                        {{ course.score }} / {{ course.GPA }}
-                    </text>
-                    <text class="text-sm">
-                        {{ course.status }}
-                    </text>
-                </view>
             </view>
-        </scroll-view>
+        </view>
     </view>
 </template>

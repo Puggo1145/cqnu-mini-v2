@@ -42,7 +42,8 @@ async function submitModification() {
             
             uni.showToast({
                 title: "修改成功",
-                icon: "success"
+                icon: "success",
+                duration: 1500
             });
 
             onClose();

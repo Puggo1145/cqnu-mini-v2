@@ -49,6 +49,7 @@ export default function useCreateEasyNote() {
             uni.showToast({
                 title: "创建成功",
                 icon: "success",
+                duration: 1500
             })
             setTimeout(() => {
                 uni.navigateBack();

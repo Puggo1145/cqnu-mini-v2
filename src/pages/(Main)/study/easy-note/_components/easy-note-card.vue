@@ -97,7 +97,8 @@ async function supportEasyNote() {
     } else {
         uni.showToast({
             title: "击掌失败",
-            icon: "error"
+            icon: "error",
+            duration: 1000
         });
     }
 }
@@ -122,7 +123,8 @@ async function deleteEasyNote() {
     if (isSuccess) {
         uni.showToast({
             title: "删除成功",
-            icon: "success"
+            icon: "success",
+            duration: 1000
         });
 
         // 查找列表中该 id 的小记并删除

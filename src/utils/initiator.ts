@@ -32,7 +32,9 @@ class Initiator {
         const isTokenValid = await validateTokenAndSyncUserInfo();
         if (!isTokenValid) {
             uni.showToast({
-                title: "获取用户信息失败，请尝试重新登录"
+                title: "获取用户信息失败，请尝试重新登录",
+                icon: 'none',
+                duration: 1500
             })
             // token 无效，跳转到首页登录
             // 可以考虑直接调用 signin 来自动登录

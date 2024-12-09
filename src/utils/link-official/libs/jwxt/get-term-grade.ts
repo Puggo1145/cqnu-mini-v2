@@ -41,6 +41,7 @@ export const getTermGrade = async (
         uni.showToast({
             title: "校园门户错误，请重试",
             icon: "error",
+            duration: 1200
         })
 
         return null;

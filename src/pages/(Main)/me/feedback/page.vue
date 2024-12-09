@@ -68,6 +68,7 @@ const submitFeedback = async () => {
             uni.showToast({
                 title: '提交成功',
                 icon: 'success',
+                duration: 1500
             });
             setTimeout(() => {
                 uni.navigateBack();

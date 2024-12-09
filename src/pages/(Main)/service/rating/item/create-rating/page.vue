@@ -56,7 +56,8 @@ async function onSubmit() {
     if (rating.value === 0) {
         uni.showToast({
             title: '请先评分',
-            icon: 'none'
+            icon: 'none',
+            duration: 1200
         })
         return;
     }
@@ -73,7 +74,8 @@ async function onSubmit() {
     if (!dishId) {
         uni.showToast({
             title: '获取美食 ID 失败',
-            icon: 'none'
+            icon: 'none',
+            duration: 1200
         })
         return;
     }
@@ -98,7 +100,8 @@ async function onSubmit() {
     if (res.ok) {
         uni.showToast({
             title: '评分成功',
-            icon: 'success'
+            icon: 'success',
+            duration: 1200
         })
 
         setTimeout(() => {

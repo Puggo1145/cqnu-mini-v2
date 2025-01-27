@@ -40,7 +40,11 @@ function gotoHome() {
 
 <template>
     <cus-page header-type="none">
-        <image :src="images.landing" mode="aspectFill" class="w-full h-[320px]" />
+        <image
+            :src="images.landing"
+            mode="aspectFill"
+            class="w-full h-[320px]"
+        />
         <view class="overflow-hidden w-screen mt-8 mb-4">
             <flowTexts />
         </view>
@@ -63,8 +67,19 @@ function gotoHome() {
                     </view>
                 </view>
             </view>
-            <cus-button @click="handleSignIn" :variant="isSigningIn ? 'loading' : 'primary'" class-name="mt-4 ">
+            <!-- <cus-button
+                @click="handleSignIn"
+                :variant="isSigningIn ? 'loading' : 'primary'"
+                class-name="mt-4 "
+            >
                 {{ isSigningIn ? "" : "登录" }}
+            </cus-button> -->
+            <cus-button
+                variant="muted"
+                disabled
+                class-name="mt-4 "
+            >
+                小程序维护中
             </cus-button>
 
             <!-- dev buttons -->
@@ -76,7 +91,7 @@ function gotoHome() {
                     dev page
                 </cus-button>
             </view> -->
-            
+
         </view>
         <!-- 背景圆 -->
         <view class="z-0 overflow-hidden w-full h-[330px] absolute bottom-0 left-0">

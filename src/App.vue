@@ -14,16 +14,24 @@ onLaunch(async () => {
     const statusBarHeight = uni.getMenuButtonBoundingClientRect().top;
     useStatusBarHeight().set(statusBarHeight - 15);
 
-    // 初始化全局状态
-    useUserInfo();
-    // 从缓存读取课表
-    const lessons = await uni.getStorageSync("schedule");
-    if (lessons) useSchedule().lessons = lessons;
+    // 显示维护提示
+    uni.showModal({
+        title: '小程序维护中',
+        content: '智慧重师正在进行假期维护，预计将于 2 月 22 日恢复。本次维护将对小程序进行轻量化改造，取消用户认证，将所有园门户信息保存在本地以保证用户隐私安全。小程序未来将专注于基于校园门户的信息和移动体验优化',
+        showCancel: false
+    });
 
-    // 初始化
-    const initiator = new Initiator();
-    initiator.validateSignInStatus();
-    initiator.addInterceptPages()
+    // TODO: 临时维护完成后取消注释
+    // // 初始化全局状态
+    // useUserInfo();
+    // // 从缓存读取课表
+    // const lessons = await uni.getStorageSync("schedule");
+    // if (lessons) useSchedule().lessons = lessons;
+
+    // // 初始化
+    // const initiator = new Initiator();
+    // initiator.validateSignInStatus();
+    // initiator.addInterceptPages()
 });
 
 

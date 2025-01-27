@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/index/index"
+		},
+		{
 			"path": "pages/(Main)/today/page"
 		},
 		{
@@ -41,9 +44,6 @@
 		},
 		{
 			"path": "pages/(Main)/me/feedback/page"
-		},
-		{
-			"path": "pages/index/index"
 		},
 		{
 			"path": "pages/(Main)/service/page"

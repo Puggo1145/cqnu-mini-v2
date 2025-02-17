@@ -100,7 +100,7 @@ export const getECardToken = async () => {
 
         // 1. 获取用户信息
         const studentId = userInfoStore.studentId;
-        const password = userInfoStore.getDecryptedCardPwd();
+        const password = userInfoStore.cardPwd;
         if (!studentId || !password) {
             uni.showToast({
                 title: '请等待用户信息加载完毕',

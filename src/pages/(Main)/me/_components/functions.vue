@@ -2,15 +2,14 @@
 // constants
 import icons from '@/constants/icons';
 
-
 interface Func {
     name: string;
     icon: string;
     page: string;
 }
+
 const funcs: Func[] = [
     { name: "修改个人信息", icon: icons.modifyUserInfo, page: "modify" },
-    { name: "意见反馈", icon: icons.feedback, page: "feedback" },
     { name: "关于我们", icon: icons.about, page: "about" },
 ]
 

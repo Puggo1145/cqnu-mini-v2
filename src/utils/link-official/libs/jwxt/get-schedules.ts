@@ -24,7 +24,7 @@ export const getSchedules = async () => {
         if (res.statusCode !== 200) {
             uni.showToast({
                 title: "校园门户错误，请重试",
-                icon: "error",
+                icon: "none",
                 duration: 1200
             })
 
@@ -39,7 +39,7 @@ export const getSchedules = async () => {
     } catch {
         uni.showToast({
             title: "校园门户错误，请重试",
-            icon: "error",
+            icon: "none",
             duration: 1200
         })
 

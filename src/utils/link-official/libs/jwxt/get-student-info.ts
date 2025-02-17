@@ -31,7 +31,7 @@ export const getStudentInfo = async () => {
     } catch (err) {
         uni.showToast({
             title: (err as Error).message || "校园门户错误，请重试",
-            icon: "error",
+            icon: "none",
             duration: 1200
         })
 

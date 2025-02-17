@@ -10,7 +10,6 @@ export const developers: Developers[] = [
     { name: "谭明扬", role: "后端核心开发" },
     { name: "高梓竣", role: "前端开发" },
     { name: "袁廙", role: "前端开发" },
-    { name: "张贵马", role: "后端开发" },
 ]
 
 export const contributors = [

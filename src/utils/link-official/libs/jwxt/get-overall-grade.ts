@@ -20,10 +20,11 @@ export const getOverallGrade = async () => {
         const overallGrade = parseOverallGrade((res.data as string));
 
         return overallGrade;
-    } catch {
+    } catch (err) {
+        console.log(err);
         uni.showToast({
-            title: "校园门户错误，请重试",
-            icon: "error",
+            title: "校园门户错误，请重试!",
+            icon: "none",
             duration: 1200
         })
 

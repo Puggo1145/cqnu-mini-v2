@@ -39,8 +39,8 @@ export const getTermGrade = async (
         return res.data as OriginalTermGrade;
     } catch {
         uni.showToast({
-            title: "校园门户错误，请重试",
-            icon: "error",
+            title: "校园门户错误，请重试!",
+            icon: "none",
             duration: 1200
         })
 

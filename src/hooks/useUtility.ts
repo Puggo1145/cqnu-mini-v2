@@ -2,8 +2,6 @@ import { ref, onMounted, watch } from "vue";
 import useUserInfo from "@/stores/user-info";
 // linkOfficial
 import { getCardInfo, getUtilityBalance } from '@/utils/link-official';
-// api
-import { updateUserInfo } from '@/api/user';
 
 
 interface UtilityBalance {
@@ -11,65 +9,67 @@ interface UtilityBalance {
     water: number | null;
 }
 const useUtility = () => {
-    const userInfo = useUserInfo();
+    const userInfoStore = useUserInfo();
 
     const isFetchingBalance = ref(false);
+    const error = ref(false);
     const balance = ref<UtilityBalance>({
         electricity: 0,
         water: 0
     });
 
     async function queryUtility() {
-        isFetchingBalance.value = true;
-
-        if (!userInfo.studentId || !userInfo.dormitory || !userInfo.roomNumber) {
-            isFetchingBalance.value = false;
+        if (!userInfoStore.studentId || !userInfoStore.dormitory || !userInfoStore.roomNumber) {
             return
         };
+
+        isFetchingBalance.value = true;
 
         const eCardId = await getCardId();
 
         const res = await getUtilityBalance({
             eCardId: eCardId,
-            dormitoryName: userInfo.dormitory,
-            roomNumber: userInfo.roomNumber
+            dormitoryName: userInfoStore.dormitory,
+            roomNumber: userInfoStore.roomNumber
         });
         if (res.ok) {
             balance.value = res.data.data
+        } else {
+            error.value = true;
         }
 
         isFetchingBalance.value = false;
     }
 
     async function getCardId() {
-        if (!userInfo.ecardId) {
-            const res = await getCardInfo(userInfo.studentId!);
+        if (!userInfoStore.ecardId) {
+            const res = await getCardInfo(userInfoStore.studentId!);
 
             if (res.ok) {
                 const ecardId = res.data.data[0].account;
-
-                // 将 ecardId update 到 user info
-                await updateUserInfo({
-                    openid: userInfo.openid!,
+                userInfoStore.setUserInfo({
                     ecardId: ecardId
                 });
-
-                return ecardId;
             }
 
         }
 
-        return userInfo.ecardId!;
+        return userInfoStore.ecardId!;
     }
 
-    onMounted(async () => {
-        await queryUtility();
+    onMounted(() => {
+        queryUtility();
     })
-    watch(() => userInfo.dormitory, async () => {
-        await queryUtility();
+    watch(() => userInfoStore.dormitory, () => {
+        queryUtility();
     })
 
-    return { balance, isFetchingBalance }
+    return { 
+        balance, 
+        isFetchingBalance, 
+        error,
+        queryUtility
+    }
 }
 
 export default useUtility;

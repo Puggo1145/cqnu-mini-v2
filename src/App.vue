@@ -8,7 +8,6 @@ import { useStatusBarHeight } from './stores/statusBarHeight';
 import useUserInfo from './stores/user-info';
 import { useSchedule } from './stores/useSchedule';
 
-
 onLaunch(async () => {
     // 自适应状态栏高度
     const statusBarHeight = uni.getMenuButtonBoundingClientRect().top;
@@ -21,11 +20,9 @@ onLaunch(async () => {
 
     // 初始化
     const initiator = new Initiator();
-    // initiator.validateSignInStatus();
+    initiator.validateSignInStatus();
     initiator.addInterceptPages()
 });
-
-
 </script>
 
 <style lang="scss">

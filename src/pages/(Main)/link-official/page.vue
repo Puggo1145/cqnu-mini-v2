@@ -25,6 +25,17 @@ const {
 const userInfoStore = useUserInfo();
 
 const backPage = ref<string>();
+const titleDescType = ref<'initial' | 'default'>(userInfoStore.studentId ? 'default' : 'initial');
+const titleDescContent = ref({
+    initial: {
+        title: '添加校园门户账号',
+        desc: '添加官网校园门户账号后可以访问官网学业与生活服务信息。小程序非常重视您的隐私安全，您的账号和密码仅保存在本地设备，不会上传到云端'
+    },
+    default: {
+        title: '登录到校园门户',
+        desc: '请输入验证码获取校园门户信息'
+    }
+})
 onMounted(async () => {
     // 获取 backPage
     const pages = getCurrentPages();
@@ -65,7 +76,7 @@ function gotoBackPage() {
 
     setTimeout(() => {
         if (backPage.value) {
-            uni.switchTab({
+            uni.redirectTo({
                 url: backPage.value
             });
         } else {
@@ -82,8 +93,8 @@ function gotoBackPage() {
         class-name="pt-8"
     >
         <title-desc
-            title="添加校园门户账号"
-            desc="添加官网校园门户账号后可以访问官网学业与生活服务信息。小程序非常重视您的隐私安全，您的账号和密码仅保存在本地设备，不会上传到云端"
+            :title="titleDescContent[titleDescType].title"
+            :desc="titleDescContent[titleDescType].desc"
         />
         <view class="mt-4 flex flex-col gap-y-3">
             <cusInput

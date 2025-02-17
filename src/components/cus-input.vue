@@ -3,8 +3,7 @@ import { ref, watch, withDefaults, onMounted } from 'vue';
 // types
 import type { InputTypeHTMLAttribute } from 'vue';
 // static
-import icons from '@/constants/icons';
-
+// import icons from '@/constants/icons';
 
 export type CusInputEvent = { value: string };
 interface Props {
@@ -26,7 +25,6 @@ const isInputFocused = ref(false);
 const inputValue = ref('');
 const errorMessage = ref('');
 
-
 // input 事件相关
 const emit = defineEmits(['focus', 'blur', 'input']);
 const onFocus = () => {
@@ -41,13 +39,11 @@ const onInput = (e: Event) => {
 };
 const onBlur = () => inputValue.value.length === 0 && (isInputFocused.value = false)
 
-
 // 显示错误信息
 const showError = (message: string) => {
     errorMessage.value = message;
 };
 defineExpose({ showError });
-
 
 // input 初始状态表现
 onMounted(() => {
@@ -70,7 +66,7 @@ watch(() => props.value, (value) => {
 <template>
     <view
         :class="[
-            'box-border flex items-center w-full h-[60px] border border-solid rounded-2xl bg-white',
+            'box-border flex items-center w-full h-[60px] border border-solid rounded-2xl bg-secondary',
             isInputFocused ? 'border-secondary-foreground' : 'border-[#E0E0E0]',
             errorMessage && '!border-destructive',
             props.disabled && 'border-[#E0E0E0] bg-[#F5F5F5]',

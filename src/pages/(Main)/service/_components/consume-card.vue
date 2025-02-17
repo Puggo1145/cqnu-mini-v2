@@ -40,7 +40,7 @@ function goToBill() {
         @click="consumeCardOnClick"
     >
         <view class="w-full flex items-center justify-between">
-            <text class="text-secondary-foreground leading-none text-sm text-opacity-90">
+            <text class="text-secondary-foreground text-sm text-opacity-90">
                 本月消费
             </text>
             <view
@@ -73,7 +73,6 @@ function goToBill() {
 
             <spinner
                 v-else-if="isFetching"
-                size="medium"
                 color="black"
             />
 

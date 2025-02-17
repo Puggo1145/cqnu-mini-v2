@@ -37,10 +37,10 @@ function goToSchedule() {
                 class="flex justify-between"
             >
                 <view class="flex flex-col gap-y-2">
-                    <text class="text-white text-3xl font-bold">
+                    <text class="text-primary-foreground text-3xl font-bold">
                         请同步课表
                     </text>
-                    <text class="text-sm text-white">
+                    <text class="text-sm text-primary-foreground">
                         体验高效好用的智能课表
                     </text>
                 </view>

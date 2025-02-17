@@ -17,12 +17,19 @@ function onClose() {
     isModifyDormitoryPopupShow.value = false;
 }
 
-const { balance, isFetchingBalance } = useUtility();
+const { balance, isFetchingBalance, error, queryUtility } = useUtility();
 const currentView = ref<"electricity" | "water">("electricity");
-function utilityOnClick() {
+
+async function utilityOnClick() {
     // 判断是否绑定宿舍信息
     if (!userInfo.dormitory || !userInfo.roomNumber) {
         isModifyDormitoryPopupShow.value = true;
+        return;
+    }
+
+    // 如果有错误，点击重试
+    if (error.value) {
+        await queryUtility();
         return;
     }
 
@@ -49,7 +56,7 @@ function utilityOnClick() {
             </text>
 
             <view
-                v-if="balance.water"
+                v-if="balance.water && !error"
                 class="flex items-center gap-x-1"
             >
                 <image
@@ -83,6 +90,18 @@ function utilityOnClick() {
                 v-else-if="isFetchingBalance"
                 color="black"
             />
+
+            <!-- 错误状态 -->
+            <view
+                v-else-if="error"
+                class="flex items-center"
+            >
+                <text class="text-secondary-foreground font-bold">请点击重试</text>
+                <image
+                    class="size-4"
+                    :src="icons.rightSecondary"
+                />
+            </view>
 
             <!-- 余额 -->
             <view v-else>

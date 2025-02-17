@@ -18,7 +18,7 @@ const props = defineProps<{
     onClose: () => void;
 }>();
 
-const userInfo = useUserInfo();
+const userInfoStore = useUserInfo();
 
 const selectedDormitory = ref(0);
 function onDormitoryChange(e: CusSelectEvent) {
@@ -42,15 +42,9 @@ async function bindDormitory() {
         });
 
         // 更新 store 中的宿舍信息
-        userInfo.setUserInfo({
+        userInfoStore.setUserInfo({
             dormitory: baseConfigs.dormitories[selectedDormitory.value],
             roomNumber: roomNumber.value
-        });
-
-        uni.showToast({
-            title: '绑定成功',
-            icon: 'success',
-            duration: 500
         });
 
         // 关闭弹窗

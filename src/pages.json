@@ -7,19 +7,7 @@
 			"path": "pages/index/index"
 		},
 		{
-			"path": "pages/(Main)/service/rating/item/create-rating/page"
-		},
-		{
-			"path": "pages/(Main)/service/rating/item/page"
-		},
-		{
 			"path": "pages/(dev)/report/page"
-		},
-		{
-			"path": "pages/(Main)/service/rating/create-item/page"
-		},
-		{
-			"path": "pages/(Main)/service/rating/page"
 		},
 		{
 			"path": "pages/(Main)/service/bill/page"
@@ -38,9 +26,6 @@
 		},
 		{
 			"path": "pages/(Main)/study/schedule/page"
-		},
-		{
-			"path": "pages/(Main)/me/feedback/page"
 		},
 		{
 			"path": "pages/(Main)/service/page"

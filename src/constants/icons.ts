@@ -37,22 +37,16 @@ import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
 import studyReview from "@/static/icons/study-review.svg"
 import add from '@/static/icons/add.svg'
-// easy-note
-import haveFive from "@/static/icons/have-five.svg"
-import deleteNote from '@/static/icons/delete.svg'
-import claped from '@/static/icons/claped.svg'
-import clap from '@/static/icons/clap.svg'
 // me
 import modifyUserInfo from '@/static/icons/modify-user-info.svg'
 import about from '@/static/icons/about.svg'
 import feedback from '@/static/icons/feedback.svg'
+// services
+import utility from '@/static/icons/service-utility.svg'
+import ecard from '@/static/icons/service-ecard.svg'
 // bill
 import alipay from '@/static/icons/alipay.svg'
 import wxpay from '@/static/icons/wxpay.svg'
-// rating
-import ratingStar from '@/static/icons/rating-star.svg'
-import ratingStarSolid from '@/static/icons/rating-star-solid.svg'
-import ratingStarHollow from '@/static/icons/rating-star-hollow.svg'
 
 
 const icons = {
@@ -96,12 +90,6 @@ const icons = {
         review: studyReview,
         add: add,
     },
-    easyNote: {
-        haveFive,
-        deleteNote,
-        clap,
-        claped,
-    },
     modifyUserInfo,
     about,
     feedback,
@@ -109,10 +97,9 @@ const icons = {
         alipay,
         wxpay,
     },
-    rating: {
-        star: ratingStar,
-        starSolid: ratingStarSolid,
-        starHollow: ratingStarHollow
+    service: {
+        utility,
+        ecard,
     }
 };
 

@@ -11,8 +11,6 @@ import studyEasyNote from "@/static/images/study-easy-note.svg";
 import shareTodoAvatars from '@/static/images/share-todo-avatars.png'
 // service
 import serviceBg from "@/static/images/service-bg.svg";
-import serviceUtility from "@/static/images/service-utility.svg";
-import serviceCard from "@/static/images/service-card.svg";
 import serviceFood from "@/static/images/service-food.png";
 import serviceLocation from "@/static/images/service-location.svg";
 import serviceWater from "@/static/images/service-water.svg";
@@ -37,8 +35,6 @@ const images = {
     },
     service: {
         bg: serviceBg,
-        utility: serviceUtility,
-        card: serviceCard,
         food: serviceFood,
         location: serviceLocation,
         water: serviceWater,

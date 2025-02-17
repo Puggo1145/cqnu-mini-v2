@@ -5,8 +5,6 @@ import titleDesc from '@/components/title-desc.vue';
 import cusSelect from '@/components/cus-select.vue';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
-// api
-import { updateUserInfo } from '@/api/user';
 // stores
 import useUserInfo from '@/stores/user-info';
 // zod
@@ -20,9 +18,7 @@ const props = defineProps<{
     onClose: () => void;
 }>();
 
-
 const userInfo = useUserInfo();
-
 
 const selectedDormitory = ref(0);
 function onDormitoryChange(e: CusSelectEvent) {
@@ -35,46 +31,36 @@ function onRoomNumberChange(e: any) {
     roomNumber.value = e.value;
 }
 
-
-const isBinding = ref(false);
 const bindDormitorySchema = z.object({
     roomNumber: z.string().min(3, '宿舍号最小为 3 位').max(4, '宿舍号最大为 4 位')
 });
-async function bindDormitory() {
-    isBinding.value = true;
 
+async function bindDormitory() {
     try {
         bindDormitorySchema.parse({
             roomNumber: roomNumber.value
         });
 
-        // 更新用户信息
-        const isSuccess = await updateUserInfo({
-            openid: userInfo.openid!,
+        // 更新 store 中的宿舍信息
+        userInfo.setUserInfo({
             dormitory: baseConfigs.dormitories[selectedDormitory.value],
             roomNumber: roomNumber.value
         });
-        if (isSuccess) {
-            userInfo.dormitory = baseConfigs.dormitories[selectedDormitory.value];
-            userInfo.roomNumber = roomNumber.value;
 
-            uni.showToast({
-                title: '绑定成功',
-                icon: 'success',
-                duration: 1500
-            });
+        uni.showToast({
+            title: '绑定成功',
+            icon: 'success',
+            duration: 500
+        });
 
-            // 关闭弹窗
-            props.onClose();
-        }
+        // 关闭弹窗
+        props.onClose();
     } catch (err) {
         if (err instanceof ZodError) {
             if (err.errors[0].path[0] === "roomNumber") {
                 roomNumberInputRef.value.showError(err.errors[0].message);
             }
         }
-    } finally {
-        isBinding.value = false;
     }
 }
 </script>
@@ -102,7 +88,6 @@ async function bindDormitory() {
         </view>
         <cus-button
             class="mt-6"
-            :variant="isBinding ? 'loading' : 'primary'"
             @click="bindDormitory"
         >
             绑定

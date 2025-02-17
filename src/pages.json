@@ -1,10 +1,10 @@
 {
 	"pages": [
 		{
-			"path": "pages/index/index"
+			"path": "pages/(Main)/today/page"
 		},
 		{
-			"path": "pages/(Main)/today/page"
+			"path": "pages/index/index"
 		},
 		{
 			"path": "pages/(Main)/service/rating/item/create-rating/page"
@@ -20,9 +20,6 @@
 		},
 		{
 			"path": "pages/(Main)/service/rating/page"
-		},
-		{
-			"path": "pages/(Main)/study/easy-note/create/page"
 		},
 		{
 			"path": "pages/(Main)/service/bill/page"
@@ -58,19 +55,7 @@
 			"path": "pages/(Onboarding)/sign-up/page"
 		},
 		{
-			"path": "pages/(Main)/study/share-todo/initialization/first-todo/page"
-		},
-		{
-			"path": "pages/(Main)/study/share-todo/initialization/page"
-		},
-		{
 			"path": "pages/(Main)/study/page"
-		},
-		{
-			"path": "pages/(Main)/study/easy-note/page"
-		},
-		{
-			"path": "pages/(Main)/study/share-todo/page"
 		},
 		{
 			"path": "pages/(Onboarding)/process-sign-up/page"
@@ -90,32 +75,6 @@
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black"
-	},
-	"tabBar": {
-		"color": "#434041",
-		"selectedColor": "#3662E3",
-		"borderStyle": "white",
-		"backgroundColor": "#ffffff",
-		"list": [
-			{
-				"pagePath": "pages/(Main)/today/page",
-				"iconPath": "static/icons/today.png",
-				"selectedIconPath": "static/icons/today-activated.png",
-				"text": "今日"
-			},
-			{
-				"pagePath": "pages/(Main)/study/page",
-				"iconPath": "static/icons/study.png",
-				"selectedIconPath": "static/icons/study-activated.png",
-				"text": "学业"
-			},
-			{
-				"pagePath": "pages/(Main)/service/page",
-				"iconPath": "static/icons/service.png",
-				"selectedIconPath": "static/icons/service-activated.png",
-				"text": "服务"
-			}
-		]
 	},
 	"easycom": {
 		"autoscan": true,

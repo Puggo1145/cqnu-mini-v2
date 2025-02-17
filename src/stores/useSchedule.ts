@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
+import { STORAGE_KEYS } from "@/constants/storage-key";
 
+const STORAGE_KEY = STORAGE_KEYS.SCHEDULE;
 
 export interface Lesson {
   lesson_id: number;
@@ -23,6 +25,13 @@ export const useSchedule = defineStore("useSchedule", {
     lessons: [] as Lesson[],
   }),
   actions: {
+    getLessonsFromStorage() {
+      const lessons = uni.getStorageSync(STORAGE_KEY);
+      if (lessons) this.lessons = lessons;
+    },
+    setLessonsToStorage(lessons: Lesson[]) {
+      uni.setStorageSync(STORAGE_KEY, lessons);
+    },
     getLessons({ week, day }: GetLessonsParams) {
       return this.lessons?.filter(lesson =>
         lesson.include_week.includes(week)
@@ -40,6 +49,5 @@ export const useSchedule = defineStore("useSchedule", {
     getNamesOfLessons() {
       return this.lessons?.map(lesson => lesson.name);
     },
-
   }
 });

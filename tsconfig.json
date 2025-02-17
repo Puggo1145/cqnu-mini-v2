@@ -1,6 +1,9 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "importsNotUsedAsValues": "remove",
+    "preserveValueImports": null,
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {

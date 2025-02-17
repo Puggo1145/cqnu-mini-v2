@@ -28,7 +28,7 @@ function goToPage(url: string) {
 </script>
 
 <template>
-    <view class="w-full h-[124px] rounded-2xl bg-white flex items-center justify-evenly">
+    <view class="w-full h-[124px] rounded-2xl bg-secondary flex items-center justify-evenly">
         <view 
             v-for="func in otherFunctions"
             :key="func.name"

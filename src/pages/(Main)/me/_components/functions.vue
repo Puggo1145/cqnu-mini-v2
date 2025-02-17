@@ -26,7 +26,7 @@ function goPage(page: string) {
         <view
             v-for="func in funcs"
             :key="func.name"
-            class="w-full flex items-center gap-x-2 p-4 bg-white rounded-2xl"
+            class="w-full flex items-center gap-x-2 p-4 bg-secondary rounded-2xl"
             @click="() => goPage(func.page)"
         >
             <view class="w-6 h-6 flex items-center justify-center rounded-2xl">

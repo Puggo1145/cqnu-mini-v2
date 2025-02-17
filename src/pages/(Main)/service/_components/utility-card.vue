@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 // components
-import bindDormitory from './bind-dormitory.vue';
+import modifyDormitory from '@/pages/(Main)/me/modify/_components/modify-dormitory.vue';
 import spinner from '@/components/spinner.vue';
 // stores
 import useUserInfo from '@/stores/user-info';
@@ -9,21 +9,12 @@ import useUserInfo from '@/stores/user-info';
 import useUtility from '@/hooks/useUtility';
 // static
 import icons from '@/constants/icons';
-import images from '@/constants/images';
-
-interface UtilityCardProps {
-    variant?: 'primary' | 'secondary';
-}
-
-const props = withDefaults(defineProps<UtilityCardProps>(), {
-    variant: 'primary'
-});
 
 const userInfo = useUserInfo();
 
-const isBindDormitoryPopupShow = ref(false);
+const isModifyDormitoryPopupShow = ref(false);
 function onClose() {
-    isBindDormitoryPopupShow.value = false;
+    isModifyDormitoryPopupShow.value = false;
 }
 
 const { balance, isFetchingBalance } = useUtility();
@@ -31,7 +22,7 @@ const currentView = ref<"electricity" | "water">("electricity");
 function utilityOnClick() {
     // 判断是否绑定宿舍信息
     if (!userInfo.dormitory || !userInfo.roomNumber) {
-        isBindDormitoryPopupShow.value = true;
+        isModifyDormitoryPopupShow.value = true;
         return;
     }
 
@@ -45,23 +36,14 @@ function utilityOnClick() {
 </script>
 
 <template>
-    <view 
-        class="relative w-full h-[172px] rounded-2xl shadow-md px-4 py-5"
-        :class="[
-            props.variant === 'primary' ? [
-                'bg-primary',
-                'shadow-primary'
-            ] : [
-                'bg-primary/90',
-                'shadow-primary/60'
-            ]
-        ]"
+    <view
+        class="relative w-full h-[172px] rounded-2xl px-4 py-5 bg-secondary"
         @click="utilityOnClick"
     >
         <view class="w-full flex items-center justify-between">
-            <text 
-                class="text-white"
-                :class="props.variant === 'primary' ? 'text-sm text-opacity-90' : 'text-xs text-opacity-80'"
+            <text
+                class="text-secondary-foreground"
+                :class="'text-sm text-opacity-90'"
             >
                 {{ currentView === "electricity" ? "电" : "水" }}费余额
             </text>
@@ -70,13 +52,13 @@ function utilityOnClick() {
                 v-if="balance.water"
                 class="flex items-center gap-x-1"
             >
-                <image 
-                    :src="icons.switchWhite" 
-                    :class="props.variant === 'primary' ? 'size-4' : 'size-3'"
+                <image
+                    :src="icons.switchWhite"
+                    class="size-4"
                 />
-                <text 
-                    class="text-white"
-                    :class="props.variant === 'primary' ? 'text-sm text-opacity-90' : 'text-xs text-opacity-80'"
+                <text
+                    class="text-secondary-foreground"
+                    :class="'text-sm text-opacity-90'"
                 >
                     切换
                 </text>
@@ -85,39 +67,48 @@ function utilityOnClick() {
 
         <view class="mt-3">
             <!-- 绑定宿舍信息 -->
-            <view 
+            <view
                 v-if="!userInfo.dormitory && !userInfo.roomNumber"
                 class="flex items-center"
             >
-                <view class="text-white font-bold">去绑定宿舍信息</view>
-                <image class="size-4" :src="icons.rightWhite" />
+                <view class="text-secondary-foreground font-bold">去绑定宿舍信息</view>
+                <image
+                    class="size-4"
+                    :src="icons.rightSecondary"
+                />
             </view>
 
             <!-- 加载中 -->
-            <spinner v-else-if="isFetchingBalance" color="white" />
+            <spinner
+                v-else-if="isFetchingBalance"
+                color="black"
+            />
 
             <!-- 余额 -->
             <view v-else>
-                <text class="text-white font-bold text-4xl">
+                <text class="text-secondary-foreground font-bold text-4xl">
                     {{ currentView === "electricity" ? balance.electricity : balance.water }}
                 </text>
-                <!-- <text class="text-white text-sm">
-                    元
-                </text> -->
             </view>
         </view>
-        <image :src="images.service.utility" class="absolute size-[110px] right-0 -bottom-[14px]" />
+        <view class="absolute left-4 bottom-4 size-8 bg-primary rounded-full 
+        flex items-center justify-center">
+            <image
+                :src="icons.service.utility"
+                class="size-4"
+            />
+        </view>
     </view>
 
     <!-- 绑定宿舍弹出层 -->
     <up-popup
-        :show="isBindDormitoryPopupShow"
+        :show="isModifyDormitoryPopupShow"
         mode="bottom"
         :round="16"
         @close="onClose"
         class="z-50 fixed"
     >
-        <bind-dormitory :onClose="onClose" />
+        <modify-dormitory :onClose="onClose" />
         <view class="h-[64px]" />
     </up-popup>
 </template>

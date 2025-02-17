@@ -1,19 +1,19 @@
+import { STORAGE_KEYS } from "@/constants/storage-key";
 import { defineStore } from "pinia";
-import { decryptPwd } from "@/utils/encrypter";
 
+const STORAGE_KEY = STORAGE_KEYS.USER_INFO;
 
 export interface UserInfo extends Record<string, any> {
     id: number | undefined;
     openid: string | undefined;
-    username: string | undefined;
     studentId: string | undefined;
-    linker: string | undefined; // 门户密码
+    password: string | undefined; // 官网门户密码
 
-    faculty: string | undefined;
-    major: string | undefined;
-    stuClass: string | undefined;
-    grade: number | undefined;
-    identity: number | undefined;
+    // faculty: string | undefined;
+    // major: string | undefined;
+    // stuClass: string | undefined;
+    // grade: number | undefined;
+    // identity: number | undefined;
 
     dormitory?: string;
     roomNumber?: string;
@@ -24,52 +24,39 @@ export interface UserInfo extends Record<string, any> {
 }
 
 const useUserInfo = defineStore("useUserInfo", {
-    state: () => ({
-        id: undefined,
-        openid: undefined,
-
-        username: undefined,
-        studentId: undefined,
-        linker: undefined,
-
-        grade: undefined,
-        faculty: undefined,
-        major: undefined,
-        stuClass: undefined,
-        identity: undefined,
-
-        dormitory: undefined,
-        roomNumber: undefined,
-        ecardId: undefined,
-        cardPwd: undefined,
-
-        showFlag: undefined,
-        // id: 1,
-        // openid: "qw0d9ef8hufbh13q9efuwrv8hufgydbhsc",
-
-        // username: "puggo",
-        // studentId: "2021050919079",
-        // linker: undefined,
-
-        // grade: 2021,
-        // faculty: "新闻与传媒学院",
-        // major: "网络与新媒体",
-        // stuClass: "网络与新媒体1班",
-        // identity: 0,
-
-        // dormitory: undefined,
-        // roomNumber: undefined,
-
-        // showFlag: 0,
-    }) as UserInfo,
+    state: () => {
+        // 从本地存储加载初始状态
+        const savedState = uni.getStorageSync(STORAGE_KEY) as UserInfo;
+        return savedState || {
+            id: undefined,
+            openid: undefined,
+            studentId: undefined,
+            password: undefined,
+            // grade: undefined,
+            // faculty: undefined,
+            // major: undefined,
+            // stuClass: undefined,
+            // identity: undefined,
+            dormitory: undefined,
+            roomNumber: undefined,
+            ecardId: undefined,
+            cardPwd: undefined,
+            showFlag: undefined,
+        } satisfies UserInfo;
+    },
     actions: {
-        setUserInfo(userInfo: UserInfo) {
-            this.$state = userInfo;
+        setUserInfo(userInfo: Partial<UserInfo>) {
+            // 更新状态
+            Object.assign(this.$state, userInfo);
+            // 保存到本地存储
+            uni.setStorageSync(STORAGE_KEY, this.$state);
         },
         clearUserInfo() {
             Object.keys(this.$state).forEach((key) => {
                 this.$state[key] = undefined;
-            })
+            });
+            // 清除本地存储
+            uni.removeStorageSync(STORAGE_KEY);
         },
         getUserPublicInfo() {
             return {
@@ -92,20 +79,20 @@ const useUserInfo = defineStore("useUserInfo", {
         getUserPrivateInfo() {
             return this.$state;
         },
-        getDecryptedLinker() {
-            if (this.linker) {
-                return decryptPwd(this.linker);
-            } else {
-                return undefined;
-            }
-        },
-        getDecryptedCardPwd() {
-            if (this.cardPwd) {
-                return decryptPwd(this.cardPwd);
-            } else {
-                return undefined;
-            }
-        }
+        // getDecryptedLinker() {
+        //     if (this.linker) {
+        //         return decryptPwd(this.linker);
+        //     } else {
+        //         return undefined;
+        //     }
+        // },
+        // getDecryptedCardPwd() {
+        //     if (this.cardPwd) {
+        //         return decryptPwd(this.cardPwd);
+        //     } else {
+        //         return undefined;
+        //     }
+        // }
     }
 })
 

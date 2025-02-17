@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // constants
 import { baseConfigs } from '@/constants/baseConfig';
+import icons from '@/constants/icons';
 // store
 import { useSchedule } from '@/stores/useSchedule';
 // types
@@ -28,19 +29,30 @@ function goToSchedule() {
     <!-- 最近一节课程 -->
     <view class="w-full">
         <view
-            class="w-full p-6 rounded-2xl text-white leading-none bg-[#5670FD] shadow-lg shadow-[#5670FD]/20"
+            class="w-full p-7 rounded-2xl text-white leading-none bg-primary"
             @click="goToSchedule"
         >
             <view
                 v-if="scheduleStore.lessons.length === 0"
-                class="flex flex-col gap-y-2"
+                class="flex justify-between"
             >
-                <text class="text-white text-3xl font-bold">
-                    请同步课表
-                </text>
-                <text class="text-sm text-white">
-                    点击同步课表，让你的效率加倍！
-                </text>
+                <view class="flex flex-col gap-y-2">
+                    <text class="text-white text-3xl font-bold">
+                        请同步课表
+                    </text>
+                    <text class="text-sm text-white">
+                        体验高效好用的智能课表
+                    </text>
+                </view>
+                <view class="p-1.5 h-fit rounded-full bg-white text-primary flex gap-x-2 items-center justify-between">
+                    <text class="text-xs ml-2 leading-none">去同步</text>
+                    <view class="flex items-center justify-center bg-primary rounded-full p-1">
+                        <image
+                            :src="icons.rightWhite"
+                            class="size-3"
+                        />
+                    </view>
+                </view>
             </view>
 
             <view

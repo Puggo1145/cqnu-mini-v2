@@ -7,8 +7,6 @@ import cusButton from '@/components/cus-button.vue';
 import { signup } from '@/api/auth';
 // stores
 import { useSignupInfo } from '@/stores/signup-info';
-// utils
-import { encryptLinker } from '@/utils/encrypter';
 
 
 const stores = useSignupInfo();
@@ -18,28 +16,26 @@ const isSigningUp = ref(false);
 
 
 async function goToSignUpProcess() {
-    isSigningUp.value = true;
+    // isSigningUp.value = true;
 
-    const encryptedLinker = encryptLinker(stores.linker);
+    // const res = await signup({
+    //     username: stores.username,
+    //     studentId: stores.studentId,
+    //     linker: encryptedLinker,
+    //     identity: stores.identity!,
+    //     grade: Number(stores.studentId!.toString().slice(0, 4)),
+    //     faculty: stores.faculty!,
+    //     major: stores.major!,
+    //     stuClass: stores.stuClass!,
+    // });
 
-    const res = await signup({
-        username: stores.username,
-        studentId: stores.studentId,
-        linker: encryptedLinker,
-        identity: stores.identity!,
-        grade: Number(stores.studentId!.toString().slice(0, 4)),
-        faculty: stores.faculty!,
-        major: stores.major!,
-        stuClass: stores.stuClass!,
-    });
+    // if (res?.success) {
+    //     uni.redirectTo({
+    //         url: '/pages/(Onboarding)/process-sign-up/page'
+    //     });
+    // }
 
-    if (res?.success) {
-        uni.redirectTo({
-            url: '/pages/(Onboarding)/process-sign-up/page'
-        });
-    }
-
-    isSigningUp.value = false;
+    // isSigningUp.value = false;
 }
 </script>
 

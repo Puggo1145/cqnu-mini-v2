@@ -5,9 +5,9 @@ import cusPage from '@/components/cus-page.vue';
 import cusButton from '@/components/cus-button.vue';
 import modifyText from './_components/modify-text.vue';
 import modifyUsername from './_components/modify-username.vue';
-import modifyLinker from './_components/modify-linker.vue';
+import modifyPassword from './_components/modify-password.vue';
 import modifyEcardPwd from './_components/modify-ecard-pwd.vue';
-import bindDormitory from '../../service/_components/bind-dormitory.vue';
+import modifyDormitory from './_components/modify-dormitory.vue';
 // store
 import useUserInfo from '@/stores/user-info';
 // static
@@ -98,11 +98,11 @@ function onClose() {
             v-if="currentModifyView === 'username'"
             :on-close="onClose"
         />
-        <bind-dormitory
+        <modify-dormitory
             v-if="currentModifyView === 'dormitory'"
             :on-close="onClose"
         />
-        <modify-linker
+        <modify-password
             v-if="currentModifyView === 'linker'"
             :on-close="onClose"
         />

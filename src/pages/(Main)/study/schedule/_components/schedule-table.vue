@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { startOfWeek, addDays, format } from 'date-fns';
-// components
-import scheduleDetail from './schedule-detail.vue';
-
 
 interface Lesson {
 	lesson_id: number;

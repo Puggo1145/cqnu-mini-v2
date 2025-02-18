@@ -26,7 +26,7 @@ interface ILinkOfficial {
     dataObj: Ref<DataObj>,
     authCode: Ref<string>,
     studentId: Ref<string | undefined>,
-    linker: Ref<string | undefined>,
+    password: Ref<string | undefined>,
     onSuccess: () => Promise<void> | void,
     onFail: () => Promise<void>,
 }
@@ -34,7 +34,7 @@ export default function useLinkOfficial({
     dataObj,
     authCode,
     studentId,
-    linker,
+    password,
     onSuccess,
     onFail,
 
@@ -52,25 +52,9 @@ export default function useLinkOfficial({
             // 1. 验证表单
             const form = linkOfficialSchema.parse({
                 studentId: studentId?.value,
-                password: linker?.value,
+                password: password?.value,
                 authCode: authCode.value,
             });
-
-            // 2. 登录官网 - Legacy
-            // const signInRes = await signInToOfficial(
-            //     form.studentId,
-            //     form.password,
-            //     form.authCode,
-            //     dataObj.value,
-            // )
-
-            // if (!signInRes.ok) {
-            //     await onFail();
-
-            //     return;
-            // }
-
-            // await onSuccess();
 
             const signInSuccess = await signInToOfficialLocal(
                 form.studentId,

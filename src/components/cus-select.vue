@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 
 const variants = {
-    primary: "w-full h-[60px] border border-solid border-[#E0E0E0] rounded-2xl bg-white",
+    primary: "w-full h-[60px] border border-solid border-[#E0E0E0] rounded-2xl bg-secondary",
     mini: "h-[36px] bg-secondary rounded-full text-secondary-foreground text-sm"
 }
 

@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 // components
 import titleDesc from '@/components/title-desc.vue';
 import cusPage from '@/components/cus-page.vue';
 import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
 import spinner from '@/components/spinner.vue';
-import modifyLinker from '../me/modify/_components/modify-linker.vue';
 // hooks
 import useLinkOfficial from '@/hooks/useLinkOfficial';
 import useFetchOfficialAuthCode from '@/hooks/useFetchOfficialAuthCode';
 // stores
 import useUserInfo from '@/stores/user-info';
 
-
-// 校园官网验证码和登陆数据对象 //////////////////////////////////////////
+// 校园官网验证码和登陆数据对象
 const {
     isFetching,
     authCode,
@@ -23,24 +21,57 @@ const {
     refreshAuthCode,
 } = useFetchOfficialAuthCode();
 
-
-// 登陆官网逻辑 //////////////////////////////////////////
+// 登陆官网逻辑
 const userInfoStore = useUserInfo();
-const backPage = ref<string>();
 
+const backPage = ref<string>();
+const titleDescType = ref<'initial' | 'default'>(userInfoStore.studentId ? 'default' : 'initial');
+const titleDescContent = ref({
+    initial: {
+        title: '添加校园门户账号',
+        desc: '添加官网校园门户账号后可以访问官网学业与生活服务信息。小程序非常重视您的隐私安全，您的账号和密码仅保存在本地设备，不会上传到云端'
+    },
+    default: {
+        title: '登录到校园门户',
+        desc: '请输入验证码获取校园门户信息'
+    }
+})
 onMounted(async () => {
-    // 登录成功后返回目标页面
+    // 获取 backPage
     const pages = getCurrentPages();
     const currentPage = pages[pages.length - 1];
     // @ts-expect-error uniapp 没有标注 options 类型
     backPage.value = currentPage.options.backPage;
 })
 
+const studentId = ref(userInfoStore.studentId);
+const password = ref(userInfoStore.password);
+const {
+    studentIdInputRef,
+    passwordInputRef,
+    authCodeInputRef,
+    isLinkingOfficial,
+    submitLinkOfficialSignIn,
+} = useLinkOfficial({
+    dataObj: dataObj,
+    authCode: authCode,
+    studentId: studentId,
+    password: password,
+    onSuccess: gotoBackPage,
+    onFail: refreshAuthCode,
+});
+
 function gotoBackPage() {
     uni.showToast({
         title: '登录成功',
         icon: 'success',
         duration: 500
+    });
+
+    // 保存用户信息
+    userInfoStore.setUserInfo({
+        studentId: studentId.value,
+        password: password.value,
     });
 
     setTimeout(() => {
@@ -53,36 +84,6 @@ function gotoBackPage() {
         }
     }, 500);
 }
-
-const studentId = ref(userInfoStore.studentId);
-const linker = ref(userInfoStore.getDecryptedLinker());
-
-const {
-    studentIdInputRef,
-    passwordInputRef,
-    authCodeInputRef,
-    isLinkingOfficial,
-    submitLinkOfficialSignIn,
-} = useLinkOfficial({
-    dataObj: dataObj,
-    authCode: authCode,
-    studentId: studentId,
-    linker: linker,
-    onSuccess: gotoBackPage,
-    onFail: refreshAuthCode,
-});
-
-
-// 修改信息逻辑 //////////////////////////////////////////
-// 由于校园官网要求所有人修改密码，因此数据库的 linker 已经全部重置，检查 linker 是否为空判断是否需要重新设定密码
-const doesModifyPopupShow = ref(!userInfoStore.linker);
-function onClose() {
-    doesModifyPopupShow.value = false;
-}
-// 监听 linker 变化，如果修改成功则关闭弹窗
-watch(() => userInfoStore.linker, () => {
-    linker.value = userInfoStore.getDecryptedLinker();
-});
 </script>
 
 <template>
@@ -92,8 +93,8 @@ watch(() => userInfoStore.linker, () => {
         class-name="pt-8"
     >
         <title-desc
-            title="登录到校园门户"
-            desc="登录后可以访问官网学业与生活服务信息"
+            :title="titleDescContent[titleDescType].title"
+            :desc="titleDescContent[titleDescType].desc"
         />
         <view class="mt-4 flex flex-col gap-y-3">
             <cusInput
@@ -106,8 +107,8 @@ watch(() => userInfoStore.linker, () => {
                 field-name="官网密码"
                 type="password"
                 ref="passwordInputRef"
-                :value="linker"
-                @input="e => linker = e.value"
+                :value="password"
+                @input="e => password = e.value"
             />
             <view class="flex items-start gap-x-4">
                 <cusInput
@@ -148,13 +149,4 @@ watch(() => userInfoStore.linker, () => {
             </cusButton>
         </view>
     </cus-page>
-    <up-popup
-        :show="doesModifyPopupShow"
-        mode="bottom"
-        :round="16"
-        @close="onClose"
-    >
-        <modify-linker :on-close="onClose" />
-        <view class="h-8" />
-    </up-popup>
 </template>

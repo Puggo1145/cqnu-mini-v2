@@ -5,7 +5,7 @@ import titleDesc from '@/components/title-desc.vue';
 // static
 import logo from "@/static/icons/logo.png";
 // constants
-import { developers, contributors } from '@/constants/about';
+import { developers, contributors, VERSION } from '@/constants/about';
 </script>
 
 <template>
@@ -24,7 +24,7 @@ import { developers, contributors } from '@/constants/about';
                 />
                 <view class="flex flex-col">
                     <text class="font-bold">智慧重师</text>
-                    <text class="text-sm text-secondary-foreground">v2.1.9</text>
+                    <text class="text-sm text-secondary-foreground">v{{ VERSION }}</text>
                 </view>
             </view>
             <view class="mt-9">

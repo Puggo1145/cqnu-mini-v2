@@ -74,13 +74,13 @@ const handleGoMap = (nav: ArrItem) => {
                                 <view
                                     v-for="(item2) in item1.places" 
                                     :key="item2.name"
-                                    class="px-4 py-6 rounded-xl bg-[#E0E0E0] flex flex-col justify-center gap-y-1" 
+                                    class="px-4 py-6 rounded-xl bg-secondary flex flex-col justify-center gap-y-1" 
                                     @click="handleGoMap(item2)"
                                 >
-                                    <text class="font-bold">
+                                    <text class="font-bold text-secondary-foreground">
                                         {{ item2.name }}
                                     </text>
-                                    <text class="text-sm text-[#899199]">
+                                    <text class="text-sm text-secondary-foreground/70">
                                         {{ item2.alias }}
                                     </text>
                                 </view>

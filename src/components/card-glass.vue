@@ -27,7 +27,7 @@ const emit = defineEmits(['click']);
 <template>
     <view 
         @click="$emit('click')"
-        class="relative bg-white rounded-2xl" 
+        class="relative bg-secondary rounded-2xl" 
         :class="[
             cardSize[props.size],
             props.clipContent && 'overflow-hidden',
@@ -36,11 +36,11 @@ const emit = defineEmits(['click']);
         <view class="flex flex-col">
             <text 
                 :class="props.size === 'small' ? 'text-md' : 'text-2xl'"
-                class="text-modern font-bold leading-none"
+                class="text-secondary-foreground font-bold leading-none"
             >
                 {{ props.title }}
             </text>
-            <text class="text-xs text-modern-secondary mt-1">
+            <text class="text-xs text-secondary-foreground/70 mt-1">
                 {{ props.desc }}
             </text>
         </view>

@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { STORAGE_KEYS } from "@/constants/storage-key";
-import { ref } from 'vue';
 
 const STORAGE_KEY = STORAGE_KEYS.SCHEDULE;
 
@@ -14,6 +13,7 @@ export interface Lesson {
   day: number;
   include_week: number[];
   color: string;
+  isLocal?: boolean; // 标记是否为本地添加的课程
 }
 
 interface GetLessonsParams {
@@ -25,6 +25,7 @@ export const useSchedule = defineStore("useSchedule", {
   state: () => ({
     lessons: [] as Lesson[],
     syncStatus: !!uni.getStorageSync(STORAGE_KEY),
+    nextLocalId: 10000, // 本地课程 ID 起始值
   }),
   getters: {
     hasSynced(): boolean {
@@ -69,5 +70,26 @@ export const useSchedule = defineStore("useSchedule", {
       this.syncStatus = false;
       uni.removeStorageSync(STORAGE_KEY);
     },
+    addLocalLesson(lesson: Omit<Lesson, 'lesson_id' | 'isLocal'>) {
+      const newLesson = {
+        ...lesson,
+        lesson_id: this.nextLocalId++,
+        isLocal: true,
+      };
+      
+      this.lessons.push(newLesson);
+      this.setLessonsToStorage(this.lessons);
+    },
+    removeLesson(lessonId: number) {
+      this.lessons = this.lessons.filter(lesson => lesson.lesson_id !== lessonId);
+      this.setLessonsToStorage(this.lessons);
+    },
+    editLocalLesson(lessonId: number, updates: Partial<Omit<Lesson, 'lesson_id' | 'isLocal'>>) {
+      const index = this.lessons.findIndex(lesson => lesson.lesson_id === lessonId);
+      if (index !== -1 && this.lessons[index].isLocal) {
+        this.lessons[index] = { ...this.lessons[index], ...updates };
+        this.setLessonsToStorage(this.lessons);
+      }
+    }
   }
 });

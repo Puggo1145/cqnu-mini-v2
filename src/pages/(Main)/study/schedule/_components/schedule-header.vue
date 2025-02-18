@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // components
 import CusButton from '@/components/cus-button.vue';
+// import lessonEditor from '@/components/lesson-editor.vue';
 // utils
 import { getDate } from '@/utils/timeHandler';
 // api
@@ -10,7 +11,9 @@ import { useSchedule } from '@/stores/useSchedule';
 import { useLinkOfficialAuth } from '@/stores/link-official-auth';
 // static
 import icons from '@/constants/icons';
-
+import { ref } from 'vue';
+// types
+import type { Lesson } from '@/stores/useSchedule';
 
 interface ScheduleHeaderProps {
     currentWeek: number;
@@ -22,13 +25,13 @@ const props = defineProps<ScheduleHeaderProps>();
 
 const schedule = useSchedule();
 const linkOfficialAuth = useLinkOfficialAuth();
+const showLessonEditor = ref(false);
 
 async function updateSchedule() {
     if (!linkOfficialAuth.mainCookie) {
         uni.navigateTo({
             url: `/pages/(Main)/link-official/page`,
         });
-
         return;
     }
 
@@ -36,7 +39,7 @@ async function updateSchedule() {
 
     const res = await getSchedules();
     if (res) {
-        schedule.lessons = res;
+        schedule.setLessonsToStorage(res);
         uni.showToast({
             title: "同步成功",
             icon: "success",
@@ -44,6 +47,16 @@ async function updateSchedule() {
         })
     }
 }
+
+// function addLocalLesson(lesson: Omit<Lesson, 'lesson_id' | 'isLocal'>) {
+//     schedule.addLocalLesson(lesson);
+//     showLessonEditor.value = false;
+//     uni.showToast({
+//         title: "添加成功",
+//         icon: "success",
+//         duration: 800
+//     });
+// }
 </script>
 
 <template>
@@ -66,16 +79,36 @@ async function updateSchedule() {
         </view>
         <!-- 课表相关功能 -->
         <view class="flex items-center gap-x-3">
+            <!-- <cus-button 
+                variant="secondary"
+                @click="showLessonEditor = true"
+            >
+                <image :src="icons.plus" class="size-4 mr-2" />
+                <text class="text-sm">添加</text>
+            </cus-button> -->
             <cus-button 
-                class="flex items-center justify-center"
                 variant="secondary"
                 @click="updateSchedule"
             >
                 <image :src="icons.syncBlack" class="size-4 mr-2" />
-                <text class="text-sm">
-                    同步
-                </text>
+                <text class="text-sm">同步</text>
             </cus-button>
         </view>
     </view>
+
+    <!-- <up-popup
+        :show="showLessonEditor"
+        mode="bottom"
+        :round="16"
+        @close="showLessonEditor = false"
+        class="max-h-[80vh]"
+    >
+        <view class="overflow-hidden pt-6 px-4 flex flex-col h-[76vh]">
+            <text class="mb-3 text-2xl font-bold">添加课程</text>
+            <lesson-editor
+                :onClose="() => showLessonEditor = false"
+                :onSubmit="addLocalLesson"
+            />
+        </view>
+    </up-popup> -->
 </template>

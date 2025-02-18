@@ -146,8 +146,15 @@ watch([gradeIndex, semesterIndex], getTranscript)
                 class-name="mt-[92px]"
             />
 
+            <no-data
+                v-else-if="!isTranscriptLoading && transcript?.length === 0"
+                title="暂无成绩"
+                desc="该学期暂无成绩数据"
+                class-name="mt-[92px]"
+            />
+
             <view
-                v-else
+                v-else-if="transcript && transcript.length > 0"
                 v-for="(item, index) in transcriptSearchResult"
                 :key="index"
                 class="w-full flex justify-between items-center border-b border-gray-200 py-3"

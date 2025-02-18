@@ -7,9 +7,6 @@
 			"path": "pages/index/index"
 		},
 		{
-			"path": "pages/(dev)/report/page"
-		},
-		{
 			"path": "pages/(Main)/service/bill/page"
 		},
 		{
@@ -37,13 +34,7 @@
 			"path": "pages/(Main)/link-official/page"
 		},
 		{
-			"path": "pages/(Onboarding)/sign-up/page"
-		},
-		{
 			"path": "pages/(Main)/study/page"
-		},
-		{
-			"path": "pages/(Onboarding)/process-sign-up/page"
 		},
 		{
 			"path": "pages/(Main)/service/school-nav/page"

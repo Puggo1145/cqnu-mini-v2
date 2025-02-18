@@ -11,12 +11,9 @@ import notification from "@/static/icons/notification.svg"
 import setting from "@/static/icons/setting.svg"
 import plus from "@/static/icons/plus.svg"
 import search from "@/static/icons/search.svg"
-import calendar from "@/static/icons/calendar.svg"
-import calendarWhite from "@/static/icons/calendar-white.svg"
 import attentionWhite from "@/static/icons/attention-white.svg"
 import boxWhite from "@/static/icons/box-white.svg"
 import image from "@/static/icons/image.svg"
-import clock from "@/static/icons/clock.svg"
 import academy from "@/static/icons/academy.svg"
 import sync from "@/static/icons/sync.svg"
 import syncBlack from "@/static/icons/sync-black.svg"
@@ -68,12 +65,9 @@ const icons = {
     plus,
     rightSecondary,
     rightWhite,
-    calendar,
-    calendarWhite,
     attentionWhite,
     boxWhite,
     image,
-    clock,
     academy,
     downSecondary,
     sync,

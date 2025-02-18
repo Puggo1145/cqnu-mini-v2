@@ -32,8 +32,9 @@ function goToSchedule() {
             class="w-full p-7 rounded-2xl text-white leading-none bg-primary"
             @click="goToSchedule"
         >
+            <!-- 未同步课表 -->
             <view
-                v-if="scheduleStore.lessons.length === 0"
+                v-if="!scheduleStore.hasSynced"
                 class="flex justify-between"
             >
                 <view class="flex flex-col gap-y-2">
@@ -55,6 +56,7 @@ function goToSchedule() {
                 </view>
             </view>
 
+            <!-- 已同步但无课 -->
             <view
                 v-else-if="props.courseOfToday.length === 0"
                 class="flex flex-col gap-y-2"
@@ -66,10 +68,9 @@ function goToSchedule() {
                     学习辛苦，好好休息一下吧
                 </text>
             </view>
-            <view
-                v-else
-                class="flex flex-col justify-between gap-y-2"
-            >
+
+            <!-- 有课程 -->
+            <view v-else>
                 <view :class="remainingTimeOfLatestCourse <= 30 && 'w-fit bg-white rounded-full py-1 px-3 mb-1'">
                     <text
                         v-if="remainingTimeOfLatestCourse > 60"

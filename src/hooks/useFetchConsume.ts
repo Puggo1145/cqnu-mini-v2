@@ -1,4 +1,4 @@
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 // store
 import useUserInfo from "@/stores/user-info";
 // link official
@@ -9,6 +9,7 @@ import type { BalanceParams } from "@/utils/link-official/libs/e-card/get-consum
 
 export default function useFetchConsume() {
     const userInfoStore = useUserInfo();
+    const ecardPwd = computed(() => userInfoStore.ecardPwd);
 
     const consume = ref(0);
     const isFetching = ref(false);
@@ -21,7 +22,7 @@ export default function useFetchConsume() {
     }
 
     async function fetchConsume(params: BalanceParams = defaultParams) {
-        if (!userInfoStore.cardPwd) {
+        if (!userInfoStore.ecardPwd) {
             return;
         }
 
@@ -42,8 +43,8 @@ export default function useFetchConsume() {
         fetchConsume();
     });
     
-    watch(() => userInfoStore.cardPwd, () => {
-        fetchConsume();
+    watch(ecardPwd, async () => {
+        await fetchConsume();
     });
 
     return {

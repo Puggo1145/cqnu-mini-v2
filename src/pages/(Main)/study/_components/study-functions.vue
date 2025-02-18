@@ -7,22 +7,35 @@ const otherFunctions = [
     {
         name: "成绩查询",
         icon: icons.study.transcript,
-        url: "/pages/(Main)/study/grades/page"
-    },
-    {
-        name: "我的课表",
-        icon: icons.study.schedule,
-        url: "/pages/(Main)/study/schedule/page"
+        url: "/pages/(Main)/study/grades/page",
+        availability: true
     },
     {
         name: "学业情况",
         icon: icons.study.review,
-        url: "/pages/(Main)/study/academic-details/page"
+        url: "/pages/(Main)/study/academic-details/page",
+        availability: true
+    },
+    {
+        name: "场地预约",
+        icon: icons.study.schedule,
+        url: "/pages/(Main)/study/schedule/page",
+        availability: false
     },
 ];
 
 
-function goToPage(url: string) {
+function goToPage(url: string, availability: boolean) {
+    if (!availability) {
+        uni.showToast({
+            title: "开发中，敬请期待",
+            icon: "none",
+            duration: 1000
+        })
+
+        return
+    }
+
     uni.navigateTo({ url })
 }
 </script>
@@ -33,7 +46,7 @@ function goToPage(url: string) {
             v-for="func in otherFunctions"
             :key="func.name"
             class="flex flex-col items-center gap-1"
-            @click="goToPage(func.url)"
+            @click="goToPage(func.url, func.availability)"
         >
             <image :src="func.icon" class="size-12" />
             <text class="text-sm text-secondary-foreground">{{ func.name }}</text>

@@ -61,7 +61,7 @@ function goToBill() {
         <view class="mt-3">
             <!-- 绑定一卡通密码 -->
             <view
-                v-if="!userInfoStore.cardPwd"
+                v-if="!userInfoStore.ecardPwd"
                 class="flex items-center"
             >
                 <view class="text-secondary-foreground font-bold">去绑定一卡通</view>

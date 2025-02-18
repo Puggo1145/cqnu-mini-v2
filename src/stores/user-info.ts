@@ -18,7 +18,7 @@ export interface UserInfo extends Record<string, any> {
     dormitory?: string;
     roomNumber?: string;
     ecardId?: string;
-    cardPwd?: string;
+    ecardPwd?: string;
 
     showFlag: number | undefined;
 }
@@ -40,15 +40,14 @@ const useUserInfo = defineStore("useUserInfo", {
             dormitory: undefined,
             roomNumber: undefined,
             ecardId: undefined,
-            cardPwd: undefined,
+            ecardPwd: undefined,
             showFlag: undefined,
         } satisfies UserInfo;
     },
     actions: {
         setUserInfo(userInfo: Partial<UserInfo>) {
-            // 更新状态
+            console.log('change');
             Object.assign(this.$state, userInfo);
-            // 保存到本地存储
             uni.setStorageSync(STORAGE_KEY, this.$state);
         },
         clearUserInfo() {

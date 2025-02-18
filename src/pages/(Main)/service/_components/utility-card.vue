@@ -60,7 +60,7 @@ async function utilityOnClick() {
                 class="flex items-center gap-x-1"
             >
                 <image
-                    :src="icons.switchWhite"
+                    :src="icons.switchBlack"
                     class="size-4"
                 />
                 <text

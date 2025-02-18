@@ -22,6 +22,7 @@ import sync from "@/static/icons/sync.svg"
 import syncBlack from "@/static/icons/sync-black.svg"
 import syncPrimary from "@/static/icons/sync-primary.svg"
 import switchWhite from "@/static/icons/switch-white.svg"
+import switchBlack from "@/static/icons/switch-black.svg"
 import visible from "@/static/icons/visible.svg"
 import invisible from "@/static/icons/invisible.svg"
 import announcement from "@/static/icons/announcement.svg"
@@ -79,6 +80,7 @@ const icons = {
     syncBlack,
     syncPrimary,
     switchWhite,
+    switchBlack,
     visible,
     invisible,
     announcement,

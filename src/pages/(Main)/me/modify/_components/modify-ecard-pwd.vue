@@ -27,12 +27,8 @@ async function submitModification() {
         const checkedEcardPwd = pwdSchema.parse(ecardPwd.value);
         
         // 更新 store 中的一卡通密码
-        userInfoStore.setUserInfo({ cardPwd: checkedEcardPwd });
-            
-        uni.showToast({
-            title: "修改成功",
-            icon: "success",
-            duration: 500
+        userInfoStore.setUserInfo({
+            ecardPwd: checkedEcardPwd
         });
 
         onClose();

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { STORAGE_KEYS } from "@/constants/storage-key";
+import { ref } from 'vue';
 
 const STORAGE_KEY = STORAGE_KEYS.SCHEDULE;
 
@@ -23,13 +24,24 @@ interface GetLessonsParams {
 export const useSchedule = defineStore("useSchedule", {
   state: () => ({
     lessons: [] as Lesson[],
+    syncStatus: !!uni.getStorageSync(STORAGE_KEY),
   }),
+  getters: {
+    hasSynced(): boolean {
+      return this.syncStatus;
+    }
+  },
   actions: {
     getLessonsFromStorage() {
       const lessons = uni.getStorageSync(STORAGE_KEY);
-      if (lessons) this.lessons = lessons;
+      if (lessons) {
+        this.lessons = lessons;
+        this.syncStatus = true;
+      }
     },
     setLessonsToStorage(lessons: Lesson[]) {
+      this.lessons = lessons;
+      this.syncStatus = true;
       uni.setStorageSync(STORAGE_KEY, lessons);
     },
     getLessons({ week, day }: GetLessonsParams) {
@@ -48,6 +60,14 @@ export const useSchedule = defineStore("useSchedule", {
     },
     getNamesOfLessons() {
       return this.lessons?.map(lesson => lesson.name);
+    },
+    setLessons(newLessons: Lesson[]) {
+      this.lessons = newLessons;
+    },
+    clearLessons() {
+      this.lessons = [];
+      this.syncStatus = false;
+      uni.removeStorageSync(STORAGE_KEY);
     },
   }
 });

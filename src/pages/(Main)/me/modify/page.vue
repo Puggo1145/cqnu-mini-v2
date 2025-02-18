@@ -4,10 +4,9 @@ import { ref } from 'vue';
 import cusPage from '@/components/cus-page.vue';
 import cusButton from '@/components/cus-button.vue';
 import modifyText from './_components/modify-text.vue';
-import modifyUsername from './_components/modify-username.vue';
-import modifyLinker from './_components/modify-linker.vue';
+import modifyPassword from './_components/modify-password.vue';
 import modifyEcardPwd from './_components/modify-ecard-pwd.vue';
-import bindDormitory from '../../service/_components/bind-dormitory.vue';
+import modifyDormitory from './_components/modify-dormitory.vue';
 // store
 import useUserInfo from '@/stores/user-info';
 // static
@@ -36,20 +35,8 @@ function onClose() {
             scroll-y
             class="overflow-hidden flex-1"
         >
-            <!-- 用户名 -->
-            <view class="w-full p-4 py-6 bg-white rounded-2xl flex items-center justify-between">
-                <modify-text>用户名</modify-text>
-                <view 
-                    class="flex items-center"
-                    @click="() => chooseModifyView('username')"
-                >
-                    <text>{{ userInfoStore.username }}</text>
-                    <image :src="icons.rightSecondary" class="size-6" />
-                </view>
-            </view>
-
             <!-- 宿舍信息 -->
-            <view class="mt-4 w-full p-4 py-6 bg-white rounded-2xl flex flex-col gap-y-4">
+            <view class="mt-4 w-full p-4 py-6 bg-secondary rounded-2xl flex flex-col gap-y-4">
                 <view class="flex items-center justify-between">
                     <modify-text>宿舍楼</modify-text>
                     <text>{{ userInfoStore.dormitory }}</text>
@@ -68,7 +55,7 @@ function onClose() {
 
             <!-- 校园门户密码 -->
             <view 
-                class="mt-4 w-full p-4 py-6 bg-white rounded-2xl flex items-center justify-between"
+                class="mt-4 w-full p-4 py-6 bg-secondary rounded-2xl flex items-center justify-between"
                 @click="() => chooseModifyView('linker')"
             >
                 <modify-text>校园门户密码</modify-text>
@@ -77,7 +64,7 @@ function onClose() {
 
             <!-- 一卡通密码 -->
             <view 
-                class="mt-4 w-full p-4 py-6 bg-white rounded-2xl flex items-center justify-between"
+                class="mt-4 w-full p-4 py-6 bg-secondary rounded-2xl flex items-center justify-between"
                 @click="() => chooseModifyView('ecardPwd')"
             >
                 <modify-text>一卡通密码</modify-text>
@@ -98,11 +85,11 @@ function onClose() {
             v-if="currentModifyView === 'username'"
             :on-close="onClose"
         />
-        <bind-dormitory
+        <modify-dormitory
             v-if="currentModifyView === 'dormitory'"
             :on-close="onClose"
         />
-        <modify-linker
+        <modify-password
             v-if="currentModifyView === 'linker'"
             :on-close="onClose"
         />

@@ -1,6 +1,6 @@
 export const baseConfigs = {
     // 开学时间（课表开始日期，每学期手动更新）, 请填写开始上课当天的前一天的日期
-    termStartDate: "2024-09-01",
+    termStartDate: "2025-02-23",
     // 课表周数配置
     totalWeeks: 20,
     // 课表课时配置

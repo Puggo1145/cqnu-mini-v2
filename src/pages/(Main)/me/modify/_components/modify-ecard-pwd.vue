@@ -6,62 +6,38 @@ import cusInput from '@/components/cus-input.vue';
 import cusButton from '@/components/cus-button.vue';
 // store
 import useUserInfo from '@/stores/user-info';
-// api
-import { updateECardPwd, validateTokenAndSyncUserInfo } from '@/api/user';
-// utils
-import { encryptLinker } from '@/utils/encrypter';
 // types
 import type { CusInputEvent } from '@/components/cus-input.vue';
 // zod
 import { z } from 'zod';
 
-
 const { onClose } = defineProps<{ onClose: () => void }>();
-
 
 const userInfoStore = useUserInfo();
 
-const ecardPwd = ref(userInfoStore.getDecryptedCardPwd());
+const ecardPwd = ref(userInfoStore.cardPwd);
 const ecardPwdRef = ref();
 function modifyEcardPwd(e: CusInputEvent) {
     ecardPwd.value = e.value;
 }
 
-
-const isSubmitting = ref(false);
-const linkerSchema = z.string().min(1)
+const pwdSchema = z.string().min(1)
 async function submitModification() {
-    isSubmitting.value = true;
-
     try {
-        const checkedEcardPwd = linkerSchema.parse(ecardPwd.value);
-
-        // 加密
-        const encryptedEcardPwd = encryptLinker(checkedEcardPwd);
+        const checkedEcardPwd = pwdSchema.parse(ecardPwd.value);
         
-        const isSuccess = await updateECardPwd({ 
-            cardPwd: encryptedEcardPwd
+        // 更新 store 中的一卡通密码
+        userInfoStore.setUserInfo({
+            ecardPwd: checkedEcardPwd
         });
 
-        if (isSuccess) {
-            await validateTokenAndSyncUserInfo();
-            
-            uni.showToast({
-                title: "修改成功",
-                icon: "success",
-                duration: 1500
-            });
-
-            onClose();
-        }
+        onClose();
     } catch (err) {
         if (err instanceof z.ZodError) {
             if (err.errors[0].code === "too_small") {
                 ecardPwdRef.value.showError("密码不能为空");
             }
         }
-    } finally {
-        isSubmitting.value = false;
     }
 }
 </script>
@@ -78,10 +54,7 @@ async function submitModification() {
             :value="ecardPwd"
             @input="modifyEcardPwd"
         />
-        <cus-button 
-            @click="submitModification"
-            :variant="isSubmitting ? 'loading' : 'primary'"
-        >
+        <cus-button @click="submitModification">
             保存
         </cus-button>
     </view>

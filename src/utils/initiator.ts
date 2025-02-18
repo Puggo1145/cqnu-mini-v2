@@ -5,7 +5,7 @@ import { pagesRequireLinkOfficial } from "@/constants/pagesOnIntercept";
 // types
 import type { Store } from "pinia";
 import type { LinkOfficialAuthState } from "@/stores/link-official-auth";
-
+import { STORAGE_KEYS } from "@/constants/storage-key";
 /**
  * @description 小程序初始化器
  */
@@ -16,41 +16,16 @@ class Initiator {
         this.linkOfficialAuth = useLinkOfficialAuth();
     }
 
-    // 检查 token 有效性
+    // 检查缓存是否存在官网账号，不存在则跳转到首页登录
     async validateSignInStatus() {
-        const token = uni.getStorageSync("token");
-        // 检查 token 是否存在，不存在则跳转到首页登录
-        if (!token) {
+        const userInfo = uni.getStorageSync(STORAGE_KEYS.USER_INFO);
+        if (!userInfo) {
             uni.redirectTo({
                 url: "/pages/index/index"
             });
 
             return;
         };
-
-        // 有 token 检查 token 是否有效
-        const isTokenValid = await validateTokenAndSyncUserInfo();
-        if (!isTokenValid) {
-            uni.showToast({
-                title: "获取用户信息失败，请尝试重新登录",
-                icon: 'none',
-                duration: 1500
-            })
-            // token 无效，跳转到首页登录
-            // 可以考虑直接调用 signin 来自动登录
-            const pages = getCurrentPages();
-            const currentPage = pages[pages.length - 1];
-            if (currentPage.route !== "pages/index/index") {
-                uni.redirectTo({
-                    url: "/pages/index/index"
-                });
-            }
-        } else {
-            // token 有效，跳转到首页
-            uni.switchTab({
-                url: "/pages/(Main)/today/page"
-            });
-        }
     }
 
     // 添加页面拦截规则

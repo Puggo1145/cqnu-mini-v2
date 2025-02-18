@@ -10,13 +10,11 @@ import { getSchedules } from '@/utils/link-official';
 const schedule = useSchedule();
 const linkOfficialAuth = useLinkOfficialAuth();
 
-
 async function updateSchedule() {
     if (!linkOfficialAuth.mainCookie) {
         uni.navigateTo({
             url: `/pages/(Main)/link-official/page`,
         });
-
         return;
     }
 
@@ -24,7 +22,7 @@ async function updateSchedule() {
 
     const res = await getSchedules();
     if (res) {
-        schedule.lessons = res;
+        schedule.setLessonsToStorage(res);
         uni.showToast({
             title: "同步成功",
             icon: "success",
@@ -37,10 +35,10 @@ async function updateSchedule() {
 <template>
     <view class="w-full h-full flex justify-center mt-[160px]">
         <no-data
-			title="暂无课程"
-			desc="点击按钮一键同步课程吧！"
+            :title="schedule.hasSynced ? '暂无课程' : '未同步课表'"
+            :desc="schedule.hasSynced ? '本学期暂无课程安排' : '点击按钮一键同步课程吧！'"
             action-text="同步"
             :action="updateSchedule"
-		/>
+        />
     </view>
 </template>

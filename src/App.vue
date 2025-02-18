@@ -8,7 +8,6 @@ import { useStatusBarHeight } from './stores/statusBarHeight';
 import useUserInfo from './stores/user-info';
 import { useSchedule } from './stores/useSchedule';
 
-
 onLaunch(async () => {
     // 自适应状态栏高度
     const statusBarHeight = uni.getMenuButtonBoundingClientRect().top;
@@ -17,16 +16,13 @@ onLaunch(async () => {
     // 初始化全局状态
     useUserInfo();
     // 从缓存读取课表
-    const lessons = await uni.getStorageSync("schedule");
-    if (lessons) useSchedule().lessons = lessons;
+    useSchedule().getLessonsFromStorage();
 
     // 初始化
     const initiator = new Initiator();
     initiator.validateSignInStatus();
     initiator.addInterceptPages()
 });
-
-
 </script>
 
 <style lang="scss">
@@ -41,11 +37,11 @@ onLaunch(async () => {
 
 @layer base {
     :root {
-        --background: 20 30% 98%;
-        --foreground: 330 33% 99%;
-        --secondary: 231 10% 94%;
-        --secondary-foreground: 0 0% 50%;
-        --primary: 225 76% 55%;
+        --background: 0 0% 100%;
+        --foreground: 0 0% 11%;
+        --secondary: 260 16% 97%;
+        --secondary-foreground: 218 5% 30%;
+        --primary: 225 91% 59%;
         --primary-foreground: 330 33% 99%;
         --muted: 0 0% 85%;
         --destructive: 356 61% 40%;

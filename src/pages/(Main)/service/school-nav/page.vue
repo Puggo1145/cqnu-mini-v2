@@ -15,14 +15,14 @@ const navCategories = [
     },
     { 
         name: '快递', 
-        desc: "顺丰快递怎么在校外！",
+        desc: "京东/顺丰/菜鸟驿站",
         color: "#d4b07c",
         img: images.service.nav.express,
         dataSource: "express",
     },
     { 
         name: '商铺',
-        desc: "校内美食/小吃/奶茶/超市，都在这里了",
+        desc: "校内美食/小吃/奶茶/超市",
         color: "#df7d4e",
         img: images.service.nav.shop,
         dataSource: "shop",

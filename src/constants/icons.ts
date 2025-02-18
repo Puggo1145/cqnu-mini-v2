@@ -11,17 +11,15 @@ import notification from "@/static/icons/notification.svg"
 import setting from "@/static/icons/setting.svg"
 import plus from "@/static/icons/plus.svg"
 import search from "@/static/icons/search.svg"
-import calendar from "@/static/icons/calendar.svg"
-import calendarWhite from "@/static/icons/calendar-white.svg"
 import attentionWhite from "@/static/icons/attention-white.svg"
 import boxWhite from "@/static/icons/box-white.svg"
 import image from "@/static/icons/image.svg"
-import clock from "@/static/icons/clock.svg"
 import academy from "@/static/icons/academy.svg"
 import sync from "@/static/icons/sync.svg"
 import syncBlack from "@/static/icons/sync-black.svg"
 import syncPrimary from "@/static/icons/sync-primary.svg"
 import switchWhite from "@/static/icons/switch-white.svg"
+import switchBlack from "@/static/icons/switch-black.svg"
 import visible from "@/static/icons/visible.svg"
 import invisible from "@/static/icons/invisible.svg"
 import announcement from "@/static/icons/announcement.svg"
@@ -37,22 +35,16 @@ import studyTranscript from "@/static/icons/study-transcript.svg"
 import studySchedule from "@/static/icons/study-schedule.svg"
 import studyReview from "@/static/icons/study-review.svg"
 import add from '@/static/icons/add.svg'
-// easy-note
-import haveFive from "@/static/icons/have-five.svg"
-import deleteNote from '@/static/icons/delete.svg'
-import claped from '@/static/icons/claped.svg'
-import clap from '@/static/icons/clap.svg'
 // me
 import modifyUserInfo from '@/static/icons/modify-user-info.svg'
 import about from '@/static/icons/about.svg'
 import feedback from '@/static/icons/feedback.svg'
+// services
+import utility from '@/static/icons/service-utility.svg'
+import ecard from '@/static/icons/service-ecard.svg'
 // bill
 import alipay from '@/static/icons/alipay.svg'
 import wxpay from '@/static/icons/wxpay.svg'
-// rating
-import ratingStar from '@/static/icons/rating-star.svg'
-import ratingStarSolid from '@/static/icons/rating-star-solid.svg'
-import ratingStarHollow from '@/static/icons/rating-star-hollow.svg'
 
 
 const icons = {
@@ -73,18 +65,16 @@ const icons = {
     plus,
     rightSecondary,
     rightWhite,
-    calendar,
-    calendarWhite,
     attentionWhite,
     boxWhite,
     image,
-    clock,
     academy,
     downSecondary,
     sync,
     syncBlack,
     syncPrimary,
     switchWhite,
+    switchBlack,
     visible,
     invisible,
     announcement,
@@ -96,12 +86,6 @@ const icons = {
         review: studyReview,
         add: add,
     },
-    easyNote: {
-        haveFive,
-        deleteNote,
-        clap,
-        claped,
-    },
     modifyUserInfo,
     about,
     feedback,
@@ -109,10 +93,9 @@ const icons = {
         alipay,
         wxpay,
     },
-    rating: {
-        star: ratingStar,
-        starSolid: ratingStarSolid,
-        starHollow: ratingStarHollow
+    service: {
+        utility,
+        ecard,
     }
 };
 
